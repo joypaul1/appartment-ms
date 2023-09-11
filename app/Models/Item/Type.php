@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models\Item;
+
+use App\Traits\AutoTimeStamp;
+use App\Traits\GlobalScope;
+use Illuminate\Database\Eloquent\Model;
+
+class Type extends Model
+{
+    use GlobalScope, AutoTimeStamp;
+
+    protected $table ='item_types';
+    protected $guarded =['id'];
+}
