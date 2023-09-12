@@ -47,9 +47,12 @@
     <div class="col-12">
         <div class="card p-3">
             <div class="card-header">
-                <h5 class="card-title">Responsive DataTables</h5>
-                <h6 class="card-subtitle text-muted">Highly flexible tool that many advanced features to any HTML table. See official
-                    documentation <a href="https://datatables.net/extensions/responsive/" target="_blank" rel="noopener noreferrer nofollow">here</a>.</h6>
+                <h5 class="card-title">
+                    <i class="align-middle mr-2" data-feather="list"></i> Owner List
+                </h5>
+                <h6 class="card-subtitle text-muted mt-3">
+                    List of all owner of this apartment.
+                </h6>
             </div>
             <div class="card-body">
                 <table id="datatables-reponsive" class="table table-striped" style="width:100%">
