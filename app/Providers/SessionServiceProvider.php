@@ -30,21 +30,21 @@ class SessionServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', function ($view) {
-            if(!session('site_info')){
-                $siteInfo = SiteInfo::first()->toArray();
-                session(['site_info' => $siteInfo]);
-            }
+            // if(!session('site_info')){
+            //     $siteInfo = SiteInfo::first()->toArray();
+            //     session(['site_info' => $siteInfo]);
+            // }
         });
 
         View::composer('backend/*', function ($view) {
-            if(!session('invoice_prefix')){
-                $prefixArray= InvoicePrefix::select('name','value')->get()->toArray();
-                $arrayTemp = array();
-                foreach ($prefixArray as $key => $val) {
-                    $arrayTemp[$val['name']] = $val['value'];
-                }
-                session(['invoice_prefix' => $arrayTemp]);
-            }
+            // if(!session('invoice_prefix')){
+            //     $prefixArray= InvoicePrefix::select('name','value')->get()->toArray();
+            //     $arrayTemp = array();
+            //     foreach ($prefixArray as $key => $val) {
+            //         $arrayTemp[$val['name']] = $val['value'];
+            //     }
+            //     session(['invoice_prefix' => $arrayTemp]);
+            // }
         });
         // View::composer('frontend/*', function ($view) {
         //     if(!session('categories')){
