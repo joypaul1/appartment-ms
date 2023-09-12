@@ -48,7 +48,7 @@ class DashboardController extends Controller
             ->select(DB::raw('count(id) as fund'))
             // ->where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
             ->get();
-        $result_ou = DB::table('tbl_add_fair')
+        $result_ou = DB::table('fairs')
             ->select(
                 DB::raw('sum(water_bill) as w_bil'),
                 DB::raw('sum(electric_bill) as e_bil'),
@@ -60,8 +60,8 @@ class DashboardController extends Controller
             // ->where('type', 'Owner')
             ->get();
         if ($result_ou) {
-            $total_owner_utility = (float)$result_ou->w_bil + (float)$result_ou->e_bil + (float)$result_ou->g_bil + (float)$result_ou->u_bil + (float)$result_ou->s_bil + (float)$result_ou->o_bil;
-            $total_utility = $total_owner_utility;
+            // $total_owner_utility = (float)$result_ou->w_bil + (float)$result_ou->e_bil + (float)$result_ou->g_bil + (float)$result_ou->u_bil + (float)$result_ou->s_bil + (float)$result_ou->o_bil;
+            // $total_utility = $total_owner_utility;
         }
         $result_salary = DB::table('employee_salaries')
             ->select(DB::raw('sum(amount) as totals'))
