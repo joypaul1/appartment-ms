@@ -18,7 +18,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-
         if ($request->ajax()) {
             return response()->json(['data' => User::whereLike($request->optionData)
                 ->whereLike($request->optionData, 'mobile')
