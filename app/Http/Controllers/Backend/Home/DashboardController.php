@@ -163,10 +163,10 @@ class DashboardController extends Controller
 
     function tableDesign()
     {
-        return view('backend.dashboard.index');
+        return view('backend.dashboard.tableDesign');
     }
     function formDesign()
     {
-        return view('backend.dashboard.index');
+        return view('backend.dashboard.formDesign');
     }
 }

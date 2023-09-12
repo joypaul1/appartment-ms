@@ -27,10 +27,9 @@
     </div>
 
     <script src="{{ asset('assets/backend/js/app.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/datatables.js') }}"></script>
 
     @include('backend._include.footerJs')
-
-
 </body>
 
 </html>
