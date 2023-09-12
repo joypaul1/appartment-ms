@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FloorController extends Controller
 {
@@ -14,7 +15,11 @@ class FloorController extends Controller
      */
     public function index()
     {
-        return view('backend.floor.index');
+        $data = DB::table('floors')
+            // ->where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
+            ->orderBy('id', 'DESC')
+            ->get();
+        return view('backend.floor.index', compact('data'));
     }
 
     /**
@@ -25,7 +30,6 @@ class FloorController extends Controller
     public function create()
     {
         return view('backend.floor.create');
-
     }
 
     /**
@@ -36,7 +40,10 @@ class FloorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $floor = new Floor();
+        $floor->floor_no = $_POST['txtFloor'];
+        $floor->branch_id = $_SESSION['objLogin']['branch_id'];
+        $floor->save();
     }
 
     /**
@@ -59,7 +66,6 @@ class FloorController extends Controller
     public function edit($id)
     {
         return view('backend.floor.edit');
-
     }
 
     /**
@@ -71,7 +77,17 @@ class FloorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $floor = Floor::find($id);
+
+        if (!$floor) {
+            return redirect()->route('floors.index')->with('error', 'Floor not found.');
+        }
+
+        $floor->floor_no = $request->input('txtFloor');
+        $floor->branch_id = $_SESSION['objLogin']['branch_id'];
+        $floor->save();
+
+        return redirect()->route('floors.index')->with('success', 'Floor updated successfully.');
     }
 
     /**
@@ -82,6 +98,14 @@ class FloorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $floor = Floor::find($id);
+
+        if (!$floor) {
+            return redirect()->route('floors.index')->with('error', 'Floor not found.');
+        }
+
+        $floor->delete();
+
+        return redirect()->route('floors.index')->with('success', 'Floor deleted successfully.');
     }
 }

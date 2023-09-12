@@ -25,8 +25,17 @@ class BillDepositController extends Controller
      */
     public function create()
     {
+        $bill = new Bill();
+        $bill->bill_type = $_POST['ddlBillType'];
+        $bill->bill_date = $_POST['txtBillDate'];
+        $bill->bill_month = $_POST['ddlBillMonth'];
+        $bill->bill_year = $_POST['ddlBillYear'];
+        $bill->total_amount = $_POST['txtTotalAmount'];
+        $bill->deposit_bank_name = $_POST['txtDepositBankName'];
+        $bill->bill_details = $_POST['txtBillDetails'];
+        $bill->branch_id = $_SESSION['objLogin']['branch_id'];
+        $bill->save();
         return view('backend.billDeposit.create');
-
     }
 
     /**
@@ -60,7 +69,6 @@ class BillDepositController extends Controller
     public function edit($id)
     {
         return view('backend.billDeposit.edit');
-
     }
 
     /**
