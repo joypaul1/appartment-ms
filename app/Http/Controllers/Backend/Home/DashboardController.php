@@ -60,8 +60,8 @@ class DashboardController extends Controller
             // ->where('type', 'Owner')
             ->get();
         if ($result_ou) {
-            // $total_owner_utility = (float)$result_ou->w_bil + (float)$result_ou->e_bil + (float)$result_ou->g_bil + (float)$result_ou->u_bil + (float)$result_ou->s_bil + (float)$result_ou->o_bil;
-            // $total_utility = $total_owner_utility;
+            $total_owner_utility = (float)$result_ou[0]->w_bil + (float)$result_ou[0]->e_bil + (float)$result_ou[0]->g_bil + (float)$result_ou[0]->u_bil + (float)$result_ou[0]->s_bil + (float)$result_ou[0]->o_bil;
+            $total_utility = $total_owner_utility;
         }
         $result_salary = DB::table('employee_salaries')
             ->select(DB::raw('sum(amount) as totals'))
@@ -78,6 +78,85 @@ class DashboardController extends Controller
         if ($result_branch && $result_branch->totals > 0) {
             $total_branch = $result_branch->totals;
         }
+
+        $_graph_deposit = [];
+        $branchId = 7;
+        $currentYear = date('Y');
+
+        $result_deposit = DB::select(DB::raw("
+            SELECT sum(`total_amount`) as total, m.name as month_name, y.year as year_name, b.`month` as bill_month FROM bills b
+            INNER JOIN bill_types bt ON bt.id = b.bill_type_id
+            INNER JOIN month_setups m ON m.id = b.`month`
+            INNER JOIN year_configurations y ON y.id = b.year
+            WHERE b.branch_id = :branchId and y.year = :currentYear
+            GROUP BY b.`month`, m.name, y.year
+            ORDER BY b.`month` ASC
+        "), ['branchId' => $branchId, 'currentYear' => $currentYear]);
+
+
+        foreach ($result_deposit as $row_deposit_total) {
+            $_graph_deposit[$row_deposit_total->bill_month] = $row_deposit_total;
+        }
+
+        $graph_data = '';
+        if (!empty($_graph_deposit)) {
+            for ($i = 1; $i <= 12; $i++) {
+                if (isset($_graph_deposit[$i])) {
+                    $graph_data .= $_graph_deposit[$i]->total . ',';
+                } else {
+                    $graph_data .= '0,';
+                }
+            }
+        }
+
+        if (!empty($graph_data)) {
+            $monthly_bill_data = rtrim($graph_data, ',');
+        }
+
+
+
+        $_graph_rent = [];
+
+        $result_rent = DB::table('fairs')
+            ->select(DB::raw('SUM(total_rent) as total'), 'month_id')
+            ->where('branch_id', $branchId)
+            ->where('year', $currentYear)
+            ->groupBy('month_id')
+            ->orderBy('month_id', 'asc')
+            ->get();
+
+        foreach ($result_rent as $row_rent_total) {
+            $_graph_rent[$row_rent_total->month_id] = $row_rent_total;
+        }
+
+        $rent_data = '';
+
+        if (!empty($_graph_rent)) {
+            for ($i = 1; $i <= 12; $i++) {
+                if (isset($_graph_rent[$i])) {
+                    $rent_data .= $_graph_rent[$i]->total . ',';
+                } else {
+                    $rent_data .= '0,';
+                }
+            }
+        }
+
+        if (!empty($rent_data)) {
+            $monthly_rent_data = rtrim($rent_data, ',');
+        }
+
+
+        $total_complain = 0;
+
+        return $result = DB::table('complains as c')
+            ->select(DB::raw('count(id) as total_complain'))
+            ->where('c.branch_id', $branchId)
+            ->first();
+
+        if ($result) {
+            $total_complain = $result->total_complain;
+        }
+
 
         return view('backend.dashboard.index');
     }
