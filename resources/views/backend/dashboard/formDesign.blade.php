@@ -2,14 +2,37 @@
 @push('css')
 @endpush
 @section('content')
+@section('page-header')
+<i class="fa fa-list"></i> Patient Admission Add
+@stop
+@section('table_header')
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-plus-circle',
+'name' => 'Create Admission',
+'modelName' => 'create_data',
+'route' =>'#',
+])
+@endsection
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <h3 class="card-title">
                     <i class="align-middle mr-2" data-feather="list"></i> Owners Entry Form
                 </h3>
-            </div>
+            </div> --}}
+            {{-- <div class="card d-flex  mt-5">
+
+            </div> --}}
+            {{-- <div class="card-header">
+                <span href="#" style="font-size: 18px;font-weight:700">
+                    <i class="fa fa-desktop"></i> Dialysis Point OF Sell (POS)
+                </span>
+                <a href="" target="_blank"><button class="btn btn-info btn-md mr-1">Home</button></a>
+
+            </div> --}}
+
+            @yield('table_header')
             <div class="card-body">
                 <form class="row g-3 needs-validation" novalidate>
                     <div class="col-md-4">
