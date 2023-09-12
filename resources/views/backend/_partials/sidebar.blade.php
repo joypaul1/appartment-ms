@@ -60,7 +60,7 @@
                 <a data-bs-target="#Unit" data-bs-toggle="collapse"
                     class="sidebar-link {{ request()->segment(2) == 'unit' ? 'active' : ' ' }}">
                     <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">unit</span>
+                    <span class="align-middle">Unit</span>
                 </a>
                 <ul id="Unit"
                     class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'unit' ? 'show' : ' ' }}  "
@@ -76,7 +76,7 @@
             <li class="sidebar-item">
                 <a data-bs-target="#owner" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">Unit</span>
+                    <span class="align-middle">Owner</span>
                 </a>
                 <ul id="owner"
                     class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'owner' ? 'show' : ' ' }} "
@@ -108,7 +108,7 @@
             <li class="sidebar-item">
                 <a data-bs-target="#employee" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">Tenant</span>
+                    <span class="align-middle">Employee</span>
                 </a>
                 <ul id="employee"
                     class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'employee' ? 'show' : ' ' }} "
