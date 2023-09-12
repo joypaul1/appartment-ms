@@ -47,9 +47,9 @@
     <div class="col-12">
         <div class="card p-3">
             <div class="card-header">
-                <h5 class="card-title">
+                <h3 class="card-title">
                     <i class="align-middle mr-2" data-feather="list"></i> Owner List
-                </h5>
+                </h3>
                 <h6 class="card-subtitle text-muted mt-3">
                     List of all owner of this apartment.
                 </h6>

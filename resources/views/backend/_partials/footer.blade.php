@@ -3,7 +3,9 @@
         <div class="row text-muted">
             <div class="col-6 text-start">
                 <p class="mb-0">
-                    <a href="#" target="_blank" class="text-muted"><strong>AdminKit</strong></a> &copy;
+                    <a href="/" class="text-muted"><strong>
+                            {{ config('app.name') }}
+                        </strong></a> &copy;
                 </p>
             </div>
             <div class="col-6 text-end">
