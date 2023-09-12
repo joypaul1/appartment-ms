@@ -15,7 +15,3 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[LoginController::class, 'showLoginForm'])->name('home');
-Route::get('/file-import',[ImportController::class,'importView'])->name('import-view');
-Route::post('/import',[ImportController::class,'import'])->name('import');
-Route::get('/export-users',[ImportController::class,'exportUsers'])->name('export-users');
-
