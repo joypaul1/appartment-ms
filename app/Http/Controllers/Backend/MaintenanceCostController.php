@@ -14,7 +14,7 @@ class MaintenanceCostController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.maintenanceCost.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class MaintenanceCostController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.maintenanceCost.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class MaintenanceCostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.maintenanceCost.edit');
+
     }
 
     /**
@@ -83,3 +85,4 @@ class MaintenanceCostController extends Controller
         //
     }
 }
+

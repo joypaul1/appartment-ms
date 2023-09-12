@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.employee.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.employee.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.employee.edit');
+
     }
 
     /**
@@ -83,3 +85,4 @@ class EmployeeController extends Controller
         //
     }
 }
+

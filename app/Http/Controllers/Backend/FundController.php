@@ -14,7 +14,7 @@ class FundController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.fund.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class FundController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.fund.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class FundController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.fund.edit');
+
     }
 
     /**

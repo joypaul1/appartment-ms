@@ -14,7 +14,7 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.owner.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.owner.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class OwnerController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.owner.edit');
+
     }
 
     /**
@@ -83,3 +85,4 @@ class OwnerController extends Controller
         //
     }
 }
+

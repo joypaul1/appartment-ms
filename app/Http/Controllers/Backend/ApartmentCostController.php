@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AppartmentCostController extends Controller
+class ApartmentCostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class AppartmentCostController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.floor.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class AppartmentCostController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.floor.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class AppartmentCostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.floor.edit');
+
     }
 
     /**
@@ -83,3 +85,4 @@ class AppartmentCostController extends Controller
         //
     }
 }
+

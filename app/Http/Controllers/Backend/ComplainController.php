@@ -14,7 +14,7 @@ class ComplainController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.complain.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class ComplainController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.complain.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class ComplainController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.complain.edit');
+
     }
 
     /**
@@ -83,3 +85,4 @@ class ComplainController extends Controller
         //
     }
 }
+

@@ -14,7 +14,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.unit.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class UnitController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.unit.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class UnitController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.unit.edit');
+
     }
 
     /**
@@ -83,3 +85,4 @@ class UnitController extends Controller
         //
     }
 }
+

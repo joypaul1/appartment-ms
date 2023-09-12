@@ -14,7 +14,7 @@ class FloorController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.floor.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class FloorController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.floor.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class FloorController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.floor.edit');
+
     }
 
     /**

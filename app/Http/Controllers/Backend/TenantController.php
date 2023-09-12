@@ -14,7 +14,7 @@ class TenantController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.tenant.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class TenantController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.tenant.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class TenantController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.tenant.edit');
+
     }
 
     /**

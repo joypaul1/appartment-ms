@@ -14,7 +14,7 @@ class VisitorController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.visitor.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class VisitorController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.visitor.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class VisitorController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.visitor.edit');
     }
 
     /**

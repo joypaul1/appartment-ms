@@ -14,7 +14,7 @@ class NoticeBoardController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.noticeBoard.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class NoticeBoardController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.noticeBoard.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class NoticeBoardController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.noticeBoard.edit');
+
     }
 
     /**

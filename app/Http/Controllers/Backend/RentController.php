@@ -14,7 +14,7 @@ class RentController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.rent.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class RentController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.rent.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class RentController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.rent.edit');
+
     }
 
     /**

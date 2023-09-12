@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class BillDepositController extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class BillDepositController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.billDeposit.index');
     }
 
     /**
@@ -24,7 +25,8 @@ class BillDepositController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.billDeposit.create');
+
     }
 
     /**
@@ -57,7 +59,8 @@ class BillDepositController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.billDeposit.edit');
+
     }
 
     /**

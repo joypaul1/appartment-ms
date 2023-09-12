@@ -14,7 +14,7 @@ class OwnerUtilityController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.ownerUtility.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class OwnerUtilityController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.ownerUtility.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class OwnerUtilityController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.ownerUtility.edit');
+
     }
 
     /**

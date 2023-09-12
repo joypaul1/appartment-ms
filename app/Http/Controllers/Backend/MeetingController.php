@@ -14,7 +14,7 @@ class MeetingController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.meeting.index');
     }
 
     /**
@@ -24,7 +24,8 @@ class MeetingController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.meeting.create');
+
     }
 
     /**
@@ -57,7 +58,8 @@ class MeetingController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.meeting.edit');
+
     }
 
     /**
@@ -83,3 +85,4 @@ class MeetingController extends Controller
         //
     }
 }
+
