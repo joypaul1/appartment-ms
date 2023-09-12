@@ -148,7 +148,7 @@ class DashboardController extends Controller
 
         $total_complain = 0;
 
-        return $result = DB::table('complains as c')
+        $result = DB::table('complains as c')
             ->select(DB::raw('count(id) as total_complain'))
             ->where('c.branch_id', $branchId)
             ->first();
@@ -156,7 +156,6 @@ class DashboardController extends Controller
         if ($result) {
             $total_complain = $result->total_complain;
         }
-
 
         return view('backend.dashboard.index');
     }
