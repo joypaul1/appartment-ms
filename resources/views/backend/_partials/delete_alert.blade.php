@@ -1,8 +1,8 @@
 @push('css')
-<link rel="stylesheet" href="{{ asset('assets/backend') }}/vendor/sweetalert/sweetalert.min.css">
+<link rel="stylesheet" href="{{ asset('assets/backend') }}/sweetalert/sweetalert.min.css">
 @endpush
 @push('js')
-<script src="{{ asset('assets/backend') }}/vendor/sweetalert/sweetalert.min.js"></script>
+<script src="{{ asset('assets/backend') }}/sweetalert/sweetalert.min.js"></script>
 <script>
     function delete_check(id) {
         Swal.fire({
@@ -50,7 +50,8 @@
                             positionClass: $positionClass
                         });
                         if (res.status) {
-                            table_name.DataTable().ajax.reload();
+                            window.location.reload();
+                            // table_name.DataTable().ajax.reload();
                         }
                     }
                 , });
@@ -86,7 +87,8 @@
                             positionClass: $positionClass
                         });
                         if (res.status) {
-                            table_name.ajax.reload();
+                            // table_name.ajax.reload();
+                            window.location.reload();
                         }
                     },error:function(res){
                         var errors =res;
@@ -95,8 +97,7 @@
                         for (var key in myObject) {
                         if (myObject.hasOwnProperty(key)) {
                             console.log(key + "/" + myObject[key]);
-                            $("form#warehouse_add_form input[name='" + key + "']").after("<div class='text-danger'><strong>" + ' ' + " </strong></div>");
-                            $("form#warehouse_add_form input[name='" + key + "']").after("<div class='text-danger'><strong>" + myObject[key] + " </strong></div>");
+
                                 let $message = myObject[key] ;
                                 let $context = 'error';
                                 let $positionClass= 'toast-top-right';

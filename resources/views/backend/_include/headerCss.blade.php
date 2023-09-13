@@ -23,6 +23,8 @@
 <!-- BEGIN SETTINGS -->
 <link href="{{ asset('assets/backend/css/light.css') }}" rel="stylesheet">
 {{-- <link  href="{{ asset('assets/backend/css/light.css') }}" rel="stylesheet"> --}}
+<link href="{{ asset('assets/backend') }}/toastr/toastr.min.css"  rel="stylesheet">
+
 
 
 <style>
