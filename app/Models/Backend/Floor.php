@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Floor extends Model
 {
+    protected $table ='floors';
+
     use GlobalScope, AutoTimeStamp;
 
     protected $guarded =['id'];

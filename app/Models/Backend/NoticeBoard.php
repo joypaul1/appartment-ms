@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class NoticeBoard extends Model
 {
+    // protected $table ='management_committees';
+
     use GlobalScope, AutoTimeStamp;
 
     protected $guarded =['id'];

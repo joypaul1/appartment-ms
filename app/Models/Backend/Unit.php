@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
 {
+    protected $table ='units';
+
     use GlobalScope, AutoTimeStamp;
 
     protected $guarded =['id'];

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Owner extends Model
 {
+    protected $table ='owners';
+
     use GlobalScope, AutoTimeStamp;
 
     protected $guarded =['id'];

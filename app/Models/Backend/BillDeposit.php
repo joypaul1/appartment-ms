@@ -12,5 +12,6 @@ class BillDeposit extends Model
 {
     use GlobalScope, AutoTimeStamp;
 
+    protected $table ='bills';
     protected $guarded =['id'];
 }

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Meeting extends Model
 {
+    protected $table ='meetings';
+
     use GlobalScope, AutoTimeStamp;
     protected $guarded =['id'];
 

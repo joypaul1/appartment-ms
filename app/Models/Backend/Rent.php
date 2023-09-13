@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rent extends Model
 {
+    protected $table ='rent_configurations';
+
     use GlobalScope, AutoTimeStamp;
 
     protected $guarded =['id'];

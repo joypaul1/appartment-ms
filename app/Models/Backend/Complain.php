@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Complain extends Model
 {
     use GlobalScope, AutoTimeStamp;
+    protected $table ='complains';
 
     protected $guarded =['id'];
 }
