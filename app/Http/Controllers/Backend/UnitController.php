@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Floor;
+use App\Models\Backend\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,11 +17,9 @@ class UnitController extends Controller
      */
     public function index()
     {
-        return $data = DB::table('unit_configurations as u')
-            ->select('f.floor_no', 'u.unit_no', 'u.id')
-            ->join('floors as f', 'f.id', '=', 'u.floor_no')
-            // ->where('u.branch_id', (int)$_SESSION['objLogin']['branch_id'])
-            ->orderBy('u.id', 'ASC')
+        $data = Unit::with('branch:id,name')->with('floor:id,name')
+            // ->where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
+            ->orderBy('id', 'DESC')
             ->get();
         return view('backend.unit.index', compact('data'));
     }
@@ -31,7 +31,8 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('backend.unit.create');
+        $floors = Floor::get(['id', 'name']);
+        return view('backend.unit.create', compact('floors'));
     }
 
     /**
@@ -42,11 +43,23 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        $unit = new Unit();
-        $unit->floor_no = $_POST['ddlFloor'];
-        $unit->unit_no = $_POST['txtUnit'];
-        $unit->branch_id = $_SESSION['objLogin']['branch_id'];
-        $unit->save();
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'floor_id' => 'required',
+        ]);
+        try {
+            DB::beginTransaction();
+            $data = $validatedData;
+            $data['branch_id'] = auth('admin')->user()->branch_id;
+            // dd($data);
+            Unit::create($data);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $ex->getMessage());
+            // return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.unit.index')->with('success', 'Data Created Successfully');
     }
 
     /**
@@ -66,10 +79,11 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Unit $unit)
     {
-        $unit = Unit::findOrFail($id); // Find the unit by its ID
-        return view('backend.unit.edit');
+        $floors = Floor::get(['id', 'name']);
+
+        return view('backend.unit.edit', compact('unit','floors'));
     }
 
     /**
@@ -79,20 +93,24 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Unit $unit)
     {
-        $request->validate([
-            'ddlFloor' => 'required', // Add validation rules for your fields here
-            'txtUnit' => 'required',
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'floor_id' => 'required',
+
         ]);
-
-        $unit = Unit::findOrFail($id);
-        $unit->floor_no = $request->input('ddlFloor');
-        $unit->unit_no = $request->input('txtUnit');
-        // Update other fields as needed
-        $unit->save();
-
-        return redirect()->route('units.index')->with('success', 'Unit updated successfully.');
+        try {
+            DB::beginTransaction();
+            $data = $validatedData;
+            $data['branch_id'] = auth('admin')->user()->branch_id;
+            $unit->update($data);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.unit.index')->with('success', 'Data Updated Successfully');
     }
 
     /**
@@ -101,11 +119,24 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Unit $unit)
     {
-        $unit = Unit::findOrFail($id);
-        $unit->delete();
 
-        return redirect()->route('units.index')->with('success', 'Unit deleted successfully.');
+        try {
+            $unit->delete();
+        } catch (\Exception $ex) {
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
+        }
+        // (new LogActivity)::addToLog('Category Deleted');
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
+        // $floor = Floor::find($id);
+
+        // if (!$floor) {
+        //     return redirect()->route('floors.index')->with('error', 'Floor not found.');
+        // }
+
+        // $floor->delete();
+
+        // return redirect()->route('floors.index')->with('success', 'Floor deleted successfully.');
     }
 }

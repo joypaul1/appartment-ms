@@ -1,6 +1,7 @@
 @push('css')
-<link rel="stylesheet" href="{{ asset('assets/backend') }}/vendor/select2/select2.css" />
-<link rel="stylesheet" href="{{ asset('assets/backend') }}/css/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{{-- <link rel="stylesheet" href="{{ asset('assets/backend') }}/vendor/select2/select2.css" /> --}}
+{{-- <link rel="stylesheet" href="{{ asset('assets/backend') }}/css/main.css"> --}}
 @endpush
 
 @php
@@ -39,7 +40,8 @@ $label = ucfirst(str_replace($str, $rplc, $label));
 </select>
 
 @push('js')
-<script src="{{ asset('assets/backend') }}/vendor/select2/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- <script src="{{ asset('assets/backend') }}/vendor/select2/select2.min.js"></script> --}}
 @if (isset($name))
 <script>
     $("#{{ $name }}").each(function() {

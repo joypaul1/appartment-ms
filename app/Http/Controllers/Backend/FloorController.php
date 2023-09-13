@@ -74,9 +74,9 @@ class FloorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Floor $floor)
     {
-        return view('backend.floor.edit');
+        return view('backend.floor.edit', compact('floor'));
     }
 
     /**
@@ -86,19 +86,22 @@ class FloorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Floor $floor)
     {
-        $floor = Floor::find($id);
-
-        if (!$floor) {
-            return redirect()->route('floors.index')->with('error', 'Floor not found.');
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        try {
+            DB::beginTransaction();
+            $data = $validatedData;
+            $data['branch_id'] = auth('admin')->user()->branch_id;
+            $floor->update($data);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something went wrong!');
         }
-
-        $floor->floor_no = $request->input('txtFloor');
-        $floor->branch_id = $_SESSION['objLogin']['branch_id'];
-        $floor->save();
-
-        return redirect()->route('floors.index')->with('success', 'Floor updated successfully.');
+        return redirect()->route('backend.floor.index')->with('success', 'Floor Updated Successfully');
     }
 
     /**
@@ -113,7 +116,7 @@ class FloorController extends Controller
         try {
             $floor->delete();
         } catch (\Exception $ex) {
-            return response()->json(['status' => false, 'mes' =>'Something went wrong!This was relationship Data.']);
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }
         // (new LogActivity)::addToLog('Category Deleted');
         return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
