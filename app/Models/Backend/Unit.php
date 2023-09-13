@@ -22,4 +22,9 @@ class Unit extends Model
     {
         return $this->belongsTo(Floor::class, 'floor_id');
     }
+
+    public function owners()
+    {
+        return $this->belongsToMany(Owner::class);
+    }
 }

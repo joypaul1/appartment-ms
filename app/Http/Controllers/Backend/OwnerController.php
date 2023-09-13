@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helpers\Image;
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Owner;
+use App\Models\Backend\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,10 +18,11 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        $result = Owner::where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
-            ->orderBy('id', 'desc')
+        return $data = Owner::with('units')->
+            // where('branch_id',auth('admin')->user()->branch_id)
+            orderBy('id', 'desc')
             ->get();
-        return view('backend.owner.index');
+        return view('backend.owner.index', compact('data'));
     }
 
     /**
@@ -28,7 +32,8 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        return view('backend.owner.create');
+        $units = Unit::get(['id', 'name']);
+        return view('backend.owner.create', compact('units'));
     }
 
     /**
@@ -39,34 +44,34 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'txtOwnerName' => 'required|string|max:255',
-            'txtOwnerEmail' => 'required|email|max:255',
-            'txtOwnerContact' => 'required|string|max:20',
-            'txtOwnerPreAddress' => 'required|string|max:255',
-            'txtOwnerPerAddress' => 'required|string|max:255',
-            'txtOwnerNID' => 'required|string|max:20',
-            'o_password' => 'required|string|max:255', // Make sure you hash this password before saving it
-            'image' => 'required|string|max:255',
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'mobile' => 'required|string|max:20',
+            'pre_address' => 'required|string|max:255',
+            'per_address' => 'required|string|max:255',
+            'nid' => 'required|string|max:20',
+            'password' => 'required|string|max:255',
+            'image' => 'nullable',
         ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
+        try {
+            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            if ($request->hasfile('image')) {
+                $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(200, 200)->save();
+                $validatedData['image'] = $image;
+            }
+            // dd($validatedData);
+            $owner = Owner::create($validatedData);
+            if ($request->unit_id) {
+                $owner->units()->sync($request->unit_id);
+            }
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('error',  $ex->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
         }
-        $owner = new Owner();
-        $owner->o_name = $_POST['txtOwnerName'];
-        $owner->o_email = $_POST['txtOwnerEmail'];
-        $owner->o_contact = $_POST['txtOwnerContact'];
-        $owner->o_pre_address = $_POST['txtOwnerPreAddress'];
-        $owner->o_per_address = $_POST['txtOwnerPerAddress'];
-        $owner->o_nid = $_POST['txtOwnerNID'];
-        $owner->o_password = $o_password; // Assuming $o_password is already defined
-        $owner->image = $image_url; // Assuming $image_url is already defined
-        $owner->branch_id = $_SESSION['objLogin']['branch_id'];
-        $owner->save();
-        return redirect()->route('backend.owners.index')->with('success', 'Owner added successfully.');
+
+        return redirect()->route('backend.owner.index')->with('success', 'Owner Created successfully.');
     }
 
     /**

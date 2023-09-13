@@ -4,7 +4,7 @@ namespace App\Traits;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 
-trait AutoTimeStamp 
+trait AutoTimeStamp
 {
 
     private static $baseClass = (self::class);
@@ -64,5 +64,5 @@ trait AutoTimeStamp
     //     return  json_encode($fillable);
 
     // }
-    
+
 }

@@ -18,7 +18,7 @@ class UnitController extends Controller
     public function index()
     {
         $data = Unit::with('branch:id,name')->with('floor:id,name')
-            // ->where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
+            // ->where('branch_id', auth('admin')->user()->branch_id)
             ->orderBy('id', 'DESC')
             ->get();
         return view('backend.unit.index', compact('data'));
@@ -51,13 +51,11 @@ class UnitController extends Controller
             DB::beginTransaction();
             $data = $validatedData;
             $data['branch_id'] = auth('admin')->user()->branch_id;
-            // dd($data);
             Unit::create($data);
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
-            return redirect()->back()->with('error', $ex->getMessage());
-            // return redirect()->back()->with('error', 'Something went wrong!');
+            return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.unit.index')->with('success', 'Data Created Successfully');
     }

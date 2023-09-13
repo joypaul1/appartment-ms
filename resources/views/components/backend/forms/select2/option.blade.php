@@ -5,8 +5,8 @@
 @endpush
 
 @php
-$str = ['_', '[', ']'];
-$rplc = [' ', ' ', ' '];
+$str = ['_'];
+$rplc = [' '];
 $upName = ucfirst(str_replace($str, $rplc, $name));
 if (isset($label)) {
 $label = ucfirst(str_replace($str, $rplc, $label));

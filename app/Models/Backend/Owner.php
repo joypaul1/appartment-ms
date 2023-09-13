@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Owner extends Model
 {
-    protected $table ='owners';
+    protected $table = 'owners';
 
     use GlobalScope, AutoTimeStamp;
 
-    protected $guarded =['id'];
-
+    protected $guarded = ['id'];
+    public function units()
+    {
+        return $this->belongsToMany(Unit::class, 'owner_unit', 'unit_id');
+    }
 }
