@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Floor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,9 +16,9 @@ class FloorController extends Controller
      */
     public function index()
     {
-        $data = DB::table('floors')
+        return $data = Floor::
             // ->where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
-            ->orderBy('id', 'DESC')
+            orderBy('id', 'DESC')
             ->get();
         return view('backend.floor.index', compact('data'));
     }
