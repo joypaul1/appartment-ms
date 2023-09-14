@@ -175,6 +175,7 @@ class TenantController extends Controller
     public function destroy(Tenant $tenant)
     {
         try {
+            Unit::whereId($tenant->unit_id)->update(['status' => 0]);
             $tenant->delete();
         } catch (\Exception $ex) {
             return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
