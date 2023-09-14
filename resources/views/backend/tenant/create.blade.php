@@ -99,7 +99,7 @@
                         'name' => 'rent_per_month',
                         'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('advance_rent')])
+                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('rent_per_month')])
                     </div>
                     {{-- @dd(date('m')) --}}
                     <div class="col-md-6">
