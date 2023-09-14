@@ -30,6 +30,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'backend.'],
     Route::resource('tenant', TenantController::class);
     Route::resource('employee', EmployeeController::class);
     Route::resource('employee-salary', EmployeeSalaryController::class);
+    Route::resource('employee-leave', EmployeeSalaryController::class);
     Route::resource('rent', RentController::class);
     Route::resource('owner-utility', OwnerUtilityController::class);
     Route::resource('maintenance-cost', MaintenanceCostController::class);

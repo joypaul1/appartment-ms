@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Helpers\Image;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Employee;
+use App\Models\Backend\EmployeeSalary;
 use App\Models\Backend\MemberType;
+use App\Models\Backend\Year;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +22,8 @@ class EmployeeSalaryController extends Controller
      */
     public function index()
     {
-        $data = Employee::where('branch_id', auth('admin')->user()->branch_id)->get();
-        return view('backend.employee.index', compact('data'));
+        $data = EmployeeSalary::where('branch_id', auth('admin')->user()->branch_id)->with('employee:id,name', 'year:id,name', 'month:id,name')->get();
+        return view('backend.employee_salary.index', compact('data'));
     }
 
     /**
@@ -31,9 +33,17 @@ class EmployeeSalaryController extends Controller
      */
     public function create()
     {
-        $member_types = MemberType::get(['id', 'name']);
-        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
-        return view('backend.employee.create', compact('status', 'member_types'));
+        $employees = Employee::get(['id', 'name']);
+        $months = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $date = DateTime::createFromFormat('!m', $i);
+            $months[] = [
+                'id' => $i,
+                'name' => $date->format('F')
+            ];
+        }
+        $years = Year::get(['id', 'name']);
+        return view('backend.employee_salary.create', compact('employees', 'years', 'months'));
     }
 
     /**
@@ -44,39 +54,25 @@ class EmployeeSalaryController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validatedData = $request->validate([
-            'name'              => 'required|string|max:255',
-            'email'             => 'required|email|max:255',
-            'mobile'            => 'required|string|max:20',
-            'pre_address'       => 'required|string|max:255',
-            'per_address'       => 'required|string|max:255',
-            'nid'               => 'required|string|max:20',
-            'password'          => 'required|string|max:255',
-            'salary'            => 'required',
-            'joining_date'      => 'required',
-            'resign_date'       => 'nullable',
-            'status'            => 'required',
-            'member_type_id'            => 'required',
+            'salary'        => 'required',
+            'issue_date'    => 'required',
+            'employee_id'   => 'required',
+            'month_id'      => 'required',
+            'year_id'       => 'required',
         ]);
         try {
-            $validatedData['password'] = Hash::make($request->password);
+            $validatedData['amount'] = $request->salary;
             $validatedData['branch_id'] = auth('admin')->user()->branch_id;
-            $validatedData['joining_date'] = date('Y-m-d', strtotime($request->joining_date));
-            if ($request->resign_date) {
-                $validatedData['resign_date'] = date('Y-m-d', strtotime($request->resign_date));
-            }
-            if ($request->hasfile('image')) {
-                $image =  (new Image)->dirName('employee')->file($request->image)->resizeImage(100, 100)->save();
-                $validatedData['image'] = $image;
-            }
-            $employee = Employee::create($validatedData);
+            $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
+
+            EmployeeSalary::create($validatedData);
         } catch (\Exception $ex) {
             dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
-        return redirect()->route('backend.employee.index')->with('success', 'Employee Created successfully.');
+        return redirect()->route('backend.employee-salary.index')->with('success', 'Employee Salary Created successfully.');
     }
 
     /**
@@ -96,11 +92,19 @@ class EmployeeSalaryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(EmployeeSalary $employeeSalary)
     {
-        $member_types = MemberType::get(['id', 'name']);
-        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
-        return view('backend.employee.edit', compact('member_types', 'status', 'employee'));
+        $employees = Employee::get(['id', 'name']);
+        $months = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $date = DateTime::createFromFormat('!m', $i);
+            $months[] = [
+                'id' => $i,
+                'name' => $date->format('F')
+            ];
+        }
+        $years = Year::get(['id', 'name']);
+        return view('backend.employee_salary.edit', compact('employees', 'years', 'months', 'employeeSalary'));
     }
 
     /**
@@ -110,43 +114,27 @@ class EmployeeSalaryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, EmployeeSalary $employeeSalary)
     {
         $validatedData = $request->validate([
-            'name'              => 'required|string|max:255',
-            'email'             => 'required|email|max:255',
-            'mobile'            => 'required|string|max:20',
-            'pre_address'       => 'required|string|max:255',
-            'per_address'       => 'required|string|max:255',
-            'nid'               => 'required|string|max:20',
-            // 'password'          => 'nullable|string|max:255',
-            'salary'            => 'required',
-            'joining_date'      => 'required',
-            'resign_date'       => 'nullable',
-            'status'            => 'required',
-            'member_type_id'            => 'required',
+            'salary'        => 'required',
+            'issue_date'    => 'required',
+            'employee_id'   => 'required',
+            'month_id'      => 'required',
+            'year_id'       => 'required',
         ]);
         try {
-            if($request->password){
-                $validatedData['password'] = Hash::make($request->password);
-            }
+            $validatedData['amount'] = $request->salary;
             $validatedData['branch_id'] = auth('admin')->user()->branch_id;
-            $validatedData['joining_date'] = date('Y-m-d', strtotime($request->joining_date));
-            if ($request->resign_date) {
-                $validatedData['resign_date'] = date('Y-m-d', strtotime($request->resign_date));
-            }
-            if ($request->hasfile('image')) {
-                $image =  (new Image)->dirName('employee')->file($request->image)->resizeImage(100, 100)->save();
-                $validatedData['image'] = $image;
-            }
+            $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
 
-            $employee->update($validatedData);
+            $employeeSalary->update($validatedData);
         } catch (\Exception $ex) {
             return redirect()->back()->with('error',  $ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
-        return redirect()->route('backend.employee.index')->with('success', 'Employee Updated successfully.');
+        return redirect()->route('backend.employee-salary.index')->with('success', 'Employee Salary Updated successfully.');
     }
 
     /**
@@ -155,10 +143,10 @@ class EmployeeSalaryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(EmployeeSalary $employeeSalary)
     {
         try {
-            $employee->delete();
+            $employeeSalary->delete();
         } catch (\Exception $ex) {
             return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }

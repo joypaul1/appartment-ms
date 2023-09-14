@@ -18,8 +18,12 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->getSalary){
+            return response()->json(['data' =>  Employee::whereId($request->Employeeid)->first()->salary]);
+        }
+
         $data = Employee::where('branch_id', auth('admin')->user()->branch_id)->get();
         return view('backend.employee.index', compact('data'));
     }

@@ -107,13 +107,20 @@ $strpos = Route::currentRouteName();
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Employee</span>
                 </a>
-                <ul id="employee" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'employee' ? 'show' : ' ' }} "
+                <ul id="employee" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'employee' ? 'show' : ' ' }}
+                    {{ request()->segment(2) == 'employee-salary' ? 'show' : ' ' }}  "
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.employee.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.employee.index') }}">Employee List</a>
                     </li>
                     <li class="sidebar-item {{ strpos($strpos, 'backend.employee.create') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.employee.create') }}">Create Employee </a>
+                    </li>
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.employee-salary.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.employee-salary.index') }}"> Salary List</a>
+                    </li>
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.employee-leave.create') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.employee-leave.create') }}">Create Salary </a>
                     </li>
                 </ul>
             </li>

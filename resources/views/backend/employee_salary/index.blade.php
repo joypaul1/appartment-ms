@@ -4,13 +4,13 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Employee List
+<i class="fa fa-list"></i> Employee Salary List
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
 'name' => 'Create Employee',
-'route' =>route('backend.employee.create'),
+'route' =>route('backend.employee-salary.create'),
 ])
 @endsection
 
@@ -45,25 +45,26 @@
                                 {{-- <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset=""> --}}
                             </td>
                             <td>
-                                {{ $row->email }}
+                                {{ optional($row->year)->name }}
+
                             </td>
                             <td>
-                                {{ $row->mobile }}
+                                {{ date('d-m-Y', strtotime($row->issue_date)) }}
                             </td>
                             <td>
-                                {{ $row->address }}
+                                {{ $row->amount }}
                             </td>
 
 
                             <td class="table-action">
-                                <a href="{{ route('backend.employee.edit', $row) }}">
+                                <a href="{{ route('backend.employee-salary.edit', $row) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-edit-2 align-middle">
                                         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
                                 </a>
-                                <a data-href="{{ route('backend.employee.destroy', $row) }}" href="#" class="delete_check">
+                                <a data-href="{{ route('backend.employee-salary.destroy', $row) }}" href="#" class="delete_check">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-trash align-middle">

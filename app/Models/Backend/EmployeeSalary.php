@@ -12,4 +12,18 @@ class EmployeeSalary extends Model
 
     use GlobalScope, AutoTimeStamp;
     protected $guarded =['id'];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+    public function year()
+    {
+        return $this->belongsTo(Year::class);
+    }
+    public function month()
+    {
+        return $this->belongsTo(MonthConfiguration::class);
+    }
+
 }
