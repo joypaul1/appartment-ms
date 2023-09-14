@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tenant extends Model
 {
-    protected $table ='rent_configurations';
+    protected $table = 'rent_configurations';
 
     use GlobalScope, AutoTimeStamp;
-    protected $guarded =['id'];
+    
+    protected $guarded = ['id'];
 
     public function unit()
     {
@@ -21,5 +22,4 @@ class Tenant extends Model
     {
         return $this->belongsTo(Floor::class);
     }
-
 }

@@ -20,7 +20,8 @@ class RentController extends Controller
      */
     public function index()
     {
-        return view('backend.rent.index');
+        $rentCollections=RentCollection::get();
+        return view('backend.rent.index', compact('rentCollections'));
     }
 
     /**
