@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ManagementCommittee extends Model
 {
-    protected $table ='management_committees';
+    protected $table = 'management_committees';
 
     use GlobalScope, AutoTimeStamp;
 
     protected $guarded = ['id'];
+    public function memberType()
+    {
+        return $this->belongsTo(MemberType::class, 'member_type_id');
+    }
 }

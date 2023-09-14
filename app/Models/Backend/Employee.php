@@ -13,4 +13,9 @@ class Employee extends Model
     use GlobalScope, AutoTimeStamp;
 
     protected $guarded =['id'];
+
+    public function memberType()
+    {
+        return $this->belongsTo(MemberType::class, 'member_type_id');
+    }
 }

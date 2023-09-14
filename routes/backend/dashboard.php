@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\FloorController;
 use App\Http\Controllers\Backend\FundController;
 use App\Http\Controllers\Backend\Home\DashboardController;
 use App\Http\Controllers\Backend\MaintenanceCostController;
+use App\Http\Controllers\Backend\ManagementCommitteeController;
 use App\Http\Controllers\Backend\MeetingController;
 use App\Http\Controllers\Backend\NoticeBoardController;
 use App\Http\Controllers\Backend\OwnerController;
@@ -34,7 +35,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'backend.'],
     Route::resource('rent', RentController::class);
     Route::resource('owner-utility', OwnerUtilityController::class);
     Route::resource('maintenance-cost', MaintenanceCostController::class);
-    Route::resource('management-committee', FloorController::class);
+    Route::resource('management-committee', ManagementCommitteeController::class);
     Route::resource('fund', FundController::class);
     Route::resource('bill-deposit', BillDepositController::class);
     Route::resource('complain', ComplainController::class);

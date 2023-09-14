@@ -48,7 +48,6 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validatedData = $request->validate([
             'name'              => 'required|string|max:255',
             'email'             => 'required|email|max:255',
@@ -146,7 +145,6 @@ class EmployeeController extends Controller
 
             $employee->update($validatedData);
         } catch (\Exception $ex) {
-            return redirect()->back()->with('error',  $ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 

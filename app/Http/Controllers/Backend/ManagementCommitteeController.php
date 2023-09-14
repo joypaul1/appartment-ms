@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helpers\Image;
 use App\Http\Controllers\Controller;
+use App\Models\Backend\ManagementCommittee;
+use App\Models\Backend\MemberType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ManagementCommitteeController extends Controller
 {
@@ -14,7 +18,8 @@ class ManagementCommitteeController extends Controller
      */
     public function index()
     {
-        return view('backend.managementCommittee.index');
+        $data = ManagementCommittee::where('branch_id', auth('admin')->user()->branch_id)->get();
+        return view('backend.managementCommittee.index', compact('data'));
     }
 
     /**
@@ -24,8 +29,9 @@ class ManagementCommitteeController extends Controller
      */
     public function create()
     {
-        return view('backend.managementCommittee.create');
-
+        $member_types = MemberType::get(['id', 'name']);
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        return view('backend.managementCommittee.create', compact('status', 'member_types'));
     }
 
     /**
@@ -36,7 +42,39 @@ class ManagementCommitteeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'              => 'required|string|max:255',
+            'email'             => 'required|email|max:255',
+            'mobile'            => 'required|string|max:20',
+            'pre_address'       => 'required|string|max:255',
+            'per_address'       => 'required|string|max:255',
+            'nid'               => 'required|string|max:20',
+            'password'          => 'required|string|max:255',
+            // 'salary'            => 'required',
+            'joining_date'      => 'required',
+            'resign_date'       => 'nullable',
+            'status'            => 'required',
+            'member_type_id'            => 'required',
+        ]);
+        try {
+            $validatedData['password'] = Hash::make($request->password);
+            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['joining_date'] = date('Y-m-d', strtotime($request->joining_date));
+            if ($request->resign_date) {
+                $validatedData['resign_date'] = date('Y-m-d', strtotime($request->resign_date));
+            }
+            if ($request->hasfile('image')) {
+                $image =  (new Image)->dirName('managementCommittee')->file($request->image)->resizeImage(100, 100)->save();
+                $validatedData['image'] = $image;
+            }
+            ManagementCommittee::create($validatedData);
+        } catch (\Exception $ex) {
+            dd($ex->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+
+
+        return redirect()->route('backend.managementCommittee.index')->with('success', 'Tenant Created successfully.');
     }
 
     /**
@@ -56,10 +94,12 @@ class ManagementCommitteeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ManagementCommittee $managementCommittee)
     {
-        return view('backend.managementCommittee.edit');
-
+        $member_types = MemberType::get(['id', 'name']);
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        return view('backend.managementCommittee.edit', compact('member_types', 'status', 'managementCommittee'));
+        return view('backend.managementCommittee.edit', compact('floors', 'months', 'years', 'status', 'tenant'));
     }
 
     /**
@@ -69,9 +109,42 @@ class ManagementCommitteeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ManagementCommittee $managementCommittee)
     {
-        //
+        $validatedData = $request->validate([
+            'name'              => 'required|string|max:255',
+            'email'             => 'required|email|max:255',
+            'mobile'            => 'required|string|max:20',
+            'pre_address'       => 'required|string|max:255',
+            'per_address'       => 'required|string|max:255',
+            'nid'               => 'required|string|max:20',
+            // 'password'          => 'nullable|string|max:255',
+            // 'salary'            => 'required',
+            'joining_date'      => 'required',
+            'resign_date'       => 'nullable',
+            'status'            => 'required',
+            'member_type_id'            => 'required',
+        ]);
+        try {
+            if ($request->password) {
+                $validatedData['password'] = Hash::make($request->password);
+            }
+            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['joining_date'] = date('Y-m-d', strtotime($request->joining_date));
+            if ($request->resign_date) {
+                $validatedData['resign_date'] = date('Y-m-d', strtotime($request->resign_date));
+            }
+            if ($request->hasfile('image')) {
+                $image =  (new Image)->dirName('managementCommittee')->file($request->image)->resizeImage(100, 100)->save();
+                $validatedData['image'] = $image;
+            }
+
+            $managementCommittee->update($validatedData);
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+
+        return redirect()->route('backend.managementCommittee.index')->with('success', 'Tenant Updated successfully.');
     }
 
     /**
@@ -80,8 +153,13 @@ class ManagementCommitteeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ManagementCommittee $managementCommittee)
     {
-        //
+        try {
+            $managementCommittee->delete();
+        } catch (\Exception $ex) {
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
+        }
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }
