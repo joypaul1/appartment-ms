@@ -15,14 +15,14 @@ $label = ucfirst(str_replace($str, $rplc, $label));
 @endphp
 {{-- label end here --}}
 
-<label class="col-form-label for=" {{ $upName }}">
+<label class="col-form-label" for="{{ $upName }}">
     {{ $label ?? $upName }}
     @isset($required)
     <span class="text-danger">*</span>
     @endisset
 </label>
 {{-- label end here --}}
-<select class="form-control show-tick ms select2" id="{{ $upName }}" name="{{ $name }}" @isset($multiple) multiple @endisset @isset($onclick)
+<select class="form-control show-tick ms select2" id="{{$upName}}" name="{{ $name }}" @isset($multiple) multiple @endisset @isset($onclick)
     onclick="dataBaseCall()" @endisset @isset($onchange) onchange="dataBaseCall()" @endisset @isset($required) required @endisset @isset($readonly)
     readonly @endisset>
     <option value="{{ null }}">- select {{ $label ?? $upName }} -</option>

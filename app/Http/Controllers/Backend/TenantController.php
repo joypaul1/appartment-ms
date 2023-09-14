@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Helpers\Image;
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Floor;
+use App\Models\Backend\Tenant;
+use App\Models\Backend\Unit;
+use App\Models\Backend\Year;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class TenantController extends Controller
 {
@@ -14,7 +21,8 @@ class TenantController extends Controller
      */
     public function index()
     {
-        return view('backend.tenant.index');
+        $data = Tenant::where('branch_id', auth('admin')->user()->branch_id)->with('unit:id,name', 'floor:id,name')->get();
+        return view('backend.tenant.index', compact('data'));
     }
 
     /**
@@ -24,8 +32,19 @@ class TenantController extends Controller
      */
     public function create()
     {
-        return view('backend.tenant.create');
+        $months = [];
 
+        for ($i = 1; $i <= 12; $i++) {
+            $date = DateTime::createFromFormat('!m', $i);
+            $months[] = [
+                'id' => $i,
+                'name' => $date->format('F')
+            ];
+        }
+        $floors = Floor::active()->get(['id', 'name']);
+        $years = Year::get(['id', 'name']);
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        return view('backend.tenant.create', compact('floors', 'months', 'years', 'status'));
     }
 
     /**
@@ -36,7 +55,36 @@ class TenantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'          => 'required|string|max:255',
+            'email'         => 'required|email|max:255',
+            'mobile'        => 'required|string|max:20',
+            'address'   => 'required|string|max:255',
+            'nid'           => 'required|string|max:20',
+            'password'      => 'required|string|max:255',
+            'floor_id'      => 'required',
+            'unit_id'       => 'required',
+            'advance_rent'  => 'required',
+            'rent_per_month' => 'required',
+            'month_id'      => 'required',
+            'year_id'       => 'required',
+            'status'        => 'required',
+        ]);
+        try {
+            $validatedData['password'] = Hash::make($request->password);
+            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['date'] = date('Y-m-d');
+            if ($request->hasfile('image')) {
+                $image =  (new Image)->dirName('tenant')->file($request->image)->resizeImage(100, 100)->save();
+                $validatedData['image'] = $image;
+            }
+            Unit::whereId($request->unit_id)->update(['status' => '1']);
+            $tenant = Tenant::create($validatedData);
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+
+        return redirect()->route('backend.tenant.index')->with('success', 'Tenant Created successfully.');
     }
 
     /**
@@ -56,10 +104,21 @@ class TenantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tenant $tenant)
     {
-        return view('backend.tenant.edit');
+        $months = [];
 
+        for ($i = 1; $i <= 12; $i++) {
+            $date = DateTime::createFromFormat('!m', $i);
+            $months[] = [
+                'id' => $i,
+                'name' => $date->format('F')
+            ];
+        }
+        $floors = Floor::active()->get(['id', 'name']);
+        $years = Year::get(['id', 'name']);
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        return view('backend.tenant.edit', compact('floors', 'months', 'years', 'status', 'tenant'));
     }
 
     /**
@@ -69,9 +128,42 @@ class TenantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tenant $tenant)
     {
-        //
+        $validatedData = $request->validate([
+            'name'          => 'required|string|max:255',
+            'email'         => 'required|email|max:255',
+            'mobile'        => 'required|string|max:20',
+            'address'   => 'required|string|max:255',
+            'nid'           => 'required|string|max:20',
+            'password'      => 'nullable|string|max:255',
+            'floor_id'      => 'required',
+            'unit_id'       => 'required',
+            'advance_rent'  => 'required',
+            'rent_per_month' => 'required',
+            'month_id'      => 'required',
+            'year_id'       => 'required',
+            'status'        => 'required',
+        ]);
+        try {
+            $validatedData['password'] = Hash::make($request->password);
+            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['date'] = date('Y-m-d');
+            if ($request->hasfile('image')) {
+                $image =  (new Image)->dirName('tenant')->file($request->image)->resizeImage(100, 100)->save();
+                $validatedData['image'] = $image;
+            }
+            if ($request->unit_id != $tenant->unit_id) {
+                Unit::whereId($tenant->unit_id)->update(['status' => 0]);
+                Unit::whereId($request->unit_id)->update(['status' => 1]);
+            }
+            $tenant->update($validatedData);
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('error',  $ex->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+
+        return redirect()->route('backend.tenant.index')->with('success', 'Tenant Updated successfully.');
     }
 
     /**
@@ -80,8 +172,14 @@ class TenantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tenant $tenant)
     {
-        //
+        try {
+            $tenant->delete();
+        } catch (\Exception $ex) {
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
+        }
+        // (new LogActivity)::addToLog('Category Deleted');
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }

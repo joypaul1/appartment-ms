@@ -15,8 +15,14 @@ class UnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->getFreeUnits) {
+            $units = Unit::where('floor_id', $request->Floorid)
+            ->where('branch_id', auth('admin')->user()->branch_id)
+            ->where('status', 0)->orderBy('id', 'asc')->get();
+            return response()->json(['data' => $units]);
+        }
         $data = Unit::with('branch:id,name')->with('floor:id,name')
             // ->where('branch_id', auth('admin')->user()->branch_id)
             ->orderBy('id', 'DESC')
@@ -81,7 +87,7 @@ class UnitController extends Controller
     {
         $floors = Floor::get(['id', 'name']);
 
-        return view('backend.unit.edit', compact('unit','floors'));
+        return view('backend.unit.edit', compact('unit', 'floors'));
     }
 
     /**

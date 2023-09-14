@@ -42,8 +42,6 @@
                                 {{ $row->name }}
                             </td>
                             <td>
-                                {{-- {{ $row->image }} --}}
-                                {{-- @dd(($row->image)); --}}
                                 <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
                             </td>
                             <td>
