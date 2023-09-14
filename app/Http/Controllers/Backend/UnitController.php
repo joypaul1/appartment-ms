@@ -23,6 +23,13 @@ class UnitController extends Controller
             ->where('status', 0)->orderBy('id', 'asc')->get();
             return response()->json(['data' => $units]);
         }
+        if ($request->getUnit) {
+            $units = Unit::where('floor_id', $request->floorid)
+            ->where('branch_id', auth('admin')->user()->branch_id)
+            ->orderBy('id', 'asc')->get();
+            return response()->json(['data' => $units]);
+        }
+
         $data = Unit::with('branch:id,name')->with('floor:id,name')
             // ->where('branch_id', auth('admin')->user()->branch_id)
             ->orderBy('id', 'DESC')

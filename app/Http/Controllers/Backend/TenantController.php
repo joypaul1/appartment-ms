@@ -19,8 +19,15 @@ class TenantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->getRent) {
+            $rent = Tenant::where('floor_id', $request->floor_id)
+                ->where('unit_id', $request->unit_id)->
+                // ->where('branch_id', auth('admin')->user()->branch_id)
+                where('status', 1)->first();
+            return response()->json(['data' => $rent]);
+        }
         $data = Tenant::where('branch_id', auth('admin')->user()->branch_id)->with('unit:id,name', 'floor:id,name')->get();
         return view('backend.tenant.index', compact('data'));
     }
