@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\BillDepositController;
 use App\Http\Controllers\Backend\ComplainController;
 use App\Http\Controllers\Backend\Dialysis\Report\ReportController;
 use App\Http\Controllers\Backend\EmployeeController;
+use App\Http\Controllers\Backend\EmployeeSalaryController;
 use App\Http\Controllers\Backend\FloorController;
 use App\Http\Controllers\Backend\FundController;
 use App\Http\Controllers\Backend\Home\DashboardController;
@@ -28,6 +29,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'backend.'],
     Route::resource('owner', OwnerController::class);
     Route::resource('tenant', TenantController::class);
     Route::resource('employee', EmployeeController::class);
+    Route::resource('employee-salary', EmployeeSalaryController::class);
     Route::resource('rent', RentController::class);
     Route::resource('owner-utility', OwnerUtilityController::class);
     Route::resource('maintenance-cost', MaintenanceCostController::class);
