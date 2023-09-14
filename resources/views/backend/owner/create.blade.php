@@ -18,7 +18,7 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.owner.store') }}" method="POST" class="row g-3">
+                <form action="{{ route('backend.owner.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
                     @method('POST')
                     @csrf
                     <div class="col-md-6">
@@ -81,7 +81,7 @@
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('image')])
                     </div>
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'unit_id', 'required' => true,
+                        @include('components.backend.forms.select2.option',[ 'name' => 'unit_id[]',
                         'label'=>'Unit','optionData'=> $units, 'multiple' => true])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('unit_id')])
                     </div>

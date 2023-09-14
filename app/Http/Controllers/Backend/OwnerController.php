@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Owner;
 use App\Models\Backend\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class OwnerController extends Controller
@@ -18,9 +19,10 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        return $data = Owner::with('units')->
+        $data = Owner::with('units')->
             // where('branch_id',auth('admin')->user()->branch_id)
             orderBy('id', 'desc')
+            // ->take(1)
             ->get();
         return view('backend.owner.index', compact('data'));
     }
@@ -56,12 +58,13 @@ class OwnerController extends Controller
             'image' => 'nullable',
         ]);
         try {
+            $validatedData['password'] = Hash::make($request->password);
             $validatedData['branch_id'] = auth('admin')->user()->branch_id;
             if ($request->hasfile('image')) {
-                $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(200, 200)->save();
+                $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
             }
-            // dd($validatedData);
+            // dd($request->unit_id);
             $owner = Owner::create($validatedData);
             if ($request->unit_id) {
                 $owner->units()->sync($request->unit_id);
@@ -91,9 +94,11 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Owner $owner)
     {
-        return view('backend.owner.edit');
+        $units = Unit::get(['id', 'name']);
+
+        return view('backend.owner.edit', compact('owner', 'units'));
     }
 
     /**
@@ -103,43 +108,43 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Owner $owner)
     {
-        $validator = Validator::make($request->all(), [
-            'txtOwnerName' => 'required|string|max:255',
-            'txtOwnerEmail' => 'required|email|max:255',
-            'txtOwnerContact' => 'required|string|max:20',
-            'txtOwnerPreAddress' => 'required|string|max:255',
-            'txtOwnerPerAddress' => 'required|string|max:255',
-            'txtOwnerNID' => 'required|string|max:20',
-            'o_password' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'mobile' => 'required|string|max:20',
+            'pre_address' => 'required|string|max:255',
+            'per_address' => 'required|string|max:255',
+            'nid' => 'required|string|max:20',
+            // 'password' => 'nullable',
+            // 'image' => 'nullable',
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
         // Validation passed, update the data in the database
-        $owner = Owner::find($ownerId);
+        // $owner = Owner::find($id);
         if (!$owner) {
             return redirect()->back()->with('error', 'Owner not found.');
         }
+        $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+        // dd($request->image);
 
-        $owner->o_name = $request->input('txtOwnerName');
-        $owner->o_email = $request->input('txtOwnerEmail');
-        $owner->o_contact = $request->input('txtOwnerContact');
-        $owner->o_pre_address = $request->input('txtOwnerPreAddress');
-        $owner->o_per_address = $request->input('txtOwnerPerAddress');
-        $owner->o_nid = $request->input('txtOwnerNID');
-        $owner->o_password = bcrypt($request->input('o_password')); // Hash the password
-        $owner->image = $request->input('image');
-        $owner->branch_id = $_SESSION['objLogin']['branch_id'];
-        $owner->save();
+        if ($request->hasFile('image')) {
+            $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
+            $validatedData['image'] = $image;
+        }
+        // unset($validatedData['password']);
+        if ($request->password) {
+            $validatedData['password'] = Hash::make($request->password);
+        }
+        // dd($request->password);
 
-        return redirect()->route('owners.index')->with('success', 'Owner updated successfully.');
+        // dd($validatedData);
+        $owner->update($validatedData);
+        if ($request->unit_id) {
+            $owner->units()->sync($request->unit_id);
+        }
+        return redirect()->route('backend.owner.index')->with('success', 'Owner updated successfully.');
     }
 
     /**

@@ -15,6 +15,6 @@ class Owner extends Model
     protected $guarded = ['id'];
     public function units()
     {
-        return $this->belongsToMany(Unit::class, 'owner_unit', 'unit_id');
+        return $this->belongsToMany(Unit::class, 'owner_unit', 'owner_id', 'unit_id');
     }
 }

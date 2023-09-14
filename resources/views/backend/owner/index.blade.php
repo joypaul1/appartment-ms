@@ -42,7 +42,9 @@
                                 {{ $row->name }}
                             </td>
                             <td>
-
+                                {{-- {{ $row->image }} --}}
+                                {{-- @dd(($row->image)); --}}
+                                <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
                             </td>
                             <td>
                                 {{ $row->email }}
@@ -54,8 +56,10 @@
                                 {{ $row->pre_address }}
                             </td>
                             <td>
-                                @dd($row->units);
-                                {{-- {{ $row->units->pluck('name')->toArray() }} --}}
+                                @foreach (optional($row->units)->pluck('name') as $unitName)
+                                {{ $unitName }}
+                                @endforeach
+
                             </td>
 
 
@@ -67,7 +71,7 @@
                                         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
                                 </a>
-                                <a data-href="{{ route('backend.owner.destroy', $row) }}" href="#" class="delete_check" >
+                                <a data-href="{{ route('backend.owner.destroy', $row) }}" href="#" class="delete_check">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-trash align-middle">
