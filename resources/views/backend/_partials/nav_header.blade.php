@@ -7,13 +7,18 @@
         <ul class="navbar-nav navbar-align">
             <li class="nav-item dropdown">
                 <a class="nav-flag dropdown-toggle" href="#" id="languageDropdown" data-bs-toggle="dropdown">
-                    <img src="{{ asset('assets/backend') }}/img/flags/us.png" alt="English" />
+                    <img src="{{ asset('assets/backend') }}/img/flags/us.png" alt="" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
                     <a class="dropdown-item" href="#">
                         <img src="{{ asset('assets/backend') }}/img/flags/us.png" alt="English" width="20"
                             class="align-middle me-1" />
                         <span class="align-middle">English</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <img src="{{ asset('assets/backend') }}/img/flags/bd.png" alt="Bangla" width="20"
+                            class="align-middle me-1" />
+                        <span class="align-middle">Bangla</span>
                     </a>
 
                 </div>
