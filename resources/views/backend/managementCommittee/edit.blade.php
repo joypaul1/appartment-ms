@@ -9,7 +9,7 @@
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
 'name' => 'Management-Committe List',
-'route' =>route('backend.management-committe.index'),
+'route' =>route('backend.management-committee.index'),
 ])
 @endsection
 <div class="row">
@@ -18,14 +18,14 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.management-committe.update', $management-committe) }}" method="POST" class="row g-3" enctype="multipart/form-data">
+                <form action="{{ route('backend.management-committee.update', $managementCommittee) }}" method="POST" class="row g-3" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'name',
                         'required' => true,
-                        'value' => $management-committe->name
+                        'value' => $managementCommittee->name
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])
                     </div>
@@ -34,7 +34,7 @@
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'mobile',
                         'required' => true,
-                        'value' => $management-committe->mobile
+                        'value' => $managementCommittee->mobile
 
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('mobile')])
@@ -43,7 +43,7 @@
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'email',
                         'required' => true,
-                        'value' => $management-committe->email
+                        'value' => $managementCommittee->email
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('email')])
                     </div>
@@ -55,14 +55,14 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'member_type_id',
-                        'required' => true,'label'=>'Member Type','optionData'=> $member_types, 'selectedKey' => $management-committe->member_type_id])
+                        'required' => true,'label'=>'Member Type','optionData'=> $member_types, 'selectedKey' => $managementCommittee->member_type_id])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('member_type_id')])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'pre_address',
                         'label' => 'Present Address',
-                        'value' => $management-committe->pre_address,
+                        'value' => $managementCommittee->pre_address,
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('pre_address')])
@@ -71,7 +71,7 @@
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'per_address',
                         'label' => 'Permanent Address',
-                        'value' => $management-committe->per_address,
+                        'value' => $managementCommittee->per_address,
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('per_address')])
@@ -79,7 +79,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'nid',
-                        'value' => $management-committe->nid,
+                        'value' => $managementCommittee->nid,
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('nid')])
@@ -93,14 +93,14 @@
                     </div>
 
                     <div class="col-md-6">
-                        <img src="{{ asset($management-committe->image) }}" alt="" srcset="">
+                        <img src="{{ asset($managementCommittee->image) }}" alt="" srcset="">
                     </div>
                     <hr>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
                         'name' => 'joining_date',
-                        'value' => $management-committe->joining_date,
+                        'value' => $managementCommittee->joining_date,
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('joining_date')])
@@ -109,22 +109,14 @@
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
                         'name' => 'resign_date',
-                        'value' => $management-committe->resign_date,
+                        'value' => $managementCommittee->resign_date,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('joining_date')])
-                    </div>
-                    <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'name' => 'salary',
-                        'required' => true,
-                        'value' => $management-committe->salary
-                        ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('salary')])
+
                     </div>
 
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'status','selectedKey'=>$management-committe->status,
+                        @include('components.backend.forms.select2.option',[ 'name' => 'status','selectedKey'=>$managementCommittee->status,
                         'required' => true,'label'=>'status','optionData'=> $status])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('status')])
                     </div>
@@ -163,7 +155,7 @@
                 $.map( res.data, function( val, i ) {
                     var newOption = new Option(val.name, val.id, false, false);
                     $('#Unitid').append(newOption).trigger('change');
-                    $('#Unitid').val("{{$management-committe->unit_id}}").trigger('change')
+                    $('#Unitid').val("{{$managementCommittee->unit_id}}").trigger('change')
 
                 });
             },

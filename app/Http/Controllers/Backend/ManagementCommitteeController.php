@@ -74,7 +74,7 @@ class ManagementCommitteeController extends Controller
         }
 
 
-        return redirect()->route('backend.managementCommittee.index')->with('success', 'Tenant Created successfully.');
+        return redirect()->route('backend.management-committee.index')->with('success', 'Tenant Created successfully.');
     }
 
     /**
@@ -99,7 +99,6 @@ class ManagementCommitteeController extends Controller
         $member_types = MemberType::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
         return view('backend.managementCommittee.edit', compact('member_types', 'status', 'managementCommittee'));
-        return view('backend.managementCommittee.edit', compact('floors', 'months', 'years', 'status', 'tenant'));
     }
 
     /**
@@ -144,7 +143,7 @@ class ManagementCommitteeController extends Controller
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
-        return redirect()->route('backend.managementCommittee.index')->with('success', 'Tenant Updated successfully.');
+        return redirect()->route('backend.management-committee.index')->with('success', 'Tenant Updated successfully.');
     }
 
     /**

@@ -24,10 +24,12 @@
                         <tr>
                             <th>Sl.</th>
                             <th>Name</th>
-                            <th>Month</th>
-                            <th>Year</th>
-                            <th>Issue Date</th>
-                            <th>Salary</th>
+                            <th>Image</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Join Date</th>
+                            <th>Salary </th>
+                            <th>Member Type</th>
                             <th>Action </th>
                         </tr>
                     </thead>
@@ -38,11 +40,10 @@
                                 {{ $key+1 }}
                             </td>
                             <td>
-                                {{ optional($row->employee)->name }}
+                                {{ $row->name }}
                             </td>
                             <td>
-                                {{ optional($row->month)->name }}
-                                {{-- <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset=""> --}}
+                                <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
                             </td>
                             <td>
                                 {{ $row->email }}
@@ -51,8 +52,16 @@
                                 {{ $row->mobile }}
                             </td>
                             <td>
-                                {{ $row->address }}
+                                {{ date('d-m-y', strtotime($row->joining_date)) }}
                             </td>
+                            <td>
+                                {{ $row->salary }}
+                            </td>
+                            </td>
+                            <td>
+                                {{ optional($row->memberType)->name }}
+                            </td>
+
 
 
                             <td class="table-action">

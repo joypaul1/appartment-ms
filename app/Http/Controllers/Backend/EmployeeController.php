@@ -24,7 +24,7 @@ class EmployeeController extends Controller
             return response()->json(['data' =>  Employee::whereId($request->Employeeid)->first()->salary]);
         }
 
-        $data = Employee::where('branch_id', auth('admin')->user()->branch_id)->get();
+        $data = Employee::with('memberType:id,name')->where('branch_id', auth('admin')->user()->branch_id)->get();
         return view('backend.employee.index', compact('data'));
     }
 

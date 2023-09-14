@@ -9,7 +9,7 @@
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
 'name' => 'Management-Committe List',
-'route' =>route('backend.management-committe.index'),
+'route' =>route('backend.management-committee.index'),
 ])
 @endsection
 <div class="row">
@@ -18,7 +18,7 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.management-committe.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
+                <form action="{{ route('backend.management-committee.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
                     @method('POST')
                     @csrf
                     <div class="col-md-6">
@@ -103,15 +103,7 @@
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('joining_date')])
                     </div>
-                    <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'name' => 'salary',
-                        'required' => true,
-                        'value' =>0.00
-                        ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('salary')])
-                    </div>
+
 
 
                     <div class="col-md-6">
