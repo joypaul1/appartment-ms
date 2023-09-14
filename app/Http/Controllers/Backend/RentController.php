@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Floor;
+use App\Models\Backend\Year;
+use DateTime;
 use Illuminate\Http\Request;
 
 class RentController extends Controller
@@ -24,7 +27,19 @@ class RentController extends Controller
      */
     public function create()
     {
-        return view('backend.rent.create');
+        $months = [];
+
+        for ($i = 1; $i <= 12; $i++) {
+            $date = DateTime::createFromFormat('!m', $i);
+            $months[] = [
+                'id' => $i,
+                'name' => $date->format('F')
+            ];
+        }
+        $floors = Floor::active()->get(['id', 'name']);
+        $years = Year::get(['id', 'name']);
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        return view('backend.rent.create', compact('floors', 'months', 'years', 'status'));
 
     }
 
