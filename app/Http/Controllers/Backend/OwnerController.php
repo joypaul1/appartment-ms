@@ -18,8 +18,18 @@ class OwnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        if ($request->getUnitOwner) {
+            $owner = Owner::whereHas('units', function ($query) use ($request) {
+                $query->where('unit_configurations.floor_id', $request->floor_id)
+                ->where('unit_configurations.id', $request->unit_id);
+            })->first();
+
+            return response()->json(['data' => $owner]);
+        }
+
         $data = Owner::with('units')->
             // where('branch_id',auth('admin')->user()->branch_id)
             orderBy('id', 'desc')

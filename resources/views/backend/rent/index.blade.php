@@ -4,14 +4,13 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> Patient Admission Add
+    <i class="fa fa-list"></i> Rent Collection List
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-plus-circle',
-        'name' => 'Create Admission',
-        'modelName' => 'create_data',
-        'route' => '#',
+        'name' => 'Create Rent Collection',
+        'route' => route('backend.rent.create'),
     ])
 @endsection
 
@@ -31,10 +30,13 @@
                                 Unit
                             </th>
                             <th>
-                               Month
+                                Month
                             </th>
                             <th>
                                 Year
+                            </th>
+                            <th>
+                                Total Rent
                             </th>
                             <th>
                                 Bill Status
@@ -51,22 +53,25 @@
                                     {{ $row->invoice_number }}
                                 </td>
                                 <td>
-                                   {{ optional($row->tenant)->name }}
+                                    {{ optional($row->tenant)->name }}
                                 </td>
                                 <td>
-                                   {{ optional($row->floor)->name }}
+                                    {{ optional($row->floor)->name }}
                                 </td>
                                 <td>
-                                   {{ optional($row->unit)->name }}
+                                    {{ optional($row->unit)->name }}
                                 </td>
                                 <td>
-                                   {{ optional($row->month)->name }}
+                                    {{ optional($row->month)->name }}
                                 </td>
                                 <td>
-                                   {{ optional($row->year)->name }}
+                                    {{ optional($row->year)->name }}
                                 </td>
                                 <td>
-                                   {{ $row->bill_status }}
+                                    {{ $row->total_rent }}
+                                </td>
+                                <td>
+                                    {{ $row->bill_status }}
                                 </td>
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Floor;
+use App\Models\Backend\Owner;
 use App\Models\Backend\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,19 +20,20 @@ class UnitController extends Controller
     {
         if ($request->getFreeUnits) {
             $units = Unit::where('floor_id', $request->Floorid)
-            ->where('branch_id', auth('admin')->user()->branch_id)
-            ->where('status', 0)->orderBy('id', 'asc')->get();
+                ->where('branch_id', auth('admin')->user()->branch_id)
+                ->where('status', 0)->orderBy('id', 'asc')->get();
             return response()->json(['data' => $units]);
         }
         if ($request->getUnit) {
-            $units = Unit::where('floor_id', $request->floorid)
-            ->where('branch_id', auth('admin')->user()->branch_id)
-            ->orderBy('id', 'asc')->get();
+            $units = Unit::where('floor_id', $request->floor_id)
+                ->where('branch_id', auth('admin')->user()->branch_id)
+                ->orderBy('id', 'asc')->get();
             return response()->json(['data' => $units]);
         }
 
+
         return  $data = Unit::with('branch:id,name')->with('floor:id,name')
-        ->with('owners')
+            ->with('owners')
             // ->where('branch_id', auth('admin')->user()->branch_id)
             ->orderBy('id', 'DESC')
             ->get();

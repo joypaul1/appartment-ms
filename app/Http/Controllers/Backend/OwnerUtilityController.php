@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Helpers\Image;
+use App\Helpers\InvoiceNumber;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Floor;
 use App\Models\Backend\OwnerUtility;
@@ -19,8 +20,9 @@ class OwnerUtilityController extends Controller
      */
     public function index()
     {
-        $OwnerUtilitys=OwnerUtility::get();
-        return view('backend.ownerUtility.index', compact('OwnerUtilitys'));
+        $ownerUtilitys = OwnerUtility::with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+            ->orderBy('id', 'desc')->get();
+        return view('backend.ownerUtility.index', compact('ownerUtilitys'));
     }
 
     /**
@@ -46,6 +48,14 @@ class OwnerUtilityController extends Controller
         return view('backend.ownerUtility.create', compact('floors', 'months', 'years', 'status'));
     }
 
+    public function getInvoiceNumber()
+    {
+        if (!OwnerUtility::latest()->first()) {
+            return 1;
+        } else {
+            return OwnerUtility::latest()->first()->invoice_number + 1;
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -54,33 +64,33 @@ class OwnerUtilityController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'floor_id' => 'required|numeric',
             'unit_id' => 'required|numeric',
             'month_id' => 'required|numeric',
             'year_id' => 'required|numeric',
-            'renter_name' => 'required|string',
-            'rent' => 'required',
-            'rent_id' => 'required|numeric',
+            'owner_name' => 'required|string',
+            'owner_id' => 'required|numeric',
             'water_bill' => 'required|numeric',
             'electric_bill' => 'required|numeric',
             'gas_bill' => 'required|numeric',
             'security_bill' => 'required|numeric',
             'utility_bill' => 'required|numeric',
             'other_bill' => 'required|numeric',
-            'total_rent' => 'required|numeric',
-            'status' => 'required|numeric',
+            'total_utility' => 'required|numeric',
+            'issue_date' => 'required',
         ]);
+        // dd($validatedData);
         try {
-            $validatedData['rent_type'] = 'Rented';
+            $validatedData['invoice_number'] = (new InvoiceNumber)->invoice_num($this->getInvoiceNumber());
             $validatedData['branch_id'] = auth('admin')->user()->branch_id;
-            $validatedData['date'] = date('Y-m-d');
-            if ($request->hasfile('image')) {
-                $image =  (new Image)->dirName('owner_utility')->file($request->image)->resizeImage(100, 100)->save();
-                $validatedData['image'] = $image;
-            }
+            $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
+
+
             OwnerUtility::create($validatedData);
         } catch (\Exception $ex) {
+            dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
@@ -116,38 +126,35 @@ class OwnerUtilityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,OwnerUtility $OwnerUtility)
+    public function update(Request $request, OwnerUtility $OwnerUtility)
     {
         $validatedData = $request->validate([
             'floor_id' => 'required|numeric',
             'unit_id' => 'required|numeric',
             'month_id' => 'required|numeric',
             'year_id' => 'required|numeric',
-            'renter_name' => 'required|string',
-            'rent' => 'required',
-            'rent_id' => 'required|numeric',
+            'owner_name' => 'required|string',
+            'owner_id' => 'required|numeric',
             'water_bill' => 'required|numeric',
             'electric_bill' => 'required|numeric',
             'gas_bill' => 'required|numeric',
             'security_bill' => 'required|numeric',
             'utility_bill' => 'required|numeric',
             'other_bill' => 'required|numeric',
-            'total_rent' => 'required|numeric',
-            'status' => 'required|numeric',
+            'total_utility' => 'required|numeric',
+            'issue_date' => 'required',
+
         ]);
         try {
-            $validatedData['rent_type'] = 'Rented';
+
             $validatedData['branch_id'] = auth('admin')->user()->branch_id;
-            if ($request->hasfile('image')) {
-                $image =  (new Image)->dirName('owner_utility')->file($request->image)->resizeImage(100, 100)->save();
-                $validatedData['image'] = $image;
-            }
+            $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
+
             $OwnerUtility->update($validatedData);
         } catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.ownerUtility.index')->with('success', 'Rent Collection Updated successfully.');
-
     }
 
     /**

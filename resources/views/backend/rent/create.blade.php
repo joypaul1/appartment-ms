@@ -171,7 +171,7 @@
                             'message' => $errors->first('total_rent'),
                         ])
                     </div>
-
+                    {{--
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'file',
@@ -179,6 +179,16 @@
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('image'),
+                        ])
+                    </div> --}}
+                    <div class="col-md-6">
+                        @include('components.backend.forms.input.input-type', [
+                            'inType' => 'date',
+                            'name' => 'issue_date',
+                            'required' => true,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('issue_date'),
                         ])
                     </div>
                     <div class="col-md-6">
@@ -193,6 +203,7 @@
                             'message' => $errors->first('status'),
                         ])
                     </div>
+
 
                     <div class="col-12 text-center">
                         <button class="btn btn-primary" type="submit">Submit Data</button>
@@ -214,7 +225,7 @@
             url: url,
             dataType: 'JSON',
             data: {
-                'floorid': e.target.value,
+                'floor_id': e.target.value,
                 'getUnit': true
             },
 

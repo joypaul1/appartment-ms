@@ -21,9 +21,8 @@ class RentController extends Controller
      */
     public function index()
     {
-        $rentCollections=RentCollection::where('rent_type', 'Rented')
-       ->with('tenant:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
-       -> orderBy('id', 'desc')->get();
+        $rentCollections = RentCollection::with('tenant:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+            ->orderBy('id', 'desc')->get();
         return view('backend.rent.index', compact('rentCollections'));
     }
     public function getInvoiceNumber()
@@ -82,13 +81,14 @@ class RentController extends Controller
             'other_bill' => 'required|numeric',
             'total_rent' => 'required|numeric',
             'status' => 'required|numeric',
+            'issue_date' => 'required',
         ]);
         try {
             $validatedData['invoice_number'] = (new InvoiceNumber)->invoice_num($this->getInvoiceNumber());
             $validatedData['tenant_id'] = $request->rent_id;
             $validatedData['rent_type'] = 'Rented';
             $validatedData['branch_id'] = auth('admin')->user()->branch_id;
-            $validatedData['date'] = date('Y-m-d');
+            $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('rent')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
@@ -130,7 +130,7 @@ class RentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,RentCollection $rentCollection)
+    public function update(Request $request, RentCollection $rentCollection)
     {
         $validatedData = $request->validate([
             'floor_id' => 'required|numeric',
@@ -148,10 +148,13 @@ class RentController extends Controller
             'other_bill' => 'required|numeric',
             'total_rent' => 'required|numeric',
             'status' => 'required|numeric',
+            'issue_date' => 'required',
         ]);
         try {
+            $validatedData['tenant_id'] = $request->rent_id;
             $validatedData['rent_type'] = 'Rented';
             $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('rent')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
@@ -161,7 +164,6 @@ class RentController extends Controller
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.rent.index')->with('success', 'Rent Collection Updated successfully.');
-
     }
 
     /**
