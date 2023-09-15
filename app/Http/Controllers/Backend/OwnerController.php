@@ -31,9 +31,9 @@ class OwnerController extends Controller
         }
 
         $data = Owner::with('units')->
-            // where('branch_id',auth('admin')->user()->branch_id)
+
             orderBy('id', 'desc')
-            // ->take(1)
+         
             ->get();
         return view('backend.owner.index', compact('data'));
     }
@@ -46,12 +46,6 @@ class OwnerController extends Controller
     public function create()
     {
         $units = Unit::whereDoesntHave('owners')->get();
-        // $units = Unit::get(['id', 'name']);
-        // $units = DB::table('unit_configurations')
-        //     ->leftJoin('owner_unit', 'unit_configurations.id', '=', 'owner_unit.unit_id')
-        //     ->whereNull('owner_unit.owner_id')
-        //     ->select('unit_configurations.id', 'unit_configurations.name')
-        //     ->get()->toArray();
         return view('backend.owner.create', compact('units'));
     }
 
@@ -63,7 +57,6 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
