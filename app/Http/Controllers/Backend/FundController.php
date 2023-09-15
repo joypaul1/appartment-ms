@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Fund;
-use App\Models\Backend\MaintenanceCost;
 use App\Models\Backend\Owner;
 use App\Models\Backend\Year;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FundController extends Controller
 {
@@ -136,8 +136,16 @@ class FundController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Fund $fund)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $fund->delete();
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!']);
+        }
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }

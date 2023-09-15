@@ -114,20 +114,14 @@ class FloorController extends Controller
     {
 
         try {
+            DB::beginTransaction();
             $floor->delete();
+            DB::commit();
         } catch (\Exception $ex) {
+            DB::rollback();
             return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }
-        // (new LogActivity)::addToLog('Category Deleted');
         return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
-        // $floor = Floor::find($id);
 
-        // if (!$floor) {
-        //     return redirect()->route('floors.index')->with('error', 'Floor not found.');
-        // }
-
-        // $floor->delete();
-
-        // return redirect()->route('floors.index')->with('success', 'Floor deleted successfully.');
     }
 }
