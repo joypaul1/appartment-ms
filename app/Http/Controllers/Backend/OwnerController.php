@@ -33,7 +33,7 @@ class OwnerController extends Controller
         $data = Owner::with('units')->
 
             orderBy('id', 'desc')
-         
+
             ->get();
         return view('backend.owner.index', compact('data'));
     }
@@ -46,7 +46,7 @@ class OwnerController extends Controller
     public function create()
     {
         $units = Unit::whereDoesntHave('owners')->get();
-        return view('backend.owner.create', compact('units'));
+        return view('backend.owner.c reate', compact('units'));
     }
 
     /**

@@ -50,7 +50,7 @@ class AdminController extends Controller
     {
         $returnData = $request->storeData($request);
         if($returnData->getData()->status){
-            (new LogActivity)::addToLog('Admin Created');
+
             return back()->with(['success' => $returnData->getData()->msg  ]);
         }
         return back()->with(['error' =>$returnData->getData()->msg ]);
