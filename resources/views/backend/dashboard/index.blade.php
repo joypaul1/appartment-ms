@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    <h1 class="mt-1 mb-3">2.382</h1>
+                    <h1 class="mt-1 mb-3">2</h1>
                     <div class="mb-0">
                         <span class="badge badge-primary-light"> <i class="mdi mdi-arrow-bottom-right"></i> Click </span>
                         {{-- <span class="text-muted">Since last week</span> --}}

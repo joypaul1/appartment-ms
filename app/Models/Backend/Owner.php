@@ -13,6 +13,7 @@ class Owner extends Model
     use GlobalScope, AutoTimeStamp;
 
     protected $guarded = ['id'];
+
     public function units()
     {
         return $this->belongsToMany(Unit::class, 'owner_unit', 'owner_id', 'unit_id');

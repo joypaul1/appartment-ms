@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Owner;
 use App\Models\Backend\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -34,7 +35,13 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        $units = Unit::get(['id', 'name']);
+        $units = Unit::whereDoesntHave('owners')->get();
+        // $units = Unit::get(['id', 'name']);
+        // $units = DB::table('unit_configurations')
+        //     ->leftJoin('owner_unit', 'unit_configurations.id', '=', 'owner_unit.unit_id')
+        //     ->whereNull('owner_unit.owner_id')
+        //     ->select('unit_configurations.id', 'unit_configurations.name')
+        //     ->get()->toArray();
         return view('backend.owner.create', compact('units'));
     }
 
@@ -70,7 +77,7 @@ class OwnerController extends Controller
                 $owner->units()->sync($request->unit_id);
             }
         } catch (\Exception $ex) {
-            return redirect()->back()->with('error',  $ex->getMessage());
+            // return redirect()->back()->with('error',  $ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 

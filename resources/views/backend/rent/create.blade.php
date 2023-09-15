@@ -183,7 +183,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'status',
+                            'name' => 'bill_status',
                             'selectedKey' => 1,
                             'required' => true,
                             'label' => 'status',

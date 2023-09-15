@@ -30,7 +30,8 @@ class UnitController extends Controller
             return response()->json(['data' => $units]);
         }
 
-        $data = Unit::with('branch:id,name')->with('floor:id,name')
+        return  $data = Unit::with('branch:id,name')->with('floor:id,name')
+        ->with('owners')
             // ->where('branch_id', auth('admin')->user()->branch_id)
             ->orderBy('id', 'DESC')
             ->get();

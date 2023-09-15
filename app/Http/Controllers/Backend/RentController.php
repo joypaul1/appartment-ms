@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Helpers\Image;
+use App\Helpers\InvoiceNumber;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Floor;
 use App\Models\Backend\Rent;
@@ -20,8 +21,18 @@ class RentController extends Controller
      */
     public function index()
     {
-        $rentCollections=RentCollection::get();
+        $rentCollections=RentCollection::where('rent_type', 'Rented')
+       ->with('tenant:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+       -> orderBy('id', 'desc')->get();
         return view('backend.rent.index', compact('rentCollections'));
+    }
+    public function getInvoiceNumber()
+    {
+        if (!RentCollection::latest()->first()) {
+            return 1;
+        } else {
+            return RentCollection::latest()->first()->invoice_number + 1;
+        }
     }
 
     /**
@@ -43,7 +54,7 @@ class RentController extends Controller
 
         $floors = Floor::active()->get(['id', 'name']);
         $years = Year::get(['id', 'name']);
-        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        $status = [['id' => 1, 'name' => 'Paid'], ['id' => 0, 'name' => 'Due']];
         return view('backend.rent.create', compact('floors', 'months', 'years', 'status'));
     }
 
@@ -73,6 +84,8 @@ class RentController extends Controller
             'status' => 'required|numeric',
         ]);
         try {
+            $validatedData['invoice_number'] = (new InvoiceNumber)->invoice_num($this->getInvoiceNumber());
+            $validatedData['tenant_id'] = $request->rent_id;
             $validatedData['rent_type'] = 'Rented';
             $validatedData['branch_id'] = auth('admin')->user()->branch_id;
             $validatedData['date'] = date('Y-m-d');

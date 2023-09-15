@@ -25,6 +25,6 @@ class Unit extends Model
 
     public function owners()
     {
-        return $this->belongsToMany(Owner::class);
+        return $this->belongsToMany(Owner::class, 'owner_unit');
     }
 }

@@ -24,17 +24,20 @@
                 <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Sl.</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>Invoice No.</th>
+                            <th>Renter Name</th>
+                            <th>Floor </th>
                             <th>
-                                Contact
+                                Unit
                             </th>
                             <th>
-                                Present Address
+                               Month
                             </th>
                             <th>
-                                Owner Unit
+                                Year
+                            </th>
+                            <th>
+                                Bill Status
                             </th>
                             <th>
                                 Action
@@ -45,10 +48,25 @@
                         @foreach ($rentCollections as $key => $row)
                             <tr>
                                 <td>
-                                    
+                                    {{ $row->invoice_number }}
                                 </td>
                                 <td>
-                                    Md. Alamin
+                                   {{ optional($row->tenant)->name }}
+                                </td>
+                                <td>
+                                   {{ optional($row->floor)->name }}
+                                </td>
+                                <td>
+                                   {{ optional($row->unit)->name }}
+                                </td>
+                                <td>
+                                   {{ optional($row->month)->name }}
+                                </td>
+                                <td>
+                                   {{ optional($row->year)->name }}
+                                </td>
+                                <td>
+                                   {{ $row->bill_status }}
                                 </td>
 
 
