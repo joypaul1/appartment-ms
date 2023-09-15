@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Complain;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ComplainController extends Controller
 {
@@ -14,7 +16,8 @@ class ComplainController extends Controller
      */
     public function index()
     {
-        return view('backend.complain.index');
+        $complains = Complain::get();
+        return view('backend.complain.index', compact('complains'));
     }
 
     /**
@@ -25,7 +28,6 @@ class ComplainController extends Controller
     public function create()
     {
         return view('backend.complain.create');
-
     }
 
     /**
@@ -36,7 +38,20 @@ class ComplainController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'date' => 'required',
+            'description' => 'required|string',
+        ]);
+        try {
+            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['date'] = date('Y-m-d', strtotime($request->date));
+            Complain::create($validatedData);
+        } catch (\Exception $ex) {
+            // dd($ex->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.complain.index')->with('success', 'Complain Created successfully.');
     }
 
     /**
@@ -56,10 +71,9 @@ class ComplainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Complain $complain)
     {
-        return view('backend.complain.edit');
-
+        return view('backend.complain.edit', compact('complain'));
     }
 
     /**
@@ -69,9 +83,21 @@ class ComplainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Complain $complain)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'date' => 'required',
+            'description' => 'required|string',
+        ]);
+        try {
+            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['date'] = date('Y-m-d', strtotime($request->date));
+            $complain->update($validatedData);
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.complain.index')->with('success', 'Complain Updated successfully.');
     }
 
     /**
@@ -80,9 +106,16 @@ class ComplainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Complain $complain)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $complain->delete();
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!']);
+        }
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }
-
