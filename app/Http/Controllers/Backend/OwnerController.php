@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Helpers\Image;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Backend\Owner;
 use App\Models\Backend\Unit;
 use Illuminate\Http\Request;
@@ -24,15 +25,13 @@ class OwnerController extends Controller
         if ($request->getUnitOwner) {
             $owner = Owner::whereHas('units', function ($query) use ($request) {
                 $query->where('unit_configurations.floor_id', $request->floor_id)
-                ->where('unit_configurations.id', $request->unit_id);
+                    ->where('unit_configurations.id', $request->unit_id);
             })->first();
 
             return response()->json(['data' => $owner]);
         }
 
-        $data = Owner::with('units')->
-
-            orderBy('id', 'desc')
+        $data = Owner::with('units')->orderBy('id', 'desc')
 
             ->get();
         return view('backend.owner.index', compact('data'));
@@ -57,6 +56,7 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -76,6 +76,21 @@ class OwnerController extends Controller
             }
             // dd($request->unit_id);
             $owner = Owner::create($validatedData);
+
+            $data['name'] = ($request->name);
+            $data['email'] = ($request->email);
+            $data['mobile'] = ($request->mobile);
+            $data['branch_id'] =  $validatedData['branch_id'];
+            $data['role_type'] =  'owner';
+            if ($request->password) {
+                $data['password'] = Hash::make($request->password);
+            }
+            if ($request->hasFile('image')) {
+                $data['image'] =  $validatedData['image'];
+            }
+            Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
+                ->updateOrCreate($data);
+
             if ($request->unit_id) {
                 $owner->units()->sync($request->unit_id);
             }
@@ -137,20 +152,30 @@ class OwnerController extends Controller
             return redirect()->back()->with('error', 'Owner not found.');
         }
         $validatedData['branch_id'] = auth('admin')->user()->branch_id;
-        // dd($request->image);
-
+        // dd($validatedData['branch_id'] );
         if ($request->hasFile('image')) {
             $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
             $validatedData['image'] = $image;
         }
-        // unset($validatedData['password']);
+        $owner->update($validatedData);
+
+
+        $data['name'] = ($request->name);
+        $data['email'] = ($request->email);
+        $data['mobile'] = ($request->mobile);
+        $data['branch_id'] =  $validatedData['branch_id'];
         if ($request->password) {
-            $validatedData['password'] = Hash::make($request->password);
+            $data['password'] = Hash::make($request->password);
         }
+        if ($request->hasFile('image')) {
+            $data['image'] =  $validatedData['image'];
+        }
+        Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
+            ->updateOrCreate($data);
         // dd($request->password);
 
         // dd($validatedData);
-        $owner->update($validatedData);
+
         if ($request->unit_id) {
             $owner->units()->sync($request->unit_id);
         }

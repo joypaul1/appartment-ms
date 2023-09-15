@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Backend\BillDepositController;
 use App\Http\Controllers\Backend\ComplainController;
-use App\Http\Controllers\Backend\Dialysis\Report\ReportController;
 use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\EmployeeSalaryController;
 use App\Http\Controllers\Backend\FloorController;
@@ -15,6 +14,7 @@ use App\Http\Controllers\Backend\NoticeBoardController;
 use App\Http\Controllers\Backend\OwnerController;
 use App\Http\Controllers\Backend\OwnerUtilityController;
 use App\Http\Controllers\Backend\RentController;
+use App\Http\Controllers\Backend\ReportController as BackendReportController;
 use App\Http\Controllers\Backend\TenantController;
 use App\Http\Controllers\Backend\UnitController;
 use App\Http\Controllers\Backend\VisitorController;
@@ -42,7 +42,14 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'backend.'],
     Route::resource('visitor', VisitorController::class);
     Route::resource('meeting', MeetingController::class);
     Route::resource('notice-board', NoticeBoardController::class);
-    Route::resource('report', ReportController::class);
+    Route::get('rental-report', [BackendReportController::class, 'rentReport']);
+    Route::get('tenant-report', [BackendReportController::class, 'tenantReport']);
+    Route::get('visitor-report', [BackendReportController::class, 'visitorReport']);
+    Route::get('complain-report', [BackendReportController::class, 'complainReport']);
+    Route::get('unit-report', [BackendReportController::class, 'unitReport']);
+    Route::get('fund-report', [BackendReportController::class, 'fundReport']);
+    Route::get('bill-report', [BackendReportController::class, 'billReport']);
+    Route::get('salary-report', [BackendReportController::class, 'salaryReport']);
 
 
     Route::get('formDesign', [DashboardController::class, 'formDesign']);
