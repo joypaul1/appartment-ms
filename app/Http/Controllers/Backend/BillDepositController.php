@@ -22,10 +22,10 @@ class BillDepositController extends Controller
      */
     public function index()
     {
-        $funds = BillDeposit::with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+        $billDeposits = BillDeposit::with('billType:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
             ->orderBy('id', 'desc')->get();
 
-        return view('backend.billDeposit.index', compact('funds'));
+        return view('backend.billDeposit.index', compact('billDeposits'));
     }
 
     /**

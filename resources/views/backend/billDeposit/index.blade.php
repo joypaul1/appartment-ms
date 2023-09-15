@@ -24,7 +24,8 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Owner</th>
+                            <th>Type</th>
+                            <th>Date</th>
                             <th>
                                 Month
                             </th>
@@ -35,19 +36,25 @@
                                 Amount
                             </th>
                             <th>
+                                Deposit Account
+                            </th>
+                            <th>
                                 Action
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($funds as $key => $row)
+                        @foreach ($billDeposits as $key => $row)
                             <tr>
                                 <td>
                                     {{ $key++ }}
                                 </td>
 
                                 <td>
-                                    {{ optional($row->owner)->name }}
+                                    {{ optional($row->billType)->name }}
+                                </td>
+                                <td>
+                                    {{ date('d-m-Y', strtotime($row->date)) }}
                                 </td>
                                 <td>
                                     {{ optional($row->month)->name }}
@@ -56,7 +63,10 @@
                                     {{ optional($row->year)->name }}
                                 </td>
                                 <td>
-                                    {{ $row->amount }}
+                                    {{ $row->total_amount }}
+                                </td>
+                                <td>
+                                    {{ $row->deposit_account_name }}
                                 </td>
 
 

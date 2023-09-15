@@ -15,6 +15,10 @@ class BillDeposit extends Model
     protected $table ='bills';
     protected $guarded =['id'];
 
+    public function billType()
+    {
+        return $this->belongsTo(BillType::class, 'bill_type_id');
+    }
     public function month()
     {
         return $this->belongsTo(MonthConfiguration::class, 'month_id');
