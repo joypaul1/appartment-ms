@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Fund;
+use App\Models\Backend\MaintenanceCost;
+use App\Models\Backend\Owner;
+use App\Models\Backend\Year;
+use DateTime;
 use Illuminate\Http\Request;
 
 class FundController extends Controller
@@ -14,7 +19,10 @@ class FundController extends Controller
      */
     public function index()
     {
-        return view('backend.fund.index');
+        $funds = Fund::with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+            ->orderBy('id', 'desc')->get();
+
+        return view('backend.fund.index', compact('funds'));
     }
 
     /**
@@ -22,11 +30,24 @@ class FundController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('backend.fund.create');
+        $months = [];
 
+        for ($i = 1; $i <= 12; $i++) {
+            $date = DateTime::createFromFormat('!m', $i);
+            $months[] = [
+                'id' => $i,
+                'name' => $date->format('F')
+            ];
+        }
+
+        $owners = Owner::get();
+        $years = Year::get(['id', 'name']);
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        return view('backend.fund.create', compact('months', 'years', 'status', 'owners'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +57,26 @@ class FundController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+
+        $validatedData = $request->validate([
+            'owner_id' => 'required|integer',
+            'date' => 'required|date',
+            'month_id' => 'required|integer',
+            'year_id' => 'required|integer',
+            'amount' => 'required|numeric',
+            'purpose' => 'nullable|string',
+        ]);
+        // dd($validatedData);
+        try {
+            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['date'] = date('Y-m-d', strtotime($request->date));
+            Fund::create($validatedData);
+        } catch (\Exception $ex) {
+            dd($ex->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.fund.index')->with('success', 'Fund Created successfully.');
     }
 
     /**
@@ -59,7 +99,6 @@ class FundController extends Controller
     public function edit($id)
     {
         return view('backend.fund.edit');
-
     }
 
     /**
@@ -69,9 +108,26 @@ class FundController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Fund $fund)
     {
-        //
+        $validatedData = $request->validate([
+            'owner_id' => 'required|integer',
+            'date' => 'required|date',
+            'month_id' => 'required|integer',
+            'year_id' => 'required|integer',
+            'amount' => 'required|numeric',
+            'purpose' => 'nullable|string',
+        ]);
+        try {
+
+            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['date'] = date('Y-m-d', strtotime($request->date));
+
+            $fund->update($validatedData);
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.fund.index')->with('success', 'Fund Updated successfully.');
     }
 
     /**
