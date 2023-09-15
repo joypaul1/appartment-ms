@@ -9,7 +9,7 @@
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
 'name' => 'Tenant List',
-'route' =>route('backend.tenant.index'),
+'route' =>route('backend.owner-utility.index'),
 ])
 @endsection
 <div class="row">
@@ -18,7 +18,7 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.tenant.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
+                <form action="{{ route('backend.owner-utility.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
                     @method('POST')
                     @csrf
                     <div class="col-md-6">
