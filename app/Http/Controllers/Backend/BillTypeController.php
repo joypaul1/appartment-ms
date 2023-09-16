@@ -57,7 +57,7 @@ class BillTypeController extends Controller
             dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.site-config.bill-type.index')->with('success', 'Floor Created Successfully');
+        return redirect()->route('backend.site-config.bill-type.index')->with('success', 'Data Created Successfully');
     }
 
     /**
@@ -104,7 +104,7 @@ class BillTypeController extends Controller
             DB::rollBack();
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.site-config.bill-type.index')->with('success', 'Floor Updated Successfully');
+        return redirect()->route('backend.site-config.bill-type.index')->with('success', 'Data Updated Successfully');
     }
 
     /**

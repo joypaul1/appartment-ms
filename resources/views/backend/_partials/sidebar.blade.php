@@ -318,6 +318,23 @@
                     </li>
                 </ul>
             </li> --}}
+             <li class="sidebar-item">
+                <a data-bs-target="#visitor" data-bs-toggle="collapse" class="sidebar-link ">
+                    <i class="align-middle" data-feather="sliders"></i>
+                    <span class="align-middle"> Report </span>
+                </a>
+                <ul id="visitor"
+                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'notice-board' ? 'show' : ' ' }} "
+                    data-bs-parent="#sidebar">
+                    <li
+                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.notice-board.index') }}">
+                          Rental Report
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
             <li class="sidebar-item">
                 <a data-bs-target="#visitor" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
@@ -339,26 +356,26 @@
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.bill-type.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.bill-type.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.bill-type.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.bill-type.index') }}">
                             Bill Type Config
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.member-type.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.member-type.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.member-type.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.member-type.index') }}">
                             Member Type Config
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.month.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.month.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.month.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.month.index') }}">
                             Month Config
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.year.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.year.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.year.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.year.index') }}">
                             Year Config
                         </a>
                     </li>
@@ -376,23 +393,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
-                <a data-bs-target="#visitor" data-bs-toggle="collapse" class="sidebar-link ">
-                    <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle"> Report </span>
-                </a>
-                <ul id="visitor"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'notice-board' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.index') }}">
-                          Rental Report
-                        </a>
-                    </li>
 
-                </ul>
-            </li>
 
 
 

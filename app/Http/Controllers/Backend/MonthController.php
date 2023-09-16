@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\MonthConfiguration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MonthController extends Controller
 {
@@ -14,11 +16,10 @@ class MonthController extends Controller
      */
     public function index()
     {
-        $data = Floor::with('branch:id,name')
-            // ->where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
-            ->orderBy('id', 'DESC')
+        $data = MonthConfiguration::
+            orderBy('id', 'DESC')
             ->get();
-        return view('backend.floor.index', compact('data'));
+        return view('backend.month_config.index', compact('data'));
     }
 
     /**
@@ -28,7 +29,7 @@ class MonthController extends Controller
      */
     public function create()
     {
-        return view('backend.floor.create');
+        return view('backend.month_config.create');
     }
 
     /**
@@ -45,14 +46,17 @@ class MonthController extends Controller
         try {
             DB::beginTransaction();
             $data = $validatedData;
-            $data['branch_id'] = auth('admin')->user()->branch_id;
-            Floor::create($data);
+            $data['id'] =MonthConfiguration::first()?MonthConfiguration:: orderBy('id', 'DESC')->first()->id +1: 1 ;
+            $data['created_at'] = now();
+            $data['updated_at'] = now();
+            MonthConfiguration::insert($data);
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
+            dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.floor.index')->with('success', 'Floor Created Successfully');
+        return redirect()->route('backend.site-config.bill-type.index')->with('success', 'Data Created Successfully');
     }
 
     /**
@@ -72,9 +76,10 @@ class MonthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Floor $floor)
+    public function edit($id)
     {
-        return view('backend.floor.edit', compact('floor'));
+        $monthConfiguration = MonthConfiguration::find($id);
+        return view('backend.month_config.edit', compact('monthConfiguration'));
     }
 
     /**
@@ -84,7 +89,7 @@ class MonthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Floor $floor)
+    public function update(Request $request, MonthConfiguration $monthConfiguration)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -93,13 +98,13 @@ class MonthController extends Controller
             DB::beginTransaction();
             $data = $validatedData;
             $data['branch_id'] = auth('admin')->user()->branch_id;
-            $floor->update($data);
+            $monthConfiguration->update($data);
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.floor.index')->with('success', 'Floor Updated Successfully');
+        return redirect()->route('backend.site-config.month.index')->with('success', 'Data Updated Successfully');
     }
 
     /**
@@ -108,18 +113,17 @@ class MonthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Floor $floor)
+    public function destroy(MonthConfiguration $monthConfiguration)
     {
 
         try {
             DB::beginTransaction();
-            $floor->delete();
+            $monthConfiguration->delete();
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollback();
             return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }
         return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
-
     }
 }

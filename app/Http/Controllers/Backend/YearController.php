@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,11 +16,10 @@ class YearController extends Controller
      */
     public function index()
     {
-        $data = Floor::with('branch:id,name')
-            // ->where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
-            ->orderBy('id', 'DESC')
+        $data = Year::
+            orderBy('id', 'DESC')
             ->get();
-        return view('backend.floor.index', compact('data'));
+        return view('backend.year.index', compact('data'));
     }
 
     /**
@@ -29,7 +29,7 @@ class YearController extends Controller
      */
     public function create()
     {
-        return view('backend.floor.create');
+        return view('backend.year.create');
     }
 
     /**
@@ -46,14 +46,17 @@ class YearController extends Controller
         try {
             DB::beginTransaction();
             $data = $validatedData;
-            $data['branch_id'] = auth('admin')->user()->branch_id;
-            Floor::create($data);
+            $data['id'] =Year::first()?Year:: orderBy('id', 'DESC')->first()->id +1: 1 ;
+            $data['created_at'] = now();
+            $data['updated_at'] = now();
+            Year::insert($data);
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
+            dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.floor.index')->with('success', 'Floor Created Successfully');
+        return redirect()->route('backend.site-config.year.index')->with('success', 'Data Created Successfully');
     }
 
     /**
@@ -73,9 +76,9 @@ class YearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Floor $floor)
+    public function edit(Year $year)
     {
-        return view('backend.floor.edit', compact('floor'));
+        return view('backend.year.edit', compact('year'));
     }
 
     /**
@@ -85,7 +88,7 @@ class YearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Floor $floor)
+    public function update(Request $request, Year $year)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -94,13 +97,13 @@ class YearController extends Controller
             DB::beginTransaction();
             $data = $validatedData;
             $data['branch_id'] = auth('admin')->user()->branch_id;
-            $floor->update($data);
+            $year->update($data);
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.floor.index')->with('success', 'Floor Updated Successfully');
+        return redirect()->route('backend.site-config.year.index')->with('success', 'Data Updated Successfully');
     }
 
     /**
@@ -109,18 +112,17 @@ class YearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Floor $floor)
+    public function destroy(Year $year)
     {
 
         try {
             DB::beginTransaction();
-            $floor->delete();
+            $year->delete();
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollback();
             return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }
         return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
-
     }
 }
