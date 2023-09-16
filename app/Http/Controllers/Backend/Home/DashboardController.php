@@ -18,6 +18,7 @@ use App\Models\Backend\Tenant;
 use App\Models\Backend\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -60,6 +61,16 @@ class DashboardController extends Controller
     function branch($id)
     {
         session(['branch_id' => $id]);
+        return back();
+    }
+    function language($locale)
+    {
+        if (!in_array($locale, ['en', 'bn'])) {
+            abort(400);
+        }
+        App::setLocale($locale);
+
+
         return back();
     }
     function tableDesign()
