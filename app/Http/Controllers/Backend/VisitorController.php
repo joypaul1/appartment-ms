@@ -20,7 +20,7 @@ class VisitorController extends Controller
      */
     public function index()
     {
-         $visitors = Visitor::with('floor:id,name', 'unit:id,name')->get();
+        $visitors = Visitor::with('floor:id,name', 'unit:id,name')->get();
         return view('backend.visitor.index', compact('visitors'));
     }
 

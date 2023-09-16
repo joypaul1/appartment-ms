@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\BuildingInformation;
+use App\Models\Backend\Complain;
 use App\Models\Backend\Floor;
 use App\Models\Backend\MonthConfiguration;
 use App\Models\Backend\Rent;
 use App\Models\Backend\RentCollection;
 use App\Models\Backend\Tenant;
+use App\Models\Backend\Visitor;
 use App\Models\Backend\Year;
 use App\Models\Branch;
 use Illuminate\Http\Request;
@@ -54,12 +56,33 @@ class ReportController extends Controller
     {
         return view('backend.report.billReport');
     }
-    function visitorReport()
+    function visitorReport(Request $request)
     {
+        if ($request->start_date && $request->end_date) {
+            $startDate = date('Y-m-d', strtotime($request->start_date));
+            $endDate = date('Y-m-d', strtotime($request->end_date));
+            $visitors = Visitor::where('branch_id', auth('admin')->user()->branch_id)
+                ->with('floor:id,name', 'unit:id,name')
+                ->whereBetween('date', [$startDate, $endDate])
+                ->get();
+            $branch = BuildingInformation::whereId(7)->first();
+
+            return view('backend.report.visitorReportPdf', compact('visitors', 'branch'));
+        }
         return view('backend.report.visitorReport');
     }
-    function complainReport()
+    function complainReport(Request $request)
     {
+        if ($request->start_date && $request->end_date) {
+            $startDate = date('Y-m-d', strtotime($request->start_date));
+            $endDate = date('Y-m-d', strtotime($request->end_date));
+            $complains = Complain::where('branch_id', auth('admin')->user()->branch_id)
+                
+                ->whereBetween('date', [$startDate, $endDate])
+                ->get();
+            $branch = BuildingInformation::whereId(7)->first();
+            return view('backend.report.visitorReportPdf', compact('complains', 'branch'));
+        }
         return view('backend.report.complainReport');
     }
     function unitReport()

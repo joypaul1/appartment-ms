@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Complain;
+use App\Models\Backend\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,6 +19,8 @@ class ComplainController extends Controller
     {
         $complains = Complain::get();
         if (auth('admin')->user()->role_type == 'owner') {
+            $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+            $complains = Complain::where('branch_id', $owner->branch_id)->get();
             return view('backend.complain.owner', compact('complains'));
         }
         return view('backend.complain.index', compact('complains'));
