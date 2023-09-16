@@ -24,6 +24,8 @@ class NoticeBoardController extends Controller
      */
     public function create()
     {
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+
         return view('backend.noticeBoard.create');
 
     }
