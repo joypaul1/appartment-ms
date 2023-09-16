@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\BuildingInformation;
 use App\Models\Backend\Complain;
+use App\Models\Backend\EmployeeSalary;
 use App\Models\Backend\Floor;
 use App\Models\Backend\Fund;
 use App\Models\Backend\MaintenanceCost;
@@ -118,13 +119,28 @@ class ReportController extends Controller
                 ->whereBetween('date', [$startDate, $endDate])
                 ->with('month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
+            $branch = BuildingInformation::whereId(7)->first();
+
             return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
         }
 
         return view('backend.report.billReport');
     }
-    function salaryReport()
+    function salaryReport(Request $request)
     {
+        if ($request->start_date && $request->end_date) {
+            $startDate = date('Y-m-d', strtotime($request->start_date));
+            $endDate = date('Y-m-d', strtotime($request->end_date));
+            $data = EmployeeSalary::where('branch_id', auth('admin')->user()->branch_id)
+                ->whereBetween('issue_date', [$startDate, $endDate])
+                ->with('employee:id,name', 'year:id,name', 'month:id,name')
+                ->get();
+            $branch = BuildingInformation::whereId(7)->first();
+
+            return view('backend.report.salaryReportPdf', compact('data', 'branch'));
+        }
+
+
         return view('backend.report.salaryReport');
     }
 }

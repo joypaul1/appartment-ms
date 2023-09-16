@@ -68,7 +68,6 @@ class EmployeeSalaryController extends Controller
 
             EmployeeSalary::create($validatedData);
         } catch (\Exception $ex) {
-            dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
