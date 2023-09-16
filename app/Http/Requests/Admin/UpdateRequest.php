@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
-   
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,9 +30,11 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'password' => ['nullable', new MatchOldPassword($this->admin)],
+            'branch_id' => 'required',
+            // 'password' => ['nullable', new MatchOldPassword($this->admin)],
             'email' => ['required', Rule::unique('admins')->ignore($this->admin->id)],
-            'mobile' => 'nullable',
+            'mobile' => ['required', Rule::unique('admins')->ignore($this->admin->id)],
+            // 'mobile' => 'nullable',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
         ];
     }
@@ -44,13 +46,13 @@ class UpdateRequest extends FormRequest
             unset($data['password']);
             if(!empty($request->image)){
                 $data['image'] =  (new Image)->dirName('admin')->file($request->image)
-                ->resizeImage(150, 150)
+                ->resizeImage(100, 100)
                 ->deleteIfExists($admin->image)
                 ->save();
             }
             if(($request->filled('password'))){
                 $data['password'] = Hash::make($request->password);
-            }   
+            }
             // dd($data);
             $admin->update($data);
         } catch (\Exception $ex) {

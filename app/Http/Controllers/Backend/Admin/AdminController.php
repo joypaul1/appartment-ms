@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreRequest;
 use App\Http\Requests\Admin\UpdateRequest;
 use App\Models\Admin;
+use App\Models\Branch;
 use App\Models\LogActivity as BackendLogActivity;
 
 
@@ -37,7 +38,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('backend.admin.create');
+        $branches = Branch::get(['id','name']);
+        return view('backend.admin.create', compact('branches'));
     }
 
     /**
@@ -76,8 +78,9 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin )
     {
-        // dd($admin);
-        return view('backend.admin.edit',compact('admin'));
+        $branches = Branch::get(['id','name']);
+
+        return view('backend.admin.edit',compact('admin','branches'));
     }
 
     /**
@@ -92,7 +95,6 @@ class AdminController extends Controller
 
         $returnData = $request->updateData($request, $admin);
         if($returnData->getData()->status){
-            (new LogActivity)::addToLog('Admin Updated');
             return back()->with(['success' => $returnData->getData()->msg  ]);
 
         }

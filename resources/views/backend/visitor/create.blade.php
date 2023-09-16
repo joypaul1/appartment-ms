@@ -83,17 +83,7 @@
                         ])
                     </div>
 
-                    <div class="col-md-6">
-                        @include('components.backend.forms.select2.option', [
-                            'name' => 'floor_id',
-                            'required' => true,
-                            'label' => 'Floor',
-                            'optionData' => $floors,
-                        ])
-                        @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('floor_id'),
-                        ])
-                    </div>
+                    d-block
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'unit_id',

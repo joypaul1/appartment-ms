@@ -41,8 +41,8 @@ class EmailConfigurationController extends Controller
         } catch (\Exception $ex) {
             return back()->with(['status' => false, 'error' =>$ex->getMessage()]);
         }
-        (new LogActivity)::addToLog('Email-Configuration');
 
-        return back()->with(['status' => true, 'success' => 'Data Deleted Successfully']);
+
+        return back()->with(['status' => true, 'success' => 'Data Updated Successfully']);
     }
 }

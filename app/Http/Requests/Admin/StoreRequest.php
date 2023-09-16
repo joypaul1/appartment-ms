@@ -29,25 +29,27 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required|unique:admins,email',
-            'mobile' => 'nullable',
-            'image' => 'nullable|image|mimes:jpg,png,jpeg',
+            'mobile' => 'required|unique:admins,mobile',
+            'branch_id' => 'required',
+            'image' => 'required',
         ];
     }
 
     public function storeData($request)
     {
-      
+
         try {
             $data = $request->validated();
             if($request->image){
                 $data['image'] =  (new Image)->dirName('admin')->file($request->image)
-                ->resizeImage(150, 150)
+                ->resizeImage(100, 100)
                 ->save();
             }
-            
+
             if($request->password){
                 $data['password'] = Hash::make($request->password);
-            }          
+            }
+            $data['role_type'] = 'super_admin';
             Admin::create($data);
         } catch (\Exception $ex) {
             return response()->json(['status' => false, 'msg' =>$ex->getMessage()]);

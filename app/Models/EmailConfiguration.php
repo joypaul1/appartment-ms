@@ -11,7 +11,7 @@ class EmailConfiguration extends Model
 {
     // use HasFactory;
     use AutoTimeStamp, GlobalScope;
-    
+
     protected $fillable = [
         "created_by",
         "updated_by",

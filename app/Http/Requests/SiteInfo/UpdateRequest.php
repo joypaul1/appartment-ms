@@ -37,10 +37,10 @@ class UpdateRequest extends FormRequest
             'datetimezone'                      => 'nullable|string',
             'currency_symbol_placement'         => 'nullable|string',
             'date_format'                       => 'nullable|string',
-            'accounting_method'                 => 'nullable|string',
-            'currency_precision'                => 'nullable|string',
-            'quantity_precision'                => 'nullable|string',
-            'default_datatable_page_entries'    => 'nullable|string',
+            // 'accounting_method'                 => 'nullable|string',
+            // 'currency_precision'                => 'nullable|string',
+            // 'quantity_precision'                => 'nullable|string',
+            // 'default_datatable_page_entries'    => 'nullable|string',
         ];
     }
 

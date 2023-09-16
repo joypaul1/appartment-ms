@@ -296,7 +296,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            {{-- <li class="sidebar-item">
                 <a data-bs-target="#visitor" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Notice Board</span>
@@ -317,55 +317,61 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="sidebar-item">
                 <a data-bs-target="#visitor" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Setting </span>
                 </a>
                 <ul id="visitor"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'notice-board' ? 'show' : ' ' }} "
+                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'site-config' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.index') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.admin.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.admin.index') }}">
                             Admin Config
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.building.create') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.building.create') }}">
                             Buildling Config
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.bill-type.create') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.bill-type.create') }}">
                             Bill Type Config
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.member-type.create') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.member-type.create') }}">
                             Member Type Config
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.month.create') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.month.create') }}">
                             Month Config
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.year.create') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.year.create') }}">
                             Year Config
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.system.create') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.system.create') }}">
                             System Config
+                        </a>
+                    </li>
+                    <li
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.email.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.email.index') }}">
+                            Email Config
                         </a>
                     </li>
                 </ul>
