@@ -3,13 +3,37 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\BuildingInformation;
+use App\Models\Backend\Floor;
+use App\Models\Backend\MonthConfiguration;
+use App\Models\Backend\Rent;
+use App\Models\Backend\RentCollection;
+use App\Models\Backend\Year;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    function rentReport()
+    function rentReport(Request $request)
     {
-        return view('backend.report.rentReport');
+        if ($request->floor_id && $request->unit_id && $request->month && $request->year) {
+            $rentCollections = RentCollection::where('floor_id', $request->floor_id)
+                ->where('unit_id', $request->unit_id)
+                ->where('month_id', $request->month)
+                ->where('year_id', $request->year)
+                ->where('bill_status', $request->payment_status)
+                ->with('floor:id,name')
+                ->with('unit:id,name')
+                ->with('month:id,name')
+                ->with('year:id,name')
+                ->get();
+                $branch = BuildingInformation::whereId(7)->first();
+            return view('backend.report.rentReportPdf', compact('rentCollections', 'branch'));
+        }
+        $months  = MonthConfiguration::all();
+        $years  = Year::all();
+        $floors = Floor::all();
+        return view('backend.report.rentReport', compact('months', 'years', 'floors'));
     }
     function tenantReport()
     {

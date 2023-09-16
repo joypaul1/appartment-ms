@@ -25,13 +25,11 @@
                             <th>Sl.</th>
                             <th>Name</th>
                             <th>Image</th>
-                            {{-- <th>Email</th> --}}
                             <th>Mobile</th>
                             <th>Address</th>
                             <th>Appartment</th>
                             <th>Advance</th>
                             <th>Rent </th>
-                            {{-- <th>Action </th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +58,7 @@
                             </td>
                               <td>
                                 {{ $row->advance_rent  }}
-                            </td> 
+                            </td>
                             <td>
                                 {{ $row->rent_per_month  }}
                             </td>

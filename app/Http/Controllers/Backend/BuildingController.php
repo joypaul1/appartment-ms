@@ -57,7 +57,8 @@ class BuildingController extends Controller
 
             $validatedData['branch_id'] = auth('admin')->user()->branch_id;
             if ($request->hasfile('building_image')) {
-                $image =  (new Image)->dirName('building_image')->file($request->image)->resizeImage(100, 100)->save();
+                $image =  (new Image)->dirName('building_image')->file($request->building_image)
+                    ->resizeImage(100, 100)->save();
                 $validatedData['building_image'] = $image;
             }
             BuildingInformation::create($validatedData);
@@ -88,7 +89,7 @@ class BuildingController extends Controller
      */
     public function edit($id)
     {
-        // dd($buildingInformation);
+
         $buildingInformation = BuildingInformation::whereId($id)->first();
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
         return view('backend.building.edit', compact('status', 'buildingInformation'));
@@ -124,8 +125,9 @@ class BuildingController extends Controller
             return redirect()->back()->with('error', 'Data not found.');
         }
         $validatedData['branch_id'] = auth('admin')->user()->branch_id;
-        if ($request->hasFile('building_image')) {
-            $image =  (new Image)->dirName('building_image')->file($request->image)->resizeImage(100, 100)->save();
+        if ($request->hasfile('building_image')) {
+            $image =  (new Image)->dirName('building_image')->file($request->building_image)
+                ->resizeImage(100, 100)->save();
             $validatedData['building_image'] = $image;
         }
         $buildingInformation->update($validatedData);

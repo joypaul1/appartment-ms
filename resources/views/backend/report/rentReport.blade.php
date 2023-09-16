@@ -3,90 +3,73 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i>  Rental Collection Report Form
+    <i class="fa fa-plus-circle"></i> Rental Collection Report Form
 @stop
 @section('table_header')
-@include('backend._partials.page_header')
+    @include('backend._partials.page_header')
 @endsection
 <div class="row">
     <div class="col-12">
         <div class="card">
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.floor.store') }}" method="POST" class="row g-3">
-                    @method('POST')
-                    @csrf
+                <form action="{{ route('backend.report.rental-report') }}" method="GET" class="row g-3">
+                    @method('GET')
+                    {{-- @csrf --}}
                     <div class="col-md-4">
                         @include('components.backend.forms.select2.option', [
-                        'name' => 'floor',
-                        'label' => 'Floor',
-                        'optionData' => [],
-                        'required' => true,
+                            'name' => 'floor_id',
+                            'label' => 'Floor',
+                            'optionData' => $floors,
+                            'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('floor_id'),
+                        ])
                     </div>
                     <div class="col-md-4">
                         @include('components.backend.forms.select2.option', [
-                        'name' => 'units',
-                        'label' => 'unit',
-                        'optionData' => [],
-                        'required' => true,
+                            'name' => 'unit_id',
+                            'label' => 'unit',
+                            'optionData' => [],
+                            'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('unit_id'),
+                        ])
                     </div>
                     <div class="col-md-4">
                         @include('components.backend.forms.select2.option', [
-                        'name' => 'month',
-                        'label' => 'Month',
-                        'optionData' => [
-                            ['id'=>1, 'name'=>'January'],
-                            ['id'=>2, 'name'=>'February'],
-                            ['id'=>3, 'name'=>'March'],
-                            ['id'=>4, 'name'=>'April'],
-                            ['id'=>5, 'name'=>'May'],
-                            ['id'=>6, 'name'=>'June'],
-                            ['id'=>7, 'name'=>'July'],
-                            ['id'=>8, 'name'=>'August'],
-                            ['id'=>9, 'name'=>'September'],
-                            ['id'=>10, 'name'=>'October'],
-                            ['id'=>11, 'name'=>'November'],
-                            ['id'=>12, 'name'=>'December'],
-                        ],
-                        'required' => true,
+                            'name' => 'month',
+                            'label' => 'Month',
+                            'optionData' => $months,
+                            'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('name'),
+                        ])
                     </div>
                     <div class="col-md-4">
                         @include('components.backend.forms.select2.option', [
-                        'name' => 'year',
-                        'label' => 'Year',
-                        'optionData' => [
-                            ['id'=>1, 'name'=>'2021'],
-                            ['id'=>2, 'name'=>'2022'],
-                            ['id'=>3, 'name'=>'2023'],
-                            ['id'=>4, 'name'=>'2024'],
-                            ['id'=>5, 'name'=>'2025'],
-                            ['id'=>6, 'name'=>'2026'],
-                            ['id'=>7, 'name'=>'2027'],
-                            ['id'=>8, 'name'=>'2028'],
-                            ['id'=>9, 'name'=>'2029'],
-                            ['id'=>10, 'name'=>'2030'],
-                        ],
-                        'required' => true,
+                            'name' => 'year',
+                            'label' => 'Year',
+                            'optionData' => $years,
+                            'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('name'),
+                        ])
                     </div>
                     <div class="col-md-4">
                         @include('components.backend.forms.select2.option', [
-                        'name' => 'payment_status',
-                        'label' => 'Payment Status',
-                        'optionData' => [
-                            ['id'=>1, 'name'=>'Paid'],
-                            ['id'=>2, 'name'=>'Unpaid'],
-                        ],
-                        'required' => true,
+                            'name' => 'payment_status',
+                            'label' => 'Payment Status',
+                            'optionData' => [['id' => 1, 'name' => 'Paid'], ['id' => 2, 'name' => 'Unpaid']],
+                            'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('payment_status'),
+                        ])
                     </div>
 
                     <div class="col-12 text-center">
@@ -100,5 +83,48 @@
 @endsection
 
 @push('js')
+<script>
+    $('#Floorid').on('change', function(e) {
+        e.preventDefault();
+        let url = "{{ route('backend.unit.index') }}"
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: 'JSON',
+            data: {
+                'floor_id': e.target.value,
+                'getUnit': true
+            },
 
+            success: function(res) {
+                $("#Unitid").html(' ');
+                $.map(res.data, function(val, i) {
+                    var newOption = new Option(val.name, val.id, false, false);
+                    $('#Unitid').append(newOption).trigger('change');
+
+                });
+            },
+            error: function(jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                console.log(msg);
+            },
+        });
+
+    });
+</script>
 @endpush

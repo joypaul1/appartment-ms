@@ -42,7 +42,7 @@
                                 {{ $row->name }}
                             </td>
                             <td>
-                                <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
+                                <img src="{{ asset($row->building_image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
                             </td>
                             <td>
                                 {{ $row->email }}

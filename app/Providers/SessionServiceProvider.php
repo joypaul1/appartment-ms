@@ -30,10 +30,12 @@ class SessionServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', function ($view) {
-            // if(!session('site_info')){
-            //     $siteInfo = SiteInfo::first()->toArray();
-            //     session(['site_info' => $siteInfo]);
-            // }
+            if(!session('site_info')){
+                $siteInfo = SiteInfo::first()->toArray();
+
+                session(['site_info' => $siteInfo]);
+            }
+            // dd(session('site_info'));
         });
 
         View::composer('backend/*', function ($view) {
