@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\BuildingInformation;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -65,8 +66,10 @@ class LoginController extends Controller
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        if (method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)) {
+        if (
+            method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)
+        ) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
@@ -76,9 +79,13 @@ class LoginController extends Controller
             if ($request->hasSession()) {
                 $request->session()->put('auth.password_confirmed_at', time());
             }
-
+            if ((auth('admin')->user()->role_type == 'super_admin' || auth('admin')->user()->role_type == 'admin')) {
+                $branch_id = BuildingInformation::first()->id;
+                session(['branch_id' => $branch_id]);
+            } else {
+                session(['branch_id' => auth('admin')->user()->branch_id]);
+            }
             return $this->sendLoginResponse($request);
-
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -87,7 +94,6 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
-
     }
 
     /**
@@ -150,7 +156,4 @@ class LoginController extends Controller
             ? new JsonResponse([], 204)
             : redirect()->route('backend.login.form');
     }
-
-
-
 }

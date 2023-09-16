@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'backend.'], function () {
     // dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('branch/{id}', [DashboardController::class, 'branch'])->name('dashboard.branch');
     // user
     Route::resource('floor', FloorController::class);
     Route::resource('unit', UnitController::class);

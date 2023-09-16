@@ -2,7 +2,39 @@
     <a class="sidebar-toggle js-sidebar-toggle">
         <i class="hamburger align-self-center"></i>
     </a>
+    <ul class="navbar-nav d-none d-lg-flex">
 
+
+        @php
+            $activeBranch = App\Models\Backend\BuildingInformation::where('id', session('branch_id'))
+                ->select('id', 'name')
+                ->first();
+            $allBranchs = App\Models\Backend\BuildingInformation::select('id', 'name')->get();
+
+        @endphp
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-info" href="#" id="resourcesDropdown" role="button"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <strong> {{ $activeBranch->name }} </strong>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                @foreach ($allBranchs as $branch)
+                    <a class="dropdown-item" href="{{ route('backend.dashboard.branch', $branch->id) }}" >
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-home align-middle me-1">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        {{ $branch->name }}
+                    </a>
+                @endforeach
+
+
+            </div>
+        </li>
+    </ul>
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav navbar-align">
             <li class="nav-item dropdown">

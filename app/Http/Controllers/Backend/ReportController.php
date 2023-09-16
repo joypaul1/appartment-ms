@@ -10,14 +10,11 @@ use App\Models\Backend\Floor;
 use App\Models\Backend\Fund;
 use App\Models\Backend\MaintenanceCost;
 use App\Models\Backend\MonthConfiguration;
-use App\Models\Backend\Owner;
-use App\Models\Backend\Rent;
 use App\Models\Backend\RentCollection;
 use App\Models\Backend\Tenant;
 use App\Models\Backend\Unit;
 use App\Models\Backend\Visitor;
 use App\Models\Backend\Year;
-use App\Models\Branch;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
