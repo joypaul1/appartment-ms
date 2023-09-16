@@ -13,9 +13,9 @@
         <div class="card">
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.floor.store') }}" method="POST" class="row g-3">
-                    @method('POST')
-                    @csrf
+                <form action="{{ route('backend.report.tenant-report') }}" method="GET" class="row g-3">
+                    @method('GET')
+                    
                     <div class="col-md-12">
                         @include('components.backend.forms.select2.option', [
                         'name' => 'tenant_status',
