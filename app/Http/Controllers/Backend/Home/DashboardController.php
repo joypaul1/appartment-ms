@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend\Home;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
 use App\Models\Backend\BuildingInformation;
 use App\Models\Backend\Complain;
 use App\Models\Backend\Employee;
@@ -25,35 +24,36 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $floorCount = Floor::count();
-        $unitCount = Unit::count();
-        $ownerCount = Owner::count();
-        $tenantCount = Tenant::count();
-        $employeeCount = Employee::count();
-        $managementCommitteeCount = ManagementCommittee::count();
-        $totalRentCollection = RentCollection::sum('total_rent');
-        $totalMaintenanceCost = MaintenanceCost::sum('amount');
-        $totalFund = Fund::sum('amount');
+        $floorCount = Floor::where('branch_id', session('branch_id'))->count();
+        $unitCount = Unit::where('branch_id', session('branch_id'))->count();
+        $ownerCount = Owner::where('branch_id', session('branch_id'))->count();
+        $tenantCount = Tenant::where('branch_id', session('branch_id'))->count();
+        $employeeCount = Employee::where('branch_id', session('branch_id'))->count();
+        $managementCommitteeCount = ManagementCommittee::where('branch_id', session('branch_id'))->count();
+        $totalRentCollection = RentCollection::where('branch_id', session('branch_id'))->sum('total_rent');
+        $totalMaintenanceCost = MaintenanceCost::where('branch_id', session('branch_id'))->sum('amount');
+        $totalFund = Fund::where('branch_id', session('branch_id'))->sum('amount');
         $totalOwnerUtility = OwnerUtility::sum('total_utility');
-        $totalEmployeeSalary = EmployeeSalary::sum('amount');
-        $totalComplain = Complain::count();
-        $totalHouse = BuildingInformation::count();
+        $totalEmployeeSalary = EmployeeSalary::where('branch_id', session('branch_id'))->sum('amount');
+        $totalComplain = Complain::where('branch_id', session('branch_id'))->count();
+        $totalHouse = BuildingInformation::where('branch_id', session('branch_id'))->count();
 
-        return view('backend.dashboard.index',
+        return view(
+            'backend.dashboard.index',
             compact(
                 'floorCount',
-            'unitCount',
-            'ownerCount',
-            'tenantCount',
-            'employeeCount',
-            'managementCommitteeCount',
-            'totalRentCollection',
-            'totalMaintenanceCost',
-            'totalFund',
-            'totalOwnerUtility',
-            'totalEmployeeSalary',
-            'totalComplain',
-            'totalHouse',
+                'unitCount',
+                'ownerCount',
+                'tenantCount',
+                'employeeCount',
+                'managementCommitteeCount',
+                'totalRentCollection',
+                'totalMaintenanceCost',
+                'totalFund',
+                'totalOwnerUtility',
+                'totalEmployeeSalary',
+                'totalComplain',
+                'totalHouse',
             )
         );
     }
