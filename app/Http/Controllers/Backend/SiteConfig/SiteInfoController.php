@@ -25,11 +25,10 @@ class SiteInfoController extends Controller
         'countries' =>  Country::get(['name']), 'currencies' => Currency::get(['name'])]);
     }
 
-    public function update(UpdateRequest $request)
+    public function store(UpdateRequest $request)
     {
         $returnData = $request->updateData($request);
         if ($returnData->getData()->status) {
-            (new LogActivity)::addToLog('Site Information Configuration');
             return back()->with(['success' => $returnData->getData()->msg]);
         }
         return back()->with(['error' => $returnData->getData()->msg]);

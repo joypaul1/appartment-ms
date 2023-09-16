@@ -10,7 +10,7 @@
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
 'name' => ' ',
-'route' => route('backend.siteConfig.email-configuration.index')
+'route' => route('backend.site-config.email.index')
 ])
 
 
@@ -19,7 +19,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-validation">
-                    <form action="{{ route('backend.siteConfig.email-configuration.store') }}" method="Post" enctype="multipart/form-data">
+                    <form action="{{ route('backend.site-config.email.store') }}" method="Post" enctype="multipart/form-data">
                         @method('POST')
                         @csrf
 
@@ -66,22 +66,10 @@
                         </div>
 
 
-                        <div class="form-group">
-                            <label class="col-lg-4 col-form-label" for="image">Any Related Document for Email
-                                <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-lg-8">
-                                <input type="file" name="document" class="dropify" data-allowed-file-extensions="jpg jpeg png pdf">
 
-                                {{-- <strong class="text-danger text-bold">Image Will be (200x200) px </strong> --}}
-                                @error('document')
-                                @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('document')])
-                                @enderror
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <div class="col-lg-12 text-right">
+                        <div class="d-block mt-2 ">
+                            <div class="text-right">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
@@ -90,7 +78,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    {{-- <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Uploaded Document</h4>
@@ -99,7 +87,7 @@
                 <img class="card-img-top img-fluid" src="{{ asset($emailConfig->document??' ') }}" id="outputImage" alt="Current document">
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 

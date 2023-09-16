@@ -350,8 +350,8 @@
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.building.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.building.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.building.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.building.index') }}">
                             Buildling Config
                         </a>
                     </li>
@@ -380,8 +380,8 @@
                         </a>
                     </li>
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.system.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.system.create') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.system.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.site-config.system.index') }}">
                             System Config
                         </a>
                     </li>
