@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\BillType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BillTypeController extends Controller
 {
@@ -14,7 +16,11 @@ class BillTypeController extends Controller
      */
     public function index()
     {
-        //
+        $data = BillType::
+            // ->where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
+            orderBy('id', 'DESC')
+            ->get();
+        return view('backend.bill_type.index', compact('data'));
     }
 
     /**
@@ -24,7 +30,7 @@ class BillTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.bill_type.create');
     }
 
     /**
@@ -35,7 +41,23 @@ class BillTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        try {
+            DB::beginTransaction();
+            $data = $validatedData;
+            $data['id'] =BillType::first()?BillType:: orderBy('id', 'DESC')->first()->id +1: 1 ;
+            $data['created_at'] = now();
+            $data['updated_at'] = now();
+            BillType::insert($data);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            dd($ex->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.site-config.bill-type.index')->with('success', 'Floor Created Successfully');
     }
 
     /**
@@ -55,9 +77,9 @@ class BillTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(BillType $billType)
     {
-        //
+        return view('backend.bill_type.edit', compact('billType'));
     }
 
     /**
@@ -67,9 +89,22 @@ class BillTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, BillType $billType)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        try {
+            DB::beginTransaction();
+            $data = $validatedData;
+            $data['branch_id'] = auth('admin')->user()->branch_id;
+            $billType->update($data);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.site-config.bill-type.index')->with('success', 'Floor Updated Successfully');
     }
 
     /**
@@ -78,8 +113,17 @@ class BillTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(BillType $billType)
     {
-        //
+
+        try {
+            DB::beginTransaction();
+            $billType->delete();
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
+        }
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }
