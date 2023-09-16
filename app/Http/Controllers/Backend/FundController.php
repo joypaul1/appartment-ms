@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Fund;
+use App\Models\Backend\MaintenanceCost;
 use App\Models\Backend\Owner;
 use App\Models\Backend\Year;
 use DateTime;
@@ -19,8 +20,15 @@ class FundController extends Controller
      */
     public function index()
     {
-        $funds = Fund::with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+        if (auth('admin')->user()->role_type == 'owner') {
+            //
+            $funds = Fund::where('branch_id', auth('admin')->user()->branch_id)->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
             ->orderBy('id', 'desc')->get();
+             $maintenanceCosts = MaintenanceCost::where('branch_id', auth('admin')->user()->branch_id)->with('month:id,name', 'year:id,name', 'branch:id,name')
+            ->orderBy('id', 'desc')->get();
+            return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
+        }
+
 
         return view('backend.fund.index', compact('funds'));
     }

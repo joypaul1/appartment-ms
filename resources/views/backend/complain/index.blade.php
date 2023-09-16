@@ -28,9 +28,9 @@
                             <th>
                                 Date
                             </th>
-                            <th>
+                            {{-- <th>
                                 Status
-                            </th>
+                            </th> --}}
                             {{-- <th>
                                 Assign Complain
                             </th> --}}
@@ -40,10 +40,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($complains as $key=>$row)
+                        @foreach ($complains as $key => $row)
                             <tr>
                                 <td>
-                                    {{ $key+1 }}
+                                    {{ $key + 1 }}
                                 </td>
                                 <td>
                                     {{ $row->title }}
@@ -51,9 +51,9 @@
                                 <td>
                                     {{ date('d-m-y', strtotime($row->date)) }}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $row->status }}
-                                </td>
+                                </td> --}}
                                 {{-- <td>
                             {{ $row->status }}
                         </td> --}}

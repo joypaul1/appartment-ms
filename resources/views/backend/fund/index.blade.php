@@ -25,6 +25,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Owner</th>
+                            <th>Date</th>
                             <th>
                                 Month
                             </th>
@@ -44,6 +45,9 @@
                             <tr>
                                 <td>
                                     {{ $key++ }}
+                                </td>
+                                <td>
+                                    {{ date('d-m-y', strtotime($row->date)) }}
                                 </td>
 
                                 <td>

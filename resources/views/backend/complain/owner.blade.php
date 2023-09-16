@@ -4,13 +4,13 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> Maintenance Cost List
+    <i class="fa fa-list"></i> Complain
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         // 'fa' => 'fa fa-plus-circle',
-        // 'name' => 'Create Owner Utility',
-        // 'route' => route('backend.maintenance-cost.create'),
+        // 'name' => 'Create Complain',
+        // 'route' => route('backend.complain.create'),
     ])
 @endsection
 
@@ -24,28 +24,26 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>
-                                Title
-                            </th>
+                            <th>Title</th>
                             <th>
                                 Date
                             </th>
-                            <th>
-                                Month
-                            </th>
-                            <th>
-                                Year
-                            </th>
-                            <th>
-                                Amount
-                            </th>
+                            {{-- <th>
+                                Status
+                            </th> --}}
+                            {{-- <th>
+                                Assign Complain
+                            </th> --}}
+                            {{-- <th>
+                                Action
+                            </th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($maintenanceCosts as $key => $row)
+                        @foreach ($complains as $key => $row)
                             <tr>
                                 <td>
-                                    {{ $key+1 }}
+                                    {{ $key + 1 }}
                                 </td>
                                 <td>
                                     {{ $row->title }}
@@ -53,15 +51,12 @@
                                 <td>
                                     {{ date('d-m-y', strtotime($row->date)) }}
                                 </td>
-                                <td>
-                                    {{ optional($row->month)->name }}
-                                </td>
-                                <td>
-                                    {{ optional($row->year)->name }}
-                                </td>
-                                <td>
-                                    {{ $row->amount }}
-                                </td>
+                                {{-- <td>
+                                    {{ $row->status }}
+                                </td> --}}
+                                {{-- <td>
+                            {{ $row->status }}
+                        </td> --}}
 
 
 

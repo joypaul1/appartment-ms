@@ -17,6 +17,9 @@ class ComplainController extends Controller
     public function index()
     {
         $complains = Complain::get();
+        if (auth('admin')->user()->role_type == 'owner') {
+            return view('backend.complain.owner', compact('complains'));
+        }
         return view('backend.complain.index', compact('complains'));
     }
 
