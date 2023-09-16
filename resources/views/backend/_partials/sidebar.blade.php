@@ -324,7 +324,7 @@
                     <span class="align-middle"> Report </span>
                 </a>
                 <ul id="report"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'notice-board' ? 'show' : ' ' }} "
+                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'report' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li
                         class="sidebar-item {{ strpos($strpos, 'backend.report.rental-report') === 0 ? 'active' : ' ' }}">
