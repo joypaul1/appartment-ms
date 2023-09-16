@@ -31,7 +31,14 @@ class UnitController extends Controller
             return response()->json(['data' => $units]);
         }
 
+        if(auth('admin')->user()->role_type == 'owner'){
+            $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+            $data = Unit::with('floor')->with('owners')->whereHas('owners',function($query) use($owner){
+                return $query->where('owner_id', $owner->id);
+            })->get();
+            return view('backend.unit.owner', compact('data'));
 
+        }
         return  $data = Unit::with('branch:id,name')->with('floor:id,name')
             ->with('owners')
             // ->where('branch_id', auth('admin')->user()->branch_id)
