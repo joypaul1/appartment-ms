@@ -33,7 +33,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($data as $key=>$row)
+                        @foreach ($data as $key=>$row)
                         <tr>
                             <td>
                                 {{ $key+1 }}
@@ -79,7 +79,7 @@
                                 </a>
                             </td>
                         </tr>
-                        @endforeach --}}
+                        @endforeach
 
 
                     </tbody>
