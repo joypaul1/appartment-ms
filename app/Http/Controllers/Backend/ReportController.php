@@ -10,6 +10,7 @@ use App\Models\Backend\MonthConfiguration;
 use App\Models\Backend\Rent;
 use App\Models\Backend\RentCollection;
 use App\Models\Backend\Tenant;
+use App\Models\Backend\Unit;
 use App\Models\Backend\Visitor;
 use App\Models\Backend\Year;
 use App\Models\Branch;
@@ -77,7 +78,7 @@ class ReportController extends Controller
             $startDate = date('Y-m-d', strtotime($request->start_date));
             $endDate = date('Y-m-d', strtotime($request->end_date));
             $complains = Complain::where('branch_id', auth('admin')->user()->branch_id)
-                
+
                 ->whereBetween('date', [$startDate, $endDate])
                 ->get();
             $branch = BuildingInformation::whereId(7)->first();
@@ -85,8 +86,20 @@ class ReportController extends Controller
         }
         return view('backend.report.complainReport');
     }
-    function unitReport()
+    function unitReport(Request $request)
     {
+        if ($request->status) {
+            $status = $request->status== 1? 0: 1;
+            $data = Unit::with('branch:id,name')
+                ->with('floor:id,name')
+                ->where('status', $status)
+                // ->where('branch_id', auth('admin')->user()->branch_id)
+                ->orderBy('id', 'DESC')
+                ->get();
+            $branch = BuildingInformation::whereId(7)->first();
+            return view('backend.report.unitStatusReportPdf', compact('data', 'branch'));
+        }
+
         return view('backend.report.unitStatusReport');
     }
     function fundReport()
