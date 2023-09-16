@@ -309,9 +309,9 @@ $strpos = Route::currentRouteName();
                         Unit Status Report
                     </a>
                 </li>
-                <li class="sidebar-item {{ strpos($strpos, 'backend.report.bill-report') === 0 ? 'active' : ' ' }}">
-                    <a class="sidebar-link" href="{{ route('backend.report.bill-report') }}">
-                        Bill Report
+                <li class="sidebar-item {{ strpos($strpos, 'backend.report.fund-report') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.report.fund-report') }}">
+                        Fund Report
                     </a>
                 </li>
                 <li class="sidebar-item {{ strpos($strpos, 'backend.report.salary-report') === 0 ? 'active' : ' ' }}">

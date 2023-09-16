@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\BuildingInformation;
 use App\Models\Backend\Complain;
 use App\Models\Backend\Floor;
+use App\Models\Backend\Fund;
+use App\Models\Backend\MaintenanceCost;
 use App\Models\Backend\MonthConfiguration;
+use App\Models\Backend\Owner;
 use App\Models\Backend\Rent;
 use App\Models\Backend\RentCollection;
 use App\Models\Backend\Tenant;
@@ -89,7 +92,7 @@ class ReportController extends Controller
     function unitReport(Request $request)
     {
         if ($request->status) {
-            $status = $request->status== 1? 0: 1;
+            $status = $request->status == 1 ? 0 : 1;
             $data = Unit::with('branch:id,name')
                 ->with('floor:id,name')
                 ->where('status', $status)
@@ -102,9 +105,23 @@ class ReportController extends Controller
 
         return view('backend.report.unitStatusReport');
     }
-    function fundReport()
+    function fundReport(Request $request)
     {
-        return view('backend.report.create');
+        if ($request->start_date && $request->end_date) {
+            $startDate = date('Y-m-d', strtotime($request->start_date));
+            $endDate = date('Y-m-d', strtotime($request->end_date));
+            $funds = Fund::where('branch_id', auth('admin')->user()->branch_id)
+                ->whereBetween('date', [$startDate, $endDate])
+                ->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+                ->orderBy('id', 'desc')->get();
+            $maintenanceCosts = MaintenanceCost::where('branch_id', auth('admin')->user()->branch_id)
+                ->whereBetween('date', [$startDate, $endDate])
+                ->with('month:id,name', 'year:id,name', 'branch:id,name')
+                ->orderBy('id', 'desc')->get();
+            return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
+        }
+
+        return view('backend.report.billReport');
     }
     function salaryReport()
     {
