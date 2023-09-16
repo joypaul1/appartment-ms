@@ -50,15 +50,17 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'backend.'],
     Route::resource('visitor', VisitorController::class);
     Route::resource('meeting', MeetingController::class);
     Route::resource('notice-board', NoticeBoardController::class);
-    Route::get('rental-report', [BackendReportController::class, 'rentReport']);
-    Route::get('tenant-report', [BackendReportController::class, 'tenantReport']);
-    Route::get('visitor-report', [BackendReportController::class, 'visitorReport']);
-    Route::get('complain-report', [BackendReportController::class, 'complainReport']);
-    Route::get('unit-report', [BackendReportController::class, 'unitReport']);
-    Route::get('fund-report', [BackendReportController::class, 'fundReport']);
-    Route::get('bill-report', [BackendReportController::class, 'billReport']);
-    Route::get('salary-report', [BackendReportController::class, 'salaryReport']);
 
+    Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
+        Route::get('rental-report', [BackendReportController::class, 'rentReport'])->name('rental-report');
+        Route::get('tenant-report', [BackendReportController::class, 'tenantReport'])->name('tenant-report');
+        Route::get('visitor-report', [BackendReportController::class, 'visitorReport'])->name('visitor-report');
+        Route::get('complain-report', [BackendReportController::class, 'complainReport'])->name('complain-report');
+        Route::get('unit-report', [BackendReportController::class, 'unitReport'])->name('unit-report');
+        Route::get('fund-report', [BackendReportController::class, 'fundReport'])->name('fund-report');
+        Route::get('bill-report', [BackendReportController::class, 'billReport'])->name('bill-report');
+        Route::get('salary-report', [BackendReportController::class, 'salaryReport'])->name('salary-report');
+    });
     Route::group(['prefix' => 'site-config', 'as' => 'site-config.'], function () {
         Route::resource('admin', AdminController::class);
         Route::resource('building', BuildingController::class);

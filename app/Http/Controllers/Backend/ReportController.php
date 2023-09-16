@@ -9,7 +9,7 @@ class ReportController extends Controller
 {
     function rentReport()
     {
-        return view('backend.report.create');
+        return view('backend.report.rentReport');
     }
     function tenantReport()
     {

@@ -319,22 +319,16 @@
                 </ul>
             </li> --}}
              <li class="sidebar-item">
-                <a data-bs-target="#visitor" data-bs-toggle="collapse" class="sidebar-link ">
+                <a data-bs-target="#Report" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Report </span>
                 </a>
-                <ul id="visitor"
+                <ul id="Report"
                     class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'report' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.report.rental-report') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.report.rental-report') }}">
-                          Rental Report
-                        </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.report.tenant-report') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.report.tenant-report') }}">
+                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.notice-board.index') }}">
                           Rental Report
                         </a>
                     </li>
