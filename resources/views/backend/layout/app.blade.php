@@ -9,7 +9,11 @@
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
     <div class="wrapper">
 
-        @include('backend._partials.sidebar')
+        @if (auth('admin')->user()->role_type == 'owner')
+            @include('backend._partials.owner_sidebar')
+        @else
+            @include('backend._partials.sidebar')
+        @endif
 
         <div class="main">
 
@@ -33,35 +37,35 @@
 
     @include('backend._include.footerJs')
     <script type="text/javascript">
-        $(document).ready( function () {
+        $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
         });
     </script>
     {{-- toast-sms --}}
     @if (Session::get('success'))
-    <script>
-        let $message = "{{Session::get('success') }}";
-             let $context = 'success';
-             let $positionClass= 'toast-top-right';
-             toastr.remove();
-             toastr[$context]($message, '', {
-                 positionClass: $positionClass
-             });
-    </script>
+        <script>
+            let $message = "{{ Session::get('success') }}";
+            let $context = 'success';
+            let $positionClass = 'toast-top-right';
+            toastr.remove();
+            toastr[$context]($message, '', {
+                positionClass: $positionClass
+            });
+        </script>
     @elseif(Session::get('error'))
-    <script>
-        let $message = "{{Session::get('error') }}";
-         let $context = 'error';
-         let $positionClass= 'toast-top-right';
-         toastr.remove();
-         toastr[$context]($message, '', {
-             positionClass: $positionClass
-         });
-    </script>
+        <script>
+            let $message = "{{ Session::get('error') }}";
+            let $context = 'error';
+            let $positionClass = 'toast-top-right';
+            toastr.remove();
+            toastr[$context]($message, '', {
+                positionClass: $positionClass
+            });
+        </script>
     @endif
 </body>
 

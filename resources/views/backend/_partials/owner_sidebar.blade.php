@@ -24,8 +24,9 @@
                         {{ auth('admin')->user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-start">
-
-                        <a class="dropdown-item" href="#">Log out</a>
+                        <a class="dropdown-item" href="#"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                        
                     </div>
 
 
@@ -39,23 +40,7 @@
                     <i class="align-middle" data-feather="home"></i> <span class="align-middle">Dashboard</span>
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a data-bs-target="#floor" data-bs-toggle="collapse"
-                    class="sidebar-link {{ strpos($strpos, 'backend.floor') === 0 ? 'active' : ' ' }}">
-                    <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">Floor</span>
-                </a>
-                <ul id="floor"
-                    class="sidebar-dropdown list-unstyled collapse {{ strpos($strpos, 'backend.floor') === 0 ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.floor.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.floor.index') }}">Floor List</a>
-                    </li>
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.floor.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.floor.create') }}">Create Floor </a>
-                    </li>
-                </ul>
-            </li>
+
             <li class="sidebar-item">
                 <a data-bs-target="#Unit" data-bs-toggle="collapse"
                     class="sidebar-link {{ request()->segment(2) == 'unit' ? 'active' : ' ' }}">
@@ -68,9 +53,7 @@
                     <li class="sidebar-item {{ strpos($strpos, 'backend.unit.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.unit.index') }}">Unit List</a>
                     </li>
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.unit.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.unit.create') }}">Create Unit </a>
-                    </li>
+
                 </ul>
             </li>
             <li class="sidebar-item">

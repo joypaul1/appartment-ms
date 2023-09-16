@@ -23,8 +23,9 @@ $strpos = Route::currentRouteName();
                         {{ auth('admin')->user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-start">
-
-                        <a class="dropdown-item" href="#">Log out</a>
+                        <a class="dropdown-item" href="#"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                        
                     </div>
 
 
