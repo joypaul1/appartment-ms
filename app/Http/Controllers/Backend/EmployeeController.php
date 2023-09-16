@@ -20,9 +20,19 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
+
+        if (auth('admin')->user()->role_type == 'owner') {
+             $data = Employee::select('employees.*', 'mt.name as designation')
+            ->join('member_types as mt', 'mt.id', '=', 'employees.member_type_id')
+            ->where('employees.branch_id', auth('admin')->user()->branch_id)
+            ->get();
+            return view('backend.employee.owner', compact('data'));
+        }
+
         if($request->getSalary){
             return response()->json(['data' =>  Employee::whereId($request->Employeeid)->first()->salary]);
         }
+
 
         $data = Employee::with('memberType:id,name')->where('branch_id', auth('admin')->user()->branch_id)->get();
         return view('backend.employee.index', compact('data'));

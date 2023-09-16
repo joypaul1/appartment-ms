@@ -6,6 +6,7 @@ use App\Helpers\Image;
 use App\Helpers\InvoiceNumber;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Floor;
+use App\Models\Backend\Owner;
 use App\Models\Backend\Rent;
 use App\Models\Backend\RentCollection;
 use App\Models\Backend\Year;
@@ -21,6 +22,18 @@ class RentController extends Controller
      */
     public function index()
     {
+        if (auth('admin')->user()->role_type == 'owner') {
+            $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+
+            $rentCollections = RentCollection::select('*', 'fl.name as floor_name', 'uc.name as unit_name')
+                ->join('owner_unit as our', 'rent_collections.unit_id', '=', 'our.unit_id')
+                ->join('floors as fl', 'fl.id', '=', 'rent_collections.floor_id')
+                ->join('unit_configurations as uc', 'uc.id', '=', 'rent_collections.unit_id')
+                ->where('our.owner_id', $owner->id)
+                ->get();
+            return view('backend.rent.owner', compact('rentCollections'));
+        }
+
         $rentCollections = RentCollection::with('tenant:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
             ->orderBy('id', 'desc')->get();
         return view('backend.rent.index', compact('rentCollections'));

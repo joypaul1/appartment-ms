@@ -26,13 +26,14 @@ class TenantController extends Controller
 
 
 
-
         if (auth('admin')->user()->role_type == 'owner') {
+            $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+
             $data = Tenant::select('*', 'fl.name as floor_name', 'uc.name as unit_name')
                 ->join('owner_unit as our', 'rent_configurations.unit_id', '=', 'our.unit_id')
                 ->join('floors as fl', 'fl.id', '=', 'rent_configurations.floor_id')
                 ->join('unit_configurations as uc', 'uc.id', '=', 'rent_configurations.unit_id')
-                ->where('our.owner_id', 13)
+                ->where('our.owner_id', $owner->id)
                 ->get();
             return view('backend.tenant.owner', compact('data'));
         }

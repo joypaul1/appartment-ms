@@ -56,22 +56,7 @@
 
                 </ul>
             </li>
-            <li class="sidebar-item">
-                <a data-bs-target="#owner" data-bs-toggle="collapse" class="sidebar-link ">
-                    <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">Owner</span>
-                </a>
-                <ul id="owner"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'owner' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.owner.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.owner.index') }}">Owner List</a>
-                    </li>
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.owner.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.owner.create') }}">Create Owner </a>
-                    </li>
-                </ul>
-            </li>
+            
             <li class="sidebar-item">
                 <a data-bs-target="#tenant" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
@@ -83,9 +68,7 @@
                     <li class="sidebar-item {{ strpos($strpos, 'backend.tenant.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.tenant.index') }}">Tenant List</a>
                     </li>
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.tenant.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.tenant.create') }}">Create Tenant </a>
-                    </li>
+                   
                 </ul>
             </li>
             <li class="sidebar-item">
@@ -100,18 +83,7 @@
                     <li class="sidebar-item {{ strpos($strpos, 'backend.employee.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.employee.index') }}">Employee List</a>
                     </li>
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.employee.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.employee.create') }}">Create Employee </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.employee-salary.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.employee-salary.index') }}"> Salary List</a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.employee-leave.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.employee-leave.create') }}">Create Salary
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
             <li class="sidebar-item">
@@ -125,9 +97,7 @@
                     <li class="sidebar-item {{ strpos($strpos, 'backend.rent.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.rent.index') }}">Rent List</a>
                     </li>
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.rent.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.rent.create') }}">Create Rent </a>
-                    </li>
+                    
                 </ul>
             </li>
             <li class="sidebar-item">
@@ -144,12 +114,7 @@
                             List
                         </a>
                     </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.owner-utility.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.owner-utility.create') }}">Create Owner
-                            Utility
-                        </a>
-                    </li>
+                   
                 </ul>
             </li>
 
