@@ -21,7 +21,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="card-title text-center"><u>Visitor Report</u> </div>
+                    <div class="card-title text-center"><u>Salary Report</u> </div>
                     <div class="card-body">
                         <div class="card-body">
                             <table id="datatables-reponsive" class="table" style="width:100%">
