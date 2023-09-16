@@ -30,21 +30,21 @@ class MailConfigProvider extends ServiceProvider
 
         // });
         // active()->
-        // $emailConfiguration = EmailConfiguration::latest()->first();
+        $emailConfiguration = EmailConfiguration::latest()->first();
 
-        // if ($emailConfiguration) {
-        //     $config = array(
-        //         'driver'     => $emailConfiguration->driver,
-        //         'host'       => $emailConfiguration->host,
-        //         'port'       => $emailConfiguration->port,
-        //         'username'   => $emailConfiguration->username,
-        //         'password'   => $emailConfiguration->password,
-        //         'encryption' => $emailConfiguration->encryption,
-        //         'from'       => array('address' => $emailConfiguration->sender_email, 'name' => $emailConfiguration->sender_name),
-        //         'sendmail'   => '/usr/sbin/sendmail -bs',
-        //         'pretend'    => false,
-        //     );
-        //     Config::set('mail', $config);
-        // }
+        if ($emailConfiguration) {
+            $config = array(
+                'driver'     => $emailConfiguration->driver,
+                'host'       => $emailConfiguration->host,
+                'port'       => $emailConfiguration->port,
+                'username'   => $emailConfiguration->username,
+                'password'   => $emailConfiguration->password,
+                'encryption' => $emailConfiguration->encryption,
+                'from'       => array('address' => $emailConfiguration->sender_email, 'name' => $emailConfiguration->sender_name),
+                'sendmail'   => '/usr/sbin/sendmail -bs',
+                'pretend'    => false,
+            );
+            Config::set('mail', $config);
+        }
     }
 }

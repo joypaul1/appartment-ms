@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Year;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class YearController extends Controller
 {
@@ -14,7 +16,10 @@ class YearController extends Controller
      */
     public function index()
     {
-        //
+        $data = Year::
+            orderBy('id', 'DESC')
+            ->get();
+        return view('backend.year.index', compact('data'));
     }
 
     /**
@@ -24,7 +29,7 @@ class YearController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.year.create');
     }
 
     /**
@@ -35,7 +40,23 @@ class YearController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        try {
+            DB::beginTransaction();
+            $data = $validatedData;
+            $data['id'] =Year::first()?Year:: orderBy('id', 'DESC')->first()->id +1: 1 ;
+            $data['created_at'] = now();
+            $data['updated_at'] = now();
+            Year::insert($data);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            dd($ex->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.site-config.year.index')->with('success', 'Data Created Successfully');
     }
 
     /**
@@ -55,9 +76,9 @@ class YearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Year $year)
     {
-        //
+        return view('backend.year.edit', compact('year'));
     }
 
     /**
@@ -67,9 +88,22 @@ class YearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Year $year)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        try {
+            DB::beginTransaction();
+            $data = $validatedData;
+            $data['branch_id'] = auth('admin')->user()->branch_id;
+            $year->update($data);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.site-config.year.index')->with('success', 'Data Updated Successfully');
     }
 
     /**
@@ -78,8 +112,17 @@ class YearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Year $year)
     {
-        //
+
+        try {
+            DB::beginTransaction();
+            $year->delete();
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
+        }
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }

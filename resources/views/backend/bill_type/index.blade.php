@@ -4,13 +4,13 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Owner List
+<i class="fa fa-list"></i> Bill Type List
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => 'Create Owner',
-'route' =>route('backend.owner.create'),
+'name' => 'Create Bill Type',
+'route' =>route('backend.site-config.bill-type.create'),
 ])
 @endsection
 
@@ -24,16 +24,11 @@
                         <tr>
                             <th>Sl.</th>
                             <th>Name</th>
-                            <th>Image</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>Address</th>
-                            <th>Unit List</th>
                             <th>Action </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($data as $key=>$row)
+                        @foreach ($data as $key=>$row)
                         <tr>
                             <td>
                                 {{ $key+1 }}
@@ -41,35 +36,17 @@
                             <td>
                                 {{ $row->name }}
                             </td>
-                            <td>
-                                <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
-                            </td>
-                            <td>
-                                {{ $row->email }}
-                            </td>
-                            <td>
-                                {{ $row->mobile }}
-                            </td>
-                            <td>
-                                {{ $row->pre_address }}
-                            </td>
-                            <td>
-                                @foreach (optional($row->units)->pluck('name') as $unitName)
-                                {{ $unitName }}
-                                @endforeach
-
-                            </td>
 
 
                             <td class="table-action">
-                                <a href="{{ route('backend.owner.edit', $row) }}">
+                                <a href="{{ route('backend.site-config.bill-type.edit', $row) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-edit-2 align-middle">
                                         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
                                 </a>
-                                <a data-href="{{ route('backend.owner.destroy', $row) }}" href="#" class="delete_check">
+                                <a data-href="{{ route('backend.site-config.bill-type.destroy', $row) }}" href="#" class="delete_check" >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-trash align-middle">
@@ -79,7 +56,7 @@
                                 </a>
                             </td>
                         </tr>
-                        @endforeach --}}
+                        @endforeach
 
 
                     </tbody>
