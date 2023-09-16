@@ -320,11 +320,11 @@
                 </ul>
             </li> --}}
              <li class="sidebar-item">
-                <a data-bs-target="#visitor" data-bs-toggle="collapse" class="sidebar-link ">
+                <a data-bs-target="#report" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Report </span>
                 </a>
-                <ul id="visitor"
+                <ul id="report"
                     class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'report' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li
@@ -343,11 +343,11 @@
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a data-bs-target="#visitor" data-bs-toggle="collapse" class="sidebar-link ">
+                <a data-bs-target="#settings" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Setting </span>
                 </a>
-                <ul id="visitor"
+                <ul id="settings"
                     class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'site-config' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li
