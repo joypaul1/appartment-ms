@@ -1,5 +1,5 @@
 @php
-    $strpos = Route::currentRouteName();
+$strpos = Route::currentRouteName();
 @endphp
 
 
@@ -16,8 +16,7 @@
         <div class="sidebar-user">
             <div class="d-flex justify-content-center">
                 <div class="flex-shrink-0">
-                    <img src="{{ asset('assets/backend') }}/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1"
-                        alt="{{ auth('admin')->user()->name }}" />
+                    <img src="{{ asset('assets/backend') }}/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="{{ auth('admin')->user()->name }}" />
                 </div>
                 <div class="flex-grow-1 ps-2">
                     <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
@@ -41,14 +40,11 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a data-bs-target="#floor" data-bs-toggle="collapse"
-                    class="sidebar-link {{ strpos($strpos, 'backend.floor') === 0 ? 'active' : ' ' }}">
+                <a data-bs-target="#floor" data-bs-toggle="collapse" class="sidebar-link {{ strpos($strpos, 'backend.floor') === 0 ? 'active' : ' ' }}">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Floor</span>
                 </a>
-                <ul id="floor"
-                    class="sidebar-dropdown list-unstyled collapse {{ strpos($strpos, 'backend.floor') === 0 ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
+                <ul id="floor" class="sidebar-dropdown list-unstyled collapse {{ strpos($strpos, 'backend.floor') === 0 ? 'show' : ' ' }} " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.floor.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.floor.index') }}">Floor List</a>
                     </li>
@@ -58,14 +54,11 @@
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a data-bs-target="#Unit" data-bs-toggle="collapse"
-                    class="sidebar-link {{ request()->segment(2) == 'unit' ? 'active' : ' ' }}">
+                <a data-bs-target="#Unit" data-bs-toggle="collapse" class="sidebar-link {{ request()->segment(2) == 'unit' ? 'active' : ' ' }}">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Unit</span>
                 </a>
-                <ul id="Unit"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'unit' ? 'show' : ' ' }}  "
-                    data-bs-parent="#sidebar">
+                <ul id="Unit" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'unit' ? 'show' : ' ' }}  " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.unit.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.unit.index') }}">Unit List</a>
                     </li>
@@ -79,9 +72,7 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Owner</span>
                 </a>
-                <ul id="owner"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'owner' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
+                <ul id="owner" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'owner' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.owner.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.owner.index') }}">Owner List</a>
                     </li>
@@ -95,9 +86,7 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Tenant</span>
                 </a>
-                <ul id="tenant"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'tenant' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
+                <ul id="tenant" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'tenant' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.tenant.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.tenant.index') }}">Tenant List</a>
                     </li>
@@ -111,22 +100,18 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Employee</span>
                 </a>
-                <ul id="employee"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'employee' ? 'show' : ' ' }}
-                    {{ request()->segment(2) == 'employee-salary' ? 'show' : ' ' }}  "
-                    data-bs-parent="#sidebar">
+                <ul id="employee" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'employee' ? 'show' : ' ' }}
+                    {{ request()->segment(2) == 'employee-salary' ? 'show' : ' ' }}  " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.employee.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.employee.index') }}">Employee List</a>
                     </li>
                     <li class="sidebar-item {{ strpos($strpos, 'backend.employee.create') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.employee.create') }}">Create Employee </a>
                     </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.employee-salary.index') === 0 ? 'active' : ' ' }}">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.employee-salary.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.employee-salary.index') }}"> Salary List</a>
                     </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.employee-leave.create') === 0 ? 'active' : ' ' }}">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.employee-leave.create') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.employee-leave.create') }}">Create Salary
                         </a>
                     </li>
@@ -137,9 +122,7 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Rent</span>
                 </a>
-                <ul id="Rent"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'rent' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
+                <ul id="Rent" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'rent' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.rent.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.rent.index') }}">Rent List</a>
                     </li>
@@ -153,17 +136,13 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Owner Utility</span>
                 </a>
-                <ul id="owner-utility"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'owner-utility' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.owner-utility.index') === 0 ? 'active' : ' ' }}">
+                <ul id="owner-utility" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'owner-utility' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.owner-utility.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.owner-utility.index') }}">Owner Utility
                             List
                         </a>
                     </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.owner-utility.create') === 0 ? 'active' : ' ' }}">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.owner-utility.create') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.owner-utility.create') }}">Create Owner
                             Utility
                         </a>
@@ -176,17 +155,13 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Maintenance Cost</span>
                 </a>
-                <ul id="maintenance-cost"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'maintenance-cost' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.maintenance-cost.index') === 0 ? 'active' : ' ' }}">
+                <ul id="maintenance-cost" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'maintenance-cost' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.maintenance-cost.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.maintenance-cost.index') }}">Maintenance Cost
                             List
                         </a>
                     </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.maintenance-cost.create') === 0 ? 'active' : ' ' }}">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.maintenance-cost.create') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.maintenance-cost.create') }}">
                             Create Maintenance Cost
                         </a>
@@ -198,17 +173,13 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Management Committee</span>
                 </a>
-                <ul id="management-committee"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'maintenance-cost' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.management-committee.index') === 0 ? 'active' : ' ' }}">
+                <ul id="management-committee" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'maintenance-cost' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.management-committee.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.management-committee.index') }}">Management
                             Committee List
                         </a>
                     </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.management-committee.create') === 0 ? 'active' : ' ' }}">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.management-committee.create') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.management-committee.create') }}">Create
                             Management Committee
                         </a>
@@ -220,9 +191,7 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Fund Management</span>
                 </a>
-                <ul id="fund"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'fund' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
+                <ul id="fund" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'fund' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.fund.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.fund.index') }}">
                             Fund List
@@ -240,17 +209,13 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Bill Collection</span>
                 </a>
-                <ul id="Bill"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'bill-deposit' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.bill-deposit.index') === 0 ? 'active' : ' ' }}">
+                <ul id="Bill" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'bill-deposit' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.bill-deposit.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.bill-deposit.index') }}">
                             Bill List
                         </a>
                     </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.bill-deposit.create') === 0 ? 'active' : ' ' }}">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.bill-deposit.create') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.bill-deposit.create') }}">
                             Create Bill
                         </a>
@@ -262,9 +227,7 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Complain</span>
                 </a>
-                <ul id="complain"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'complain' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
+                <ul id="complain" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'complain' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.complain.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.complain.index') }}">
                             Complain List
@@ -282,9 +245,7 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Visitor</span>
                 </a>
-                <ul id="visitor"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'visitor' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
+                <ul id="visitor" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'visitor' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.visitor.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.visitor.index') }}">
                             Visitor List
@@ -304,102 +265,86 @@
                 </a>
                 <ul id="visitor"
                     class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'notice-board' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.index') }}">
-                            Notice Board
-                        </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.create') }}">
-                            Create Notice Board
-                        </a>
-                    </li>
-                </ul>
-            </li> --}}
-             <li class="sidebar-item">
-                <a data-bs-target="#report" data-bs-toggle="collapse" class="sidebar-link ">
-                    <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle"> Report </span>
+            data-bs-parent="#sidebar">
+            <li class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
+                <a class="sidebar-link" href="{{ route('backend.notice-board.index') }}">
+                    Notice Board
                 </a>
-                <ul id="report"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'report' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.report.rental-report') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.report.rental-report') }}">
-                          Rental Report
-                        </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.report.tenant-report') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.report.tenant-report') }}">
-                          Rental Report
-                        </a>
-                    </li>
+            </li>
+            <li class="sidebar-item {{ strpos($strpos, 'backend.notice-board.create') === 0 ? 'active' : ' ' }}">
+                <a class="sidebar-link" href="{{ route('backend.notice-board.create') }}">
+                    Create Notice Board
+                </a>
+            </li>
+        </ul>
+        </li> --}}
+        <li class="sidebar-item">
+            <a data-bs-target="#report" data-bs-toggle="collapse" class="sidebar-link ">
+                <i class="align-middle" data-feather="sliders"></i>
+                <span class="align-middle"> Report </span>
+            </a>
+            <ul id="report" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'report' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
+                <li class="sidebar-item {{ strpos($strpos, 'backend.report.rental-report') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.report.rental-report') }}">
+                        Rental Report
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.report.tenant-report') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.report.tenant-report') }}">
+                        Tenant Report
+                    </a>
+                </li>
 
-                </ul>
-            </li>
-            <li class="sidebar-item">
-                <a data-bs-target="#settings" data-bs-toggle="collapse" class="sidebar-link ">
-                    <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle"> Setting </span>
-                </a>
-                <ul id="settings"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'site-config' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.admin.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.admin.index') }}">
-                            Admin Config
-                        </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.building.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.building.index') }}">
-                            Buildling Config
-                        </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.bill-type.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.bill-type.index') }}">
-                            Bill Type Config
-                        </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.member-type.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.member-type.index') }}">
-                            Member Type Config
-                        </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.month.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.month.index') }}">
-                            Month Config
-                        </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.year.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.year.index') }}">
-                            Year Config
-                        </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.system.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.system.index') }}">
-                            System Config
-                        </a>
-                    </li>
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.site-config.email.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.email.index') }}">
-                            Email Config
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            </ul>
+        </li>
+        <li class="sidebar-item">
+            <a data-bs-target="#settings" data-bs-toggle="collapse" class="sidebar-link ">
+                <i class="align-middle" data-feather="sliders"></i>
+                <span class="align-middle"> Setting </span>
+            </a>
+            <ul id="settings" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'site-config' ? 'show' : ' ' }} " data-bs-parent="#sidebar">
+                <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.admin.index') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.site-config.admin.index') }}">
+                        Admin Config
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.building.index') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.site-config.building.index') }}">
+                        Buildling Config
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.bill-type.index') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.site-config.bill-type.index') }}">
+                        Bill Type Config
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.member-type.index') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.site-config.member-type.index') }}">
+                        Member Type Config
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.month.index') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.site-config.month.index') }}">
+                        Month Config
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.year.index') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.site-config.year.index') }}">
+                        Year Config
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.system.index') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.site-config.system.index') }}">
+                        System Config
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.email.index') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.site-config.email.index') }}">
+                        Email Config
+                    </a>
+                </li>
+            </ul>
+        </li>
 
 
 
