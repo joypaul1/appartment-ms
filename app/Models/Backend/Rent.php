@@ -13,5 +13,10 @@ class Rent extends Model
     use GlobalScope, AutoTimeStamp;
 
     protected $guarded =['id'];
+    
+    public function ownerUnit()
+    {
+        return $this->belongsTo(OwnerUnit::class, 'unit_id');
+    }
 
 }

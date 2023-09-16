@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Helpers\Image;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Floor;
+use App\Models\Backend\Owner;
+use App\Models\Backend\OwnerUnit;
 use App\Models\Backend\Tenant;
 use App\Models\Backend\Unit;
 use App\Models\Backend\Year;
@@ -21,6 +23,20 @@ class TenantController extends Controller
      */
     public function index(Request $request)
     {
+
+
+
+
+        if (auth('admin')->user()->role_type == 'owner') {
+            $data = Tenant::select('*', 'fl.name as floor_name', 'uc.name as unit_name')
+                ->join('owner_unit as our', 'rent_configurations.unit_id', '=', 'our.unit_id')
+                ->join('floors as fl', 'fl.id', '=', 'rent_configurations.floor_id')
+                ->join('unit_configurations as uc', 'uc.id', '=', 'rent_configurations.unit_id')
+                ->where('our.owner_id', 13)
+                ->get();
+            return view('backend.tenant.owner', compact('data'));
+        }
+
         if ($request->getRent) {
             $rent = Tenant::where('floor_id', $request->floor_id)
                 ->where('unit_id', $request->unit_id)->
