@@ -6,6 +6,7 @@ use App\Helpers\Image;
 use App\Helpers\InvoiceNumber;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Floor;
+use App\Models\Backend\Owner;
 use App\Models\Backend\OwnerUtility;
 use App\Models\Backend\Year;
 use DateTime;
@@ -20,6 +21,14 @@ class OwnerUtilityController extends Controller
      */
     public function index()
     {
+        if (auth('admin')->user()->role_type == 'owner') {
+            $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+
+            $ownerUtilitys = OwnerUtility::where('owner_id', $owner->id)->with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+                ->orderBy('id', 'desc')->get();
+            return view('backend.ownerUtility.owner', compact('ownerUtilitys'));
+        }
+
         $ownerUtilitys = OwnerUtility::with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
             ->orderBy('id', 'desc')->get();
         return view('backend.ownerUtility.index', compact('ownerUtilitys'));

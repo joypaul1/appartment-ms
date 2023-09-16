@@ -21,6 +21,11 @@ class MaintenanceCostController extends Controller
      */
     public function index()
     {
+        if (auth('admin')->user()->role_type == 'owner') {
+            $maintenanceCosts = MaintenanceCost::where('branch_id', auth('admin')->user()->branch_id)->with('month:id,name', 'year:id,name', 'branch:id,name')
+                ->orderBy('id', 'desc')->get();
+            return view('backend.maintenanceCost.owner', compact('maintenanceCosts'));
+        }
         $maintenanceCosts = MaintenanceCost::with('month:id,name', 'year:id,name', 'branch:id,name')
             ->orderBy('id', 'desc')->get();
         return view('backend.maintenanceCost.index', compact('maintenanceCosts'));

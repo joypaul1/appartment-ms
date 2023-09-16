@@ -4,13 +4,13 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> Maintenance Cost List
+    <i class="fa fa-list"></i>  Owner Utility List
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
-        'fa' => 'fa fa-plus-circle',
-        'name' => 'Create Owner Utility',
-        'route' => route('backend.maintenance-cost.create'),
+        // 'fa' => 'fa fa-plus-circle',
+        // 'name' => 'Create Owner Utility',
+        // 'route' => route('backend.owner-utility.create'),
     ])
 @endsection
 
@@ -23,51 +23,53 @@
                 <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Invoice No.</th>
+                            <th>Renter Name</th>
+                            <th>Floor </th>
                             <th>
-                                Title
+                                Unit
                             </th>
                             <th>
-                                Date
-                            </th>
-                            <th>
-                                Month
+                               Month
                             </th>
                             <th>
                                 Year
                             </th>
                             <th>
-                                Amount
+                                Total Utility
                             </th>
-                            <th>
+                            {{-- <th>
                                 Action
-                            </th>
+                            </th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($maintenanceCosts as $key => $row)
+                        @foreach ($ownerUtilitys as $key => $row)
                             <tr>
                                 <td>
-                                    {{ $key+1 }}
+                                    {{ $row->invoice_number }}
                                 </td>
                                 <td>
-                                    {{ $row->title }}
+                                   {{ optional($row->owner)->name }}
                                 </td>
                                 <td>
-                                    {{ date('d-m-y', strtotime($row->date)) }}
+                                   {{ optional($row->floor)->name }}
                                 </td>
                                 <td>
-                                    {{ optional($row->month)->name }}
+                                   {{ optional($row->unit)->name }}
                                 </td>
                                 <td>
-                                    {{ optional($row->year)->name }}
+                                   {{ optional($row->month)->name }}
                                 </td>
                                 <td>
-                                    {{ $row->amount }}
+                                   {{ optional($row->year)->name }}
+                                </td>
+                                <td>
+                                   {{ $row->total_utility }}
                                 </td>
 
 
-                                <td class="table-action">
+                                {{-- <td class="table-action">
                                     <a href="#">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -87,7 +89,7 @@
                                             </path>
                                         </svg>
                                     </a>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
 
@@ -101,12 +103,14 @@
 @endsection
 
 @push('js')
+
 <script>
     $(document).ready(function() {
         $("#toggleFilter").click(function() {
             $("#filterContainer").slideToggle();
         });
     });
+
 </script>
 
 <script>
@@ -119,5 +123,6 @@
             responsive: true
         });
     });
+
 </script>
 @endpush
