@@ -25,7 +25,7 @@ $strpos = Route::currentRouteName();
                     <div class="dropdown-menu dropdown-menu-start">
                         <a class="dropdown-item" href="#"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
-                        
+
                     </div>
 
 
@@ -292,6 +292,31 @@ $strpos = Route::currentRouteName();
                 <li class="sidebar-item {{ strpos($strpos, 'backend.report.tenant-report') === 0 ? 'active' : ' ' }}">
                     <a class="sidebar-link" href="{{ route('backend.report.tenant-report') }}">
                         Tenant Report
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.report.visitor-report') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.report.visitor-report') }}">
+                        Visitor Report
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.report.complain-report') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.report.complain-report') }}">
+                        Complain Report
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.report.unit-report') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.report.unit-report') }}">
+                        Unit Status Report
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.report.bill-report') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.report.bill-report') }}">
+                        Bill Report
+                    </a>
+                </li>
+                <li class="sidebar-item {{ strpos($strpos, 'backend.report.salary-report') === 0 ? 'active' : ' ' }}">
+                    <a class="sidebar-link" href="{{ route('backend.report.salary-report') }}">
+                        Salary Report
                     </a>
                 </li>
 

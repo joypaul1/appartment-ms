@@ -13,26 +13,30 @@ class ReportController extends Controller
     }
     function tenantReport()
     {
-        return view('backend.report.create');
+        return view('backend.report.tenantReport');
     }
     function billReport()
     {
-        return view('backend.report.create');
+        return view('backend.report.billReport');
     }
     function visitorReport()
     {
-        return view('backend.report.create');
+        return view('backend.report.visitorReport');
     }
     function complainReport()
     {
-        return view('backend.report.create');
+        return view('backend.report.complainReport');
     }
     function unitReport()
     {
-        return view('backend.report.create');
+        return view('backend.report.unitStatusReport');
     }
     function fundReport()
     {
         return view('backend.report.create');
+    }
+    function salaryReport()
+    {
+        return view('backend.report.salaryReport');
     }
 }
