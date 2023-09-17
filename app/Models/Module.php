@@ -9,7 +9,7 @@ use App\Traits\AutoTimeStamp;
 
 class Module extends Model
 {
-    use HasFactory;
+
     use AutoTimeStamp;
 
     protected $fillable = ['name', 'slug', 'created_by', 'updated_by'];

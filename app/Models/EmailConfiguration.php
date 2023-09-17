@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmailConfiguration extends Model
 {
-    // use HasFactory;
+    //
     use AutoTimeStamp, GlobalScope;
 
     protected $fillable = [

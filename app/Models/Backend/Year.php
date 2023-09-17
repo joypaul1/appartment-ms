@@ -15,5 +15,5 @@ class Year extends Model
     use GlobalScope, AutoTimeStamp, SoftDeletes;
 
     protected $guarded = ['id'];
-    use HasFactory;
+
 }

@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoleAssign extends Model
 {
-    use HasFactory;
+
 
 }
