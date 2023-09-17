@@ -34,7 +34,8 @@ class EmployeeController extends Controller
         }
 
 
-        $data = Employee::with('memberType:id,name')->where('branch_id', auth('admin')->user()->branch_id)->get();
+        $data = Employee::with('memberType:id,name')->where('branch_id', session('branch_id'))
+        ->get();
         return view('backend.employee.index', compact('data'));
     }
 

@@ -38,12 +38,12 @@ class TenantController extends Controller
 
         if ($request->getRent) {
             $rent = Tenant::where('floor_id', $request->floor_id)
-                ->where('unit_id', $request->unit_id)->
-                // ->where('branch_id', auth('admin')->user()->branch_id)
-                where('status', 1)->first();
+                ->where('unit_id', $request->unit_id)
+                ->where('branch_id', session('branch_id'))
+                ->where('status', 1)->first();
             return response()->json(['data' => $rent]);
         }
-        $data = Tenant::where('branch_id', auth('admin')->user()->branch_id)->with('unit:id,name', 'floor:id,name')->get();
+        $data = Tenant::where('branch_id', session('branch_id'))->with('unit:id,name', 'floor:id,name')->get();
         return view('backend.tenant.index', compact('data'));
     }
 
@@ -181,7 +181,7 @@ class TenantController extends Controller
             }
             $tenant->update($validatedData);
         } catch (\Exception $ex) {
-            return redirect()->back()->with('error',  $ex->getMessage());
+            // return redirect()->back()->with('error',  $ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 

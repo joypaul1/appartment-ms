@@ -17,8 +17,8 @@ class BillTypeController extends Controller
     public function index()
     {
         $data = BillType::
-            // ->where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
-            orderBy('id', 'DESC')
+            where('branch_id', session('branch_id'))
+            ->orderBy('id', 'DESC')
             ->get();
         return view('backend.bill_type.index', compact('data'));
     }

@@ -22,7 +22,8 @@ class EmployeeSalaryController extends Controller
      */
     public function index()
     {
-        $data = EmployeeSalary::where('branch_id', auth('admin')->user()->branch_id)->with('employee:id,name', 'year:id,name', 'month:id,name')->get();
+        $data = EmployeeSalary::where('branch_id', session('branch_id'))
+        ->with('employee:id,name', 'year:id,name', 'month:id,name')->get();
         return view('backend.employee_salary.index', compact('data'));
     }
 

@@ -23,15 +23,16 @@ class FundController extends Controller
         if (auth('admin')->user()->role_type == 'owner') {
             $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
 
-            $funds = Fund::where('branch_id', auth('admin')->user()->branch_id)->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
-            ->orderBy('id', 'desc')->get();
-             $maintenanceCosts = MaintenanceCost::where('branch_id',$owner->branch_id)->with('month:id,name', 'year:id,name', 'branch:id,name')
-            ->orderBy('id', 'desc')->get();
+            $funds = Fund::where('branch_id', session('branch_id'))
+                ->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+                ->orderBy('id', 'desc')->get();
+            $maintenanceCosts = MaintenanceCost::where('branch_id', $owner->branch_id)->with('month:id,name', 'year:id,name', 'branch:id,name')
+                ->orderBy('id', 'desc')->get();
             return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
         }
-        $funds = Fund::where('branch_id', auth('admin')->user()->branch_id)
-        ->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
-        ->orderBy('id', 'desc')->get();
+        $funds = Fund::where('branch_id', session('branch_id'))
+            ->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+            ->orderBy('id', 'desc')->get();
 
         return view('backend.fund.index', compact('funds'));
     }

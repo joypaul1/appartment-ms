@@ -22,7 +22,8 @@ class ReportController extends Controller
     function rentReport(Request $request)
     {
         if ($request->floor_id && $request->unit_id && $request->month && $request->year) {
-            $rentCollections = RentCollection::where('branch_id', 7)->where('floor_id', $request->floor_id)
+            $rentCollections = RentCollection::where('branch_id', session('branch_id'))
+                ->where('floor_id', $request->floor_id)
                 ->where('unit_id', $request->unit_id)
                 ->where('month_id', $request->month)
                 ->where('year_id', $request->year)
@@ -33,7 +34,7 @@ class ReportController extends Controller
                 ->with('year:id,name')
 
                 ->get();
-            $branch = BuildingInformation::whereId(7)->first();
+            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
             return view('backend.report.rentReportPdf', compact('rentCollections', 'branch'));
         }
         $months  = MonthConfiguration::all();
@@ -44,9 +45,9 @@ class ReportController extends Controller
     function tenantReport(Request $request)
     {
         if ($request->tenant_status) {
-            $data = Tenant::where('branch_id', auth('admin')->user()->branch_id)
+            $data = Tenant::where('branch_id', session('branch_id'))
                 ->with('unit:id,name', 'floor:id,name')->get();
-            $branch = BuildingInformation::whereId(7)->first();
+            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
 
             return view('backend.report.tenantReportPdf', compact('data', 'branch'));
         }
@@ -63,11 +64,11 @@ class ReportController extends Controller
         if ($request->start_date && $request->end_date) {
             $startDate = date('Y-m-d', strtotime($request->start_date));
             $endDate = date('Y-m-d', strtotime($request->end_date));
-            $visitors = Visitor::where('branch_id', auth('admin')->user()->branch_id)
+            $visitors = Visitor::where('branch_id', session('branch_id'))
                 ->with('floor:id,name', 'unit:id,name')
                 ->whereBetween('date', [$startDate, $endDate])
                 ->get();
-            $branch = BuildingInformation::whereId(7)->first();
+            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
 
             return view('backend.report.visitorReportPdf', compact('visitors', 'branch'));
         }
@@ -78,11 +79,11 @@ class ReportController extends Controller
         if ($request->start_date && $request->end_date) {
             $startDate = date('Y-m-d', strtotime($request->start_date));
             $endDate = date('Y-m-d', strtotime($request->end_date));
-            $complains = Complain::where('branch_id', auth('admin')->user()->branch_id)
+            $complains = Complain::where('branch_id', session('branch_id'))
 
                 ->whereBetween('date', [$startDate, $endDate])
                 ->get();
-            $branch = BuildingInformation::whereId(7)->first();
+            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
             return view('backend.report.visitorReportPdf', compact('complains', 'branch'));
         }
         return view('backend.report.complainReport');
@@ -94,10 +95,10 @@ class ReportController extends Controller
             $data = Unit::with('branch:id,name')
                 ->with('floor:id,name')
                 ->where('status', $status)
-                // ->where('branch_id', auth('admin')->user()->branch_id)
+                ->where('branch_id', session('branch_id'))
                 ->orderBy('id', 'DESC')
                 ->get();
-            $branch = BuildingInformation::whereId(7)->first();
+            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
             return view('backend.report.unitStatusReportPdf', compact('data', 'branch'));
         }
 
@@ -108,15 +109,15 @@ class ReportController extends Controller
         if ($request->start_date && $request->end_date) {
             $startDate = date('Y-m-d', strtotime($request->start_date));
             $endDate = date('Y-m-d', strtotime($request->end_date));
-            $funds = Fund::where('branch_id', auth('admin')->user()->branch_id)
+            $funds = Fund::where('branch_id', session('branch_id'))
                 ->whereBetween('date', [$startDate, $endDate])
                 ->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
-            $maintenanceCosts = MaintenanceCost::where('branch_id', auth('admin')->user()->branch_id)
+            $maintenanceCosts = MaintenanceCost::where('branch_id', session('branch_id'))
                 ->whereBetween('date', [$startDate, $endDate])
                 ->with('month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
-            $branch = BuildingInformation::whereId(7)->first();
+            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
 
             return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
         }
@@ -128,11 +129,11 @@ class ReportController extends Controller
         if ($request->start_date && $request->end_date) {
             $startDate = date('Y-m-d', strtotime($request->start_date));
             $endDate = date('Y-m-d', strtotime($request->end_date));
-            $data = EmployeeSalary::where('branch_id', auth('admin')->user()->branch_id)
+            $data = EmployeeSalary::where('branch_id', session('branch_id'))
                 ->whereBetween('issue_date', [$startDate, $endDate])
                 ->with('employee:id,name', 'year:id,name', 'month:id,name')
                 ->get();
-            $branch = BuildingInformation::whereId(7)->first();
+            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
 
             return view('backend.report.salaryReportPdf', compact('data', 'branch'));
         }

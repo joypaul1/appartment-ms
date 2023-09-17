@@ -18,7 +18,8 @@ class ManagementCommitteeController extends Controller
      */
     public function index()
     {
-        $data = ManagementCommittee::where('branch_id', auth('admin')->user()->branch_id)->get();
+        $data = ManagementCommittee::where('branch_id', session('branch_id'))
+            ->get();
         return view('backend.managementCommittee.index', compact('data'));
     }
 

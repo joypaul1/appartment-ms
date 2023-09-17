@@ -20,13 +20,13 @@ class UnitController extends Controller
     {
         if ($request->getFreeUnits) {
             $units = Unit::where('floor_id', $request->Floorid)
-                ->where('branch_id', auth('admin')->user()->branch_id)
+                ->where('branch_id', session('branch_id'))
                 ->where('status', 0)->orderBy('id', 'asc')->get();
             return response()->json(['data' => $units]);
         }
         if ($request->getUnit) {
             $units = Unit::where('floor_id', $request->floor_id)
-                ->where('branch_id', auth('admin')->user()->branch_id)
+                ->where('branch_id', session('branch_id'))
                 ->orderBy('id', 'asc')->get();
             return response()->json(['data' => $units]);
         }
@@ -40,7 +40,7 @@ class UnitController extends Controller
         }
         $data = Unit::with('branch:id,name')->with('floor:id,name')
             ->with('owners')
-            // ->where('branch_id', auth('admin')->user()->branch_id)
+            ->where('branch_id', session('branch_id'))
             ->orderBy('id', 'DESC')
             ->get();
         return view('backend.unit.index', compact('data'));
@@ -53,7 +53,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        $floors = Floor::get(['id', 'name']);
+        $floors = Floor::where('branch_id', session('branch_id'))->get(['id', 'name']);
         return view('backend.unit.create', compact('floors'));
     }
 

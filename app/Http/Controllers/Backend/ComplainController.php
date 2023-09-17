@@ -19,8 +19,9 @@ class ComplainController extends Controller
     {
         $complains = Complain::get();
         if (auth('admin')->user()->role_type == 'owner') {
-            $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
-            $complains = Complain::where('branch_id', $owner->branch_id)->get();
+
+            $complains = Complain::            where('branch_id', session('branch_id'))
+            ->get();
             return view('backend.complain.owner', compact('complains'));
         }
         return view('backend.complain.index', compact('complains'));
