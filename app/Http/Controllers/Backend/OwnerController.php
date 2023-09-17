@@ -159,7 +159,7 @@ class OwnerController extends Controller
         $data['email']      = ($request->email);
         $data['mobile']     = ($request->mobile);
         $data['branch_id']  =  $validatedData['branch_id'];
-        $data['role_type']  =  'employee';
+        $data['role_type']  =  'owner';
         if ($request->password) {
             $data['password'] = Hash::make($request->password);
         }
