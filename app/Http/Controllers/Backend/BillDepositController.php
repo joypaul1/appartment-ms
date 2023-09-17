@@ -72,7 +72,7 @@ class BillDepositController extends Controller
         ]);
         // dd($validatedData);
         try {
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             BillDeposit::create($validatedData);
         } catch (\Exception $ex) {
@@ -124,7 +124,7 @@ class BillDepositController extends Controller
         ]);
         try {
 
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
 
             $billDeposit->update($validatedData);

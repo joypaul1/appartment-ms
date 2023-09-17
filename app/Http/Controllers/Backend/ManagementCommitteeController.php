@@ -59,7 +59,7 @@ class ManagementCommitteeController extends Controller
         ]);
         try {
             $validatedData['password'] = Hash::make($request->password);
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['joining_date'] = date('Y-m-d', strtotime($request->joining_date));
             if ($request->resign_date) {
                 $validatedData['resign_date'] = date('Y-m-d', strtotime($request->resign_date));
@@ -129,7 +129,7 @@ class ManagementCommitteeController extends Controller
             if ($request->password) {
                 $validatedData['password'] = Hash::make($request->password);
             }
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['joining_date'] = date('Y-m-d', strtotime($request->joining_date));
             if ($request->resign_date) {
                 $validatedData['resign_date'] = date('Y-m-d', strtotime($request->resign_date));

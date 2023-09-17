@@ -100,7 +100,7 @@ class RentController extends Controller
             $validatedData['invoice_number'] = (new InvoiceNumber)->invoice_num($this->getInvoiceNumber());
             $validatedData['tenant_id'] = $request->rent_id;
             $validatedData['rent_type'] = 'Rented';
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('rent')->file($request->image)->resizeImage(100, 100)->save();
@@ -166,7 +166,7 @@ class RentController extends Controller
         try {
             $validatedData['tenant_id'] = $request->rent_id;
             $validatedData['rent_type'] = 'Rented';
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('rent')->file($request->image)->resizeImage(100, 100)->save();

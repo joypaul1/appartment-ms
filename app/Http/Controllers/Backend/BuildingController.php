@@ -55,7 +55,7 @@ class BuildingController extends Controller
         ]);
         try {
 
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             if ($request->hasfile('building_image')) {
                 $image =  (new Image)->dirName('building_image')->file($request->building_image)
                     ->resizeImage(100, 100)->save();
@@ -124,7 +124,7 @@ class BuildingController extends Controller
         if (!$buildingInformation) {
             return redirect()->back()->with('error', 'Data not found.');
         }
-        $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+        $validatedData['branch_id'] = session('branch_id');
         if ($request->hasfile('building_image')) {
             $image =  (new Image)->dirName('building_image')->file($request->building_image)
                 ->resizeImage(100, 100)->save();

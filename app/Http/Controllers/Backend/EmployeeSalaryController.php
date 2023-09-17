@@ -64,7 +64,7 @@ class EmployeeSalaryController extends Controller
         ]);
         try {
             $validatedData['amount'] = $request->salary;
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
 
             EmployeeSalary::create($validatedData);
@@ -125,7 +125,7 @@ class EmployeeSalaryController extends Controller
         ]);
         try {
             $validatedData['amount'] = $request->salary;
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
 
             $employeeSalary->update($validatedData);

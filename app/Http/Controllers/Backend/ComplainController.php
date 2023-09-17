@@ -51,7 +51,7 @@ class ComplainController extends Controller
             'description' => 'required|string',
         ]);
         try {
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             Complain::create($validatedData);
         } catch (\Exception $ex) {
@@ -98,7 +98,7 @@ class ComplainController extends Controller
             'description' => 'required|string',
         ]);
         try {
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             $complain->update($validatedData);
         } catch (\Exception $ex) {

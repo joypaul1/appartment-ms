@@ -67,7 +67,7 @@ class OwnerController extends Controller
         ]);
         try {
             $validatedData['password'] = Hash::make($request->password);
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
@@ -149,7 +149,7 @@ class OwnerController extends Controller
         if (!$owner) {
             return redirect()->back()->with('error', 'Owner not found.');
         }
-        $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+        $validatedData['branch_id'] = session('branch_id');
         // dd($validatedData['branch_id'] );
         if ($request->hasFile('image')) {
             $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();

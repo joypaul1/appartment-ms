@@ -94,7 +94,7 @@ class TenantController extends Controller
         ]);
         try {
             $validatedData['password'] = Hash::make($request->password);
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d');
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('tenant')->file($request->image)->resizeImage(100, 100)->save();
@@ -169,7 +169,7 @@ class TenantController extends Controller
         ]);
         try {
             $validatedData['password'] = Hash::make($request->password);
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d');
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('tenant')->file($request->image)->resizeImage(100, 100)->save();

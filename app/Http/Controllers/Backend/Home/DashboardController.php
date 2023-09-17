@@ -68,8 +68,6 @@ class DashboardController extends Controller
     }
     function language($locale)
     {
-        // dd($locale);
-
         if (!in_array($locale, ['en', 'bn'])) {
             abort(400);
         }
