@@ -55,7 +55,7 @@ class FundController extends Controller
             ];
         }
 
-        $owners = Owner::get();
+        $owners = Owner::where('branch_id', session('branch_id'))->get();
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
         return view('backend.fund.create', compact('months', 'years', 'status', 'owners'));
