@@ -29,7 +29,9 @@ class FundController extends Controller
             ->orderBy('id', 'desc')->get();
             return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
         }
-
+        $funds = Fund::where('branch_id', auth('admin')->user()->branch_id)
+        ->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+        ->orderBy('id', 'desc')->get();
 
         return view('backend.fund.index', compact('funds'));
     }

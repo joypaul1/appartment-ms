@@ -23,20 +23,9 @@
                 <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>
-                                Date
-                            </th>
-                            {{-- <th>
-                                Status
-                            </th> --}}
-                            {{-- <th>
-                                Assign Complain
-                            </th> --}}
-                            {{-- <th>
-                                Action
-                            </th> --}}
+                            th>@lang('table.sl')</th>
+                            <th>@lang('table.title')</th>
+                            <th>@lang('table.date')</th>
                         </tr>
                     </thead>
                     <tbody>

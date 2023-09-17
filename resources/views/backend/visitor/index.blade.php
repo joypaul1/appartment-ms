@@ -22,6 +22,7 @@
                 <table id="datatables-reponsive" class="table" style="width:100%">
                     <thead>
                         <tr>
+                             <th>@lang('table.sl')</th>
                             <th>Sl.</th>
                             <th>Entry Date</th>
                             <th>Name</th>

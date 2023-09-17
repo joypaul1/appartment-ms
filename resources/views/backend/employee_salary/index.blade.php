@@ -22,13 +22,13 @@
                 <table id="datatables-reponsive" class="table" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Sl.</th>
-                            <th>Name</th>
-                            <th>Month</th>
-                            <th>Year</th>
-                            <th>Issue Date</th>
-                            <th>Salary</th>
-                            <th>Action </th>
+                            <th>@lang('table.sl')</th>
+                            <th>@lang('table.name')</th>
+                            <th>@lang('table.month')</th>
+                            <th>@lang('table.year')</th>
+                            <th>@lang('table.issue_date')</th>
+                            <th>@lang('table.salary')</th>
+                            <th>@lang('table.action')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,7 +42,7 @@
                             </td>
                             <td>
                                 {{ optional($row->month)->name }}
-                               
+
                             </td>
                             <td>
                                 {{ optional($row->year)->name }}

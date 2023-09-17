@@ -4,14 +4,14 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> Rent Collection List
+<i class="fa fa-list"></i> Rent Collection List
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        // 'fa' => 'fa fa-plus-circle',
-        // 'name' => 'Create Rent Collection',
-        // 'route' => route('backend.rent.create'),
-    ])
+@include('backend._partials.page_header', [
+// 'fa' => 'fa fa-plus-circle',
+// 'name' => 'Create Rent Collection',
+// 'route' => route('backend.rent.create'),
+])
 @endsection
 
 
@@ -23,80 +23,66 @@
                 <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Invoice No.</th>
-                            <th>Renter Name</th>
-                            <th>Floor </th>
-                            <th>
-                                Unit
-                            </th>
-                            <th>
-                                Month
-                            </th>
-                            <th>
-                                Year
-                            </th>
-                            <th>
-                                Total Rent
-                            </th>
-                            <th>
-                                Bill Createa Date
-                            </th>
-                            {{-- <th>
-                                Action
-                            </th> --}}
+                            <th>@lang('table.invoice_no')</th>
+                            <th>@lang('table.renter_name')</th>
+                            <th>@lang('table.floor')</th>
+                            <th>@lang('table.unit')</th>
+                            <th>@lang('table.month')</th>
+                            <th>@lang('table.year')</th>
+                            <th>@lang('table.total_rent')</th>
+                            <th>@lang('table.bill_status')</th>
+                            <th>@lang('table.bill_created_date')</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($rentCollections as $key => $row)
-                            <tr>
-                                <td>
-                                    {{ $row->invoice_number }}
-                                </td>
-                                <td>
-                                    {{ optional($row->tenant)->name }}
-                                </td>
-                                <td>
-                                    {{ optional($row->floor)->name }}
-                                </td>
-                                <td>
-                                    {{ optional($row->unit)->name }}
-                                </td>
-                                <td>
-                                    {{ optional($row->month)->name }}
-                                </td>
-                                <td>
-                                    {{ optional($row->year)->name }}
-                                </td>
-                                <td>
-                                    {{ $row->total_rent }}
-                                </td>
-                                <td>
-                                    {{ date('d-m-y', strtotime($row->issue_date)) }}
-                                </td>
+                        <tr>
+                            <td>
+                                {{ $row->invoice_number }}
+                            </td>
+                            <td>
+                                {{ optional($row->tenant)->name }}
+                            </td>
+                            <td>
+                                {{ optional($row->floor)->name }}
+                            </td>
+                            <td>
+                                {{ optional($row->unit)->name }}
+                            </td>
+                            <td>
+                                {{ optional($row->month)->name }}
+                            </td>
+                            <td>
+                                {{ optional($row->year)->name }}
+                            </td>
+                            <td>
+                                {{ $row->total_rent }}
+                            </td>
+                            <td>
+                                {{ date('d-m-y', strtotime($row->issue_date)) }}
+                            </td>
 
 
-                                {{-- <td class="table-action">
-                                    <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-edit-2 align-middle">
-                                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                                        </svg>
-                                    </a>
-                                    <a href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-trash align-middle">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path
-                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                            </path>
-                                        </svg>
-                                    </a>
-                                </td> --}}
-                            </tr>
+                            {{-- <td class="table-action">
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-edit-2 align-middle">
+                                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                    </svg>
+                                </a>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-trash align-middle">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </td> --}}
+                        </tr>
                         @endforeach
 
 

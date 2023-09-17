@@ -29,4 +29,12 @@ return [
     'status' => 'status',
     'advance' => 'Advance',
     'rent' => 'Rent',
+    'renter_name' => 'Renter Name',
+    'invoice_no' => 'Invoice No',
+    'bill_status' => 'Bill Status',
+    'total_rent' => 'Total Rent',
+    'total_utility' => 'Total Utility',
+    'owner' => 'Owner',
+    'bill_created_date' => 'Bill Createa Date',
+
 ];
