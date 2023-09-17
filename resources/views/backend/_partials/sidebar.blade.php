@@ -47,7 +47,7 @@ $strpos = Route::currentRouteName();
                 </a>
                 <ul id="floor" class="sidebar-dropdown list-unstyled collapse {{ strpos($strpos, 'backend.floor') === 0 ? 'show' : ' ' }} " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.floor.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.floor.index') }}">@lang('sidebar.floor_list')</</a>
+                        <a class="sidebar-link" href="{{ route('backend.floor.index') }}">@lang('sidebar.floor_list')</a>
                     </li>
                     <li class="sidebar-item {{ strpos($strpos, 'backend.floor.create') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.floor.create') }}">@lang('sidebar.floor_create') </a>
@@ -118,7 +118,6 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            {{-- @dd(App::getLocale()); --}}
             <li class="sidebar-item">
                 <a data-bs-target="#Rent" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
