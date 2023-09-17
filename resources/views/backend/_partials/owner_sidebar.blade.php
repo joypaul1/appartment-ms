@@ -18,6 +18,7 @@ $strpos = Route::currentRouteName();
                 <div class="flex-shrink-0">
                     <img src="{{ asset('assets/backend') }}/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1"
                         alt="{{ auth('admin')->user()->name }}" />
+                        <img src="{{ auth('admin')->user()->logo ? asset(auth('admin')->user()->logo): asset('assets/backend/img/avatars/avatar.jpg') }}"class="avatar img-fluid rounded me-1" alt="admin-logo" />
                 </div>
                 <div class="flex-grow-1 ps-2">
                     <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">

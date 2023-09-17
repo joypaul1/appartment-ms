@@ -16,8 +16,8 @@ $strpos = Route::currentRouteName();
         <div class="sidebar-user">
             <div class="d-flex justify-content-center">
                 <div class="flex-shrink-0">
-                    <img src="{{ asset('assets/backend') }}/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1"
-                        alt="{{ auth('admin')->user()->name }}" />
+                    <img src="{{ auth('admin')->user()->logo ? asset(auth('admin')->user()->logo): asset('assets/backend/img/avatars/avatar.jpg') }}"
+                        class="avatar img-fluid rounded me-1" alt="admin-logo" />
                 </div>
                 <div class="flex-grow-1 ps-2">
                     <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
@@ -47,10 +47,15 @@ $strpos = Route::currentRouteName();
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">@lang('sidebar.unit')</span>
                 </a>
-            <li class="sidebar-item {{ strpos($strpos, 'backend.unit.index') === 0 ? 'active' : ' ' }}">
-                <a class="sidebar-link" href="{{ route('backend.unit.index') }}">@lang('sidebar.unit_list')</a>
+
+                <ul id="Unit" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'tenant' ? 'show' : ' ' }} "
+                    data-bs-parent="#sidebar">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.unit.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.unit.index') }}">@lang('sidebar.unit_list')</a>
+                    </li>
+                </ul>
             </li>
-            </li>
+
 
             <li class="sidebar-item">
                 <a data-bs-target="#tenant" data-bs-toggle="collapse" class="sidebar-link ">

@@ -6,7 +6,7 @@ return [
     'floor'  => 'Floor',
     'floor_list'  => 'Floor List',
     'floor_create'  => 'Create Floor',
-    'unit'  => 'unit',
+    'unit'  => 'Unit',
     'unit_list'  => 'Unit List',
     'unit_create'  => 'Create Unit',
     'unit_edit'  => 'Edit Unit',
