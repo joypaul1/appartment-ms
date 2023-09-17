@@ -10,11 +10,11 @@
     <div class="wrapper">
         {{-- @dd(auth('admin')->user()->role_type) --}}
         @if (auth('admin')->user()->role_type == 'owner')
-            @include('backend._partials.owner_sidebar')
+        @include('backend._partials.owner_sidebar')
         @elseif (auth('admin')->user()->role_type == 'tenant')
-            @include('backend._partials.tanent_sidebar')
+        @include('backend._partials.tenant_sidebar')
         @else
-            @include('backend._partials.sidebar')
+        @include('backend._partials.sidebar')
         @endif
 
         <div class="main">
