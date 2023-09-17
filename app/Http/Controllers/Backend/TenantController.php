@@ -66,7 +66,7 @@ class TenantController extends Controller
                 'name' => $date->format('F')
             ];
         }
-        $floors = Floor::active()->get(['id', 'name']);
+        $floors = Floor::active()->where('branch_id', session('branch_id'))->get(['id', 'name']);
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
         return view('backend.tenant.create', compact('floors', 'months', 'years', 'status'));
@@ -82,8 +82,8 @@ class TenantController extends Controller
     {
         $validatedData = $request->validate([
             'name'          => 'required|string|max:255',
-            'email'         => 'required|email|max:255',
-            'mobile'        => 'required|string|max:20',
+            'email' => 'required|email|max:255|unique:rent_configurations,email',
+            'mobile' => 'required|string|max:20|unique:rent_configurations,mobile',
             'address'   => 'required|string|max:255',
             'nid'           => 'required|string|max:20',
             'password'      => 'required|string|max:255',
@@ -159,10 +159,12 @@ class TenantController extends Controller
                 'name' => $date->format('F')
             ];
         }
-        $floors = Floor::active()->get(['id', 'name']);
+        // dd($tenant->unit_id);
+        $units = Unit::where('id', $tenant->unit_id)->active()->get(['id', 'name']);
+        $floors = Floor::where('branch_id', session('branch_id'))->active()->get(['id', 'name']);
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
-        return view('backend.tenant.edit', compact('floors', 'months', 'years', 'status', 'tenant'));
+        return view('backend.tenant.edit', compact('floors', 'months', 'years', 'status', 'units', 'tenant'));
     }
 
     /**
@@ -176,8 +178,8 @@ class TenantController extends Controller
     {
         $validatedData = $request->validate([
             'name'          => 'required|string|max:255',
-            'email'         => 'required|email|max:255',
-            'mobile'        => 'required|string|max:20',
+            'email' => 'required|email|max:255|unique:rent_configurations,email,'.$tenant->id,
+            'mobile' => 'required|string|max:20|unique:rent_configurations,mobile,'.$tenant->id,
             'address'   => 'required|string|max:255',
             'nid'           => 'required|string|max:20',
             'password'      => 'nullable|string|max:255',
@@ -216,7 +218,7 @@ class TenantController extends Controller
             Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
                 ->updateOrCreate($data);
         } catch (\Exception $ex) {
-            // return redirect()->back()->with('error',  $ex->getMessage());
+            return redirect()->back()->with('error',  $ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 

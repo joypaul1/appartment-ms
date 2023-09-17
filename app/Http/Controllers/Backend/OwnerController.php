@@ -57,8 +57,8 @@ class OwnerController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'mobile' => 'required|string|max:20',
+            'email' => 'required|email|max:255|unique:owners,email',
+            'mobile' => 'required|string|max:20|unique:owners,mobile',
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
             'nid' => 'required|string|max:20',
@@ -135,8 +135,8 @@ class OwnerController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'mobile' => 'required|string|max:20',
+            'email'             => 'required|email|max:255|unique:owners,email,' . $owner->id,
+            'mobile'            => 'required|string|max:20|unique:owners,mobile,' . $owner->id,
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
             'nid' => 'required|string|max:20',
@@ -170,9 +170,6 @@ class OwnerController extends Controller
         }
         Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
             ->updateOrCreate($data);
-        // dd($request->password);
-
-        // dd($validatedData);
 
         if ($request->unit_id) {
             $owner->units()->sync($request->unit_id);
@@ -188,9 +185,12 @@ class OwnerController extends Controller
      */
     public function destroy($id)
     {
-        $owner = Owner::findOrFail($id);
-        $owner->delete();
-
-        return redirect()->route('owner.index')->with('success', 'Unit deleted successfully.');
+        try {
+            $owner = Owner::findOrFail($id);
+            $owner->delete();
+        } catch (\Exception $ex) {
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!']);
+        }
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }

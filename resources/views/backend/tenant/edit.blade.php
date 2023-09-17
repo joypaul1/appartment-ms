@@ -91,7 +91,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'unit_id',
-                        'required' => true,'label'=>'Unit','optionData'=> []])
+                        'required' => true,'label'=>'Unit','optionData'=> $units ,'selectedKey' => $tenant->unit_id])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('unit_id')])
                     </div>
 
@@ -144,7 +144,7 @@
 @push('js')
 <script>
     $(function() {
-        getUnitData();
+        // getUnitData();
     $('#Floorid').on('change', function(e) {
         e.preventDefault();
         getUnitData();

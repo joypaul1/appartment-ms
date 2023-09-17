@@ -61,8 +61,8 @@ class EmployeeController extends Controller
     {
         $validatedData = $request->validate([
             'name'              => 'required|string|max:255',
-            'email'             => 'required|email|max:255',
-            'mobile'            => 'required|string|max:20',
+            'email'             => 'required|email|max:255|unique:employees,email',
+            'mobile'            => 'required|string|max:20|unique:employees,mobile',
             'pre_address'       => 'required|string|max:255',
             'per_address'       => 'required|string|max:255',
             'nid'               => 'required|string|max:20',
@@ -128,8 +128,8 @@ class EmployeeController extends Controller
     {
         $validatedData = $request->validate([
             'name'              => 'required|string|max:255',
-            'email'             => 'required|email|max:255',
-            'mobile'            => 'required|string|max:20',
+            'email'             => 'required|email|max:255|unique:employees,email,'. $employee->id,
+            'mobile'            => 'required|string|max:20|unique:employees,mobile,'. $employee->id,
             'pre_address'       => 'required|string|max:255',
             'per_address'       => 'required|string|max:255',
             'nid'               => 'required|string|max:20',
