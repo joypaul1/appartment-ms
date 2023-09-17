@@ -50,7 +50,7 @@
                         ])
                     </div>
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Submit Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>
                     </div>
                 </form>
                 @else
@@ -113,7 +113,7 @@
                     </div>
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Submit Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>
                     </div>
                 </form>
                 @endif

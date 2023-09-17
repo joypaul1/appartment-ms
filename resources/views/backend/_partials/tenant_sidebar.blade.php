@@ -14,7 +14,7 @@ $strpos = Route::currentRouteName();
         <div class="sidebar-user">
             <div class="d-flex justify-content-center">
                 <div class="flex-shrink-0">
-                    <img src="{{ auth('admin')->user()->logo ? asset(auth('admin')->user()->logo): asset('assets/backend/img/avatars/avatar.jpg') }}"
+                    <img src="{{ auth('admin')->user()->image ? asset(auth('admin')->user()->image): asset('assets/backend/img/avatars/avatar.jpg') }}"
                         class="avatar img-fluid rounded me-1" alt="admin-logo" />
                 </div>
                 <div class="flex-grow-1 ps-2">

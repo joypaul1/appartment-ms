@@ -80,7 +80,7 @@
                                     ])
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            {{-- <div class="col-md-8">
                                 @include('components.backend.forms.select2.option', [
                                     'name' => 'branch_id',
                                     'required' => true,
@@ -91,7 +91,7 @@
                                 @include('components.backend.forms.input.errorMessage', [
                                     'message' => $errors->first('branch_id'),
                                 ])
-                            </div>
+                            </div> --}}
 
                             <div class="mb-3 ">
                                 <label class="col-lg-4 col-form-label" for="image">Image</label>

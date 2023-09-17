@@ -38,7 +38,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $branches = Branch::get(['id','name']);
+        $branches = Branch::get(['id', 'name']);
         return view('backend.admin.create', compact('branches'));
     }
 
@@ -51,12 +51,11 @@ class AdminController extends Controller
     public function store(StoreRequest $request)
     {
         $returnData = $request->storeData($request);
-        if($returnData->getData()->status){
+        if ($returnData->getData()->status) {
 
-            return back()->with(['success' => $returnData->getData()->msg  ]);
+            return back()->with(['success' => $returnData->getData()->msg]);
         }
-        return back()->with(['error' =>$returnData->getData()->msg ]);
-
+        return back()->with(['error' => $returnData->getData()->msg]);
     }
 
     /**
@@ -76,11 +75,10 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin )
+    public function edit(Admin $admin)
     {
-        $branches = Branch::get(['id','name']);
 
-        return view('backend.admin.edit',compact('admin','branches'));
+        return view('backend.admin.edit', compact('admin'));
     }
 
     /**
@@ -94,11 +92,10 @@ class AdminController extends Controller
     {
 
         $returnData = $request->updateData($request, $admin);
-        if($returnData->getData()->status){
-            return back()->with(['success' => $returnData->getData()->msg  ]);
-
+        if ($returnData->getData()->status) {
+            return back()->with(['success' => $returnData->getData()->msg]);
         }
-        return back()->with(['error' =>$returnData->getData()->msg ]);
+        return back()->with(['error' => $returnData->getData()->msg]);
     }
 
     /**
@@ -113,7 +110,7 @@ class AdminController extends Controller
             (new Image)->deleteIfExists($admin->image);
             $admin->delete();
         } catch (\Exception $ex) {
-            return back()->with(['status' => false, 'error' =>$ex->getMessage()]);
+            return back()->with(['status' => false, 'error' => $ex->getMessage()]);
         }
         (new LogActivity)::addToLog('Admin Deleted');
 

@@ -30,7 +30,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'branch_id' => 'required',
+            // 'branch_id' => 'required',
             // 'password' => ['nullable', new MatchOldPassword($this->admin)],
             'email' => ['required', Rule::unique('admins')->ignore($this->admin->id)],
             'mobile' => ['required', Rule::unique('admins')->ignore($this->admin->id)],
