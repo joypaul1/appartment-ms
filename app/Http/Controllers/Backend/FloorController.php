@@ -17,7 +17,6 @@ class FloorController extends Controller
     public function index()
     {
         $data = Floor::with('branch:id,name')
-            // ->where('branch_id', (int)$_SESSION['objLogin']['branch_id'])
             ->orderBy('id', 'DESC')
             ->get();
         return view('backend.floor.index', compact('data'));

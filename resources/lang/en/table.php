@@ -27,4 +27,6 @@ return [
     'in_time' => 'In Time',
     'out_time' => 'Out Time',
     'status' => 'status',
+    'advance' => 'Advance',
+    'rent' => 'Rent',
 ];

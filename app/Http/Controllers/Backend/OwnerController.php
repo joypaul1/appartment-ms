@@ -30,7 +30,7 @@ class OwnerController extends Controller
 
             return response()->json(['data' => $owner]);
         }
-        
+
 
         $data = Owner::with('units')->orderBy('id', 'desc')->get();
         return view('backend.owner.index', compact('data'));

@@ -22,14 +22,15 @@
                 <table id="datatables-reponsive" class="table" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Sl.</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
+                            <th>@lang('table.sl')</th>
+                            <th>@lang('table.name')</th>
+                            <th>@lang('table.image') </th>
+                            <th>@lang('table.email') </th>
+                            <th>@lang('table.mobile') </th>
                             {{-- <th>Join Date</th> --}}
                             {{-- <th>Salary </th> --}}
-                            <th>Member Type</th>
+                            <th>@lang('table.memeber_type') </th>
+
                             {{-- <th>Action </th> --}}
                         </tr>
                     </thead>
