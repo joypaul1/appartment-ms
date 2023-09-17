@@ -13,6 +13,8 @@
         @include('backend._partials.owner_sidebar')
         @elseif (auth('admin')->user()->role_type == 'tenant')
         @include('backend._partials.tenant_sidebar')
+        @elseif (auth('admin')->user()->role_type == 'employee')
+        @include('backend._partials.employee_sidebar')
         @else
         @include('backend._partials.sidebar')
         @endif

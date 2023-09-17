@@ -152,6 +152,7 @@ class EmployeeController extends Controller
             'status'            => 'required',
             'member_type_id'            => 'required',
         ]);
+        // dd($validatedData, $employee);
         try {
             DB::beginTransaction();
             if ($request->password) {
@@ -184,6 +185,7 @@ class EmployeeController extends Controller
             } else {
                 Admin::create($data);
             }
+            $employee->update($validatedData);
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();

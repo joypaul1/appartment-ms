@@ -47,8 +47,11 @@ class TenantController extends Controller
                 ->where('status', 1)->first();
             return response()->json(['data' => $rent]);
         }
-        // dd(session('branch_id'));
+
         $data = Tenant::where('branch_id', session('branch_id'))->with('unit:id,name', 'floor:id,name')->get();
+        if(auth('admin')->user()->role_type == 'employee'){
+            return view('backend.tenant.employee', compact('data'));
+        }
         return view('backend.tenant.index', compact('data'));
     }
 

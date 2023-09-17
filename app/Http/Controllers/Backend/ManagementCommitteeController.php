@@ -18,8 +18,10 @@ class ManagementCommitteeController extends Controller
      */
     public function index()
     {
-        $data = ManagementCommittee::where('branch_id', session('branch_id'))
-            ->get();
+        $data = ManagementCommittee::where('branch_id', session('branch_id'))->get();
+        if (auth('admin')->user()->role_type == 'employee') {
+            return view('backend.managementCommittee.employee', compact('data'));
+        }
         return view('backend.managementCommittee.index', compact('data'));
     }
 
@@ -51,11 +53,10 @@ class ManagementCommitteeController extends Controller
             'per_address'       => 'required|string|max:255',
             'nid'               => 'required|string|max:20',
             'password'          => 'required|string|max:255',
-            // 'salary'            => 'required',
             'joining_date'      => 'required',
             'resign_date'       => 'nullable',
             'status'            => 'required',
-            'member_type_id'            => 'required',
+            'member_type_id'    => 'required',
         ]);
         try {
             $validatedData['password'] = Hash::make($request->password);

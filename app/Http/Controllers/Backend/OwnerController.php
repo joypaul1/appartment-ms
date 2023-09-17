@@ -23,16 +23,16 @@ class OwnerController extends Controller
     {
 
         if ($request->getUnitOwner) {
-            $owner = Owner::whereHas('units', function ($query) use ($request) {
+            $owner = Owner::where('branch_id', session('branch_id'))->whereHas('units', function ($query) use ($request) {
                 $query->where('unit_configurations.floor_id', $request->floor_id)
                     ->where('unit_configurations.id', $request->unit_id);
             })->first();
-
             return response()->json(['data' => $owner]);
         }
-
-
-        $data = Owner::with('units')->orderBy('id', 'desc')->get();
+        $data = Owner::where('branch_id', session('branch_id'))->with('units')->orderBy('id', 'desc')->get();
+        if(auth('admin')->user()->role_type == 'employee'){
+            return view('backend.owner.employee', compact('data'));
+        }
         return view('backend.owner.index', compact('data'));
     }
 
@@ -43,7 +43,7 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        $units = Unit::whereDoesntHave('owners')->get();
+        $units = Unit::where('branch_id', session('branch_id'))->whereDoesntHave('owners')->get();
         return view('backend.owner.create', compact('units'));
     }
 

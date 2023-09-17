@@ -20,7 +20,10 @@ class VisitorController extends Controller
      */
     public function index()
     {
-        $visitors = Visitor::with('floor:id,name', 'unit:id,name')->get();
+        $visitors = Visitor::where('branch_id', session('branch_id'))->with('floor:id,name', 'unit:id,name')->get();
+        if(auth('admin')->user()->role_type == 'employee'){
+            return view('backend.visitor.employee', compact('visitors'));
+        }
         return view('backend.visitor.index', compact('visitors'));
     }
 
