@@ -11,6 +11,7 @@ use App\Models\Backend\Floor;
 use App\Models\Backend\Fund;
 use App\Models\Backend\MaintenanceCost;
 use App\Models\Backend\ManagementCommittee;
+use App\Models\Backend\NoticeBoard;
 use App\Models\Backend\Owner;
 use App\Models\Backend\OwnerUtility;
 use App\Models\Backend\RentCollection;
@@ -26,6 +27,10 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
+        $noticeBoards = NoticeBoard::where('branch_id', session('branch_id'))
+            ->where('end_date', '<=', date('Y-m-d'))
+            ->get();
+
         $floorCount = Floor::where('branch_id', session('branch_id'))->count();
         $unitCount = Unit::where('branch_id', session('branch_id'))->count();
         $ownerCount = Owner::where('branch_id', session('branch_id'))->count();
@@ -44,6 +49,7 @@ class DashboardController extends Controller
         return view(
             'backend.dashboard.index',
             compact(
+                'noticeBoards',
                 'floorCount',
                 'unitCount',
                 'ownerCount',

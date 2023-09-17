@@ -76,6 +76,9 @@ return [
     'email_config'  => 'Email Config',
     'rent_statement'  => 'Rent Statement',
     'rent_details'  => 'Rent Details',
+    'notice-board'  => 'Notice Board',
+    'notice-board-list'  => 'Notice Board List',
+    'notice-board-create'  => 'Notice Board Create',
     // ''  => 'Details',
 
 

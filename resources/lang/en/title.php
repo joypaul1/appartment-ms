@@ -30,6 +30,10 @@ return [
     'Create-Complain' => 'Create Complain',
     'Edit-Complain' => 'Edit Complain',
 
+    'Notice-Board-List' => 'Notice-Board List',
+    'Create-Notice-Board' => 'Create Notice-Board',
+    'Edit-Notice-Board' => 'Edit Notice-Board',
+
     'Employee-List' => 'Employee List',
     'Create-Employee' => 'Create Employee',
     'Edit-Employee' => 'Edit Employee',

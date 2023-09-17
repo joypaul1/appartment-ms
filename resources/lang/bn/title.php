@@ -15,6 +15,9 @@ return [
     'Create-Admin'      => 'অ্যাডমিন তৈরি করুন',
     'Edit-Admin'        => 'এডিট অ্যাডমিন',
 
+    'Notice-board-List' => 'নোটিস-বোর্ড তালিকা',
+    'Create-Notice-Board' => 'নোটিস-বোর্ড তৈরি করুন',
+    'Edit-Notice-board' => 'নোটিস-বোর্ড সম্পাদনা করুন',
 
     'Bill-Type-List' => 'বিলের ধরন তালিকা',
     'Create-Bill-Type' => 'বিলের ধরন তৈরি করুন',

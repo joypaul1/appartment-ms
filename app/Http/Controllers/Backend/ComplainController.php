@@ -17,11 +17,11 @@ class ComplainController extends Controller
      */
     public function index()
     {
-        $complains = Complain::get();
+        $complains = Complain::where('branch_id', session('branch_id'))->get();
         if (auth('admin')->user()->role_type == 'owner') {
 
-            $complains = Complain::            where('branch_id', session('branch_id'))
-            ->get();
+            $complains = Complain::where('branch_id', session('branch_id'))
+                ->get();
             return view('backend.complain.owner', compact('complains'));
         }
         return view('backend.complain.index', compact('complains'));

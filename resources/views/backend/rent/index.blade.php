@@ -9,7 +9,7 @@
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-plus-circle',
-        'name' =>__('title.Create-Rent-Collection')  ' Rent Collection',
+        'name' =>__('title.Create-Rent-Collection'),
         'route' => route('backend.rent.create'),
     ])
 @endsection

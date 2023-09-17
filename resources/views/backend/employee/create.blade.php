@@ -8,7 +8,7 @@
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' =>  {{ __('title.Employee-List') }},
+'name' =>   __('title.Employee-List') ,
 'route' =>route('backend.employee.index'),
 ])
 @endsection

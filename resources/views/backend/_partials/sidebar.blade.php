@@ -237,6 +237,25 @@ $strpos = Route::currentRouteName();
                 </ul>
             </li>
             <li class="sidebar-item">
+                <a data-bs-target="#notice" data-bs-toggle="collapse" class="sidebar-link ">
+                    <i class="align-middle" data-feather="sliders"></i>
+                    <span class="align-middle"> @lang('sidebar.notice-board')</span>
+                </a>
+                <ul id="notice" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'complain' ? 'show' : ' ' }} "
+                    data-bs-parent="#sidebar">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.notice-board.index') }}">
+                            @lang('sidebar.notice-board-list')
+                        </a>
+                    </li>
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.notice-board.create') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.notice-board.create') }}">
+                            @lang('sidebar.notice-board-create')
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
                 <a data-bs-target="#complain" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> @lang('sidebar.complain')</span>
