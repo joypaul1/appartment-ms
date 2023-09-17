@@ -9,6 +9,7 @@ use App\Models\Backend\Floor;
 use App\Models\Backend\Owner;
 use App\Models\Backend\Rent;
 use App\Models\Backend\RentCollection;
+use App\Models\Backend\Tenant;
 use App\Models\Backend\Year;
 use DateTime;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class RentController extends Controller
      */
     public function index()
     {
+        // dd(213123);
         if (auth('admin')->user()->role_type == 'owner') {
             $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
 
@@ -31,6 +33,11 @@ class RentController extends Controller
                 ->join('unit_configurations as uc', 'uc.id', '=', 'rent_collections.unit_id')
                 ->where('our.owner_id', $owner->id)
                 ->get();
+            return view('backend.rent.owner', compact('rentCollections'));
+        }
+        if (auth('admin')->user()->role_type == 'tenant') {
+            $tenant = Tenant::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+            $rentCollections = RentCollection::where('tenant_id', $tenant->id)->get();
             return view('backend.rent.owner', compact('rentCollections'));
         }
 

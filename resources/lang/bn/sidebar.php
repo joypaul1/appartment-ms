@@ -74,6 +74,7 @@ return [
     'year_config' => 'বছর কনফিগার',
     'system_config' => 'সিস্টেম কনফিগারেশন',
     'email_config' => 'ইমেল কনফিগারেশন',
-
+    'rent_statement' => 'ভাড়া বিবৃতি',
+    'rent_details' => 'ভাড়ার বিবরণ',
 
 ];

@@ -74,6 +74,9 @@ return [
     'year_config'  => 'Year Config',
     'system_config'  => 'System Config',
     'email_config'  => 'Email Config',
+    'rent_statement'  => 'Rent Statement',
+    'rent_details'  => 'Rent Details',
+    // ''  => 'Details',
 
 
 ];

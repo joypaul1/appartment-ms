@@ -4,7 +4,7 @@
 @section('content')
 
 @section('page-header')
-<i class="fa fa-list"></i> Rent Collection List
+<i class="fa fa-list"></i> Rent  List
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
@@ -58,6 +58,9 @@
                             </td>
                             <td>
                                 {{ $row->total_rent }}
+                            </td>
+                            <td>
+                                {{ $row->status == 1 ? 'Paid':'Due' }}
                             </td>
                             <td>
                                 {{ date('d-m-y', strtotime($row->issue_date)) }}

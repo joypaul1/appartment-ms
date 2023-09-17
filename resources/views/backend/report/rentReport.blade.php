@@ -15,7 +15,6 @@
             <div class="card-body">
                 <form action="{{ route('backend.report.rental-report') }}" method="GET" class="row g-3">
                     @method('GET')
-                    {{-- @csrf --}}
                     <div class="col-md-4">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'floor_id',
