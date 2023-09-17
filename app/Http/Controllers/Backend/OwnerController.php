@@ -135,8 +135,8 @@ class OwnerController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email'             => 'required|email|max:255|unique:owners,email,' . $owner->id,
-            'mobile'            => 'required|string|max:20|unique:owners,mobile,' . $owner->id,
+            'email' => 'required|email|max:255',
+            'mobile' => 'required|string|max:20',
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
             'nid' => 'required|string|max:20',
@@ -187,6 +187,7 @@ class OwnerController extends Controller
     {
         try {
             $owner = Owner::findOrFail($id);
+            Admin::where('email', $owner->email)->where('name', $owner->name)->where('mobile', $owner->mobile)->delete();
             $owner->delete();
         } catch (\Exception $ex) {
             return response()->json(['status' => false, 'mes' => 'Something went wrong!']);

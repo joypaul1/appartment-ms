@@ -12,9 +12,11 @@ use App\Models\Backend\Tenant;
 use App\Models\Backend\Unit;
 use App\Models\Backend\Year;
 use DateTime;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule as ValidationRule;
 
 class TenantController extends Controller
 {
@@ -176,10 +178,12 @@ class TenantController extends Controller
      */
     public function update(Request $request, Tenant $tenant)
     {
+        // dd( $tenant);
         $validatedData = $request->validate([
             'name'          => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:rent_configurations,email,'.$tenant->id,
-            'mobile' => 'required|string|max:20|unique:rent_configurations,mobile,'.$tenant->id,
+
+            'email' => 'required|email|max:255',
+            'mobile' => 'required|string|max:20',
             'address'   => 'required|string|max:255',
             'nid'           => 'required|string|max:20',
             'password'      => 'nullable|string|max:255',
@@ -235,6 +239,7 @@ class TenantController extends Controller
     {
         try {
             Unit::whereId($tenant->unit_id)->update(['status' => 0]);
+            Admin::where('email', $tenant->email)->where('name', $tenant->name)->where('mobile', $tenant->mobile)->delete();
             $tenant->delete();
         } catch (\Exception $ex) {
             return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
