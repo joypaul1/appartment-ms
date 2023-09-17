@@ -6,12 +6,13 @@ use App\Models\Branch;
 use App\Traits\AutoTimeStamp;
 use App\Traits\GlobalScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends Model
 {
     protected $table = 'unit_configurations';
 
-    use GlobalScope, AutoTimeStamp;
+    use GlobalScope, AutoTimeStamp,SoftDeletes;
 
     protected $guarded = ['id'];
     public function branch()

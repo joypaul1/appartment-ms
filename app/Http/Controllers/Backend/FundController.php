@@ -80,7 +80,6 @@ class FundController extends Controller
             'amount' => 'required|numeric',
             'purpose' => 'nullable|string',
         ]);
-        // dd($validatedData);
         try {
             $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));

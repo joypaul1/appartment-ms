@@ -5,12 +5,13 @@ namespace App\Models\Backend;
 use App\Traits\AutoTimeStamp;
 use App\Traits\GlobalScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tenant extends Model
 {
     protected $table = 'rent_configurations';
 
-    use GlobalScope, AutoTimeStamp;
+    use GlobalScope, AutoTimeStamp,SoftDeletes;
 
     protected $guarded = ['id'];
 
