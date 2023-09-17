@@ -4,7 +4,7 @@
 @section('content')
 
 @section('page-header')
-<i class="fa fa-list"></i> Owner Bill Deposit
+<i class="fa fa-list"></i> Bill Deposit List
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
