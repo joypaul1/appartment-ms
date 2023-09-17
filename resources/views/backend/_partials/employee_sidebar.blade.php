@@ -49,12 +49,7 @@ $strpos = Route::currentRouteName();
                     @lang('sidebar.management_committee_list')
                 </a>
             </li>
-            {{-- <li class="sidebar-item {{ strpos($strpos, 'backend.report.rental-report') === 0 ? 'active' : ' ' }}">
-                <a class="sidebar-link" href="{{ route('backend.report.rental-report')}}">
-                    <span class="align-middle">@lang('sidebar.rental_report') </span>
 
-                </a>
-            </li> --}}
             <li class="sidebar-item {{ strpos($strpos, 'backend.owner.index') === 0 ? 'active' : ' ' }}">
                 <a class="sidebar-link" href="{{ route('backend.owner.index') }}">@lang('sidebar.owner_list')</a>
             </li>
@@ -65,6 +60,12 @@ $strpos = Route::currentRouteName();
                     @lang('sidebar.visitor_list')
                 </a>
             </li>
+            <li class="sidebar-item {{ strpos($strpos, 'backend.report.salary-report') === 0 ? 'active' : ' ' }}">
+                <a class="sidebar-link" href="{{ route('backend.report.salary-report') }}">
+                    @lang('sidebar.salary_report')
+                </a>
+            </li>
+
 
 
 
@@ -73,5 +74,5 @@ $strpos = Route::currentRouteName();
 
         </ul>
 
-    </div>
+    </ div>
 </nav>
