@@ -39,10 +39,10 @@
         <ul class="navbar-nav navbar-align">
             <li class="nav-item dropdown">
                 <a class="nav-flag dropdown-toggle" href="#" id="languageDropdown" data-bs-toggle="dropdown">
-                    @if(session()->get('locale') == 'en')
-                    <img src="{{ asset('assets/backend') }}/img/flags/us.png" alt="" />
-                    @else
+                    @if(session()->get('locale') == 'bn')
                     <img src="{{ asset('assets/backend') }}/img/flags/bd.png" alt="" />
+                    @else
+                    <img src="{{ asset('assets/backend') }}/img/flags/us.png" alt="" />
 
                     @endif
                 </a>
@@ -67,7 +67,8 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-icon pe-md-0 dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                    <img src="{{ auth('admin')->user()->logo ? asset(auth('admin')->user()->logo): asset('assets/backend/img/avatars/avatar.jpg') }}"class="avatar img-fluid rounded" alt="admin-logo" />
+                    <img src="{{ auth('admin')->user()->logo ? asset(auth('admin')->user()->logo): asset('assets/backend/img/avatars/avatar.jpg') }}"
+                        class="avatar img-fluid rounded" alt="admin-logo" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="user"></i>

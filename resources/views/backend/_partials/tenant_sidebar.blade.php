@@ -47,12 +47,12 @@ $strpos = Route::currentRouteName();
 
                 </a>
             </li>
-            {{-- <li class="sidebar-item {{ strpos($strpos, 'backend.Complain.index') === 0 ? 'active' : ' ' }}">
-                <a class="sidebar-link" href="{{ route('backend.Complain.index')}}">
-                    <span class="align-middle">@lang('sidebar.complain') </span>
+            <li class="sidebar-item {{ strpos($strpos, 'backend.report.rental-report') === 0 ? 'active' : ' ' }}">
+                <a class="sidebar-link" href="{{ route('backend.report.rental-report')}}">
+                    <span class="align-middle">@lang('sidebar.rental_report') </span>
 
                 </a>
-            </li> --}}
+            </li>
 
 
             {{-- <li class="sidebar-item {{ request()->segment(2) == 'rent' ? 'active' : ' ' }} active">

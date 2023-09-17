@@ -21,6 +21,21 @@ class ReportController extends Controller
 {
     function rentReport(Request $request)
     {
+
+        if ($request->start_date && $request->end_date) {
+             $tenant = Tenant::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+            $rentCollections = RentCollection::where('branch_id', session('branch_id'))
+                ->where('tenant_id', $tenant->id)
+                ->where('bill_status', $request->payment_status)
+                ->with('floor:id,name')
+                ->with('unit:id,name')
+                ->with('month:id,name')
+                ->with('year:id,name')
+
+                ->get();
+            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
+            return view('backend.report.rentReportPdf', compact('rentCollections', 'branch'));
+        }
         if ($request->floor_id && $request->unit_id && $request->month && $request->year) {
             $rentCollections = RentCollection::where('branch_id', session('branch_id'))
                 ->where('floor_id', $request->floor_id)
