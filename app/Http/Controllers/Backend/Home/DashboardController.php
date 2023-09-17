@@ -79,6 +79,9 @@ class DashboardController extends Controller
         // dd(App::getLocale());
         return back();
     }
+
+
+
     function tableDesign()
     {
         return view('backend.dashboard.tableDesign');

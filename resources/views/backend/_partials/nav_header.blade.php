@@ -67,11 +67,12 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-icon pe-md-0 dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                    <img src="{{ auth('admin')->user()->logo ? asset(auth('admin')->user()->logo): asset('assets/backend/img/avatars/avatar.jpg') }}"
+                    <img src="{{ auth('admin')->user()->image ? asset(auth('admin')->user()->image): asset('assets/backend/img/avatars/avatar.jpg') }}"
                         class="avatar img-fluid rounded" alt="admin-logo" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="user"></i>
+                    <a class="dropdown-item" href="{{ route('backend.site-config.admin.edit',auth('admin')->user()) }}">
+                        <i class="align-middle me-1" data-feather="user"></i>
                         Profile
                     </a>
 

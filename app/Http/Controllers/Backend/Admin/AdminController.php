@@ -78,9 +78,8 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin )
     {
-        $branches = Branch::get(['id','name']);
-
-        return view('backend.admin.edit',compact('admin','branches'));
+       
+        return view('backend.admin.edit',compact('admin'));
     }
 
     /**
@@ -96,7 +95,6 @@ class AdminController extends Controller
         $returnData = $request->updateData($request, $admin);
         if($returnData->getData()->status){
             return back()->with(['success' => $returnData->getData()->msg  ]);
-
         }
         return back()->with(['error' =>$returnData->getData()->msg ]);
     }
