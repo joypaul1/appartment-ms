@@ -8,7 +8,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total Floor</h5>
+                        <h5 class="card-title">@lang('dashboard.total_floor')</h5>
                     </div>
 
                     <div class="col-auto">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <h1 class="mt-1 mb-3">{{ $floorCount }}</h1>
-                <div class="mb-0 text-center bg-light p-2" >
+                <div class="mb-0 text-center bg-light p-2">
                     <a href="{{ route('backend.floor.index')}}" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -32,7 +32,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total Unit
+                        <h5 class="card-title">@lang('dashboard.total_unit')
                         </h5>
                     </div>
 
@@ -44,12 +44,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $unitCount }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.unit.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.unit.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -60,7 +60,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total Owner
+                        <h5 class="card-title">@lang('dashboard.total_owner')
                         </h5>
                     </div>
 
@@ -72,12 +72,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $ownerCount }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.owner.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.owner.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -88,7 +88,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total Tenant
+                        <h5 class="card-title">@lang('dashboard.total_tenant')
                         </h5>
                     </div>
 
@@ -100,12 +100,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $tenantCount }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.tenant.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.tenant.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -116,7 +116,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total Employee
+                        <h5 class="card-title">@lang('dashboard.total_employee')
                         </h5>
                     </div>
 
@@ -128,12 +128,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $employeeCount }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.employee.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.employee.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -144,7 +144,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total Committee
+                        <h5 class="card-title">@lang('dashboard.total_committee')
                         </h5>
                     </div>
 
@@ -156,12 +156,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $managementCommitteeCount }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.management-committee.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.management-committee.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -172,7 +172,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total Rent
+                        <h5 class="card-title">@lang('dashboard.total_rent')
                         </h5>
                     </div>
 
@@ -184,12 +184,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $totalRentCollection }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.rent.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.rent.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -200,7 +200,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total Maintenance
+                        <h5 class="card-title">@lang('dashboard.total_maintenance')
                         </h5>
                     </div>
 
@@ -212,12 +212,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ number_format($totalMaintenanceCost ?? 0, 2) }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.maintenance-cost.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.maintenance-cost.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -228,7 +228,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total Fund
+                        <h5 class="card-title">@lang('dashboard.total_fund')
                         </h5>
                     </div>
 
@@ -240,12 +240,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ number_format($totalFund ?? 0, 2) }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.fund.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.fund.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -256,7 +256,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Owner Utility
+                        <h5 class="card-title">@lang('dashboard.owner_utility')
                         </h5>
                     </div>
 
@@ -268,12 +268,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ number_format($totalOwnerUtility ?? 0, 2) }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.owner-utility.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.owner-utility.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -284,7 +284,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Employee Salary
+                        <h5 class="card-title">@lang('dashboard.employee_salary')
                         </h5>
                     </div>
 
@@ -296,12 +296,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ number_format($totalEmployeeSalary ?? 0, 2) }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.employee.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.employee.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -312,7 +312,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total Complain
+                        <h5 class="card-title">@lang('dashboard.total_complain')
                         </h5>
                     </div>
 
@@ -324,12 +324,12 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $totalComplain ?? 0 }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.complain.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.complain.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
@@ -340,7 +340,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h5 class="card-title">Total House
+                        <h5 class="card-title">@lang('dashboard.total_house')
 
                         </h5>
                     </div>
@@ -353,18 +353,30 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $totalHouse ?? 0 }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 text-center bg-light p-2" >
-                    <a href="{{ route('backend.site-config.building.index')}}" class="p-2">
-                        More Info
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
+                    <div class="mb-0 text-center bg-light p-2">
+                        <a href="{{ route('backend.site-config.building.index')}}" class="p-2">
+                            More Info
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
                     {{-- <span class="text-muted">Since last week</span> --}}
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+        <div class="card flex-fill">
+            <div class="card-header">
+
+                <h5 class="card-title mb-0">@lang('dashboard.building_rules') </h5>
+            </div>
+            <div class="card-body">
+                {!! $buildingInformation->building_rules !!}
+            </div>
+
+        </div>
+    </div>
 
 </div>
 @endsection
