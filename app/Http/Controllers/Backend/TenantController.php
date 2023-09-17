@@ -161,7 +161,6 @@ class TenantController extends Controller
                 'name' => $date->format('F')
             ];
         }
-        // dd($tenant->unit_id);
         $units = Unit::where('id', $tenant->unit_id)->active()->get(['id', 'name']);
         $floors = Floor::where('branch_id', session('branch_id'))->active()->get(['id', 'name']);
         $years = Year::get(['id', 'name']);
@@ -178,7 +177,6 @@ class TenantController extends Controller
      */
     public function update(Request $request, Tenant $tenant)
     {
-        // dd( $tenant);
         $validatedData = $request->validate([
             'name'          => 'required|string|max:255',
             'email' => 'required|email|max:255',
