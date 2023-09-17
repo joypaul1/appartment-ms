@@ -19,6 +19,7 @@ use App\Models\Backend\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -65,12 +66,17 @@ class DashboardController extends Controller
     }
     function language($locale)
     {
+        // dd($locale);
+
         if (!in_array($locale, ['en', 'bn'])) {
             abort(400);
         }
         App::setLocale($locale);
-
-
+        session()->put('locale', $locale);
+        Artisan::call('cache:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
+        // dd(App::getLocale());
         return back();
     }
     function tableDesign()

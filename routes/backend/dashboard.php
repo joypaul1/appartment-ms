@@ -33,6 +33,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'backend.'],
     // dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('branch/{id}', [DashboardController::class, 'branch'])->name('dashboard.branch');
+    Route::get('language/{id}', [DashboardController::class, 'language'])->name('dashboard.language');
     // user
     Route::resource('floor', FloorController::class);
     Route::resource('unit', UnitController::class);

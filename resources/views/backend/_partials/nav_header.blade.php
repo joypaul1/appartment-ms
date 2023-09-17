@@ -42,12 +42,12 @@
                     <img src="{{ asset('assets/backend') }}/img/flags/us.png" alt="" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{ route('backend.dashboard.language', 'en') }}">
                         <img src="{{ asset('assets/backend') }}/img/flags/us.png" alt="English" width="20"
                             class="align-middle me-1" />
                         <span class="align-middle">English</span>
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{ route('backend.dashboard.language', 'bn') }}">
                         <img src="{{ asset('assets/backend') }}/img/flags/bd.png" alt="Bangla" width="20"
                             class="align-middle me-1" />
                         <span class="align-middle">Bangla</span>
