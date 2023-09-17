@@ -3,6 +3,7 @@
 @endpush
 @section('content')
 <div class="row">
+    @if(auth('admin')->user()->role_type == 'super_admin')
     <div class="col-sm-3">
         <div class="card">
             <div class="card-body">
@@ -364,7 +365,7 @@
             </div>
         </div>
     </div>
-
+    @endif
     <div class="col-12 col-lg-8 col-xxl-9 d-flex">
         <div class="card flex-fill">
             <div class="card-header">

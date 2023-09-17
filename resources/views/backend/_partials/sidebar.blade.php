@@ -8,7 +8,6 @@ $strpos = Route::currentRouteName();
         <a class="sidebar-brand" href="index.html">
             <span class="sidebar-brand-text align-middle">
                 Appartment
-                {{-- <sup><small class="badge bg-primary text-uppercase">Pro</small></sup> --}}
             </span>
 
         </a>
