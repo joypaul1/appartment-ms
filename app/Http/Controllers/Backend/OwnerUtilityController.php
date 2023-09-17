@@ -24,12 +24,12 @@ class OwnerUtilityController extends Controller
         if (auth('admin')->user()->role_type == 'owner') {
             $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
 
-            $ownerUtilitys = OwnerUtility::where('owner_id', $owner->id)->with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+            $ownerUtilitys = OwnerUtility::where('branch_id', session('branch_id'))->where('owner_id', $owner->id)->with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
             return view('backend.ownerUtility.owner', compact('ownerUtilitys'));
         }
 
-        $ownerUtilitys = OwnerUtility::with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+        $ownerUtilitys = OwnerUtility::where('branch_id', session('branch_id'))->with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
             ->orderBy('id', 'desc')->get();
         return view('backend.ownerUtility.index', compact('ownerUtilitys'));
     }
