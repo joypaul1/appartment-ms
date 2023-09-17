@@ -4,14 +4,14 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Owner List
+    <i class="fa fa-list"></i> {{ __('title.Owner-List') }}
 @stop
 @section('table_header')
-@include('backend._partials.page_header', [
-'fa' => 'fa fa-plus-circle',
-'name' => 'Create Owner',
-'route' =>route('backend.owner.create'),
-])
+    @include('backend._partials.page_header', [
+        // 'fa' => 'fa fa-plus-circle',
+        // 'name' => 'Create Owner',
+        // 'route' =>route('backend.owner.create'),
+    ])
 @endsection
 
 <div class="row">
@@ -32,36 +32,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data as $key=>$row)
-                        <tr>
-                            <td>
-                                {{ $key+1 }}
-                            </td>
-                            <td>
-                                {{ $row->name }}
-                            </td>
-                            <td>
-                                <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
-                            </td>
-                            <td>
-                                {{ $row->email }}
-                            </td>
-                            <td>
-                                {{ $row->mobile }}
-                            </td>
-                            <td>
-                                {{ $row->pre_address }}
-                            </td>
-                            <td>
-                                @foreach (optional($row->units)->pluck('name') as $unitName)
-                                {{ $unitName }}
-                                @endforeach
+                        @foreach ($data as $key => $row)
+                            <tr>
+                                <td>
+                                    {{ $key + 1 }}
+                                </td>
+                                <td>
+                                    {{ $row->name }}
+                                </td>
+                                <td>
+                                    <img src="{{ asset($row->image) }}" alt=""
+                                        style="width: 50px;height:50px;border-radius:50%" srcset="">
+                                </td>
+                                <td>
+                                    {{ $row->email }}
+                                </td>
+                                <td>
+                                    {{ $row->mobile }}
+                                </td>
+                                <td>
+                                    {{ $row->pre_address }}
+                                </td>
+                                <td>
+                                    @foreach (optional($row->units)->pluck('name') as $unitName)
+                                        {{ $unitName }}
+                                    @endforeach
 
-                            </td>
+                                </td>
 
 
 
-                        </tr>
+                            </tr>
                         @endforeach
 
 
@@ -74,14 +75,12 @@
 @endsection
 
 @push('js')
-
 <script>
     $(document).ready(function() {
         $("#toggleFilter").click(function() {
             $("#filterContainer").slideToggle();
         });
     });
-
 </script>
 
 <script>
@@ -94,6 +93,5 @@
             responsive: true
         });
     });
-
 </script>
 @endpush

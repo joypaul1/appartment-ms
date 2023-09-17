@@ -4,12 +4,12 @@
 @section('content')
 
 @section('page-header')
-<i class="fa fa-list"></i> Bill Deposit List
+<i class="fa fa-list"></i>@lang('title.Bill-Deposit-List')
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => 'Create Bill Deposit',
+'name' =>__('title.Create-Bill-Deposit'),
 'route' => route('backend.bill-deposit.create'),
 ])
 @endsection

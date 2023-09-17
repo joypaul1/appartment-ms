@@ -4,14 +4,14 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Management-Committe List
+    <i class="fa fa-list"></i> {{ __('title.Management-Committe-List') }}
 @stop
 @section('table_header')
-@include('backend._partials.page_header', [
-'fa' => 'fa fa-plus-circle',
-'name' => 'Create Management-Committe',
-'route' =>route('backend.management-committee.create'),
-])
+    @include('backend._partials.page_header', [
+        'fa' => 'fa fa-plus-circle',
+        'name' => __('title.Create-Management-Committe'),
+        'route' => route('backend.management-committee.create'),
+    ])
 @endsection
 
 <div class="row">
@@ -34,52 +34,59 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $key=>$row)
-                            <tr>
-                                <td>
-                                    {{ $key+1 }}
-                                </td>
-                                <td>
-                                    {{ $row->name }}
-                                </td>
-                                <td>
-                                    <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
-                                </td>
-                                <td>
-                                    {{ $row->email }}
-                                </td>
-                                <td>
-                                    {{ $row->mobile }}
-                                </td>
-                                <td>
-                                    {{ date('d-m-y', strtotime($row->joining_date)) }}
-                                </td>
+                            @foreach ($data as $key => $row)
+                                <tr>
+                                    <td>
+                                        {{ $key + 1 }}
+                                    </td>
+                                    <td>
+                                        {{ $row->name }}
+                                    </td>
+                                    <td>
+                                        <img src="{{ asset($row->image) }}" alt=""
+                                            style="width: 50px;height:50px;border-radius:50%" srcset="">
+                                    </td>
+                                    <td>
+                                        {{ $row->email }}
+                                    </td>
+                                    <td>
+                                        {{ $row->mobile }}
+                                    </td>
+                                    <td>
+                                        {{ date('d-m-y', strtotime($row->joining_date)) }}
+                                    </td>
 
-                                </td>
-                                <td>
-                                    {{ optional($row->memberType)->name }}
-                                </td>
+                                    </td>
+                                    <td>
+                                        {{ optional($row->memberType)->name }}
+                                    </td>
 
 
 
-                                <td class="table-action">
-                                    <a href="{{ route('backend.management-committee.edit', $row) }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-edit-2 align-middle">
-                                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                                        </svg>
-                                    </a>
-                                    <a data-href="{{ route('backend.management-committee.destroy', $row) }}" href="#" class="delete_check">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-trash align-middle">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                        </svg>
-                                    </a>
-                                </td>
-                            </tr>
+                                    <td class="table-action">
+                                        <a href="{{ route('backend.management-committee.edit', $row) }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-edit-2 align-middle">
+                                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                        <a data-href="{{ route('backend.management-committee.destroy', $row) }}"
+                                            href="#" class="delete_check">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-trash align-middle">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path
+                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
                             @endforeach
 
 
@@ -93,14 +100,12 @@
 @endsection
 
 @push('js')
-
 <script>
     $(document).ready(function() {
         $("#toggleFilter").click(function() {
             $("#filterContainer").slideToggle();
         });
     });
-
 </script>
 
 <script>
@@ -113,6 +118,5 @@
             responsive: true
         });
     });
-
 </script>
 @endpush

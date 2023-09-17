@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-pencil"></i> Edit Bill Deposit
+    <i class="fa fa-pencil"></i> @lang('title.Edit-Bill-Deposit')
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => 'Owner Utilit List',
+        'name' => __('Bill-Deposit-List'),
         'route' => route('backend.bill-deposit.index'),
     ])
 @endsection

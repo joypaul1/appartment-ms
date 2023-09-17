@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> Create Owner Utility
+    <i class="fa fa-plus-circle"></i> {{ __('title.Create-Owner-Utilit') }} Create Owner Utility
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => 'Owner Utilit List',
+        'name' => __('title.Owner-Utilit-List'),
         'route' => route('backend.owner-utility.index'),
     ])
 @endsection

@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> Create Employee Salary
+    <i class="fa fa-plus-circle"></i> {{ __('title.Create-Employee-Salary') }}
 @stop
 @section('table_header')
-@include('backend._partials.page_header', [
-'fa' => 'fa fa-list',
-'name' => 'Employee List',
-'route' =>route('backend.employee-salary.index'),
-])
+    @include('backend._partials.page_header', [
+        'fa' => 'fa fa-list',
+        'name' => __('title.Employee-Salary-List'),
+        'route' => route('backend.employee-salary.index'),
+    ])
 @endsection
 <div class="row">
     <div class="col-12">
@@ -18,42 +18,65 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.employee-salary.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
+                <form action="{{ route('backend.employee-salary.store') }}" method="POST" class="row g-3"
+                    enctype="multipart/form-data">
                     @method('POST')
                     @csrf
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'employee_id','label'=> 'Select Employee',
-                        'required' => true,'optionData'=> $employees])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('employee_id')])
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'employee_id',
+                            'label' => 'Select Employee',
+                            'required' => true,
+                            'optionData' => $employees,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('employee_id'),
+                        ])
                     </div>
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'month_id','label'=> 'Month',
-                        'required' => true,'optionData'=> $months])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('month_id')])
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'month_id',
+                            'label' => 'Month',
+                            'required' => true,
+                            'optionData' => $months,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('month_id'),
+                        ])
                     </div>
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'year_id','label'=> 'year',
-                        'required' => true,'optionData'=> $years])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('year_id')])
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'year_id',
+                            'label' => 'year',
+                            'required' => true,
+                            'optionData' => $years,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('year_id'),
+                        ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'inType' => 'date',
-                        'name' => 'issue_date',
-                        'value' => date('Y-m-d'),
-                        'required' => true,
+                            'inType' => 'date',
+                            'name' => 'issue_date',
+                            'value' => date('Y-m-d'),
+                            'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('issue_date')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('issue_date'),
+                        ])
                     </div>
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'name' => 'salary',
-                        'required' => true,
-                        'value' =>0.00
+                            'inType' => 'number',
+                            'name' => 'salary',
+                            'required' => true,
+                            'value' => 0.0,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('salary')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('salary'),
+                        ])
                     </div>
 
 
@@ -69,18 +92,20 @@
 @endsection
 
 @push('js')
-
 <script>
     $('#Employeeid').on('change', function(e) {
         e.preventDefault();
-        let url ="{{route('backend.employee.index') }}"
+        let url = "{{ route('backend.employee.index') }}"
         $.ajax({
             type: "GET",
-            url: url ,
+            url: url,
             dataType: 'JSON',
-            data:{ 'Employeeid':e.target.value, 'getSalary' :true},
+            data: {
+                'Employeeid': e.target.value,
+                'getSalary': true
+            },
 
-            success: function (res) {
+            success: function(res) {
                 $("#salary").val(0);
                 $("#salary").val(res.data);
                 // $.map( res.data, function( val, i ) {
@@ -89,7 +114,7 @@
 
                 // });
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 var msg = '';
                 if (jqXHR.status === 0) {
                     msg = 'Not connect.\n Verify Network.';
@@ -111,6 +136,5 @@
         });
 
     });
-
 </script>
 @endpush

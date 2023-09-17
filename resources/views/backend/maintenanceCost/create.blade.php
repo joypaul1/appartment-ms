@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> Create Maintenance Cost
+    <i class="fa fa-plus-circle"></i>  {{ __('title.Create-Maintenance-Cost')  }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => 'Owner Utilit List',
+        'name' =>  __('title.Maintenance-Cost-List'),
         'route' => route('backend.maintenance-cost.index'),
     ])
 @endsection

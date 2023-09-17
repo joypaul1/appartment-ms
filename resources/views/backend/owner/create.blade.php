@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> Create Owner
+<i class="fa fa-plus-circle"></i>{{ __('title.Create-Owner')  }}  Owner
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' => 'Owner List',
+'name' =>  __('title.Owner-List'),
 'route' =>route('backend.owner.index'),
 ])
 @endsection

@@ -3,16 +3,17 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-pencil"></i> Edit Fund
+    <i class="fa fa-pencil"></i> @lang('title.Edit-Fund')
+@stop
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-list',
-        'name' => 'Owner Utilit List',
-        'route' => route('backend.fund.index'),
-    ])
+@include('backend._partials.page_header', [
+    'fa' => 'fa fa-list',
+    'name' => __('title.Fund-List'),
+    'route' => route('backend.fund.index'),
+])
 @endsection
-@endsection
+
 <div class="row">
     <div class="col-12">
         <div class="card">

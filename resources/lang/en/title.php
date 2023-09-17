@@ -5,6 +5,10 @@ return [
     'Create-Floor' => 'Create Floor',
     'Edit-Floor' => 'Edit Floor',
 
+    'Fund-List' => 'Fund List',
+    'Create-Fund' => 'Create Fund',
+    'Edit-Fund' => 'Edit Fund',
+
     'Unit-List' => 'Unit List',
     'Create-Unit' => 'Create Floor',
     'Edit-Unit' => 'Edit Unit',

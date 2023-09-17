@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-pencil"></i> Edit Employee Salary
+    <i class="fa fa-pencil"></i>{{ __('title.Edit-Employee-Salary') }} Edit Employee Salary
 @stop
 @section('table_header')
-@include('backend._partials.page_header', [
-'fa' => 'fa fa-list',
-'name' => 'Employee List',
-'route' =>route('backend.employee.index'),
-])
+    @include('backend._partials.page_header', [
+        'fa' => 'fa fa-list',
+        'name' => __('title.Employee-Salary-List'),
+        'route' => route('backend.employee.index'),
+    ])
 @endsection
 <div class="row">
     <div class="col-12">
@@ -18,43 +18,68 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.employee-salary.update', $employeeSalary) }}" method="POST" class="row g-3"
-                    enctype="multipart/form-data">
+                <form action="{{ route('backend.employee-salary.update', $employeeSalary) }}" method="POST"
+                    class="row g-3" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'employee_id','label'=> 'Select Employee',
-                        'required' => true,'optionData'=> $employees, 'selectedKey' => $employeeSalary->employee_id])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('status')])
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'employee_id',
+                            'label' => 'Select Employee',
+                            'required' => true,
+                            'optionData' => $employees,
+                            'selectedKey' => $employeeSalary->employee_id,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('status'),
+                        ])
                     </div>
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'month_id','label'=> 'Month',
-                        'required' => true,'optionData'=> $months, 'selectedKey' => $employeeSalary->employee_id])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('month_id')])
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'month_id',
+                            'label' => 'Month',
+                            'required' => true,
+                            'optionData' => $months,
+                            'selectedKey' => $employeeSalary->employee_id,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('month_id'),
+                        ])
                     </div>
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'year_id','label'=> 'year',
-                        'required' => true,'optionData'=> $years, 'selectedKey' => $employeeSalary->employee_id])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('year_id')])
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'year_id',
+                            'label' => 'year',
+                            'required' => true,
+                            'optionData' => $years,
+                            'selectedKey' => $employeeSalary->employee_id,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('year_id'),
+                        ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'inType' => 'date',
-                        'name' => 'issue_date',
-                        'required' => true,
-                        'value' => $employeeSalary->issue_date,
+                            'inType' => 'date',
+                            'name' => 'issue_date',
+                            'required' => true,
+                            'value' => $employeeSalary->issue_date,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('issue_date')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('issue_date'),
+                        ])
                     </div>
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'name' => 'salary',
-                        'required' => true,
-                        'value' => $employeeSalary->amount,
+                            'inType' => 'number',
+                            'name' => 'salary',
+                            'required' => true,
+                            'value' => $employeeSalary->amount,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('salary')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('salary'),
+                        ])
                     </div>
 
 
@@ -72,14 +97,17 @@
 <script>
     $('#Employeeid').on('change', function(e) {
         e.preventDefault();
-        let url ="{{route('backend.employee.index') }}"
+        let url = "{{ route('backend.employee.index') }}"
         $.ajax({
             type: "GET",
-            url: url ,
+            url: url,
             dataType: 'JSON',
-            data:{ 'Employeeid':e.target.value, 'getSalary' :true},
+            data: {
+                'Employeeid': e.target.value,
+                'getSalary': true
+            },
 
-            success: function (res) {
+            success: function(res) {
                 $("#salary").val(0);
                 $("#salary").val(res.data);
                 // $.map( res.data, function( val, i ) {
@@ -88,7 +116,7 @@
 
                 // });
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 var msg = '';
                 if (jqXHR.status === 0) {
                     msg = 'Not connect.\n Verify Network.';
@@ -110,6 +138,5 @@
         });
 
     });
-
 </script>
 @endpush

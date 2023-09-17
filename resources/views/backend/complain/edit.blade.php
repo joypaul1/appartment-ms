@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> Edit Complain
+    <i class="fa fa-plus-circle"></i>{{ __('title.Edit-Complain') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => 'Complain List',
+        'name' =>  __('title.Complain-List') ,
         'route' => route('backend.complain.index'),
     ])
 @endsection

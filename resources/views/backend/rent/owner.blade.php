@@ -4,14 +4,14 @@
 @section('content')
 
 @section('page-header')
-<i class="fa fa-list"></i> Rent  List
+    <i class="fa fa-list"></i> {{ __('title.Rent-Collection-List') }}
 @stop
 @section('table_header')
-@include('backend._partials.page_header', [
-// 'fa' => 'fa fa-plus-circle',
-// 'name' => 'Create Rent Collection',
-// 'route' => route('backend.rent.create'),
-])
+    @include('backend._partials.page_header', [
+        // 'fa' => 'fa fa-plus-circle',
+        // 'name' => 'Create Rent Collection',
+        // 'route' => route('backend.rent.create'),
+    ])
 @endsection
 
 
@@ -37,37 +37,37 @@
                     </thead>
                     <tbody>
                         @foreach ($rentCollections as $key => $row)
-                        <tr>
-                            <td>
-                                {{ $row->invoice_number }}
-                            </td>
-                            <td>
-                                {{ optional($row->tenant)->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->floor)->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->unit)->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->month)->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->year)->name }}
-                            </td>
-                            <td>
-                                {{ $row->total_rent }}
-                            </td>
-                            <td>
-                                {{ $row->status == 1 ? 'Paid':'Due' }}
-                            </td>
-                            <td>
-                                {{ date('d-m-y', strtotime($row->issue_date)) }}
-                            </td>
+                            <tr>
+                                <td>
+                                    {{ $row->invoice_number }}
+                                </td>
+                                <td>
+                                    {{ optional($row->tenant)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->floor)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->unit)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->month)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->year)->name }}
+                                </td>
+                                <td>
+                                    {{ $row->total_rent }}
+                                </td>
+                                <td>
+                                    {{ $row->status == 1 ? 'Paid' : 'Due' }}
+                                </td>
+                                <td>
+                                    {{ date('d-m-y', strtotime($row->issue_date)) }}
+                                </td>
 
 
-                            {{-- <td class="table-action">
+                                {{-- <td class="table-action">
                                 <a href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -85,7 +85,7 @@
                                     </svg>
                                 </a>
                             </td> --}}
-                        </tr>
+                            </tr>
                         @endforeach
 
 

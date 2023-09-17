@@ -4,7 +4,7 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> Owner Fund
+    <i class="fa fa-list"></i> {{ __('title.Fund-List') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [

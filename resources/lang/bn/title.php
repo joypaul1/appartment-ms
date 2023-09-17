@@ -12,8 +12,8 @@ return [
     'Edit-Unit'         => 'এডিট ইউনিট',
 
     'Admin-List'     => 'অ্যাডমিন তালিকা',
-    'Create-Admin'      => 'Admin তৈরি করুন',
-    'Edit-Admin'        => 'Edit Admin',
+    'Create-Admin'      => 'অ্যাডমিন তৈরি করুন',
+    'Edit-Admin'        => 'এডিট অ্যাডমিন',
 
 
     'Bill-Type-List' => 'বিলের ধরন তালিকা',

@@ -4,7 +4,7 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i>  Owner Utility List
+    <i class="fa fa-list"></i>  {{ __('title.Owner-Utilit-List') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
