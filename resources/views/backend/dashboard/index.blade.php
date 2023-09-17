@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <h1 class="mt-1 mb-3">{{ $floorCount }}</h1>
-                <div class="mb-0 " >
+                <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -44,7 +44,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $unitCount }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -72,7 +72,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $ownerCount }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -100,7 +100,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $tenantCount }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -128,7 +128,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $employeeCount }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -156,7 +156,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $managementCommitteeCount }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -184,7 +184,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $totalRentCollection }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -212,7 +212,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ number_format($totalMaintenanceCost ?? 0, 2) }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -240,7 +240,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ number_format($totalFund ?? 0, 2) }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -268,7 +268,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ number_format($totalOwnerUtility ?? 0, 2) }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -296,7 +296,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ number_format($totalEmployeeSalary ?? 0, 2) }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -324,7 +324,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $totalComplain ?? 0 }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
@@ -353,7 +353,7 @@
                 </div>
                 <h1 class="mt-1 mb-3">{{ $totalHouse ?? 0 }}</h1>
                 <div class="mb-0">
-                    <div class="mb-0 " >
+                    <div class="mb-0 text-center bg-light p-2" >
                     <a href="#" class="p-2">
                         More Info
                         <i class="fa fa-arrow-right"></i>
