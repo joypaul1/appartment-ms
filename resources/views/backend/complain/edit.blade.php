@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Update Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.update_data')</button>
                     </div>
                 </form>
             </div>

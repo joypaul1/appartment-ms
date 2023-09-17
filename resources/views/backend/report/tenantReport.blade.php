@@ -15,7 +15,7 @@
             <div class="card-body">
                 <form action="{{ route('backend.report.tenant-report') }}" method="GET" class="row g-3">
                     @method('GET')
-                    
+
                     <div class="col-md-12">
                         @include('components.backend.forms.select2.option', [
                         'name' => 'tenant_status',
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Submit Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>
                     </div>
                 </form>
             </div>
