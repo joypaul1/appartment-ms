@@ -16,7 +16,7 @@
                         <div class="stat text-primary">
                             <i class="align-middle" data-feather="home"></i>
                         </div>
-                    </div>
+                    </div> 
                 </div>
                 <h1 class="mt-1 mb-3">{{ $floorCount }}</h1>
                 <div class="mb-0 text-center bg-light p-2">
