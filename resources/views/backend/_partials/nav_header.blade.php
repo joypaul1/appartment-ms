@@ -15,7 +15,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-info" href="#" id="resourcesDropdown" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{-- <strong> {{ $activeBranch->name }} </strong> --}}
+                <strong> {{ $activeBranch->name }} </strong>
             </a>
             <div class="dropdown-menu" aria-labelledby="resourcesDropdown">
                 @foreach ($allBranchs as $branch)
