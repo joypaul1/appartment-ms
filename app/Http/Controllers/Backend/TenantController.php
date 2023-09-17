@@ -181,7 +181,6 @@ class TenantController extends Controller
         // dd( $tenant);
         $validatedData = $request->validate([
             'name'          => 'required|string|max:255',
-
             'email' => 'required|email|max:255',
             'mobile' => 'required|string|max:20',
             'address'   => 'required|string|max:255',
@@ -196,9 +195,11 @@ class TenantController extends Controller
             'status'        => 'required',
         ]);
         try {
+            DB::beginTransaction();
             $validatedData['password'] = Hash::make($request->password);
             $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d');
+
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('tenant')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
@@ -207,7 +208,8 @@ class TenantController extends Controller
                 Unit::whereId($tenant->unit_id)->update(['status' => 0]);
                 Unit::whereId($request->unit_id)->update(['status' => 1]);
             }
-            $tenant->update($validatedData);
+
+
             $data['name'] = ($request->name);
             $data['email'] = ($request->email);
             $data['mobile'] = ($request->mobile);
@@ -219,9 +221,17 @@ class TenantController extends Controller
             if ($request->hasFile('image')) {
                 $data['image'] =  $validatedData['image'];
             }
-            Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
-                ->updateOrCreate($data);
+            $admin = Admin::where('email', $tenant->email)->where('mobile', $tenant->mobile)->first();
+            if ($admin) {
+                $admin->update($data);
+            } else {
+                Admin::create($data);
+            }
+
+            $tenant->update($validatedData);
+            DB::commit();
         } catch (\Exception $ex) {
+            DB::rollBack();
             return redirect()->back()->with('error',  $ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }

@@ -153,6 +153,7 @@ class EmployeeController extends Controller
             'member_type_id'            => 'required',
         ]);
         try {
+            DB::beginTransaction();
             if ($request->password) {
                 $validatedData['password'] = Hash::make($request->password);
             }
@@ -166,21 +167,26 @@ class EmployeeController extends Controller
                 $validatedData['image'] = $image;
             }
 
-            $employee->update($validatedData);
-
-            $data['name'] = ($request->name);
-            $data['email'] = ($request->email);
-            $data['mobile'] = ($request->mobile);
-            $data['branch_id'] =  $validatedData['branch_id'];
+            $data['name']       = ($request->name);
+            $data['email']      = ($request->email);
+            $data['mobile']     = ($request->mobile);
+            $data['branch_id']  =  $validatedData['branch_id'];
+            $data['role_type']  =  'employee';
             if ($request->password) {
                 $data['password'] = Hash::make($request->password);
             }
             if ($request->hasFile('image')) {
                 $data['image'] =  $validatedData['image'];
             }
-            Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
-                ->updateOrCreate($data);
+            $admin = Admin::where('email', $employee->email)->where('mobile', $employee->mobile)->first();
+            if ($admin) {
+                $admin->update($data);
+            } else {
+                Admin::create($data);
+            }
+            DB::commit();
         } catch (\Exception $ex) {
+            DB::rollBack();
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 

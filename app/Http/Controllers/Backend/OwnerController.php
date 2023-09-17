@@ -150,26 +150,32 @@ class OwnerController extends Controller
             return redirect()->back()->with('error', 'Owner not found.');
         }
         $validatedData['branch_id'] = session('branch_id');
-        // dd($validatedData['branch_id'] );
+
         if ($request->hasFile('image')) {
             $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
             $validatedData['image'] = $image;
         }
-        $owner->update($validatedData);
-
-
-        $data['name'] = ($request->name);
-        $data['email'] = ($request->email);
-        $data['mobile'] = ($request->mobile);
-        $data['branch_id'] =  $validatedData['branch_id'];
+        $data['name']       = ($request->name);
+        $data['email']      = ($request->email);
+        $data['mobile']     = ($request->mobile);
+        $data['branch_id']  =  $validatedData['branch_id'];
+        $data['role_type']  =  'employee';
         if ($request->password) {
             $data['password'] = Hash::make($request->password);
         }
         if ($request->hasFile('image')) {
             $data['image'] =  $validatedData['image'];
         }
-        Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
-            ->updateOrCreate($data);
+        $admin = Admin::where('email', $owner->email)->where('mobile', $owner->mobile)->first();
+        if ($admin) {
+            $admin->update($data);
+        } else {
+            Admin::create($data);
+        }
+        $owner->update($validatedData);
+
+
+
 
         if ($request->unit_id) {
             $owner->units()->sync($request->unit_id);
