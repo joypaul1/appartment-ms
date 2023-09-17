@@ -38,7 +38,7 @@ class DashboardController extends Controller
         $totalOwnerUtility = OwnerUtility::where('branch_id', session('branch_id'))->sum('total_utility');
         $totalEmployeeSalary = EmployeeSalary::where('branch_id', session('branch_id'))->sum('amount');
         $totalComplain = Complain::where('branch_id', session('branch_id'))->count();
-        $totalHouse = BuildingInformation::where('branch_id', session('branch_id'))->count();
+        $totalHouse = BuildingInformation::where('id', session('branch_id'))->count();
         $buildingInformation = BuildingInformation::where('id', session('branch_id'))->first();
 
         return view(
