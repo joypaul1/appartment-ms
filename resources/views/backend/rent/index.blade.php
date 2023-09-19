@@ -4,12 +4,12 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> Rent Collection List
+    <i class="fa fa-list"></i> {{ __('title.Rent-Collection-List') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-plus-circle',
-        'name' => 'Create Rent Collection',
+        'name' =>__('title.Create-Rent-Collection'),
         'route' => route('backend.rent.create'),
     ])
 @endsection
@@ -23,27 +23,16 @@
                 <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Invoice No.</th>
-                            <th>Renter Name</th>
-                            <th>Floor </th>
-                            <th>
-                                Unit
-                            </th>
-                            <th>
-                                Month
-                            </th>
-                            <th>
-                                Year
-                            </th>
-                            <th>
-                                Total Rent
-                            </th>
-                            <th>
-                                Bill Status
-                            </th>
-                            <th>
-                                Action
-                            </th>
+                            <th>@lang('table.invoice_no')</th>
+                            <th>@lang('table.renter_name')</th>
+                            <th>@lang('table.floor')</th>
+                            <th>@lang('table.unit')</th>
+                            <th>@lang('table.month')</th>
+                            <th>@lang('table.year')</th>
+                            <th>@lang('table.total_rent')</th>
+                            <th>@lang('table.bill_status')</th>
+                            <th>@lang('table.action')</th>
+
                         </tr>
                     </thead>
                     <tbody>

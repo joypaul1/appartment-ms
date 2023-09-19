@@ -22,7 +22,8 @@ class MaintenanceCostController extends Controller
     public function index()
     {
         if (auth('admin')->user()->role_type == 'owner') {
-            $maintenanceCosts = MaintenanceCost::where('branch_id', auth('admin')->user()->branch_id)->with('month:id,name', 'year:id,name', 'branch:id,name')
+            $maintenanceCosts = MaintenanceCost::where('branch_id', session('branch_id'))
+            ->with('month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
             return view('backend.maintenanceCost.owner', compact('maintenanceCosts'));
         }
@@ -83,7 +84,7 @@ class MaintenanceCostController extends Controller
         ]);
         // dd($validatedData);
         try {
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             MaintenanceCost::create($validatedData);
         } catch (\Exception $ex) {
@@ -143,7 +144,7 @@ class MaintenanceCostController extends Controller
         ]);
         try {
 
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
 
             $maintenanceCost->update($validatedData);

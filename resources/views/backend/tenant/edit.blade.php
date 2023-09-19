@@ -53,7 +53,7 @@
                         // 'value' => $tenant->name
                         // 'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('mobile')])
+                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('password')])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
@@ -91,7 +91,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'unit_id',
-                        'required' => true,'label'=>'Unit','optionData'=> []])
+                        'required' => true,'label'=>'Unit','optionData'=> $units ,'selectedKey' => $tenant->unit_id])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('unit_id')])
                     </div>
 
@@ -132,7 +132,7 @@
 
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Update Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.update_data')</button>
                     </div>
                 </form>
             </div>
@@ -144,7 +144,7 @@
 @push('js')
 <script>
     $(function() {
-        getUnitData();
+        // getUnitData();
     $('#Floorid').on('change', function(e) {
         e.preventDefault();
         getUnitData();

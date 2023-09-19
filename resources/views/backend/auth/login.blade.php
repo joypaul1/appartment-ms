@@ -45,8 +45,9 @@
                             <div class="card-body">
                                 <div class="m-sm-4">
                                     <div class="text-center">
-                                        <img src="{{ asset('assets/backend') }}/img/avatars/avatar.jpg" alt="Charles Hall"
-                                            class="img-fluid rounded-circle" width="132" height="132" />
+                                        <h3>Appartment Managerment System</h3>
+                                        {{-- <img src="{{ asset('assets/backend') }}/img/avatars/avatar.jpg" alt="Charles Hall"
+                                            class="img-fluid rounded-circle" width="132" height="132" /> --}}
                                     </div>
                                     <form method="POST" action="{{ route('backend.admin.login') }}">
                                         @csrf
@@ -64,9 +65,7 @@
                                             <label class="form-label">Password</label>
                                             <input class="form-control form-control-lg" type="password" name="password"
                                                 placeholder="Enter your password" />
-                                            <small>
-                                                <a href="pages-reset-password.html">Forgot password?</a>
-                                            </small>
+                                          
                                         </div>
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">

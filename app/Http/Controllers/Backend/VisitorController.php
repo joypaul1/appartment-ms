@@ -20,7 +20,10 @@ class VisitorController extends Controller
      */
     public function index()
     {
-        $visitors = Visitor::with('floor:id,name', 'unit:id,name')->get();
+        $visitors = Visitor::where('branch_id', session('branch_id'))->with('floor:id,name', 'unit:id,name')->get();
+        if(auth('admin')->user()->role_type == 'employee'){
+            return view('backend.visitor.employee', compact('visitors'));
+        }
         return view('backend.visitor.index', compact('visitors'));
     }
 
@@ -71,7 +74,7 @@ class VisitorController extends Controller
             $validatedData['in_time'] = $inTime->format('h:i A');
             $outTime = Carbon::createFromFormat('H:i', $request->out_time);
             $validatedData['out_time'] = $outTime->format('h:i A');
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
 
             Visitor::create($validatedData);
@@ -125,7 +128,7 @@ class VisitorController extends Controller
         ]);
         try {
 
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
 
             $visitor->update($validatedData);

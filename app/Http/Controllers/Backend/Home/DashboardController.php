@@ -11,6 +11,7 @@ use App\Models\Backend\Floor;
 use App\Models\Backend\Fund;
 use App\Models\Backend\MaintenanceCost;
 use App\Models\Backend\ManagementCommittee;
+use App\Models\Backend\NoticeBoard;
 use App\Models\Backend\Owner;
 use App\Models\Backend\OwnerUtility;
 use App\Models\Backend\RentCollection;
@@ -18,12 +19,18 @@ use App\Models\Backend\Tenant;
 use App\Models\Backend\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index(Request $request)
     {
+        $noticeBoards = NoticeBoard::where('branch_id', session('branch_id'))
+            ->where('end_date', '<=', date('Y-m-d'))
+            ->get();
+
         $floorCount = Floor::where('branch_id', session('branch_id'))->count();
         $unitCount = Unit::where('branch_id', session('branch_id'))->count();
         $ownerCount = Owner::where('branch_id', session('branch_id'))->count();
@@ -33,14 +40,16 @@ class DashboardController extends Controller
         $totalRentCollection = RentCollection::where('branch_id', session('branch_id'))->sum('total_rent');
         $totalMaintenanceCost = MaintenanceCost::where('branch_id', session('branch_id'))->sum('amount');
         $totalFund = Fund::where('branch_id', session('branch_id'))->sum('amount');
-        $totalOwnerUtility = OwnerUtility::sum('total_utility');
+        $totalOwnerUtility = OwnerUtility::where('branch_id', session('branch_id'))->sum('total_utility');
         $totalEmployeeSalary = EmployeeSalary::where('branch_id', session('branch_id'))->sum('amount');
         $totalComplain = Complain::where('branch_id', session('branch_id'))->count();
-        $totalHouse = BuildingInformation::where('branch_id', session('branch_id'))->count();
+        $totalHouse = BuildingInformation::where('id', session('branch_id'))->count();
+        $buildingInformation = BuildingInformation::where('id', session('branch_id'))->first();
 
         return view(
             'backend.dashboard.index',
             compact(
+                'noticeBoards',
                 'floorCount',
                 'unitCount',
                 'ownerCount',
@@ -54,6 +63,7 @@ class DashboardController extends Controller
                 'totalEmployeeSalary',
                 'totalComplain',
                 'totalHouse',
+                'buildingInformation',
             )
         );
     }
@@ -62,6 +72,22 @@ class DashboardController extends Controller
         session(['branch_id' => $id]);
         return back();
     }
+    function language($locale)
+    {
+        if (!in_array($locale, ['en', 'bn'])) {
+            abort(400);
+        }
+        App::setLocale($locale);
+        session()->put('locale', $locale);
+        Artisan::call('cache:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
+        // dd(App::getLocale());
+        return back();
+    }
+
+
+
     function tableDesign()
     {
         return view('backend.dashboard.tableDesign');

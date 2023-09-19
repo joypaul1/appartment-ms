@@ -4,12 +4,13 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Owner List
+<i class="fa fa-list"></i> {{ __('title.Owner-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => 'Create Owner',
+'name' => __('title.Owner-List'),
+
 'route' =>route('backend.owner.create'),
 ])
 @endsection
@@ -22,14 +23,14 @@
                 <table id="datatables-reponsive" class="table" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Sl.</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>Address</th>
-                            <th>Unit List</th>
-                            <th>Action </th>
+                            <th>@lang('table.sl')</th>
+                            <th>@lang('table.name')</th>
+                            <th>@lang('table.image') </th>
+                            <th>@lang('table.email') </th>
+                            <th>@lang('table.mobile') </th>
+                            <th>@lang('table.address') </th>
+                            <th>@lang('table.unit_list')  </th>
+                            <th>@lang('table.action')  </th>
                         </tr>
                     </thead>
                     <tbody>

@@ -19,7 +19,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('admin')->check()) {
+        if (Auth::guard('admin')->check() && session('branch_id')) {
 
             $expiresAt = now()->addMinutes(2); /* keep online for 2 min */
             Cache::put('user-is-online-' . auth('admin')->id(), true, $expiresAt);

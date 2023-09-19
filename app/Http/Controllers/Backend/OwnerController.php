@@ -23,16 +23,16 @@ class OwnerController extends Controller
     {
 
         if ($request->getUnitOwner) {
-            $owner = Owner::whereHas('units', function ($query) use ($request) {
+            $owner = Owner::where('branch_id', session('branch_id'))->whereHas('units', function ($query) use ($request) {
                 $query->where('unit_configurations.floor_id', $request->floor_id)
                     ->where('unit_configurations.id', $request->unit_id);
             })->first();
-
             return response()->json(['data' => $owner]);
         }
-        
-
-        $data = Owner::with('units')->orderBy('id', 'desc')->get();
+        $data = Owner::where('branch_id', session('branch_id'))->with('units')->orderBy('id', 'desc')->get();
+        if(auth('admin')->user()->role_type == 'employee'){
+            return view('backend.owner.employee', compact('data'));
+        }
         return view('backend.owner.index', compact('data'));
     }
 
@@ -43,7 +43,7 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        $units = Unit::whereDoesntHave('owners')->get();
+        $units = Unit::where('branch_id', session('branch_id'))->whereDoesntHave('owners')->get();
         return view('backend.owner.create', compact('units'));
     }
 
@@ -57,8 +57,8 @@ class OwnerController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'mobile' => 'required|string|max:20',
+            'email' => 'required|email|max:255|unique:owners,email',
+            'mobile' => 'required|string|max:20|unique:owners,mobile',
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
             'nid' => 'required|string|max:20',
@@ -67,7 +67,7 @@ class OwnerController extends Controller
         ]);
         try {
             $validatedData['password'] = Hash::make($request->password);
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
@@ -149,30 +149,33 @@ class OwnerController extends Controller
         if (!$owner) {
             return redirect()->back()->with('error', 'Owner not found.');
         }
-        $validatedData['branch_id'] = auth('admin')->user()->branch_id;
-        // dd($validatedData['branch_id'] );
+        $validatedData['branch_id'] = session('branch_id');
+
         if ($request->hasFile('image')) {
             $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
             $validatedData['image'] = $image;
         }
-        $owner->update($validatedData);
-
-
-        $data['name'] = ($request->name);
-        $data['email'] = ($request->email);
-        $data['mobile'] = ($request->mobile);
-        $data['branch_id'] =  $validatedData['branch_id'];
+        $data['name']       = ($request->name);
+        $data['email']      = ($request->email);
+        $data['mobile']     = ($request->mobile);
+        $data['branch_id']  =  $validatedData['branch_id'];
+        $data['role_type']  =  'owner';
         if ($request->password) {
             $data['password'] = Hash::make($request->password);
         }
         if ($request->hasFile('image')) {
             $data['image'] =  $validatedData['image'];
         }
-        Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
-            ->updateOrCreate($data);
-        // dd($request->password);
+        $admin = Admin::where('email', $owner->email)->where('mobile', $owner->mobile)->first();
+        if ($admin) {
+            $admin->update($data);
+        } else {
+            Admin::create($data);
+        }
+        $owner->update($validatedData);
 
-        // dd($validatedData);
+
+
 
         if ($request->unit_id) {
             $owner->units()->sync($request->unit_id);
@@ -188,9 +191,13 @@ class OwnerController extends Controller
      */
     public function destroy($id)
     {
-        $owner = Owner::findOrFail($id);
-        $owner->delete();
-
-        return redirect()->route('owner.index')->with('success', 'Unit deleted successfully.');
+        try {
+            $owner = Owner::findOrFail($id);
+            Admin::where('email', $owner->email)->where('name', $owner->name)->where('mobile', $owner->mobile)->delete();
+            $owner->delete();
+        } catch (\Exception $ex) {
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!']);
+        }
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }

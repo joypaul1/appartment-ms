@@ -24,12 +24,12 @@ class OwnerUtilityController extends Controller
         if (auth('admin')->user()->role_type == 'owner') {
             $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
 
-            $ownerUtilitys = OwnerUtility::where('owner_id', $owner->id)->with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+            $ownerUtilitys = OwnerUtility::where('branch_id', session('branch_id'))->where('owner_id', $owner->id)->with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
             return view('backend.ownerUtility.owner', compact('ownerUtilitys'));
         }
 
-        $ownerUtilitys = OwnerUtility::with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+        $ownerUtilitys = OwnerUtility::where('branch_id', session('branch_id'))->with('owner:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
             ->orderBy('id', 'desc')->get();
         return view('backend.ownerUtility.index', compact('ownerUtilitys'));
     }
@@ -93,7 +93,7 @@ class OwnerUtilityController extends Controller
         // dd($validatedData);
         try {
             $validatedData['invoice_number'] = (new InvoiceNumber)->invoice_num($this->getInvoiceNumber());
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
 
 
@@ -156,7 +156,7 @@ class OwnerUtilityController extends Controller
         ]);
         try {
 
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
 
             $OwnerUtility->update($validatedData);

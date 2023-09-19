@@ -21,15 +21,19 @@ class FundController extends Controller
     public function index()
     {
         if (auth('admin')->user()->role_type == 'owner') {
-            $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+            $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)
+                ->where('branch_id', session('branch_id'))->first();
 
-            $funds = Fund::where('branch_id', auth('admin')->user()->branch_id)->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
-            ->orderBy('id', 'desc')->get();
-             $maintenanceCosts = MaintenanceCost::where('branch_id',$owner->branch_id)->with('month:id,name', 'year:id,name', 'branch:id,name')
-            ->orderBy('id', 'desc')->get();
+            $funds = Fund::where('branch_id', session('branch_id'))
+                ->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+                ->orderBy('id', 'desc')->get();
+            $maintenanceCosts = MaintenanceCost::where('branch_id', session('branch_id'))->with('month:id,name', 'year:id,name', 'branch:id,name')
+                ->orderBy('id', 'desc')->get();
             return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
         }
-
+        $funds = Fund::where('branch_id', session('branch_id'))
+            ->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+            ->orderBy('id', 'desc')->get();
 
         return view('backend.fund.index', compact('funds'));
     }
@@ -51,7 +55,7 @@ class FundController extends Controller
             ];
         }
 
-        $owners = Owner::get();
+        $owners = Owner::where('branch_id', session('branch_id'))->get();
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
         return view('backend.fund.create', compact('months', 'years', 'status', 'owners'));
@@ -76,9 +80,8 @@ class FundController extends Controller
             'amount' => 'required|numeric',
             'purpose' => 'nullable|string',
         ]);
-        // dd($validatedData);
         try {
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             Fund::create($validatedData);
         } catch (\Exception $ex) {
@@ -129,7 +132,7 @@ class FundController extends Controller
         ]);
         try {
 
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
 
             $fund->update($validatedData);

@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> Create Bill Type
+<i class="fa fa-plus-circle"></i> @lang('title.Create-Bill-Type')
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' => 'Bill Type List',
+'name' => __('title.Bill-Type-List'),
 'route' =>route('backend.site-config.bill-type.index'),
 ])
 @endsection
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Submit Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>
                     </div>
                 </form>
             </div>

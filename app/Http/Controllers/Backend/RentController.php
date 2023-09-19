@@ -9,6 +9,7 @@ use App\Models\Backend\Floor;
 use App\Models\Backend\Owner;
 use App\Models\Backend\Rent;
 use App\Models\Backend\RentCollection;
+use App\Models\Backend\Tenant;
 use App\Models\Backend\Year;
 use DateTime;
 use Illuminate\Http\Request;
@@ -31,6 +32,11 @@ class RentController extends Controller
                 ->join('unit_configurations as uc', 'uc.id', '=', 'rent_collections.unit_id')
                 ->where('our.owner_id', $owner->id)
                 ->get();
+            return view('backend.rent.owner', compact('rentCollections'));
+        }
+        if (auth('admin')->user()->role_type == 'tenant') {
+            $tenant = Tenant::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+            $rentCollections = RentCollection::where('tenant_id', $tenant->id)->get();
             return view('backend.rent.owner', compact('rentCollections'));
         }
 
@@ -100,7 +106,7 @@ class RentController extends Controller
             $validatedData['invoice_number'] = (new InvoiceNumber)->invoice_num($this->getInvoiceNumber());
             $validatedData['tenant_id'] = $request->rent_id;
             $validatedData['rent_type'] = 'Rented';
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('rent')->file($request->image)->resizeImage(100, 100)->save();
@@ -166,7 +172,7 @@ class RentController extends Controller
         try {
             $validatedData['tenant_id'] = $request->rent_id;
             $validatedData['rent_type'] = 'Rented';
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('rent')->file($request->image)->resizeImage(100, 100)->save();

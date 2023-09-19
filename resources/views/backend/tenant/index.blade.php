@@ -22,14 +22,14 @@
                 <table id="datatables-reponsive" class="table" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Sl.</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>Address</th>
-                            <th>Appartment</th>
-                            <th>Action </th>
+                            <th>@lang('table.sl')</th>
+                            <th>@lang('table.name')</th>
+                            <th>@lang('table.image') </th>
+                            <th>@lang('table.email') </th>
+                            <th>@lang('table.mobile') </th>
+                            <th>@lang('table.address') </th>
+                            <th>@lang('table.appartment') </th>
+                            <th>@lang('table.action') </th>
                         </tr>
                     </thead>
                     <tbody>

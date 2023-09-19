@@ -24,7 +24,7 @@ class Kernel extends HttpKernel
         \Fruitcake\Cors\HandleCors::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         // \App\Http\Middleware\AdminActivity::class,
-       
+
     ];
 
     /**
@@ -40,6 +40,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\LanguageManager::class,
         ],
 
         'api' => [

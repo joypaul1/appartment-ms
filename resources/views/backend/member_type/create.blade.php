@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> Create Member Type
+    <i class="fa fa-plus-circle"></i> {{ __('title.Create-Member-Type') }}
 @stop
 @section('table_header')
-@include('backend._partials.page_header', [
-'fa' => 'fa fa-list',
-'name' => 'Member Type List',
-'route' =>route('backend.site-config.member-type.index'),
-])
+    @include('backend._partials.page_header', [
+        'fa' => 'fa fa-list',
+        'name' => __('title.Member-Type-List'),
+        'route' => route('backend.site-config.member-type.index'),
+    ])
 @endsection
 <div class="row">
     <div class="col-12">
@@ -23,14 +23,16 @@
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'name',
-                        'required' => true,
+                            'name' => 'name',
+                            'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('name'),
+                        ])
                     </div>
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Submit Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>
                     </div>
                 </form>
             </div>
@@ -40,5 +42,4 @@
 @endsection
 
 @push('js')
-
 @endpush

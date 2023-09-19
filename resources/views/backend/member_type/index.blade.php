@@ -4,12 +4,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Member Type List
+<i class="fa fa-list"></i> {{ __('title.Member-Type-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => 'Create Member Type',
+'name' => __('title.Create-Member-Type'),
 'route' =>route('backend.site-config.member-type.create'),
 ])
 @endsection
@@ -22,9 +22,9 @@
                 <table id="datatables-reponsive" class="table" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Sl.</th>
-                            <th>Name</th>
-                            <th>Action </th>
+                            <th>@lang('table.sl')</th>
+                            <th>@lang('table.name')</th>
+                            <th>@lang('table.action') </th>
                         </tr>
                     </thead>
                     <tbody>

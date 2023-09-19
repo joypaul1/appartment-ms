@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Helpers\Image;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Backend\Employee;
 use App\Models\Backend\MemberType;
 use DateTime;
@@ -22,19 +23,20 @@ class EmployeeController extends Controller
     {
 
         if (auth('admin')->user()->role_type == 'owner') {
-             $data = Employee::select('employees.*', 'mt.name as designation')
-            ->join('member_types as mt', 'mt.id', '=', 'employees.member_type_id')
-            ->where('employees.branch_id', auth('admin')->user()->branch_id)
-            ->get();
+            $data = Employee::select('employees.*', 'mt.name as designation')
+                ->join('member_types as mt', 'mt.id', '=', 'employees.member_type_id')
+                ->where('employees.branch_id', auth('admin')->user()->branch_id)
+                ->get();
             return view('backend.employee.owner', compact('data'));
         }
 
-        if($request->getSalary){
+        if ($request->getSalary) {
             return response()->json(['data' =>  Employee::whereId($request->Employeeid)->first()->salary]);
         }
 
 
-        $data = Employee::with('memberType:id,name')->where('branch_id', auth('admin')->user()->branch_id)->get();
+        $data = Employee::with('memberType:id,name')->where('branch_id', session('branch_id'))
+            ->get();
         return view('backend.employee.index', compact('data'));
     }
 
@@ -60,8 +62,8 @@ class EmployeeController extends Controller
     {
         $validatedData = $request->validate([
             'name'              => 'required|string|max:255',
-            'email'             => 'required|email|max:255',
-            'mobile'            => 'required|string|max:20',
+            'email'             => 'required|email|max:255|unique:employees,email',
+            'mobile'            => 'required|string|max:20|unique:employees,mobile',
             'pre_address'       => 'required|string|max:255',
             'per_address'       => 'required|string|max:255',
             'nid'               => 'required|string|max:20',
@@ -74,7 +76,7 @@ class EmployeeController extends Controller
         ]);
         try {
             $validatedData['password'] = Hash::make($request->password);
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['joining_date'] = date('Y-m-d', strtotime($request->joining_date));
             if ($request->resign_date) {
                 $validatedData['resign_date'] = date('Y-m-d', strtotime($request->resign_date));
@@ -84,6 +86,18 @@ class EmployeeController extends Controller
                 $validatedData['image'] = $image;
             }
             $employee = Employee::create($validatedData);
+            $data['name'] = ($request->name);
+            $data['email'] = ($request->email);
+            $data['mobile'] = ($request->mobile);
+            $data['branch_id'] =  $validatedData['branch_id'];
+            if ($request->password) {
+                $data['password'] = Hash::make($request->password);
+            }
+            if ($request->hasFile('image')) {
+                $data['image'] =  $validatedData['image'];
+            }
+            Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
+                ->updateOrCreate($data);
         } catch (\Exception $ex) {
             dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
@@ -132,18 +146,19 @@ class EmployeeController extends Controller
             'pre_address'       => 'required|string|max:255',
             'per_address'       => 'required|string|max:255',
             'nid'               => 'required|string|max:20',
-            // 'password'          => 'nullable|string|max:255',
             'salary'            => 'required',
             'joining_date'      => 'required',
             'resign_date'       => 'nullable',
             'status'            => 'required',
             'member_type_id'            => 'required',
         ]);
+        // dd($validatedData, $employee);
         try {
-            if($request->password){
+            DB::beginTransaction();
+            if ($request->password) {
                 $validatedData['password'] = Hash::make($request->password);
             }
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['joining_date'] = date('Y-m-d', strtotime($request->joining_date));
             if ($request->resign_date) {
                 $validatedData['resign_date'] = date('Y-m-d', strtotime($request->resign_date));
@@ -153,8 +168,27 @@ class EmployeeController extends Controller
                 $validatedData['image'] = $image;
             }
 
+            $data['name']       = ($request->name);
+            $data['email']      = ($request->email);
+            $data['mobile']     = ($request->mobile);
+            $data['branch_id']  =  $validatedData['branch_id'];
+            $data['role_type']  =  'employee';
+            if ($request->password) {
+                $data['password'] = Hash::make($request->password);
+            }
+            if ($request->hasFile('image')) {
+                $data['image'] =  $validatedData['image'];
+            }
+            $admin = Admin::where('email', $employee->email)->where('mobile', $employee->mobile)->first();
+            if ($admin) {
+                $admin->update($data);
+            } else {
+                Admin::create($data);
+            }
             $employee->update($validatedData);
+            DB::commit();
         } catch (\Exception $ex) {
+            DB::rollBack();
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
@@ -171,10 +205,10 @@ class EmployeeController extends Controller
     {
         try {
             $employee->delete();
+            Admin::where('email', $employee->email)->where('name', $employee->name)->where('mobile', $employee->mobile)->delete();
         } catch (\Exception $ex) {
             return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }
-        // (new LogActivity)::addToLog('Category Deleted');
         return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }

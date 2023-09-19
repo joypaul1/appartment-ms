@@ -31,8 +31,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'backend.'], function () {
     // dashboard
+    Route::get('profile', [DashboardController::class, 'profile'])->name('admin.profile');
+    Route::post('update-profile', [DashboardController::class, 'profileUpdate'])->name('admin.update-profile');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('branch/{id}', [DashboardController::class, 'branch'])->name('dashboard.branch');
+    Route::get('language/{id}', [DashboardController::class, 'language'])->name('dashboard.language');
     // user
     Route::resource('floor', FloorController::class);
     Route::resource('unit', UnitController::class);

@@ -22,14 +22,14 @@
                 <table id="datatables-reponsive" class="table" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Sl.</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Mobile</th>
-                            <th>Address</th>
-                            <th>Appartment</th>
-                            <th>Advance</th>
-                            <th>Rent </th>
+                            <th>@lang('table.sl')</th>
+                            <th>@lang('table.name')</th>
+                            <th>@lang('table.image') </th>
+                            <th>@lang('table.mobile') </th>
+                            <th>@lang('table.address') </th>
+                            <th>@lang('table.appartment') </th>
+                            <th>@lang('table.advance') </th>
+                            <th>@lang('table.rent') </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,11 +56,11 @@
                             <td>
                                 Floor:{{ $row->floor->name }}/Unit:{{ $row->unit->name }}
                             </td>
-                              <td>
-                                {{ $row->advance_rent  }}
+                            <td>
+                                {{ $row->advance_rent }}
                             </td>
                             <td>
-                                {{ $row->rent_per_month  }}
+                                {{ $row->rent_per_month }}
                             </td>
 
 

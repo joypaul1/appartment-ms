@@ -4,12 +4,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Floor List
+<i class="fa fa-list"></i> @lang('title.Floor-List')
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => 'Create Floor',
+'name' =>  __('title.Create-Floor') ,
 'route' =>route('backend.floor.create'),
 ])
 @endsection
@@ -22,9 +22,9 @@
                 <table id="datatables-reponsive" class="table" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Sl.</th>
-                            <th>Name</th>
-                            <th>Action </th>
+                            <th>@lang('table.sl')</th>
+                            <th>@lang('table.name')</th>
+                            <th>@lang('table.action') </th>
                         </tr>
                     </thead>
                     <tbody>

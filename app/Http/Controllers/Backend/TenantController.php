@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Helpers\Image;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Backend\Floor;
 use App\Models\Backend\Owner;
 use App\Models\Backend\OwnerUnit;
@@ -11,8 +12,11 @@ use App\Models\Backend\Tenant;
 use App\Models\Backend\Unit;
 use App\Models\Backend\Year;
 use DateTime;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule as ValidationRule;
 
 class TenantController extends Controller
 {
@@ -38,12 +42,16 @@ class TenantController extends Controller
 
         if ($request->getRent) {
             $rent = Tenant::where('floor_id', $request->floor_id)
-                ->where('unit_id', $request->unit_id)->
-                // ->where('branch_id', auth('admin')->user()->branch_id)
-                where('status', 1)->first();
+                ->where('unit_id', $request->unit_id)
+                ->where('branch_id', session('branch_id'))
+                ->where('status', 1)->first();
             return response()->json(['data' => $rent]);
         }
-        $data = Tenant::where('branch_id', auth('admin')->user()->branch_id)->with('unit:id,name', 'floor:id,name')->get();
+
+        $data = Tenant::where('branch_id', session('branch_id'))->with('unit:id,name', 'floor:id,name')->get();
+        if(auth('admin')->user()->role_type == 'employee'){
+            return view('backend.tenant.employee', compact('data'));
+        }
         return view('backend.tenant.index', compact('data'));
     }
 
@@ -63,7 +71,7 @@ class TenantController extends Controller
                 'name' => $date->format('F')
             ];
         }
-        $floors = Floor::active()->get(['id', 'name']);
+        $floors = Floor::active()->where('branch_id', session('branch_id'))->get(['id', 'name']);
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
         return view('backend.tenant.create', compact('floors', 'months', 'years', 'status'));
@@ -79,8 +87,8 @@ class TenantController extends Controller
     {
         $validatedData = $request->validate([
             'name'          => 'required|string|max:255',
-            'email'         => 'required|email|max:255',
-            'mobile'        => 'required|string|max:20',
+            'email' => 'required|email|max:255|unique:rent_configurations,email',
+            'mobile' => 'required|string|max:20|unique:rent_configurations,mobile',
             'address'   => 'required|string|max:255',
             'nid'           => 'required|string|max:20',
             'password'      => 'required|string|max:255',
@@ -93,16 +101,35 @@ class TenantController extends Controller
             'status'        => 'required',
         ]);
         try {
+            DB::beginTransaction();
             $validatedData['password'] = Hash::make($request->password);
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d');
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('tenant')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
             }
             Unit::whereId($request->unit_id)->update(['status' => '1']);
-            $tenant = Tenant::create($validatedData);
+            Tenant::create($validatedData);
+
+
+            $data['name'] = ($request->name);
+            $data['email'] = ($request->email);
+            $data['mobile'] = ($request->mobile);
+            $data['branch_id'] =  $validatedData['branch_id'];
+            $data['role_type'] =  'tenant';
+            if ($request->password) {
+                $data['password'] = Hash::make($request->password);
+            }
+            if ($request->hasFile('image')) {
+                $data['image'] =  $validatedData['image'];
+            }
+            Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
+                ->updateOrCreate($data);
+            DB::rollBack();
         } catch (\Exception $ex) {
+            DB::commit();
+
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
@@ -137,10 +164,11 @@ class TenantController extends Controller
                 'name' => $date->format('F')
             ];
         }
-        $floors = Floor::active()->get(['id', 'name']);
+        $units = Unit::where('id', $tenant->unit_id)->active()->get(['id', 'name']);
+        $floors = Floor::where('branch_id', session('branch_id'))->active()->get(['id', 'name']);
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
-        return view('backend.tenant.edit', compact('floors', 'months', 'years', 'status', 'tenant'));
+        return view('backend.tenant.edit', compact('floors', 'months', 'years', 'status', 'units', 'tenant'));
     }
 
     /**
@@ -154,8 +182,8 @@ class TenantController extends Controller
     {
         $validatedData = $request->validate([
             'name'          => 'required|string|max:255',
-            'email'         => 'required|email|max:255',
-            'mobile'        => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'mobile' => 'required|string|max:20',
             'address'   => 'required|string|max:255',
             'nid'           => 'required|string|max:20',
             'password'      => 'nullable|string|max:255',
@@ -168,9 +196,11 @@ class TenantController extends Controller
             'status'        => 'required',
         ]);
         try {
+            DB::beginTransaction();
             $validatedData['password'] = Hash::make($request->password);
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d');
+
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('tenant')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
@@ -179,8 +209,30 @@ class TenantController extends Controller
                 Unit::whereId($tenant->unit_id)->update(['status' => 0]);
                 Unit::whereId($request->unit_id)->update(['status' => 1]);
             }
+
+
+            $data['name'] = ($request->name);
+            $data['email'] = ($request->email);
+            $data['mobile'] = ($request->mobile);
+            $data['branch_id'] =  $validatedData['branch_id'];
+            $data['role_type'] =  'tenant';
+            if ($request->password) {
+                $data['password'] = Hash::make($request->password);
+            }
+            if ($request->hasFile('image')) {
+                $data['image'] =  $validatedData['image'];
+            }
+            $admin = Admin::where('email', $tenant->email)->where('mobile', $tenant->mobile)->first();
+            if ($admin) {
+                $admin->update($data);
+            } else {
+                Admin::create($data);
+            }
+
             $tenant->update($validatedData);
+            DB::commit();
         } catch (\Exception $ex) {
+            DB::rollBack();
             return redirect()->back()->with('error',  $ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
@@ -198,6 +250,7 @@ class TenantController extends Controller
     {
         try {
             Unit::whereId($tenant->unit_id)->update(['status' => 0]);
+            Admin::where('email', $tenant->email)->where('name', $tenant->name)->where('mobile', $tenant->mobile)->delete();
             $tenant->delete();
         } catch (\Exception $ex) {
             return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);

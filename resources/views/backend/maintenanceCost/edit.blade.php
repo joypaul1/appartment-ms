@@ -8,11 +8,11 @@
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => 'Owner Utilit List',
+        'name' => __('title.Maintenance-Cost-List'),
         'route' => route('backend.maintenance-cost.index'),
     ])
 @endsection
-@endsection
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -96,7 +96,7 @@
 
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Submit Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>
                     </div>
                 </form>
             </div>
@@ -106,26 +106,28 @@
 @endsection
 
 @push('js')
-
 <script>
     $('#Floorid').on('change', function(e) {
         e.preventDefault();
-        let url ="{{route('backend.unit.index') }}"
+        let url = "{{ route('backend.unit.index') }}"
         $.ajax({
             type: "GET",
-            url: url ,
+            url: url,
             dataType: 'JSON',
-            data:{ 'Floorid':e.target.value, 'getFreeUnits' :true},
+            data: {
+                'Floorid': e.target.value,
+                'getFreeUnits': true
+            },
 
-            success: function (res) {
+            success: function(res) {
                 $("#Unitid").html(' ');
-                $.map( res.data, function( val, i ) {
+                $.map(res.data, function(val, i) {
                     var newOption = new Option(val.name, val.id, false, false);
                     $('#Unitid').append(newOption).trigger('change');
 
                 });
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 var msg = '';
                 if (jqXHR.status === 0) {
                     msg = 'Not connect.\n Verify Network.';
@@ -147,6 +149,5 @@
         });
 
     });
-
 </script>
 @endpush

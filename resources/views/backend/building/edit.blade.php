@@ -8,7 +8,7 @@
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => 'Building List',
+        'name' => __('title.Bill-Informaiton-List'),
         'route' => route('backend.site-config.building.index'),
     ])
 @endsection
@@ -155,7 +155,7 @@
                         ])
                     </div>
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Update Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.update_data')</button>
                     </div>
                 </form>
             </div>

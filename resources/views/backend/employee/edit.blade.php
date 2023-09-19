@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-pencil"></i> Edit Employee
+<i class="fa fa-pencil"></i> {{ __('title.Edit-Employee') }}   
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' => 'Employee List',
+'name' =>  {{ __('title.Employee-List') }},
 'route' =>route('backend.employee.index'),
 ])
 @endsection
@@ -131,7 +131,7 @@
 
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Update Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.update_data')</button>
                     </div>
                 </form>
             </div>

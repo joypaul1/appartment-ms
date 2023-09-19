@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> Create Bill Deposit
+    <i class="fa fa-plus-circle"></i> @lang('title.Create-Bill-Deposit')
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => 'Owner Utilit List',
+        'name' => __('Bill-Deposit-List'),
         'route' => route('backend.bill-deposit.index'),
     ])
 @endsection
@@ -106,7 +106,7 @@
 
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Submit Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>
                     </div>
                 </form>
             </div>

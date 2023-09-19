@@ -1,11 +1,11 @@
 @php
-    $strpos = Route::currentRouteName();
+$strpos = Route::currentRouteName();
 @endphp
 
 
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
+        <a class="sidebar-brand" href="{{ url('admin/dashboard') }}">
             <span class="sidebar-brand-text align-middle">
                 Appartment
                 {{-- <sup><small class="badge bg-primary text-uppercase">Pro</small></sup> --}}
@@ -16,16 +16,18 @@
         <div class="sidebar-user">
             <div class="d-flex justify-content-center">
                 <div class="flex-shrink-0">
-                    <img src="{{ asset('assets/backend') }}/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1"
-                        alt="{{ auth('admin')->user()->name }}" />
+                    <img src="{{ auth('admin')->user()->image ? asset(auth('admin')->user()->image): asset('assets/backend/img/avatars/avatar.jpg') }}"
+                        class="avatar img-fluid rounded me-1" alt="admin-logo" />
+
+
                 </div>
                 <div class="flex-grow-1 ps-2">
                     <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         {{ auth('admin')->user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-start">
-                        <a class="dropdown-item" href="#"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log
+                            out</a>
 
                     </div>
 
@@ -37,36 +39,30 @@
         <ul class="sidebar-nav">
             <li class="sidebar-item {{ request()->segment(2) == 'dashboard' ? 'active' : ' ' }} active">
                 <a class="sidebar-link" href="{{ url('admin/dashboard') }}">
-                    <i class="align-middle" data-feather="home"></i> <span class="align-middle">Dashboard</span>
+                    <span class="align-middle">@lang('sidebar.dashboard') </span>
+
                 </a>
             </li>
 
             <li class="sidebar-item">
-                <a data-bs-target="#Unit" data-bs-toggle="collapse"
-                    class="sidebar-link {{ request()->segment(2) == 'unit' ? 'active' : ' ' }}">
+                <a data-bs-target="#Unit" data-bs-toggle="collapse" class="sidebar-link {{ request()->segment(2) == 'unit' ? 'active' : ' ' }}">
                     <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">Unit</span>
+                    <span class="align-middle">@lang('sidebar.unit')</span>
                 </a>
-                <ul id="Unit"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'unit' ? 'show' : ' ' }}  "
-                    data-bs-parent="#sidebar">
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.unit.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.unit.index') }}">Unit List</a>
-                    </li>
-
-                </ul>
+            <li class="sidebar-item {{ strpos($strpos, 'backend.unit.index') === 0 ? 'active' : ' ' }}">
+                <a class="sidebar-link" href="{{ route('backend.unit.index') }}">@lang('sidebar.unit_list')</a>
+            </li>
             </li>
 
             <li class="sidebar-item">
                 <a data-bs-target="#tenant" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">Tenant</span>
+                    <span class="align-middle">@lang('sidebar.tenant')</span>
                 </a>
-                <ul id="tenant"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'tenant' ? 'show' : ' ' }} "
+                <ul id="tenant" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'tenant' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.tenant.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.tenant.index') }}">Tenant List</a>
+                        <a class="sidebar-link" href="{{ route('backend.tenant.index') }}">@lang('sidebar.tenant_list')</a>
                     </li>
 
                 </ul>
@@ -74,14 +70,13 @@
             <li class="sidebar-item">
                 <a data-bs-target="#employee" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">Employee</span>
+                    <span class="align-middle">@lang('sidebar.employee')</span>
+
                 </a>
-                <ul id="employee"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'employee' ? 'show' : ' ' }}
-                    {{ request()->segment(2) == 'employee-salary' ? 'show' : ' ' }}  "
-                    data-bs-parent="#sidebar">
+                <ul id="employee" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'employee' ? 'show' : ' ' }}
+                    {{ request()->segment(2) == 'employee-salary' ? 'show' : ' ' }}  " data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.employee.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.employee.index') }}">Employee List</a>
+                        <a class="sidebar-link" href="{{ route('backend.employee.index') }}">@lang('sidebar.employee_list')</a>
                     </li>
 
                 </ul>
@@ -89,13 +84,12 @@
             <li class="sidebar-item">
                 <a data-bs-target="#Rent" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">Rent</span>
+                    <span class="align-middle">@lang('sidebar.rent')</span>
                 </a>
-                <ul id="Rent"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'rent' ? 'show' : ' ' }} "
+                <ul id="Rent" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'rent' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.rent.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.rent.index') }}">Rent List</a>
+                        <a class="sidebar-link" href="{{ route('backend.rent.index') }}">@lang('sidebar.rent_list')</a>
                     </li>
 
                 </ul>
@@ -103,15 +97,14 @@
             <li class="sidebar-item">
                 <a data-bs-target="#owner-utility" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">Owner Utility</span>
+                    <span class="align-middle">@lang('sidebar.owner_utility')</span>
+
                 </a>
-                <ul id="owner-utility"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'owner-utility' ? 'show' : ' ' }} "
+                <ul id="owner-utility" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'owner-utility' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.owner-utility.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.owner-utility.index') }}">Owner Utility
-                            List
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.owner-utility.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.owner-utility.index') }}">
+                            @lang('sidebar.owner_utility_list')
                         </a>
                     </li>
 
@@ -121,15 +114,15 @@
             <li class="sidebar-item">
                 <a data-bs-target="#maintenance-cost" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle">Maintenance Cost</span>
+                    <span class="align-middle">@lang('sidebar.maintenance_cost')</span>
                 </a>
                 <ul id="maintenance-cost"
                     class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'maintenance-cost' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.maintenance-cost.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.maintenance-cost.index') }}">Maintenance Cost
-                            List
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.maintenance-cost.index') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.maintenance-cost.index') }}">
+                            @lang('sidebar.maintenance_cost_list')
+
                         </a>
                     </li>
 
@@ -141,8 +134,7 @@
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Fund Management</span>
                 </a>
-                <ul id="fund"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'fund' ? 'show' : ' ' }} "
+                <ul id="fund" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'fund' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.fund.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.fund.index') }}">
@@ -156,14 +148,13 @@
             <li class="sidebar-item">
                 <a data-bs-target="#complain" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
-                    <span class="align-middle"> Complain</span>
+                    <span class="align-middle"> @lang('sidebar.complain')</span>
                 </a>
-                <ul id="complain"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'complain' ? 'show' : ' ' }} "
+                <ul id="complain" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'complain' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.complain.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.complain.index') }}">
-                            Complain List
+                            @lang('sidebar.complain_list')
                         </a>
                     </li>
 
@@ -171,18 +162,17 @@
             </li>
 
 
-             <li class="sidebar-item">
+            <li class="sidebar-item">
                 <a data-bs-target="#Report" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> Report </span>
+                    <span class="align-middle"> @lang('sidebar.report')</span>
                 </a>
-                <ul id="Report"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'report' ? 'show' : ' ' }} "
+                <ul id="Report" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'report' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
-                    <li
-                        class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.notice-board.index') }}">
-                          Rental Report
+                            @lang('sidebar.rental_report')
                         </a>
                     </li>
 

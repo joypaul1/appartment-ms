@@ -17,10 +17,11 @@ class ComplainController extends Controller
      */
     public function index()
     {
-        $complains = Complain::get();
+        $complains = Complain::where('branch_id', session('branch_id'))->get();
         if (auth('admin')->user()->role_type == 'owner') {
-            $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
-            $complains = Complain::where('branch_id', $owner->branch_id)->get();
+
+            $complains = Complain::where('branch_id', session('branch_id'))
+                ->get();
             return view('backend.complain.owner', compact('complains'));
         }
         return view('backend.complain.index', compact('complains'));
@@ -50,7 +51,7 @@ class ComplainController extends Controller
             'description' => 'required|string',
         ]);
         try {
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             Complain::create($validatedData);
         } catch (\Exception $ex) {
@@ -97,7 +98,7 @@ class ComplainController extends Controller
             'description' => 'required|string',
         ]);
         try {
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             $complain->update($validatedData);
         } catch (\Exception $ex) {

@@ -22,16 +22,17 @@
                 <table id="datatables-reponsive" class="table" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Sl.</th>
-                            <th>Entry Date</th>
-                            <th>Name</th>
-                            <th>Mobile</th>
-                            <th>Address</th>
-                            <th>Floor </th>
-                            <th>Unit</th>
-                            <th>In Time</th>
-                            <th>Out Time</th>
-                            <th>Action </th>
+                            <th>@lang('table.sl')</th>
+                            <th>@lang('table.entry_date')</th>
+                            <th>@lang('table.name')</th>
+                            <th>@lang('table.mobile')</th>
+                            <th>@lang('table.address')</th>
+                            <th>@lang('table.floor')</th>
+                            <th>@lang('table.unit')</th>
+                            <th>@lang('table.in_time')</th>
+                            <th>@lang('table.out_time')</th>
+                            <th>@lang('table.action')</th>
+
                         </tr>
                     </thead>
                     <tbody>

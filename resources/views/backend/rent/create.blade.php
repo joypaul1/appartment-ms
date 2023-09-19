@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> Create Tenant
+    <i class="fa fa-plus-circle"></i>{{ __('title.Create-Rent-Collection') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => 'Tenant List',
+        'name' => __('title.List-Rent-Collection'),
         'route' => route('backend.tenant.index'),
     ])
 @endsection
@@ -206,7 +206,7 @@
 
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Submit Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>
                     </div>
                 </form>
             </div>

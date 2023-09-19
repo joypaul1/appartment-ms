@@ -22,7 +22,15 @@ class EmployeeSalaryController extends Controller
      */
     public function index()
     {
-        $data = EmployeeSalary::where('branch_id', auth('admin')->user()->branch_id)->with('employee:id,name', 'year:id,name', 'month:id,name')->get();
+
+        if (auth('admin')->user()->role_type == 'employee') {
+            $employee = Employee::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+            $data = EmployeeSalary::where('branch_id', session('branch_id'))->where($employee->id)
+                ->with('employee:id,name', 'year:id,name', 'month:id,name')->get();
+            return view('backend.employee_salary.index', compact('data'));
+        }
+        $data = EmployeeSalary::where('branch_id', session('branch_id'))
+            ->with('employee:id,name', 'year:id,name', 'month:id,name')->get();
         return view('backend.employee_salary.index', compact('data'));
     }
 
@@ -63,7 +71,7 @@ class EmployeeSalaryController extends Controller
         ]);
         try {
             $validatedData['amount'] = $request->salary;
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
 
             EmployeeSalary::create($validatedData);
@@ -124,7 +132,7 @@ class EmployeeSalaryController extends Controller
         ]);
         try {
             $validatedData['amount'] = $request->salary;
-            $validatedData['branch_id'] = auth('admin')->user()->branch_id;
+            $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
 
             $employeeSalary->update($validatedData);

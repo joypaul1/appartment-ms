@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\NoticeBoard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NoticeBoardController extends Controller
 {
@@ -14,7 +16,12 @@ class NoticeBoardController extends Controller
      */
     public function index()
     {
-        return view('backend.noticeBoard.index');
+        $noticeBoards = NoticeBoard::where('branch_id', session('branch_id'))->get();
+        if (auth('admin')->user()->role_type == 'owner') {
+            $noticeBoards = NoticeBoard::where('branch_id', session('branch_id'))->get();
+            return view('backend.noticeBoard.owner', compact('noticeBoards'));
+        }
+        return view('backend.noticeBoard.index', compact('noticeBoards'));
     }
 
     /**
@@ -24,10 +31,7 @@ class NoticeBoardController extends Controller
      */
     public function create()
     {
-        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
-
         return view('backend.noticeBoard.create');
-
     }
 
     /**
@@ -38,7 +42,21 @@ class NoticeBoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'end_date' => 'required',
+            'status' => 'required',
+        ]);
+        try {
+            $validatedData['branch_id'] = session('branch_id');
+            $validatedData['end_date'] = date('Y-m-d', strtotime($request->end_date));
+        
+            NoticeBoard::create($validatedData);
+        } catch (\Exception $ex) {
+            dd($ex->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.notice-board.index')->with('success', 'NoticeBoard Created successfully.');
     }
 
     /**
@@ -58,10 +76,9 @@ class NoticeBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(NoticeBoard $noticeBoard)
     {
-        return view('backend.noticeBoard.edit');
-
+        return view('backend.noticeBoard.edit', compact('noticeBoard'));
     }
 
     /**
@@ -71,9 +88,21 @@ class NoticeBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, NoticeBoard $noticeBoard)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'end_date' => 'required',
+            'status' => 'required',
+        ]);
+        try {
+            $validatedData['branch_id'] = session('branch_id');
+            $validatedData['end_date'] = date('Y-m-d', strtotime($request->end_date));
+            $noticeBoard->update($validatedData);
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+        return redirect()->route('backend.notice-board.index')->with('success', 'NoticeBoard Updated successfully.');
     }
 
     /**
@@ -82,8 +111,16 @@ class NoticeBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(NoticeBoard $noticeBoard)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $noticeBoard->delete();
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!']);
+        }
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }

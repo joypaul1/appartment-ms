@@ -4,7 +4,7 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> Owner Fund
+    <i class="fa fa-list"></i> {{ __('title.Fund-List') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
@@ -27,18 +27,12 @@
                     <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Owner</th>
-                                <th>Date</th>
-                                <th>
-                                    Month
-                                </th>
-                                <th>
-                                    Year
-                                </th>
-                                <th>
-                                    Amount
-                                </th>
+                                <th>@lang('table.sl')</th>
+                                <th>@lang('table.owner')</th>
+                                <th>@lang('table.date')</th>
+                                <th>@lang('table.month')</th>
+                                <th>@lang('table.year')</th>
+                                <th>@lang('table.amount')</th>
                             </tr>
                         </thead>
                         <tbody>

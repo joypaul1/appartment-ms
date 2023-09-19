@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-pencil"></i> Edit Member Type
+    <i class="fa fa-pencil"></i> {{ __('title.Edit-Member-Type') }}
 @stop
 @section('table_header')
-@include('backend._partials.page_header', [
-'fa' => 'fa fa-list',
-'name' => 'Member Type List',
-'route' =>route('backend.site-config.member-type.index'),
-])
+    @include('backend._partials.page_header', [
+        'fa' => 'fa fa-list',
+        'name' => __('title.Member-Type-List'),
+        'route' => route('backend.site-config.member-type.index'),
+    ])
 @endsection
 <div class="row">
     <div class="col-12">
@@ -18,20 +18,23 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.site-config.member-type.update', $floor) }}" method="POST" class="row g-3">
+                <form action="{{ route('backend.site-config.member-type.update', $floor) }}" method="POST"
+                    class="row g-3">
                     @method('PUT')
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'name',
-                        'required' => true,
-                        'value' => $floor->name
+                            'name' => 'name',
+                            'required' => true,
+                            'value' => $floor->name,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('name'),
+                        ])
                     </div>
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">Update Data</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.update_data')</button>
                     </div>
                 </form>
             </div>
@@ -41,5 +44,4 @@
 @endsection
 
 @push('js')
-
 @endpush
