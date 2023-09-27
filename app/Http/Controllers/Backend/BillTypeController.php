@@ -97,7 +97,7 @@ class BillTypeController extends Controller
         try {
             DB::beginTransaction();
             $data = $validatedData;
-            $data['branch_id'] = auth('admin')->user()->branch_id;
+            $data['branch_id'] = session('branch_id');
             $billType->update($data);
             DB::commit();
         } catch (\Exception $ex) {

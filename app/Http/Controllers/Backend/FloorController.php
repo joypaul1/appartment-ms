@@ -16,7 +16,7 @@ class FloorController extends Controller
      */
     public function index()
     {
-        $data = Floor::with('branch:id,name')
+        $data = Floor::where('branch_id', session('branch_id'))->with('branch:id,name')
             ->orderBy('id', 'DESC')
             ->get();
         return view('backend.floor.index', compact('data'));
@@ -46,7 +46,7 @@ class FloorController extends Controller
         try {
             DB::beginTransaction();
             $data = $validatedData;
-            $data['branch_id'] = auth('admin')->user()->branch_id;
+            $data['branch_id'] = session('branch_id');
             Floor::create($data);
             DB::commit();
         } catch (\Exception $ex) {
@@ -93,7 +93,7 @@ class FloorController extends Controller
         try {
             DB::beginTransaction();
             $data = $validatedData;
-            $data['branch_id'] = auth('admin')->user()->branch_id;
+            $data['branch_id'] = session('branch_id');
             $floor->update($data);
             DB::commit();
         } catch (\Exception $ex) {

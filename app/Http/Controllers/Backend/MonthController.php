@@ -97,7 +97,7 @@ class MonthController extends Controller
         try {
             DB::beginTransaction();
             $data = $validatedData;
-            $data['branch_id'] = auth('admin')->user()->branch_id;
+            $data['branch_id'] = session('branch_id');
             $monthConfiguration->update($data);
             DB::commit();
         } catch (\Exception $ex) {

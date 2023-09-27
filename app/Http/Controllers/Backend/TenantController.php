@@ -28,6 +28,7 @@ class TenantController extends Controller
     public function index(Request $request)
     {
 
+
         if (auth('admin')->user()->role_type == 'owner') {
             $owner = Owner::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
 

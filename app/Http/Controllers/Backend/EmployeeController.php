@@ -25,7 +25,7 @@ class EmployeeController extends Controller
         if (auth('admin')->user()->role_type == 'owner') {
             $data = Employee::select('employees.*', 'mt.name as designation')
                 ->join('member_types as mt', 'mt.id', '=', 'employees.member_type_id')
-                ->where('employees.branch_id', auth('admin')->user()->branch_id)
+                ->where('employees.branch_id', session('branch_id'))
                 ->get();
             return view('backend.employee.owner', compact('data'));
         }

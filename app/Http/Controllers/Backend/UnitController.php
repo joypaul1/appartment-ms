@@ -72,7 +72,7 @@ class UnitController extends Controller
         try {
             DB::beginTransaction();
             $data = $validatedData;
-            $data['branch_id'] = auth('admin')->user()->branch_id;
+            $data['branch_id'] =session('branch_id');
             Unit::create($data);
             DB::commit();
         } catch (\Exception $ex) {
@@ -123,11 +123,12 @@ class UnitController extends Controller
         try {
             DB::beginTransaction();
             $data = $validatedData;
-            $data['branch_id'] = auth('admin')->user()->branch_id;
+            $data['branch_id'] =session('branch_id');
             $unit->update($data);
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
+            dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.unit.index')->with('success', 'Data Updated Successfully');

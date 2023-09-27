@@ -50,8 +50,6 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'password',
-                        // 'value' => $tenant->name
-                        // 'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('password')])
                     </div>
@@ -89,6 +87,7 @@
                         'required' => true,'label'=>'Floor','optionData'=> $floors])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('floor_id')])
                     </div>
+                    {{-- @dd($units,$tenant->unit_id) --}}
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'unit_id',
                         'required' => true,'label'=>'Unit','optionData'=> $units ,'selectedKey' => $tenant->unit_id])
@@ -111,7 +110,7 @@
                         'value' => $tenant->rent_per_month,
                         'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('advance_rent')])
+                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('rent_per_month')])
                     </div>
                     {{-- @dd(date('m')) --}}
                     <div class="col-md-6">

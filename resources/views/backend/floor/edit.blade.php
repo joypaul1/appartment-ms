@@ -5,7 +5,7 @@
 @section('page-header')
     <i class="fa fa-pencil"></i> @lang('title.Edit-Floor')
 @stop
-@stop
+
 @section('table_header')
 @include('backend._partials.page_header', [
     'fa' => 'fa fa-list',

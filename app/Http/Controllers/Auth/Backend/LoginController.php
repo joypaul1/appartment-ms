@@ -83,7 +83,7 @@ class LoginController extends Controller
                 $branch_id = BuildingInformation::first()->id;
                 session(['branch_id' => $branch_id]);
             } else {
-                session(['branch_id' => auth('admin')->user()->branch_id]);
+                session(['branch_id' => session('branch_id')]);
             }
             return $this->sendLoginResponse($request);
         }
