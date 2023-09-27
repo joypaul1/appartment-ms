@@ -165,7 +165,7 @@ class TenantController extends Controller
                 'name' => $date->format('F')
             ];
         }
-        $units = Unit::where('id', $tenant->unit_id)->active()->get(['id', 'name']);
+        $units = Unit::where('id', $tenant->unit_id)->get(['id', 'name']);
         $floors = Floor::where('branch_id', session('branch_id'))->active()->get(['id', 'name']);
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
@@ -187,7 +187,6 @@ class TenantController extends Controller
             'mobile' => 'required|string|max:20',
             'address'   => 'required|string|max:255',
             'nid'           => 'required|string|max:20',
-            'password'      => 'nullable|string|max:255',
             'floor_id'      => 'required',
             'unit_id'       => 'required',
             'advance_rent'  => 'required',
@@ -198,10 +197,9 @@ class TenantController extends Controller
         ]);
         try {
             DB::beginTransaction();
-            $validatedData['password'] = Hash::make($request->password);
-            $validatedData['branch_id'] = session('branch_id');
-            $validatedData['date'] = date('Y-m-d');
-
+            if($request->password){
+                $validatedData['password'] = Hash::make($request->password);
+            }
             if ($request->hasfile('image')) {
                 $image =  (new Image)->dirName('tenant')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
@@ -212,11 +210,11 @@ class TenantController extends Controller
             }
 
 
-            $data['name'] = ($request->name);
-            $data['email'] = ($request->email);
-            $data['mobile'] = ($request->mobile);
-            $data['branch_id'] =  $validatedData['branch_id'];
-            $data['role_type'] =  'tenant';
+            $data['name']       = ($request->name);
+            $data['email']      = ($request->email);
+            $data['mobile']     = ($request->mobile);
+            $data['branch_id']  =  session('branch_id');
+            $data['role_type']  =  'tenant';
             if ($request->password) {
                 $data['password'] = Hash::make($request->password);
             }
@@ -224,9 +222,11 @@ class TenantController extends Controller
                 $data['image'] =  $validatedData['image'];
             }
             $admin = Admin::where('email', $tenant->email)->where('mobile', $tenant->mobile)->first();
+
             if ($admin) {
                 $admin->update($data);
             } else {
+                $data['password'] = Hash::make('123456789');
                 Admin::create($data);
             }
 
