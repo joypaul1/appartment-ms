@@ -18,16 +18,17 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.tenant.store') }}" method="POST" class="row g-3"
+                <form action="{{ route('backend.rent.update', $rentCollection) }}" method="POST" class="row g-3"
                     enctype="multipart/form-data">
-                    @method('POST')
+                    @method('PUT')
                     @csrf
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'floor_id',
+                            'optionData' => $floors,
+                            'selectedKey' => $rentCollection->floor_id,
                             'required' => true,
                             'label' => 'Floor',
-                            'optionData' => $floors,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('floor_id'),
@@ -38,22 +39,20 @@
                             'name' => 'unit_id',
                             'required' => true,
                             'label' => 'Unit',
-                            'optionData' => [],
+                            'optionData' => $units,
+                            'selectedKey' => $rentCollection->unit_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('unit_id'),
                         ])
                     </div>
-
-
-                    {{-- @dd(date('m')) --}}
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'month_id',
                             'required' => true,
                             'label' => 'Month',
                             'optionData' => $months,
-                            'selectedKey' => date('m'),
+                            'selectedKey' => $rentCollection->month_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('month_id'),
@@ -65,29 +64,30 @@
                             'required' => true,
                             'label' => 'Year',
                             'optionData' => $years,
+                            'selectedKey' => $rentCollection->year_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('year_id'),
                         ])
                     </div>
-
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'name' => 'renter_name',
                             'required' => true,
                             'readonly' => true,
+                            'value' => $rentCollection->tenant->name,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('rent_id'),
                         ])
                     </div>
-                    <input type="hidden" name="rent_id" value="">
+                    <input type="hidden" name="rent_id" id="rent_id" value="{{ $rentCollection->tenant_id }}">
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'name' => 'rent',
-                            'value' => 0.0,
                             'required' => true,
                             'readonly' => true,
+                            'value' => $rentCollection->rent,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('rent'),
@@ -96,7 +96,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => 0.0,
+                            'value' => $rentCollection->water_bill,
                             'name' => 'water_bill',
                             'required' => true,
                         ])
@@ -107,7 +107,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => 0.0,
+                            'value' => $rentCollection->electric_bill,
                             'name' => 'electric_bill',
                             'required' => true,
                         ])
@@ -118,7 +118,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => 0.0,
+                            'value' => $rentCollection->electric_bill,
                             'name' => 'gas_bill',
                             'required' => true,
                         ])
@@ -129,7 +129,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => 0.0,
+                            'value' => $rentCollection->electric_bill,
                             'name' => 'security_bill',
                             'required' => true,
                         ])
@@ -140,7 +140,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => 0.0,
+                            'value' => $rentCollection->electric_bill,
                             'name' => 'utility_bill',
                             'required' => true,
                         ])
@@ -151,7 +151,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => 0.0,
+                            'value' => $rentCollection->electric_bill,
                             'name' => 'other_bill',
                             'required' => true,
                         ])
@@ -162,7 +162,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => 0.0,
+                            'value' => $rentCollection->electric_bill,
                             'label' => 'Total Rent',
                             'name' => 'total_rent',
                             'required' => true,
@@ -181,16 +181,17 @@
                             'message' => $errors->first('image'),
                         ])
                     </div>
+                    {{-- @dd($rentCollection); --}}
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'status',
-                            'selectedKey' => 1,
+                            'name' => 'bill_status',
+                            'selectedKey' => $rentCollection->bill_status,
                             'required' => true,
                             'label' => 'status',
                             'optionData' => $status,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('status'),
+                            'message' => $errors->first('bill_status'),
                         ])
                     </div>
 

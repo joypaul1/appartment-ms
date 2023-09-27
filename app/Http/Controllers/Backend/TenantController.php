@@ -50,7 +50,7 @@ class TenantController extends Controller
         }
 
         $data = Tenant::where('branch_id', session('branch_id'))->with('unit:id,name', 'floor:id,name')->get();
-        if(auth('admin')->user()->role_type == 'employee'){
+        if (auth('admin')->user()->role_type == 'employee') {
             return view('backend.tenant.employee', compact('data'));
         }
         return view('backend.tenant.index', compact('data'));
@@ -197,7 +197,7 @@ class TenantController extends Controller
         ]);
         try {
             DB::beginTransaction();
-            if($request->password){
+            if ($request->password) {
                 $validatedData['password'] = Hash::make($request->password);
             }
             if ($request->hasfile('image')) {

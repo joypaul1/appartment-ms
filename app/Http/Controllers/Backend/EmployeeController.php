@@ -69,6 +69,7 @@ class EmployeeController extends Controller
             'nid'               => 'required|string|max:20',
             'password'          => 'required|string|max:255',
             'salary'            => 'required',
+            'password'      => 'required',
             'joining_date'      => 'required',
             'resign_date'       => 'nullable',
             'status'            => 'required',

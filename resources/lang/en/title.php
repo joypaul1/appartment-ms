@@ -51,6 +51,9 @@ return [
     'Create-Management-Committe' => 'Create Management-Committe',
     'Edit-Management-Committe' => 'Edit Management-Committe',
 
+    'Rent-Collection-List' => 'Rent-Collection-List',
+    'Create-Rent-Collection' => 'Create Rent-Collection',
+    'Edit-Rent-Collection' => 'Edit Rent-Collection',
 
     'Owner-List' => 'Owner List',
     'Create-Owner' => 'Create Owner',
