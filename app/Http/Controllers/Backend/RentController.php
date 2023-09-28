@@ -192,7 +192,6 @@ class RentController extends Controller
             'bill_status' => 'required|numeric',
             // 'issue_date' => 'required',
         ]);
-        // dd( $validatedData);
         try {
             $rentCollection = RentCollection::whereId($id)->first();
 
