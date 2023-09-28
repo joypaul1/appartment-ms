@@ -76,7 +76,6 @@ class BillDepositController extends Controller
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             BillDeposit::create($validatedData);
         } catch (\Exception $ex) {
-            dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.bill-deposit.index')->with('success', 'BillDeposit Created successfully.');
@@ -99,9 +98,22 @@ class BillDepositController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(BillDeposit $billDeposit)
     {
-        return view('backend.billDeposit.edit');
+        $months = [];
+
+        for ($i = 1; $i <= 12; $i++) {
+            $date = DateTime::createFromFormat('!m', $i);
+            $months[] = [
+                'id' => $i,
+                'name' => $date->format('F')
+            ];
+        }
+
+        $billTypes = BillType::get();
+        $years = Year::get(['id', 'name']);
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        return view('backend.billDeposit.edit', compact('months', 'billDeposit', 'billTypes', 'years', 'status'));
     }
 
     /**

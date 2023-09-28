@@ -80,5 +80,5 @@ return [
     'Owner-Utility-List' => 'Owner-Utility List',
     'Create-Owner-Utility' => 'Create Owner-Utility',
     'Edit-Owner-Utility' => 'Edit Owner-Utility',
-
+    
 ];

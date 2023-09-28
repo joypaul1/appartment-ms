@@ -35,6 +35,7 @@ return [
     'total_rent' => 'Total Rent',
     'total_utility' => 'Total Utility',
     'owner' => 'Owner',
-    'bill_created_date' => 'Bill Createa Date',
+    'bill_created_date' => 'Bill Created Date',
+    'deposit_account' =>'Account Type'
 
 ];

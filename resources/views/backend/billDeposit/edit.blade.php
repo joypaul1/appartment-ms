@@ -12,33 +12,35 @@
         'route' => route('backend.bill-deposit.index'),
     ])
 @endsection
-@endsection
 <div class="row">
     <div class="col-12">
         <div class="card">
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.bill-deposit.store') }}" method="POST" class="row g-3"
+                <form action="{{ route('backend.bill-deposit.update', $billDeposit) }}" method="POST" class="row g-3"
                     enctype="multipart/form-data">
-                    @method('POST')
+                    @method('PUT')
                     @csrf
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'owner_id',
+                            'name' => 'bill_type_id',
                             'required' => true,
-                            'label' => 'owner',
-                            'optionData' => $owners,
+                            'label' => 'Bill Type',
+                            'optionData' => $billTypes,
+                            'selectedKey' => $billDeposit->bill_type_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('owner_id'),
+                            'message' => $errors->first('bill_type_id'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'date',
                             'name' => 'date',
+                            'name' => 'date',
                             'required' => true,
+                            'value' => $billDeposit->date,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('date'),
@@ -51,7 +53,7 @@
                             'required' => true,
                             'label' => 'Month',
                             'optionData' => $months,
-                            'selectedKey' => date('m'),
+                            'selectedKey' => $billDeposit->month_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('month_id'),
@@ -63,6 +65,7 @@
                             'required' => true,
                             'label' => 'Year',
                             'optionData' => $years,
+                            'selectedKey' => $billDeposit->year_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('year_id'),
@@ -70,25 +73,37 @@
                     </div>
 
 
+
+                    <div class="col-md-6">
+                        @include('components.backend.forms.input.input-type', [
+                            'name' => 'deposit_account_name',
+                            'required' => true,
+                            'value' => $billDeposit->deposit_account_name,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('deposit_account_name'),
+                        ])
+                    </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => 0.0,
-                            'name' => 'amount',
+                            'label' => 'Amount',
+                            'name' => 'total_amount',
                             'required' => true,
+                            'value' => $billDeposit->total_amount,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('amount'),
+                            'message' => $errors->first('total_amount'),
                         ])
                     </div>
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
-                            'label' => 'Bill Deposit Purpose',
-                            'name' => 'purpose',
+                            'name' => 'details',
                             'required' => true,
+                            'value' => $billDeposit->details,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('purpose'),
+                            'message' => $errors->first('details'),
                         ])
                     </div>
 
@@ -96,7 +111,7 @@
 
 
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.update_data')</button>
                     </div>
                 </form>
             </div>
@@ -106,47 +121,4 @@
 @endsection
 
 @push('js')
-
-<script>
-    $('#Floorid').on('change', function(e) {
-        e.preventDefault();
-        let url ="{{route('backend.unit.index') }}"
-        $.ajax({
-            type: "GET",
-            url: url ,
-            dataType: 'JSON',
-            data:{ 'Floorid':e.target.value, 'getFreeUnits' :true},
-
-            success: function (res) {
-                $("#Unitid").html(' ');
-                $.map( res.data, function( val, i ) {
-                    var newOption = new Option(val.name, val.id, false, false);
-                    $('#Unitid').append(newOption).trigger('change');
-
-                });
-            },
-            error: function (jqXHR, exception) {
-                var msg = '';
-                if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
-                } else if (jqXHR.status == 404) {
-                    msg = 'Requested page not found. [404]';
-                } else if (jqXHR.status == 500) {
-                    msg = 'Internal Server Error [500].';
-                } else if (exception === 'parsererror') {
-                    msg = 'Requested JSON parse failed.';
-                } else if (exception === 'timeout') {
-                    msg = 'Time out error.';
-                } else if (exception === 'abort') {
-                    msg = 'Ajax request aborted.';
-                } else {
-                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                }
-                console.log(msg);
-            },
-        });
-
-    });
-
-</script>
 @endpush
