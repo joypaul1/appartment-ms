@@ -46,7 +46,6 @@ class FundController extends Controller
     public function create(Request $request)
     {
         $months = [];
-
         for ($i = 1; $i <= 12; $i++) {
             $date = DateTime::createFromFormat('!m', $i);
             $months[] = [
@@ -70,8 +69,6 @@ class FundController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-
         $validatedData = $request->validate([
             'owner_id' => 'required|integer',
             'date' => 'required|date',
@@ -108,9 +105,21 @@ class FundController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Fund $fund)
     {
-        return view('backend.fund.edit');
+        $months = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $date = DateTime::createFromFormat('!m', $i);
+            $months[] = [
+                'id' => $i,
+                'name' => $date->format('F')
+            ];
+        }
+
+        $owners = Owner::where('branch_id', session('branch_id'))->get();
+        $years = Year::get(['id', 'name']);
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        return view('backend.fund.edit', compact('months', 'fund', 'years', 'status', 'owners'));
     }
 
     /**
