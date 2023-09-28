@@ -107,6 +107,7 @@ class FundController extends Controller
      */
     public function edit(Fund $fund)
     {
+
         $months = [];
         for ($i = 1; $i <= 12; $i++) {
             $date = DateTime::createFromFormat('!m', $i);
