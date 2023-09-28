@@ -19,32 +19,32 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.maintenance-cost.store') }}" method="POST" class="row g-3"
+                <form action="{{ route('backend.maintenance-cost.update', $maintenanceCost) }}" method="POST" class="row g-3"
                     enctype="multipart/form-data">
-                    @method('POST')
+                    @method('PUT')
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
                             'name' => 'title',
+                            'value' => $maintenanceCost->title,
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('title'),
                         ])
-                        <input type="hidden" name="owner_id" id="owner_id" value="">
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'date',
                             'name' => 'date',
                             'required' => true,
+                            'value' => $maintenanceCost->date,
+
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('date'),
                         ])
                     </div>
-
-
 
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option', [
@@ -52,7 +52,7 @@
                             'required' => true,
                             'label' => 'Month',
                             'optionData' => $months,
-                            'selectedKey' => date('m'),
+                            'selectedKey' =>  $maintenanceCost->month_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('month_id'),
@@ -64,6 +64,8 @@
                             'required' => true,
                             'label' => 'Year',
                             'optionData' => $years,
+                            'selectedKey' =>  $maintenanceCost->year_id,
+
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('year_id'),
@@ -77,6 +79,8 @@
                             'value' => 0.0,
                             'name' => 'amount',
                             'required' => true,
+                            'value' => $maintenanceCost->amount,
+
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('amount'),
@@ -86,17 +90,16 @@
                         @include('components.backend.forms.texteditor.editor', [
                             'name' => 'details',
                             'required' => true,
+                            'value' => $maintenanceCost->details,
+
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('details'),
                         ])
                     </div>
 
-
-
-
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>
+                        <button class="btn btn-primary" type="submit">@lang('button.update_data')</button>
                     </div>
                 </form>
             </div>

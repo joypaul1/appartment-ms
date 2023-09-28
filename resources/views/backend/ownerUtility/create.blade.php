@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> {{ __('title.Create-Owner-Utilit') }} Create Owner Utility
+    <i class="fa fa-plus-circle"></i> {{ __('title.Create-Owner-Utility') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => __('title.Owner-Utilit-List'),
+        'name' => __('title.Owner-Utility-List'),
         'route' => route('backend.owner-utility.index'),
     ])
 @endsection
@@ -171,17 +171,7 @@
                             'message' => $errors->first('total_utility'),
                         ])
                     </div>
-
-                    {{-- <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                            'inType' => 'file',
-                            'name' => 'image',
-                        ])
-                        @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('image'),
-                        ])
-                    </div> --}}
-                    {{-- <div class="col-md-6">
+                    <div class="col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'status',
                             'selectedKey' => 1,
@@ -192,7 +182,7 @@
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('status'),
                         ])
-                    </div> --}}
+                    </div>
 
                     <div class="col-12 text-center">
                         <button class="btn btn-primary" type="submit">@lang('button.submit_data')</button>

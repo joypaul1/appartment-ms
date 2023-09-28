@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> {{ __('title.Edit-Owner-Utilit') }}
+    <i class="fa fa-plus-circle"></i> {{ __('title.Edit-Owner-Utility') }}
 @stop
 @section('table_header')
-@include('backend._partials.page_header', [
-'fa' => 'fa fa-list',
-'name' => __('title.Owner-Utilit-List'),
-'route' =>route('backend.owner-utility.index'),
-])
+    @include('backend._partials.page_header', [
+        'fa' => 'fa fa-list',
+        'name' => __('title.Owner-Utility-List'),
+        'route' => route('backend.owner-utility.index'),
+    ])
 @endsection
 <div class="row">
     <div class="col-12">
@@ -18,127 +18,199 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.owner-utility.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
-                    @method('POST')
+                <form action="{{ route('backend.owner-utility.update', $ownerUtility) }}" method="POST" class="row g-3"
+                    enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'floor_id',
-                        'required' => true,'label'=>'Floor','optionData'=> $floors])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('floor_id')])
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'floor_id',
+                            'required' => true,
+                            'label' => 'Floor',
+                            'optionData' => $floors,
+                            'selectedKey' => $ownerUtility->floor_id,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('floor_id'),
+                        ])
                     </div>
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'unit_id',
-                        'required' => true,'label'=>'Unit','optionData'=> []])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('unit_id')])
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'unit_id',
+                            'required' => true,
+                            'label' => 'Unit',
+                            'optionData' => $units,
+                            'selectedKey' => $ownerUtility->unit_id,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('unit_id'),
+                        ])
                     </div>
 
 
-                    {{-- @dd(date('m')) --}}
-                    <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'month_id',
-                        'required' => true,'label'=>'Month','optionData'=> $months , 'selectedKey' => date('m')])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('month_id')])
-                    </div>
-                    <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'year_id',
-                        'required' => true,'label'=>'Year','optionData'=> $years])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('year_id')])
-                    </div>
-
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'renter_name',
-                        'required' => true,
-                        'readonly' => true,
+                            'name' => 'owner_name',
+                            'required' => true,
+                            'readonly' => true,
+                            'value' =>  $ownerUtility->owner->name,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('rent_id')])
-                    </div>
-                    <input type="hidden" name="rent_id" value="">
-                    <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                        'name' => 'rent',
-                        'value' => 0.00,
-                        'required' => true,
-                        'readonly' => true,
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('owner_id'),
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('rent')])
+                        <input type="hidden" name="owner_id" id="owner_id" value="{{ $ownerUtility->owner_id }}">
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'value' => 0.00,
-                        'name' => 'water_bill',
-                        'required' => true,
+                            'inType' => 'date',
+                            'name' => 'issue_date',
+                            'required' => true,
+                            'value' =>  date('Y-m-d', strtotime($ownerUtility->issue_date)),
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('water_bill')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('issue_date'),
+                        ])
                     </div>
                     <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'value' => 0.00,
-                        'name' => 'electric_bill',
-                        'required' => true,
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'month_id',
+                            'required' => true,
+                            'label' => 'Month',
+                            'optionData' => $months,
+                            'selectedKey' => $ownerUtility->month_id,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('electric_bill')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('month_id'),
+                        ])
                     </div>
                     <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'value' => 0.00,
-                        'name' => 'gas_bill',
-                        'required' => true,
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'year_id',
+                            'required' => true,
+                            'label' => 'Year',
+                            'optionData' => $years,
+                            'selectedKey' => $ownerUtility->year_id,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('gas_bill')])
-                    </div>
-                    <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'value' => 0.00,
-                        'name' => 'security_bill',
-                        'required' => true,
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('year_id'),
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('security_bill')])
-                    </div>
-                    <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'value' => 0.00,
-                        'name' => 'utility_bill',
-                        'required' => true,
-                        ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('utility_bill')])
-                    </div>
-                    <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'value' => 0.00,
-                        'name' => 'other_bill',
-                        'required' => true,
-                        ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('other_bill')])
-                    </div>
-                    <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                        'inType' => 'number',
-                        'value' => 0.00,
-                        'label' => 'Total Rent',
-                        'name' => 'total_rent',
-                        'required' => true,
-                        ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('total_rent')])
                     </div>
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'inType' => 'file',
-                        'name' => 'image'
+                            'name' => 'renter_name',
+                            'required' => true,
+                            'readonly' => true,
+                            'value' => $ownerUtility->rent_id,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('image')])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('rent_id'),
+                        ])
+                    </div>
+
+                    <div class="col-md-6">
+                        @include('components.backend.forms.input.input-type', [
+                            'inType' => 'number',
+                            'value' => $ownerUtility->water_bill,
+
+                            'name' => 'water_bill',
+                            'required' => true,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('water_bill'),
+                        ])
                     </div>
                     <div class="col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'status','selectedKey'=>1,
-                        'required' => true,'label'=>'status','optionData'=> $status])
-                        @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('status')])
+                        @include('components.backend.forms.input.input-type', [
+                            'inType' => 'number',
+                            'value' => $ownerUtility->electric_bill,
+
+                            'name' => 'electric_bill',
+                            'required' => true,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('electric_bill'),
+                        ])
+                    </div>
+                    <div class="col-md-6">
+                        @include('components.backend.forms.input.input-type', [
+                            'inType' => 'number',
+                            'value' => $ownerUtility->gas_bill,
+
+                            'name' => 'gas_bill',
+                            'required' => true,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('gas_bill'),
+                        ])
+                    </div>
+                    <div class="col-md-6">
+                        @include('components.backend.forms.input.input-type', [
+                            'inType' => 'number',
+                            'value' => $ownerUtility->security_bill,
+                            'name' => 'security_bill',
+                            'required' => true,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('security_bill'),
+                        ])
+                    </div>
+                    <div class="col-md-6">
+                        @include('components.backend.forms.input.input-type', [
+                            'inType' => 'number',
+                            'value' => $ownerUtility->utility_bill,
+                            'name' => 'utility_bill',
+                            'required' => true,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('utility_bill'),
+                        ])
+                    </div>
+                    <div class="col-md-6">
+                        @include('components.backend.forms.input.input-type', [
+                            'inType' => 'number',
+                            'value' => $ownerUtility->other_bill,
+                            'name' => 'other_bill',
+                            'required' => true,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('other_bill'),
+                        ])
+                    </div>
+                    <div class="col-md-6">
+                        @include('components.backend.forms.input.input-type', [
+                            'inType' => 'number',
+                            'value' => $ownerUtility->total_utility,
+                            'label' => 'Total utility',
+                            'name' => 'total_utility',
+                            'required' => true,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('total_utility'),
+                        ])
+                    </div>
+
+                    <div class="col-md-6">
+                        @include('components.backend.forms.input.input-type', [
+                            'inType' => 'file',
+                            'name' => 'image',
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('image'),
+                        ])
+                    </div>
+                    <div class="col-md-6">
+                        @include('components.backend.forms.select2.option', [
+                            'name' => 'status',
+                            'selectedKey' => 1,
+                            'required' => true,
+                            'label' => 'status',
+                            'optionData' => $status,
+                            'selectedKey' => $ownerUtility->status,
+                        ])
+                        @include('components.backend.forms.input.errorMessage', [
+                            'message' => $errors->first('status'),
+                        ])
                     </div>
 
                     <div class="col-12 text-center">
@@ -152,26 +224,28 @@
 @endsection
 
 @push('js')
-
 <script>
     $('#Floorid').on('change', function(e) {
         e.preventDefault();
-        let url ="{{route('backend.unit.index') }}"
+        let url = "{{ route('backend.unit.index') }}"
         $.ajax({
             type: "GET",
-            url: url ,
+            url: url,
             dataType: 'JSON',
-            data:{ 'Floorid':e.target.value, 'getFreeUnits' :true},
+            data: {
+                'Floorid': e.target.value,
+                'getFreeUnits': true
+            },
 
-            success: function (res) {
+            success: function(res) {
                 $("#Unitid").html(' ');
-                $.map( res.data, function( val, i ) {
+                $.map(res.data, function(val, i) {
                     var newOption = new Option(val.name, val.id, false, false);
                     $('#Unitid').append(newOption).trigger('change');
 
                 });
             },
-            error: function (jqXHR, exception) {
+            error: function(jqXHR, exception) {
                 var msg = '';
                 if (jqXHR.status === 0) {
                     msg = 'Not connect.\n Verify Network.';
@@ -193,6 +267,5 @@
         });
 
     });
-
 </script>
 @endpush

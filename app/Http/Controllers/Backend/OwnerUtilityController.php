@@ -8,9 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Floor;
 use App\Models\Backend\Owner;
 use App\Models\Backend\OwnerUtility;
+use App\Models\Backend\Unit;
 use App\Models\Backend\Year;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OwnerUtilityController extends Controller
 {
@@ -51,7 +53,7 @@ class OwnerUtilityController extends Controller
             ];
         }
 
-        $floors = Floor::active()->get(['id', 'name']);
+        $floors = Floor::active()->where('branch_id', session('branch_id'))->get(['id', 'name']);
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
         return view('backend.ownerUtility.create', compact('floors', 'months', 'years', 'status'));
@@ -90,16 +92,14 @@ class OwnerUtilityController extends Controller
             'total_utility' => 'required|numeric',
             'issue_date' => 'required',
         ]);
-        // dd($validatedData);
         try {
+            $validatedData['status'] =$request->status;
             $validatedData['invoice_number'] = (new InvoiceNumber)->invoice_num($this->getInvoiceNumber());
             $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
 
-
             OwnerUtility::create($validatedData);
         } catch (\Exception $ex) {
-            dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
@@ -123,9 +123,23 @@ class OwnerUtilityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(OwnerUtility $ownerUtility)
     {
-        return view('backend.ownerUtility.edit');
+        $months = [];
+        // dd($ownerUtility);
+        for ($i = 1; $i <= 12; $i++) {
+            $date = DateTime::createFromFormat('!m', $i);
+            $months[] = [
+                'id' => $i,
+                'name' => $date->format('F')
+            ];
+        }
+        $floors = Floor::active()->where('branch_id', session('branch_id'))->get(['id', 'name']);
+        $units = Unit::where('floor_id', $ownerUtility->floor_id)->where('branch_id', session('branch_id'))->get();
+        $years = Year::get(['id', 'name']);
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        return view('backend.ownerUtility.edit',
+        compact('months','ownerUtility','floors', 'years', 'status', 'units'));
     }
 
     /**
@@ -135,7 +149,7 @@ class OwnerUtilityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OwnerUtility $OwnerUtility)
+    public function update(Request $request, OwnerUtility $ownerUtility)
     {
         $validatedData = $request->validate([
             'floor_id' => 'required|numeric',
@@ -156,14 +170,14 @@ class OwnerUtilityController extends Controller
         ]);
         try {
 
+            $validatedData['status'] =$request->status;
             $validatedData['branch_id'] = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
-
-            $OwnerUtility->update($validatedData);
+            $ownerUtility->update($validatedData);
         } catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.ownerUtility.index')->with('success', 'Rent Collection Updated successfully.');
+        return redirect()->route('backend.owner-utility.index')->with('success', 'Rent Collection Updated successfully.');
     }
 
     /**
@@ -174,6 +188,15 @@ class OwnerUtilityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            OwnerUtility::whereId($id)->first()->delete();
+
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
+        }
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }

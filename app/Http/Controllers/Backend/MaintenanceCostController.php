@@ -23,7 +23,7 @@ class MaintenanceCostController extends Controller
     {
         if (auth('admin')->user()->role_type == 'owner') {
             $maintenanceCosts = MaintenanceCost::where('branch_id', session('branch_id'))
-            ->with('month:id,name', 'year:id,name', 'branch:id,name')
+                ->with('month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
             return view('backend.maintenanceCost.owner', compact('maintenanceCosts'));
         }
@@ -40,7 +40,6 @@ class MaintenanceCostController extends Controller
     public function create(Request $request)
     {
         $months = [];
-
         for ($i = 1; $i <= 12; $i++) {
             $date = DateTime::createFromFormat('!m', $i);
             $months[] = [
@@ -48,8 +47,6 @@ class MaintenanceCostController extends Controller
                 'name' => $date->format('F')
             ];
         }
-
-        // $floors = Floor::active()->get(['id', 'name']);
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
         return view('backend.maintenanceCost.create', compact('months', 'years', 'status'));
@@ -71,27 +68,23 @@ class MaintenanceCostController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
 
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'owner_id' => 'nullable|integer',
             'date' => 'required',
             'month_id' => 'required|integer',
             'year_id' => 'required|integer',
             'amount' => 'required|numeric',
             'details' => 'nullable|string',
         ]);
-        // dd($validatedData);
         try {
             $validatedData['branch_id'] = session('branch_id');
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             MaintenanceCost::create($validatedData);
         } catch (\Exception $ex) {
-            // dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.maintenance-cost.index')->with('success', 'Rent Collection Created successfully.');
+        return redirect()->route('backend.maintenance-cost.index')->with('success', 'Data Created successfully.');
     }
 
     /**
@@ -111,9 +104,19 @@ class MaintenanceCostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(MaintenanceCost $maintenanceCost)
     {
-        return view('backend.maintenanceCost.edit');
+        $months = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $date = DateTime::createFromFormat('!m', $i);
+            $months[] = [
+                'id' => $i,
+                'name' => $date->format('F')
+            ];
+        }
+        $years = Year::get(['id', 'name']);
+        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        return view('backend.maintenanceCost.edit', compact('maintenanceCost', 'months', 'years', 'status'));
     }
 
     /**
@@ -126,32 +129,21 @@ class MaintenanceCostController extends Controller
     public function update(Request $request, MaintenanceCost $maintenanceCost)
     {
         $validatedData = $request->validate([
-            'floor_id' => 'required|numeric',
-            'unit_id' => 'required|numeric',
-            'month_id' => 'required|numeric',
-            'year_id' => 'required|numeric',
-            'owner_name' => 'required|string',
-            'owner_id' => 'required|numeric',
-            'water_bill' => 'required|numeric',
-            'electric_bill' => 'required|numeric',
-            'gas_bill' => 'required|numeric',
-            'security_bill' => 'required|numeric',
-            'utility_bill' => 'required|numeric',
-            'other_bill' => 'required|numeric',
-            'total_utility' => 'required|numeric',
-            'issue_date' => 'required',
-
+            'title' => 'required|string|max:255',
+            'date' => 'required',
+            'month_id' => 'required|integer',
+            'year_id' => 'required|integer',
+            'amount' => 'required|numeric',
+            'details' => 'nullable|string',
         ]);
         try {
-
             $validatedData['branch_id'] = session('branch_id');
-            $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
-
+            $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             $maintenanceCost->update($validatedData);
         } catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.maintenance-cost.index')->with('success', 'Rent Collection Updated successfully.');
+        return redirect()->route('backend.maintenance-cost.index')->with('success', 'Rent Collection Created successfully.');
     }
 
     /**
@@ -160,8 +152,13 @@ class MaintenanceCostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(MaintenanceCost $maintenanceCost)
     {
-        //
+        try {
+            $maintenanceCost->delete();
+        } catch (\Exception $ex) {
+            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
+        }
+        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
     }
 }

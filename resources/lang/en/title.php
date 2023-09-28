@@ -59,9 +59,7 @@ return [
     'Create-Owner' => 'Create Owner',
     'Edit-Owner' => 'Edit Owner',
 
-    'Owner-Utility-List' => 'Owner-Utility List',
-    'Create-Owner-Utility' => 'Create Owner-Utility',
-    'Edit-Owner-Utility' => 'Edit Owner-Utility',
+
 
     'Tenant-List' => 'Tenant List',
     'Create-Tenant' => 'Create Tenant',
@@ -76,9 +74,11 @@ return [
     'Edit-Visitor' => 'Edit Visitor',
 
     'Email-List' => 'Email List',
-    'Email-Year' => 'Create Email',
+    'Create-Email' => 'Create Email',
     'Edit-Email' => 'Edit Email',
+
+    'Owner-Utility-List' => 'Owner-Utility List',
+    'Create-Owner-Utility' => 'Create Owner-Utility',
+    'Edit-Owner-Utility' => 'Edit Owner-Utility',
+
 ];
-
-
-// 'name' => __('title.Floor-List') ,
