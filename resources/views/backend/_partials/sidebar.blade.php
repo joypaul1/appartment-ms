@@ -184,7 +184,7 @@ $strpos = Route::currentRouteName();
                     <span class="align-middle"> @lang('sidebar.management_committee')</span>
                 </a>
                 <ul id="management-committee"
-                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'maintenance-cost' ? 'show' : ' ' }} "
+                    class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'management-committee' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.management-committee.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.management-committee.index') }}">
