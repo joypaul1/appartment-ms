@@ -33,7 +33,7 @@ class ReportController extends Controller
                 ->with('year:id,name')
 
                 ->get();
-            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
+            $branch = BuildingInformation::where('id', session('branch_id'))->first();
             return view('backend.report.rentReportPdf', compact('rentCollections', 'branch'));
         }
         if ($request->floor_id && $request->unit_id && $request->month && $request->year) {
@@ -49,7 +49,7 @@ class ReportController extends Controller
                 ->with('year:id,name')
 
                 ->get();
-            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
+            $branch = BuildingInformation::where('id', session('branch_id'))->first();
             return view('backend.report.rentReportPdf', compact('rentCollections', 'branch'));
         }
         $months  = MonthConfiguration::all();
@@ -62,7 +62,7 @@ class ReportController extends Controller
         if ($request->tenant_status) {
             $data = Tenant::where('branch_id', session('branch_id'))
                 ->with('unit:id,name', 'floor:id,name')->get();
-            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
+            $branch = BuildingInformation::where('id', session('branch_id'))->first();
 
             return view('backend.report.tenantReportPdf', compact('data', 'branch'));
         }
@@ -83,7 +83,7 @@ class ReportController extends Controller
                 ->with('floor:id,name', 'unit:id,name')
                 ->whereBetween('date', [$startDate, $endDate])
                 ->get();
-            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
+            $branch = BuildingInformation::where('id', session('branch_id'))->first();
 
             return view('backend.report.visitorReportPdf', compact('visitors', 'branch'));
         }
@@ -98,7 +98,7 @@ class ReportController extends Controller
 
                 ->whereBetween('date', [$startDate, $endDate])
                 ->get();
-            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
+            $branch = BuildingInformation::where('id', session('branch_id'))->first();
             return view('backend.report.visitorReportPdf', compact('complains', 'branch'));
         }
         return view('backend.report.complainReport');
@@ -113,7 +113,7 @@ class ReportController extends Controller
                 ->where('branch_id', session('branch_id'))
                 ->orderBy('id', 'DESC')
                 ->get();
-            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
+            $branch = BuildingInformation::where('id', session('branch_id'))->first();
             return view('backend.report.unitStatusReportPdf', compact('data', 'branch'));
         }
 
@@ -132,7 +132,7 @@ class ReportController extends Controller
                 ->whereBetween('date', [$startDate, $endDate])
                 ->with('month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
-            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
+            $branch = BuildingInformation::where('id', session('branch_id'))->first();
 
             return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
         }
@@ -148,7 +148,7 @@ class ReportController extends Controller
                 ->whereBetween('issue_date', [$startDate, $endDate])
                 ->with('employee:id,name', 'year:id,name', 'month:id,name')
                 ->get();
-            $branch = BuildingInformation::where('branch_id', session('branch_id'))->first();
+            $branch = BuildingInformation::where('id', session('branch_id'))->first();
 
             return view('backend.report.salaryReportPdf', compact('data', 'branch'));
         }
