@@ -126,11 +126,11 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'builder_name',
-                            'value' => $buildingInformation->builder_name,
+                            'name' => 'builder_mobile',
+                            // 'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('builder_name'),
+                            'message' => $errors->first('builder_mobile'),
                         ])
                     </div>
                     <div class="col-md-6">
