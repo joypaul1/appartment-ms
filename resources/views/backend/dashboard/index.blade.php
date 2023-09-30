@@ -15,20 +15,23 @@
         </div>
         @if (auth('admin')->user()->role_type == 'super_admin')
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to right, #355c7d, #6c5b7b, #c06c84);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                <h5 class="card-title text-white">@lang('dashboard.total_floor')</h5>
+                                <h5 class="card-title">@lang('dashboard.total_floor')</h5>
+                                <h1 class="mt-1 mb-3">{{ $floorCount }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
+                                {{-- style="background: url('{{ asset('assets/backend') }}/img/login_bgs.jpg'); background-size: cover; background-repeat: no-repeat; " --}}
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/1.png" alt="">
+                                {{-- <div class="stat text-primary">
                                     <i class="align-middle" data-feather="home"></i>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ $floorCount }}</h1>
+
                         <div class="mb-0 text-center bg-light p-2">
                             <a href="{{ route('backend.floor.index') }}" class="p-2">
                                 More Info
@@ -39,21 +42,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to right, #373b44, #4286f4);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.total_unit')
+                                  <h5 class="card-title">@lang('dashboard.total_unit')
                                 </h5>
+                        <h1 class="mt-1 mb-3">{{ $unitCount }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="activity"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/2.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ $unitCount }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.unit.index') }}" class="p-2">
@@ -67,21 +68,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to right, #cb356b, #bd3f32);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.total_owner')
+                                  <h5 class="card-title">@lang('dashboard.total_owner')
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ $ownerCount }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="award"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/3.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ $ownerCount }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.owner.index') }}" class="p-2">
@@ -95,21 +94,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to left, #dc21f3, #f44336);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.total_tenant')
+                                  <h5 class="card-title">@lang('dashboard.total_tenant')
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ $tenantCount }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="box"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/4.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ $tenantCount }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.tenant.index') }}" class="p-2">
@@ -123,21 +120,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to left, #4ca2cd, #4ca2cd);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.total_employee')
+                                  <h5 class="card-title">@lang('dashboard.total_employee')
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ $employeeCount }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="briefcase"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/5.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ $employeeCount }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.employee.index') }}" class="p-2">
@@ -151,21 +146,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to left, #ec6ead, #ec6ead);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.total_committee')
+                                  <h5 class="card-title">@lang('dashboard.total_committee')
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ $managementCommitteeCount }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="eye"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/6.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ $managementCommitteeCount }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.management-committee.index') }}" class="p-2">
@@ -179,21 +172,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card"  style="background: linear-gradient(to right, #355c7d, #6c5b7b, #c06c84);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.total_rent')
+                                  <h5 class="card-title">@lang('dashboard.total_rent')
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ $totalRentCollection }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="dollar-sign"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/7.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ $totalRentCollection }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.rent.index') }}" class="p-2">
@@ -207,21 +198,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to right, #373b44, #4286f4);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.total_maintenance')
+                                  <h5 class="card-title">@lang('dashboard.total_maintenance')
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ number_format($totalMaintenanceCost ?? 0, 2) }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="tool"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/8.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ number_format($totalMaintenanceCost ?? 0, 2) }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.maintenance-cost.index') }}" class="p-2">
@@ -235,21 +224,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to right, #373b44, #4286f4);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.total_fund')
+                                  <h5 class="card-title">@lang('dashboard.total_fund')
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ number_format($totalFund ?? 0, 2) }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="credit-card"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/9.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ number_format($totalFund ?? 0, 2) }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.fund.index') }}" class="p-2">
@@ -263,21 +250,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card"style="background: linear-gradient(to left, #dc21f3, #f44336);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.owner_utility')
+                                  <h5 class="card-title">@lang('dashboard.owner_utility')
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ number_format($totalOwnerUtility ?? 0, 2) }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="shield"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/10.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ number_format($totalOwnerUtility ?? 0, 2) }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.owner-utility.index') }}" class="p-2">
@@ -291,21 +276,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to left, #62a369, #4ca2cd);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.employee_salary')
+                                  <h5 class="card-title">@lang('dashboard.employee_salary')
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ number_format($totalEmployeeSalary ?? 0, 2) }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="dollar-sign"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/11.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ number_format($totalEmployeeSalary ?? 0, 2) }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.employee.index') }}" class="p-2">
@@ -319,21 +302,19 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to right, #cb356b, #bd3f32);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.total_complain')
+                                  <h5 class="card-title">@lang('dashboard.total_complain')
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ $totalComplain ?? 0 }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="alert-octagon"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/12.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ $totalComplain ?? 0 }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.complain.index') }}" class="p-2">
@@ -347,22 +328,20 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card" style="background: linear-gradient(to right, #355c7d, #6c5b7b, #c06c84);">
+                <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                  <h5 class="card-title text-white"text-white">@lang('dashboard.total_house')
+                                  <h5 class="card-title">@lang('dashboard.total_house')
 
                                 </h5>
+                                <h1 class="mt-1 mb-3">{{ $totalHouse ?? 0 }}</h1>
                             </div>
 
                             <div class="col-auto">
-                                <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="home"></i>
-                                </div>
+                                <img class="mb-3" src="{{ asset('assets/backend') }}/img/icons/13.png" alt="">
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3 text-white">{{ $totalHouse ?? 0 }}</h1>
                         <div class="mb-0">
                             <div class="mb-0 text-center bg-light p-2">
                                 <a href="{{ route('backend.site-config.building.index') }}" class="p-2">
