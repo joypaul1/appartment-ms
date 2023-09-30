@@ -46,9 +46,9 @@
                             <div class="card-body">
                                 <div class="m-sm-4">
                                     <div class="text-center mb-4">
-                                        <h3>Appartment Managerment System</h3>
-                                        {{-- <img src="{{ asset('assets/backend') }}/img/avatars/avatar.jpg" alt="Charles Hall"
-                                        class="img-fluid rounded-circle" width="132" height="132" /> --}}
+                                        {{-- <h3>Appartment Managerment System</h3> --}}
+                                        <img src="{{ asset('assets/backend') }}/img/login.png" alt="Charles Hall"
+                                        class="img-fluid" width="200" />
                                     </div>
                                     <form method="POST" action="{{ route('backend.admin.login') }}">
                                         @csrf
