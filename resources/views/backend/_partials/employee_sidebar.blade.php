@@ -5,13 +5,12 @@ $strpos = Route::currentRouteName();
 
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="{{ url('admin/dashboard') }}">
+        {{-- <a class="sidebar-brand" href="{{ url('admin/dashboard') }}">
             <span class="sidebar-brand-text align-middle">
-                Appartment
-                {{-- <sup><small class="badge bg-primary text-uppercase">Pro</small></sup> --}}
+                {{ session('site_info')['name'] }}
             </span>
 
-        </a>
+        </a> --}}
 
         <div class="sidebar-user">
             <div class="d-flex justify-content-center">

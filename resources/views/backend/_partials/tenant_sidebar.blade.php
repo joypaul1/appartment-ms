@@ -7,7 +7,7 @@ $strpos = Route::currentRouteName();
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="{{ url('admin/dashboard') }}">
             <span class="sidebar-brand-text align-middle">
-                Appartment
+                {{ session('site_info')['name'] }}
             </span>
         </a>
 
