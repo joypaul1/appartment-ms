@@ -6,13 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-    {{-- <meta name="author" content="AdminKit"> --}}
-    {{-- <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web"> --}}
+    {{--
+    <meta name="author" content="AdminKit"> --}}
+    {{--
+    <meta name="keywords"
+        content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web"> --}}
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-    {{-- <link rel="canonical" href="https://demo.adminkit.io/dashboard-ecommerce" /> --}}
+    {{--
+    <link rel="canonical" href="https://demo.adminkit.io/dashboard-ecommerce" /> --}}
 
     <title>Appartment| Login</title>
 
@@ -22,20 +26,21 @@
 
     <!-- BEGIN SETTINGS -->
     <link href="{{ asset('assets/backend/css/dark.css') }}" rel="stylesheet">
-    {{-- <link  href="{{ asset('assets/backend/css/light.css') }}" rel="stylesheet"> --}}
+    {{--
+    <link href="{{ asset('assets/backend/css/light.css') }}" rel="stylesheet"> --}}
 
     <style>
         body {
             opacity: 0;
         }
-
     </style>
     <!-- END SETTINGS -->
 
     @stack('css')
 </head>
 
-<body data-theme="dark" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default" style="background: url('{{ asset('assets/backend') }}/img/login_bg.jpg'); background-size: cover; background-repeat: no-repeat; ">
+<body data-theme="dark" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default"
+    style="background: url('{{ asset('assets/backend') }}/img/login_bg.jpg'); background-size: cover; background-repeat: no-repeat; ">
     <main class="d-flex w-100 h-100" style="background-color: #19222ce8;backdrop-filter: blur(6px);">
         <div class="container d-flex flex-column">
             <div class="row vh-100">
@@ -46,9 +51,15 @@
                             <div class="card-body">
                                 <div class="m-sm-4">
                                     <div class="text-center mb-4">
-                                        {{-- <h3>Appartment Managerment System</h3> --}}
-                                        <img src="{{ asset('assets/backend') }}/img/login.png" alt="Charles Hall"
-                                        class="img-fluid" width="200" />
+                                        @php
+                                        $siteInfo = App\Models\SiteInfo::first();
+
+                                        @endphp
+                                        @if (File::exists(public_path($siteInfo->logo)))
+                                        <img src="{{ asset('assets/backend') }}/img/login.png" alt="Charles Hall" class="img-fluid" width="200" />
+                                        @else
+                                        <img src="{{ asset('assets/backend') }}/img/login.png" alt="Charles Hall" class="img-fluid" width="200" />
+                                        @endif
                                     </div>
                                     <form method="POST" action="{{ route('backend.admin.login') }}">
                                         @csrf
@@ -63,7 +74,8 @@
                                         @enderror
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
-                                            <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
+                                            <input class="form-control form-control-lg" type="password" name="password"
+                                                placeholder="Enter your password" />
 
                                         </div>
                                         @error('password')
