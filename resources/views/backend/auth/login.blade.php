@@ -28,14 +28,15 @@
         body {
             opacity: 0;
         }
+
     </style>
     <!-- END SETTINGS -->
 
     @stack('css')
 </head>
 
-<body data-theme="dark" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
-    <main class="d-flex w-100 h-100">
+<body data-theme="dark" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default" style="background: url('{{ asset('assets/backend') }}/img/login_bg.jpg'); background-size: cover; background-repeat: no-repeat; ">
+    <main class="d-flex w-100 h-100" style="background-color: #19222ce8;backdrop-filter: blur(6px);">
         <div class="container d-flex flex-column">
             <div class="row vh-100">
                 <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
@@ -44,33 +45,31 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="m-sm-4">
-                                    <div class="text-center">
+                                    <div class="text-center mb-4">
                                         <h3>Appartment Managerment System</h3>
                                         {{-- <img src="{{ asset('assets/backend') }}/img/avatars/avatar.jpg" alt="Charles Hall"
-                                            class="img-fluid rounded-circle" width="132" height="132" /> --}}
+                                        class="img-fluid rounded-circle" width="132" height="132" /> --}}
                                     </div>
                                     <form method="POST" action="{{ route('backend.admin.login') }}">
                                         @csrf
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
-                                            <input class="form-control form-control-lg" type="email" name="email"
-                                                placeholder="Enter your email" />
+                                            <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
                                         </div>
                                         @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                         <div class="mb-3">
                                             <label class="form-label">Password</label>
-                                            <input class="form-control form-control-lg" type="password" name="password"
-                                                placeholder="Enter your password" />
-                                          
+                                            <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
+
                                         </div>
                                         @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
 
                                         <div class="text-center mt-3">
