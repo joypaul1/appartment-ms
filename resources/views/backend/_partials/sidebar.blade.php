@@ -27,7 +27,6 @@ $strpos = Route::currentRouteName();
 
                     </div>
 
-
                 </div>
             </div>
         </div>
