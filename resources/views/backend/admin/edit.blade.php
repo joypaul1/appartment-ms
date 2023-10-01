@@ -8,9 +8,9 @@
 
 @section('content')
     @include('backend._partials.page_header', [
-        'fa' => 'fa fa-list',
-        'name' => 'Admin List',
-        'route' => route('backend.site-config.admin.index'),
+        // 'fa' => 'fa fa-list',
+        // 'name' => 'Admin List',
+        // 'route' => route('backend.site-config.admin.index'),
     ])
 
 
