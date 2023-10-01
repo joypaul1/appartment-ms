@@ -31,22 +31,22 @@ class DashboardController extends Controller
             ->where('end_date', '<=', date('Y-m-d'))
             ->get();
 
-        $floorCount = Floor::where('branch_id', session('branch_id'))->count();
-        $unitCount = Unit::where('branch_id', session('branch_id'))->count();
-        $ownerCount = Owner::where('branch_id', session('branch_id'))->count();
-        $tenantCount = Tenant::where('branch_id', session('branch_id'))->count();
-        $employeeCount = Employee::where('branch_id', session('branch_id'))->count();
+        $floorCount               = Floor::where('branch_id', session('branch_id'))->count();
+        $unitCount                = Unit::where('branch_id', session('branch_id'))->count();
+        $ownerCount               = Owner::where('branch_id', session('branch_id'))->count();
+        $tenantCount              = Tenant::where('branch_id', session('branch_id'))->count();
+        $employeeCount            = Employee::where('branch_id', session('branch_id'))->count();
         $managementCommitteeCount = ManagementCommittee::where('branch_id', session('branch_id'))->count();
-        $totalRentCollection = RentCollection::where('branch_id', session('branch_id'))->sum('total_rent');
-        $totalMaintenanceCost = MaintenanceCost::where('branch_id', session('branch_id'))->sum('amount');
-        $totalFund = Fund::where('branch_id', session('branch_id'))->sum('amount');
-        $totalOwnerUtility = OwnerUtility::where('branch_id', session('branch_id'))->sum('total_utility');
-        $totalEmployeeSalary = EmployeeSalary::where('branch_id', session('branch_id'))->sum('amount');
-        $totalComplain = Complain::where('branch_id', session('branch_id'))->count();
-        $totalHouse = BuildingInformation::where('id', session('branch_id'))->count();
-        $buildingInformation = BuildingInformation::where('id', session('branch_id'))->first();
-        $depositMonthlyReport = $this->depositMonthlyReport();
-        $rentMonthlyReport = $this->rentMonthlyReport();
+        $totalRentCollection      = RentCollection::where('branch_id', session('branch_id'))->sum('total_rent');
+        $totalMaintenanceCost     = MaintenanceCost::where('branch_id', session('branch_id'))->sum('amount');
+        $totalFund                = Fund::where('branch_id', session('branch_id'))->sum('amount');
+        $totalOwnerUtility        = OwnerUtility::where('branch_id', session('branch_id'))->sum('total_utility');
+        $totalEmployeeSalary      = EmployeeSalary::where('branch_id', session('branch_id'))->sum('amount');
+        $totalComplain            = Complain::where('branch_id', session('branch_id'))->count();
+        $totalHouse               = BuildingInformation::where('id', session('branch_id'))->count();
+        $buildingInformation      = BuildingInformation::where('id', session('branch_id'))->first();
+        $depositMonthlyReport     = $this->depositMonthlyReport();
+        $rentMonthlyReport        = $this->rentMonthlyReport();
         return view(
             'backend.dashboard.index',
             compact(
@@ -72,12 +72,12 @@ class DashboardController extends Controller
     }
     function branch($id)
     {
-        session(['branch_id' => $id]);
+        session([ 'branch_id' => $id ]);
         return back();
     }
     function language($locale)
     {
-        if (!in_array($locale, ['en', 'bn'])) {
+        if (!in_array($locale, [ 'en', 'bn' ])) {
             abort(400);
         }
         App::setLocale($locale);
@@ -95,13 +95,15 @@ class DashboardController extends Controller
         $currentYear = Carbon::now()->year;
 
         $monthlyReport = DB::table('bills')
+            ->where('branch_id', session('branch_id'))
             ->rightJoin(
                 DB::raw("
                 (SELECT 1 as month UNION SELECT 2 UNION SELECT 3 UNION SELECT 4
                  UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8
                  UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) as months
             "),
-                function ($join) use ($currentYear) {
+                function ($join) use ($currentYear)
+                {
                     $join->on(DB::raw('months.month'), '=', DB::raw('MONTH(bills.date)'))
                         ->whereYear('bills.date', $currentYear);
                 }
@@ -113,23 +115,25 @@ class DashboardController extends Controller
             ->groupBy('months.month', 'month_name')
             ->orderBy('months.month', $order)
             ->get();
-        return ['monthlyReport' =>  $monthlyReport->pluck('total_amount')->toArray()];
+        return [ 'monthlyReport' => $monthlyReport->pluck('total_amount')->toArray() ];
     }
 
     private function rentMonthlyReport($order = 'asc')
     {
         // dd(date('Y'));
-        $currentYear = Carbon::now()->year;
+        $currentYear   = Carbon::now()->year;
         $monthlyReport = DB::table('rent_collections')
+            ->where('branch_id', session('branch_id'))
             ->rightJoin(
                 DB::raw("
             (SELECT 1 as month UNION SELECT 2 UNION SELECT 3 UNION SELECT 4
              UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8
              UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) as months
         "),
-                function ($join) use ($currentYear) {
+                function ($join) use ($currentYear)
+                {
                     $join->on(DB::raw('months.month'), '=', DB::raw('MONTH(rent_collections.issue_date)'))
-                    ->whereYear('rent_collections.issue_date', $currentYear);
+                        ->whereYear('rent_collections.issue_date', $currentYear);
                     // ->where('year_id' , DB::raw('(SELECT name FROM year_configurations WHERE name = '.date('Y').')'), $currentYear);
                 }
             )
@@ -143,7 +147,7 @@ class DashboardController extends Controller
 
 
 
-        return ['monthlyReport' =>  $monthlyReport->pluck('total_rent')->toArray()];
+        return [ 'monthlyReport' => $monthlyReport->pluck('total_rent')->toArray() ];
     }
 
     function tableDesign()

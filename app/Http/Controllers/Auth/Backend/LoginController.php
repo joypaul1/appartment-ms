@@ -60,7 +60,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-
+        // dd(123213);
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -79,11 +79,13 @@ class LoginController extends Controller
             if ($request->hasSession()) {
                 $request->session()->put('auth.password_confirmed_at', time());
             }
+            // dd(auth('admin')->user()->role_type);
             if ((auth('admin')->user()->role_type == 'super_admin' || auth('admin')->user()->role_type == 'admin')) {
                 $branch_id = BuildingInformation::first()->id;
                 session(['branch_id' => $branch_id]);
-            } else {
-                session(['branch_id' => session('branch_id')]);
+            }else{
+                session(['branch_id' => auth('admin')->user()->branch_id]);
+
             }
             return $this->sendLoginResponse($request);
         }

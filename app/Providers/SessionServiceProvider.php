@@ -29,39 +29,14 @@ class SessionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('*', function ($view) {
-            if(!session('site_info')){
+        View::composer('*', function ($view)
+        {
+            if (!session('site_info')) {
                 $siteInfo = SiteInfo::first()->toArray();
-
-                session(['site_info' => $siteInfo]);
+                session([ 'site_info' => $siteInfo ]);
             }
-            // dd(session('site_info'));
         });
 
-        View::composer('backend/*', function ($view) {
-            // if(!session('invoice_prefix')){
-            //     $prefixArray= InvoicePrefix::select('name','value')->get()->toArray();
-            //     $arrayTemp = array();
-            //     foreach ($prefixArray as $key => $val) {
-            //         $arrayTemp[$val['name']] = $val['value'];
-            //     }
-            //     session(['invoice_prefix' => $arrayTemp]);
-            // }
-        });
-        // View::composer('frontend/*', function ($view) {
-        //     if(!session('categories')){
-        //         $categories= Category::active()->with(['subcategories' => function($sub){
-        //             $sub->active()->select('id','name', 'slug', 'status','category_id')
-        //             ->with(['childcategories' => function($child){
-        //                 $child->active()->select('id', 'name', 'slug', 'status','subcategory_id', 'category_id');
-        //             }]);
-        //         }])->select('id', 'name', 'slug', 'status')->get();
-        //         session(['categories' => $categories]);
-        //     }
-        //     if(!session('quick_page')){
-        //         $quick_page =QuickPage::select('id', 'name', 'slug', 'position')->orderBy('position')->get();
-        //         session(['quick_page' => $quick_page]);
-        //     }
-        // });
+
     }
 }

@@ -25,11 +25,6 @@ class MailConfigProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        // view()->composer('email', function ($view) {
-
-        // });
-        // active()->
         $emailConfiguration = EmailConfiguration::latest()->first();
 
         if ($emailConfiguration) {
