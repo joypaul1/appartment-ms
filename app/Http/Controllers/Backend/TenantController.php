@@ -211,12 +211,12 @@ class TenantController extends Controller
             'month_id'       => 'required',
             'year_id'        => 'required',
             'status'         => 'required',
+            'password'       => 'required|string|max:255',
+
         ]);
         try {
             DB::beginTransaction();
-            if ($request->password) {
-                $validatedData['password'] = Hash::make($request->password);
-            }
+
             if ($request->hasfile('image')) {
                 $image                  = (new Image)->dirName('tenant')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;

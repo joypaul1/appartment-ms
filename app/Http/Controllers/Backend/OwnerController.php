@@ -145,7 +145,6 @@ class OwnerController extends Controller
      */
     public function update(Request $request, Owner $owner)
     {
-        // dd($owner);
         $validatedData = $request->validate([
             'name'        => 'required|string|max:255',
             'email'       => [
