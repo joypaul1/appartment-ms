@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Floor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class FloorController extends Controller
 {
@@ -41,15 +42,21 @@ class FloorController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => [
+                'required',
+                'string',
+                'max:30',
+                Rule::unique('floors', 'name'),
+            ],
         ]);
         try {
             DB::beginTransaction();
-            $data = $validatedData;
+            $data              = $validatedData;
             $data['branch_id'] = session('branch_id');
             Floor::create($data);
             DB::commit();
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Something went wrong!');
         }
@@ -88,15 +95,19 @@ class FloorController extends Controller
     public function update(Request $request, Floor $floor)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name'         => [
+                'required',
+                Rule::unique('floors')->ignore($floor->id),
+            ],
         ]);
         try {
             DB::beginTransaction();
-            $data = $validatedData;
+            $data              = $validatedData;
             $data['branch_id'] = session('branch_id');
             $floor->update($data);
             DB::commit();
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Something went wrong!');
         }
@@ -116,11 +127,12 @@ class FloorController extends Controller
             DB::beginTransaction();
             $floor->delete();
             DB::commit();
-        } catch (\Exception $ex) {
-            DB::rollback();
-            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }
-        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
+        catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json([ 'status' => false, 'mes' => 'Something went wrong!This was relationship Data.' ]);
+        }
+        return response()->json([ 'status' => true, 'mes' => 'Data Deleted Successfully' ]);
 
     }
 }

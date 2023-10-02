@@ -68,7 +68,7 @@ class OwnerController extends Controller
             ],
             'mobile'      => [
                 'required',
-                'mobile',
+                'string',
                 'max:255',
                 Rule::unique('owners', 'mobile'),
                 Rule::unique('admins', 'mobile'),
@@ -149,10 +149,12 @@ class OwnerController extends Controller
             'name'        => 'required|string|max:255',
             'email'       => [
                 'required',
+                'email',
                 Rule::unique('owners')->ignore($owner->id),
             ],
             'mobile'      => [
                 'required',
+                'string',
                 Rule::unique('owners')->ignore($owner->id),
             ],
             'pre_address' => 'required|string|max:255',
