@@ -31,19 +31,21 @@ $upName = ucfirst(str_replace($str, $rplc, $name));
 <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
 <script>
     ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-    .catch( error => {
-        console.error( error );
-    } );
+            .create( document.querySelector( '.editor-textarea' ) )
+            .then( editor => {
+                    console.log( editor );
+            } )
+            .catch( error => {
+                    console.error( error );
+            } );
 
 
-    // tinymce.init({
-    //             selector: '.editor-textarea',
-    //             plugins: 'advlist autolink lists link image charmap preview anchor pagebreak table',
-    //             toolbar_mode: 'floating',
-    //             height: '220px',
-    //         });
 </script>
-
+{{-- // tinymce.init({
+// selector: '.editor-textarea',
+// plugins: 'advlist autolink lists link image charmap preview anchor pagebreak table',
+// toolbar_mode: 'floating',
+// height: '220px',
+// }); --}}
 
 @endpush
