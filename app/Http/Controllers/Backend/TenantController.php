@@ -12,11 +12,10 @@ use App\Models\Backend\Tenant;
 use App\Models\Backend\Unit;
 use App\Models\Backend\Year;
 use DateTime;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule as ValidationRule;
+use Illuminate\Validation\Rule;
 
 class TenantController extends Controller
 {
@@ -88,8 +87,20 @@ class TenantController extends Controller
     {
         $validatedData = $request->validate([
             'name'           => 'required|string|max:255',
-            'email'          => 'required|email|max:255|unique:rent_configurations,email',
-            'mobile'         => 'required|string|max:20|unique:rent_configurations,mobile',
+            'email'          => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('rent_configurations', 'email'),
+                Rule::unique('admins', 'email'),
+            ],
+            'mobile'         => [
+                'required',
+                'mobile',
+                'max:255',
+                Rule::unique('rent_configurations', 'mobile'),
+                Rule::unique('admins', 'mobile'),
+            ],
             'address'        => 'required|string|max:255',
             'nid'            => 'required|string|max:20',
             'password'       => 'required|string|max:255',
@@ -103,7 +114,6 @@ class TenantController extends Controller
         ]);
         try {
             DB::beginTransaction();
-            $validatedData['password']  = Hash::make($request->password);
             $validatedData['branch_id'] = session('branch_id');
             $validatedData['date']      = date('Y-m-d');
             if ($request->hasfile('image')) {
@@ -184,8 +194,14 @@ class TenantController extends Controller
     {
         $validatedData = $request->validate([
             'name'           => 'required|string|max:255',
-            'email'          => 'required|email|max:255|unique:rent_configurations,email,' . $tenant->id,
-            'mobile'         => 'required|string|max:20|unique:rent_configurations,mobile,' . $tenant->id,
+            'email'          => [
+                'required',
+                Rule::unique('owners')->ignore($tenant->id),
+            ],
+            'mobile'         => [
+                'required',
+                Rule::unique('owners')->ignore($tenant->id),
+            ],
             'address'        => 'required|string|max:255',
             'nid'            => 'required|string|max:20',
             'floor_id'       => 'required',
@@ -237,7 +253,6 @@ class TenantController extends Controller
         }
         catch (\Exception $ex) {
             DB::rollBack();
-            return redirect()->back()->with('error', $ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
@@ -260,7 +275,6 @@ class TenantController extends Controller
         catch (\Exception $ex) {
             return response()->json([ 'status' => false, 'mes' => 'Something went wrong!This was relationship Data.' ]);
         }
-        // (new LogActivity)::addToLog('Category Deleted');
         return response()->json([ 'status' => true, 'mes' => 'Data Deleted Successfully' ]);
     }
 }

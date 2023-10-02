@@ -59,8 +59,20 @@ class OwnerController extends Controller
     {
         $validatedData = $request->validate([
             'name'        => 'required|string|max:255',
-            'email'       => 'required|email|max:255|unique:owners,email',
-            'mobile'      => 'required|string|max:20|unique:owners,mobile',
+            'email'       => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('owners', 'email'),
+                Rule::unique('admins', 'email'),
+            ],
+            'mobile'      => [
+                'required',
+                'mobile',
+                'max:255',
+                Rule::unique('owners', 'mobile'),
+                Rule::unique('admins', 'mobile'),
+            ],
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
             'nid'         => 'required|string|max:25',
@@ -161,7 +173,7 @@ class OwnerController extends Controller
             $image                  = (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
             $validatedData['image'] = $image;
         }
-        $owner->update($validatedData);
+
 
         //admin data
         $data['name']      = ($request->name);
@@ -188,6 +200,8 @@ class OwnerController extends Controller
         if ($request->unit_id) {
             $owner->units()->sync($request->unit_id);
         }
+        $owner->update($validatedData);
+
         return redirect()->route('backend.owner.index')->with('success', 'Owner updated successfully.');
     }
 

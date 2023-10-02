@@ -80,5 +80,9 @@ return [
     'Owner-Utility-List' => 'Owner-Utility List',
     'Create-Owner-Utility' => 'Create Owner-Utility',
     'Edit-Owner-Utility' => 'Edit Owner-Utility',
-    
+
+    'Management-Management-List' => 'Management-Management List',
+    'Create-Management-Management' => 'Create Management-Management',
+    'Edit-Management-Management' => 'Edit Management-Management',
+
 ];
