@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class OwnerController extends Controller
 {
@@ -23,14 +24,15 @@ class OwnerController extends Controller
     {
 
         if ($request->getUnitOwner) {
-            $owner = Owner::where('branch_id', session('branch_id'))->whereHas('units', function ($query) use ($request) {
+            $owner = Owner::where('branch_id', session('branch_id'))->whereHas('units', function ($query) use ($request)
+            {
                 $query->where('unit_configurations.floor_id', $request->floor_id)
                     ->where('unit_configurations.id', $request->unit_id);
             })->first();
-            return response()->json(['data' => $owner]);
+            return response()->json([ 'data' => $owner ]);
         }
         $data = Owner::where('branch_id', session('branch_id'))->with('units')->orderBy('id', 'desc')->get();
-        if(auth('admin')->user()->role_type == 'employee'){
+        if (auth('admin')->user()->role_type == 'employee') {
             return view('backend.owner.employee', compact('data'));
         }
         return view('backend.owner.index', compact('data'));
@@ -56,44 +58,42 @@ class OwnerController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:owners,email',
-            'mobile' => 'required|string|max:20|unique:owners,mobile',
+            'name'        => 'required|string|max:255',
+            'email'       => 'required|email|max:255|unique:owners,email',
+            'mobile'      => 'required|string|max:20|unique:owners,mobile',
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
-            'nid' => 'required|string|max:20',
-            'password' => 'required|string|max:255',
-            'image' => 'nullable',
+            'nid'         => 'required|string|max:25',
+            'password'    => 'required|string|max:20',
+            'image'       => 'nullable',
         ]);
         try {
-            $validatedData['password'] = Hash::make($request->password);
+            // $validatedData['password'] = Hash::make($request->password);
             $validatedData['branch_id'] = session('branch_id');
             if ($request->hasfile('image')) {
-                $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
+                $image                  = (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
             }
-            // dd($request->unit_id);
             $owner = Owner::create($validatedData);
 
-            $data['name'] = ($request->name);
-            $data['email'] = ($request->email);
-            $data['mobile'] = ($request->mobile);
-            $data['branch_id'] =  $validatedData['branch_id'];
-            $data['role_type'] =  'owner';
+            $data['name']      = ($request->name);
+            $data['email']     = ($request->email);
+            $data['mobile']    = ($request->mobile);
+            $data['branch_id'] = $validatedData['branch_id'];
+            $data['role_type'] = 'owner';
+            if ($request->hasFile('image')) {
+                $data['image'] = $validatedData['image'];
+            }
             if ($request->password) {
                 $data['password'] = Hash::make($request->password);
+                Admin::create($data);
             }
-            if ($request->hasFile('image')) {
-                $data['image'] =  $validatedData['image'];
-            }
-            Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
-                ->updateOrCreate($data);
 
             if ($request->unit_id) {
                 $owner->units()->sync($request->unit_id);
             }
-        } catch (\Exception $ex) {
-            // return redirect()->back()->with('error',  $ex->getMessage());
+        }
+        catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
@@ -119,7 +119,7 @@ class OwnerController extends Controller
      */
     public function edit(Owner $owner)
     {
-        $units = Unit::get(['id', 'name']);
+        $units = Unit::get([ 'id', 'name' ]);
 
         return view('backend.owner.edit', compact('owner', 'units'));
     }
@@ -133,49 +133,57 @@ class OwnerController extends Controller
      */
     public function update(Request $request, Owner $owner)
     {
+        // dd($owner);
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'mobile' => 'required|string|max:20',
+            'name'        => 'required|string|max:255',
+            'email'       => [
+                'required',
+                Rule::unique('owners')->ignore($owner->id),
+            ],
+            'mobile'      => [
+                'required',
+                Rule::unique('owners')->ignore($owner->id),
+            ],
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
-            'nid' => 'required|string|max:20',
-            // 'password' => 'nullable',
-            // 'image' => 'nullable',
+            'nid'         => 'required|string|max:25',
+            'password'    => 'required|string|max:20',
+
         ]);
 
         // Validation passed, update the data in the database
-        // $owner = Owner::find($id);
         if (!$owner) {
             return redirect()->back()->with('error', 'Owner not found.');
         }
         $validatedData['branch_id'] = session('branch_id');
-
+        $validatedData['image']     = $owner->image;
         if ($request->hasFile('image')) {
-            $image =  (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
+            $image                  = (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
             $validatedData['image'] = $image;
         }
-        $data['name']       = ($request->name);
-        $data['email']      = ($request->email);
-        $data['mobile']     = ($request->mobile);
-        $data['branch_id']  =  $validatedData['branch_id'];
-        $data['role_type']  =  'owner';
+        $owner->update($validatedData);
+
+        //admin data
+        $data['name']      = ($request->name);
+        $data['email']     = ($request->email);
+        $data['mobile']    = ($request->mobile);
+        $data['branch_id'] = $validatedData['branch_id'];
+        $data['role_type'] = 'owner';
+
         if ($request->password) {
             $data['password'] = Hash::make($request->password);
         }
         if ($request->hasFile('image')) {
-            $data['image'] =  $validatedData['image'];
+            $data['image'] = $validatedData['image'];
         }
         $admin = Admin::where('email', $owner->email)->where('mobile', $owner->mobile)->first();
         if ($admin) {
             $admin->update($data);
-        } else {
+        }
+        else {
             Admin::create($data);
         }
-        $owner->update($validatedData);
-
-
-
+        //admin data
 
         if ($request->unit_id) {
             $owner->units()->sync($request->unit_id);
@@ -195,9 +203,10 @@ class OwnerController extends Controller
             $owner = Owner::findOrFail($id);
             Admin::where('email', $owner->email)->where('name', $owner->name)->where('mobile', $owner->mobile)->delete();
             $owner->delete();
-        } catch (\Exception $ex) {
-            return response()->json(['status' => false, 'mes' => 'Something went wrong!']);
         }
-        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
+        catch (\Exception $ex) {
+            return response()->json([ 'status' => false, 'mes' => 'Something went wrong!' ]);
+        }
+        return response()->json([ 'status' => true, 'mes' => 'Data Deleted Successfully' ]);
     }
 }

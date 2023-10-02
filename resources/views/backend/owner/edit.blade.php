@@ -56,11 +56,11 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'name' => 'password',
-                            // 'value' => $owner->name
-                            // 'required' => true,
+                            'value' => $owner->password,
+                            'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('mobile'),
+                            'message' => $errors->first('password'),
                         ])
                     </div>
                     <div class="col-md-6">
