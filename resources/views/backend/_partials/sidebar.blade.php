@@ -12,7 +12,7 @@ $strpos = Route::currentRouteName();
 
         </a>
 
-        <div class="sidebar-user">
+        {{-- <div class="sidebar-user">
             <div class="d-flex justify-content-center">
                 <div class="flex-shrink-0">
                     <img src="{{ auth('admin')->user()->image ? asset(auth('admin')->user()->image): asset('assets/backend/img/avatars/avatar.jpg') }}"class="avatar img-fluid rounded me-1" alt="admin-logo" />
@@ -29,7 +29,7 @@ $strpos = Route::currentRouteName();
 
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <ul class="sidebar-nav">
             <li class="sidebar-item {{ request()->segment(2) == 'dashboard' ? 'active' : ' ' }} active">
@@ -395,6 +395,5 @@ $strpos = Route::currentRouteName();
 
         </ul>
 
-        {{-- --}}
     </div>
 </nav>

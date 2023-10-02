@@ -45,7 +45,7 @@
                                 <td class="text-center">{{ $item->name??'-' }}</td>
                                 <td class="text-center">{{ $item->email??'-' }}</td>
                                 <td class="text-center">{{ $item->mobile??'-' }}</td>
-                                <td class="text-center"><span class="badge  bg-info">{{ $admin->role_type }}</span></td>
+                                <td class="text-center"><span class="badge  bg-info">{{ $item->role_type }}</span></td>
                                 <td class="text-center"><img src="{{ asset($item->image) }}" alt="{{ $item->image }}" srcset="" width="100%"
                                         height="100"></td>
 
@@ -61,6 +61,7 @@
                                     <a href="{{ route('backend.site-config.admin.edit', $item) }}" class="btn btn-sm btn-icon btn-warning  m-r-5"
                                         data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
+                                    @if($item->role_type == 'super_admin')
                                     <button type="button" onclick="delete_check({{$item->id}})" class="btn btn-sm btn-icon btn-danger  button-remove"
                                         data-toggle="tooltip" data-original-title="Remove" aria-describedby="tooltip64483">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
@@ -70,6 +71,7 @@
                                         @method('delete')
                                         @csrf
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                             @empty
