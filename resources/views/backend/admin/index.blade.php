@@ -22,7 +22,7 @@
         <div class="card">
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-responsive text-center">
                         <thead>
                             <tr>
                                 <th class="text-center">Sl.</th>

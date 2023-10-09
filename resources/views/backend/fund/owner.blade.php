@@ -24,7 +24,7 @@
             <div id="printArea">
                 <div class="card-title text-center">Fund Management List </div>
                 <div class="card-body">
-                    <table id="datatables-reponsive" class="table table-striped text-center" style="width:100%">
+                    <table id="datatables-reponsive" class="table table-bordered table-responsive text-center" style="width:100%">
                         <thead>
                             <tr>
                                 <th>@lang('table.sl')</th>
