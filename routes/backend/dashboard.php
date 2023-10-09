@@ -64,6 +64,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'backend.'],
         Route::get('fund-report', [BackendReportController::class, 'fundReport'])->name('fund-report');
         Route::get('bill-report', [BackendReportController::class, 'billReport'])->name('bill-report');
         Route::get('salary-report', [BackendReportController::class, 'salaryReport'])->name('salary-report');
+        Route::get('expense-report', [BackendReportController::class, 'expenseReport'])->name('expense-report');
     });
     Route::group(['prefix' => 'site-config', 'as' => 'site-config.'], function () {
         Route::resource('admin', AdminController::class);

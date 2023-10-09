@@ -19,6 +19,10 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+
+    function expense(Request $request){
+        return view('backend.report.billReport');
+    }
     function rentReport(Request $request)
     {
 
@@ -47,7 +51,6 @@ class ReportController extends Controller
                 ->with('unit:id,name')
                 ->with('month:id,name')
                 ->with('year:id,name')
-
                 ->get();
             $branch = BuildingInformation::where('id', session('branch_id'))->first();
             return view('backend.report.rentReportPdf', compact('rentCollections', 'branch'));
@@ -137,7 +140,7 @@ class ReportController extends Controller
             return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
         }
 
-        return view('backend.report.billReport');
+        return view('backend.report.fundReport');
     }
     function salaryReport(Request $request)
     {

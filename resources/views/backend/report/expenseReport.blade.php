@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> Bill Report Form
+<i class="fa fa-plus-circle"></i> Expense Report Form
 @stop
 @section('table_header')
 @include('backend._partials.page_header')
@@ -13,7 +13,7 @@
         <div class="card">
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.report.bill-report') }}" method="GET" class="row g-3">
+                <form action="{{ route('backend.report.expense-report') }}" method="GET" class="row g-3">
                     @method('GET')
 
                     <div class="col-md-4">
