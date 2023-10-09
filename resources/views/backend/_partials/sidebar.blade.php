@@ -208,7 +208,7 @@ $strpos = Route::currentRouteName();
                         </a>
                     </li>
                     <li class="sidebar-item {{ strpos($strpos, 'backend.fund.create') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.fund.create') }}">Create
+                        <a class="sidebar-link" href="{{ route('backend.fund.create') }}">
                             @lang('sidebar.fund_management_create')
                         </a>
                     </li>
