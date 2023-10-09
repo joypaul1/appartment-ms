@@ -339,6 +339,11 @@ $strpos = Route::currentRouteName();
                             Expense Report
                         </a>
                     </li>
+                    <li class="sidebar-item {{ strpos($strpos, 'backend.report.income-report') === 0 ? 'active' : ' ' }}">
+                        <a class="sidebar-link" href="{{ route('backend.report.income-report') }}">
+                            Income Report
+                        </a>
+                    </li>
 
                 </ul>
             </li>

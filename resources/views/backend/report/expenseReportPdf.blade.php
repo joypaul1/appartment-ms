@@ -4,6 +4,9 @@
 @section('content')
 @php
 $remainBalance = 0;
+$remainBalance += $maintenanceCost;
+$remainBalance += $employeeSalary;
+
 @endphp
 
 <div class="row">
@@ -20,63 +23,36 @@ $remainBalance = 0;
                         </p>
                     </div>
                 </div>
-                <div class="card-title text-center"><u>Visitor Report</u> </div>
+                <div class="card-title text-center"><u>Expense Report</u> </div>
                 <div class="card-body">
                     <div class="card-body">
-                        <table id="datatables-reponsive" class="table" style="width:100%">
+                        <table id="datatables-reponsive" class="table text-center" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Sl.</th>
-                                    <th>Entry Date</th>
                                     <th>Name</th>
-                                    <th>Mobile</th>
-                                    <th>Address</th>
-                                    <th>Floor </th>
-                                    <th>Unit</th>
-                                    <th>In Time</th>
-                                    <th>Out Time</th>
+                                    <th>Total Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($visitors as $key => $row)
                                 <tr>
-                                    <td>
-                                        {{ $key + 1 }}
-                                    </td>
-                                    <td>
-                                        {{ date('d-m-y', strtotime($row->date)) }}
-                                    </td>
-                                    <td>
-                                        {{ $row->name }}
-                                    </td>
-
-                                    <td>
-                                        {{ $row->mobile }}
-                                    </td>
-                                    <td>
-                                        {{ $row->address }}
-                                    </td>
-                                    <td>
-                                        {{ optional($row->floor)->name }}
-
-                                    </td>
-                                    <td>
-                                        {{ optional($row->unit)->name }}
-
-                                    </td>
-                                    <td>
-                                        {{ $row->in_time }}
-                                    </td>
-                                    <td>
-                                        {{ $row->out_time }}
-                                    </td>
-
-
+                                    <td>1</td>
+                                    <td>Maintenance Cost </td>
+                                    <td class="text-end">{{ number_format($maintenanceCost ,2) }} </td>
                                 </tr>
-                                @endforeach
-
+                                <tr>
+                                    <td>1</td>
+                                    <td>Salary </td>
+                                    <td class="text-end">{{ number_format($employeeSalary, 2) }} </td>
+                                </tr>
 
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" class="text-end"><strong>Total Expense : </strong></td>
+                                    <td class="text-end"><u><strong>{{ number_format($remainBalance, 2) }}</strong></u></td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

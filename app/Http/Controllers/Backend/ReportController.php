@@ -20,14 +20,30 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
 
-    function expense(Request $request){
-        return view('backend.report.billReport');
+    function expenseReport(Request $request)
+    {
+
+        if ($request->start_date && $request->end_date) {
+
+            $startDate       = date('Y-m-d', strtotime($request->start_date));
+            $endDate         = date('Y-m-d', strtotime($request->end_date));
+            $employeeSalary  = EmployeeSalary::where('branch_id', session('branch_id'))
+                ->whereBetween('issue_date', [ $startDate, $endDate ])
+                ->get()->sum('amount')??0;
+            $maintenanceCost = MaintenanceCost::where('branch_id', session('branch_id'))
+                ->whereBetween('date', [ $startDate, $endDate ])
+                ->orderBy('id', 'desc')->get()->sum('amount')??0;
+            $branch          = BuildingInformation::where('id', session('branch_id'))->first();
+            return view('backend.report.expenseReportPdf', compact('branch', 'maintenanceCost', 'employeeSalary'));
+
+        }
+        return view('backend.report.expenseReport');
     }
     function rentReport(Request $request)
     {
 
         if ($request->start_date && $request->end_date) {
-             $tenant = Tenant::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+            $tenant          = Tenant::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
             $rentCollections = RentCollection::where('branch_id', session('branch_id'))
                 ->where('tenant_id', $tenant->id)
                 ->where('bill_status', $request->payment_status)
@@ -37,7 +53,7 @@ class ReportController extends Controller
                 ->with('year:id,name')
 
                 ->get();
-            $branch = BuildingInformation::where('id', session('branch_id'))->first();
+            $branch          = BuildingInformation::where('id', session('branch_id'))->first();
             return view('backend.report.rentReportPdf', compact('rentCollections', 'branch'));
         }
         if ($request->floor_id && $request->unit_id && $request->month && $request->year) {
@@ -52,10 +68,10 @@ class ReportController extends Controller
                 ->with('month:id,name')
                 ->with('year:id,name')
                 ->get();
-            $branch = BuildingInformation::where('id', session('branch_id'))->first();
+            $branch          = BuildingInformation::where('id', session('branch_id'))->first();
             return view('backend.report.rentReportPdf', compact('rentCollections', 'branch'));
         }
-        $months  = MonthConfiguration::all();
+        $months = MonthConfiguration::all();
         $years  = Year::all();
         $floors = Floor::all();
         return view('backend.report.rentReport', compact('months', 'years', 'floors'));
@@ -63,7 +79,7 @@ class ReportController extends Controller
     function tenantReport(Request $request)
     {
         if ($request->tenant_status) {
-            $data = Tenant::where('branch_id', session('branch_id'))
+            $data   = Tenant::where('branch_id', session('branch_id'))
                 ->with('unit:id,name', 'floor:id,name')->get();
             $branch = BuildingInformation::where('id', session('branch_id'))->first();
 
@@ -81,12 +97,12 @@ class ReportController extends Controller
     {
         if ($request->start_date && $request->end_date) {
             $startDate = date('Y-m-d', strtotime($request->start_date));
-            $endDate = date('Y-m-d', strtotime($request->end_date));
-            $visitors = Visitor::where('branch_id', session('branch_id'))
+            $endDate   = date('Y-m-d', strtotime($request->end_date));
+            $visitors  = Visitor::where('branch_id', session('branch_id'))
                 ->with('floor:id,name', 'unit:id,name')
-                ->whereBetween('date', [$startDate, $endDate])
+                ->whereBetween('date', [ $startDate, $endDate ])
                 ->get();
-            $branch = BuildingInformation::where('id', session('branch_id'))->first();
+            $branch    = BuildingInformation::where('id', session('branch_id'))->first();
 
             return view('backend.report.visitorReportPdf', compact('visitors', 'branch'));
         }
@@ -96,12 +112,12 @@ class ReportController extends Controller
     {
         if ($request->start_date && $request->end_date) {
             $startDate = date('Y-m-d', strtotime($request->start_date));
-            $endDate = date('Y-m-d', strtotime($request->end_date));
+            $endDate   = date('Y-m-d', strtotime($request->end_date));
             $complains = Complain::where('branch_id', session('branch_id'))
 
-                ->whereBetween('date', [$startDate, $endDate])
+                ->whereBetween('date', [ $startDate, $endDate ])
                 ->get();
-            $branch = BuildingInformation::where('id', session('branch_id'))->first();
+            $branch    = BuildingInformation::where('id', session('branch_id'))->first();
             return view('backend.report.visitorReportPdf', compact('complains', 'branch'));
         }
         return view('backend.report.complainReport');
@@ -110,7 +126,7 @@ class ReportController extends Controller
     {
         if ($request->status) {
             $status = $request->status == 1 ? 0 : 1;
-            $data = Unit::with('branch:id,name')
+            $data   = Unit::with('branch:id,name')
                 ->with('floor:id,name')
                 ->where('status', $status)
                 ->where('branch_id', session('branch_id'))
@@ -125,17 +141,17 @@ class ReportController extends Controller
     function fundReport(Request $request)
     {
         if ($request->start_date && $request->end_date) {
-            $startDate = date('Y-m-d', strtotime($request->start_date));
-            $endDate = date('Y-m-d', strtotime($request->end_date));
-            $funds = Fund::where('branch_id', session('branch_id'))
-                ->whereBetween('date', [$startDate, $endDate])
+            $startDate        = date('Y-m-d', strtotime($request->start_date));
+            $endDate          = date('Y-m-d', strtotime($request->end_date));
+            $funds            = Fund::where('branch_id', session('branch_id'))
+                ->whereBetween('date', [ $startDate, $endDate ])
                 ->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
             $maintenanceCosts = MaintenanceCost::where('branch_id', session('branch_id'))
-                ->whereBetween('date', [$startDate, $endDate])
+                ->whereBetween('date', [ $startDate, $endDate ])
                 ->with('month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
-            $branch = BuildingInformation::where('id', session('branch_id'))->first();
+            $branch           = BuildingInformation::where('id', session('branch_id'))->first();
 
             return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
         }
@@ -146,12 +162,12 @@ class ReportController extends Controller
     {
         if ($request->start_date && $request->end_date) {
             $startDate = date('Y-m-d', strtotime($request->start_date));
-            $endDate = date('Y-m-d', strtotime($request->end_date));
-            $data = EmployeeSalary::where('branch_id', session('branch_id'))
-                ->whereBetween('issue_date', [$startDate, $endDate])
+            $endDate   = date('Y-m-d', strtotime($request->end_date));
+            $data      = EmployeeSalary::where('branch_id', session('branch_id'))
+                ->whereBetween('issue_date', [ $startDate, $endDate ])
                 ->with('employee:id,name', 'year:id,name', 'month:id,name')
                 ->get();
-            $branch = BuildingInformation::where('id', session('branch_id'))->first();
+            $branch    = BuildingInformation::where('id', session('branch_id'))->first();
 
             return view('backend.report.salaryReportPdf', compact('data', 'branch'));
         }
