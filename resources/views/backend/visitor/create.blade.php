@@ -82,8 +82,6 @@
                             'message' => $errors->first('out_time'),
                         ])
                     </div>
-
-                    d-block
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'unit_id',

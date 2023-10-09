@@ -154,7 +154,7 @@ $strpos = Route::currentRouteName();
                 </ul>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'maintenance-cost' ? 'active' : ' ' }}  ">
                 <a data-bs-target="#maintenance-cost" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="dollar-sign"></i>
                     <span class="align-middle">@lang('sidebar.maintenance_cost')</span>
@@ -175,7 +175,7 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'management-committee' ? 'active' : ' ' }}">
                 <a data-bs-target="#management-committee" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="activity"></i>
                     <span class="align-middle"> @lang('sidebar.management_committee')</span>
@@ -195,7 +195,7 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'fund' ? 'active' : ' ' }}">
                 <a data-bs-target="#fund" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="book"></i>
                     <span class="align-middle"> @lang('sidebar.fund_management')</span>
@@ -214,7 +214,7 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'bill-deposit' ? 'active' : ' ' }}">
                 <a data-bs-target="#Bill" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="check-square"></i>
                     <span class="align-middle"> @lang('sidebar.bill_collection')</span>
@@ -233,12 +233,14 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'notice-board' ? 'active' : ' ' }}">
                 <a data-bs-target="#notice" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="clipboard"></i>
                     <span class="align-middle"> @lang('sidebar.notice-board')</span>
                 </a>
-                <ul id="notice" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'complain' ? 'show' : ' ' }} "
+                <ul id="notice" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'notice-board' ? 'show' : ' ' }}
+
+                    "
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.notice-board.index') }}">
@@ -252,7 +254,7 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'complain' ? 'active' : ' ' }}">
                 <a data-bs-target="#complain" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="code"></i>
                     <span class="align-middle"> @lang('sidebar.complain')</span>
