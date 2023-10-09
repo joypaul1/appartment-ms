@@ -22,6 +22,8 @@
                     <form action="{{ route('backend.site-config.admin.store') }}" method="Post" enctype="multipart/form-data">
                         @method('POST')
                         @csrf
+
+                        <input type="hidden" name="role_type" value="supper_admin">
                         <div class="mb-3 row">
                             {{-- <label class="col-lg-4 col-form-label" for="text">Name <span
                                     class="text-danger">*</span></label> --}}

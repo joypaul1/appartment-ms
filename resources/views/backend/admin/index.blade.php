@@ -31,8 +31,8 @@
                                 <th class="text-center">Mobile</th>
                                 <th class="text-center">Role Type</th>
                                 <th class="text-center">Image</th>
-                                <th class="text-center">Active/Not</th>
-                                <th class="text-center">Last Seen</th>
+                                {{-- <th class="text-center">Active/Not</th> --}}
+                                {{-- <th class="text-center">Last Seen</th> --}}
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -46,22 +46,12 @@
                                 <td class="text-center">{{ $item->email??'-' }}</td>
                                 <td class="text-center">{{ $item->mobile??'-' }}</td>
                                 <td class="text-center"><span class="badge  bg-info">{{ $item->role_type }}</span></td>
-                                <td class="text-center"><img src="{{ asset($item->image) }}" alt="{{ $item->image }}" srcset="" width="100%"
-                                        height="100"></td>
-
+                                <td class="text-center"><img src="{{ asset($item->image) }}" alt="{{ $item->image }}" srcset="" width="100px"
+                                        height="100px"></td>
                                 <td class="text-center">
-                                    @if ($item->isOnline())
-                                    <i class="fa fa-check-circle-o" aria-hidden="true" style="color: green"></i>
-                                    @else
-                                    <i class="fa fa-times-circle-o" aria-hidden="true" style="color: red"></i>
-                                    @endif
-                                </td>
-                                <td> {{ Carbon\Carbon::parse($item->last_seen??' ')->diffForHumans() }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('backend.site-config.admin.edit', $item) }}" class="btn btn-sm btn-icon btn-warning  m-r-5"
-                                        data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                    <a href="{{ route('backend.site-config.admin.edit', $item) }}" class="btn btn-sm btn-icon btn-warning  m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
-                                    @if($item->role_type == 'super_admin')
+                                    @if($item->role_type != 'super_admin')
                                     <button type="button" onclick="delete_check({{$item->id}})" class="btn btn-sm btn-icon btn-danger  button-remove"
                                         data-toggle="tooltip" data-original-title="Remove" aria-describedby="tooltip64483">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
