@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> {{ __('title.Create-Member-Type') }}
+    <i class="fa fa-plus-circle"></i> {{ __('Create Member Type') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => __('title.Member-Type-List'),
+        'name' => __('Member Type List'),
         'route' => route('backend.site-config.member-type.index'),
     ])
 @endsection

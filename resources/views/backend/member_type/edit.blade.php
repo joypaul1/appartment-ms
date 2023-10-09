@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-pencil"></i> {{ __('title.Edit-Member-Type') }}
+    <i class="fa fa-pencil"></i> {{ __('Edit Member Type') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => __('title.Member-Type-List'),
+        'name' => __('Member Type List'),
         'route' => route('backend.site-config.member-type.index'),
     ])
 @endsection
@@ -18,7 +18,7 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.site-config.member-type.update', $floor) }}" method="POST"
+                <form action="{{ route('backend.site-config.member-type.update', $memberType) }}" method="POST"
                     class="row g-3">
                     @method('PUT')
                     @csrf
@@ -26,7 +26,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'name' => 'name',
                             'required' => true,
-                            'value' => $floor->name,
+                            'value' => $memberType->name,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('name'),

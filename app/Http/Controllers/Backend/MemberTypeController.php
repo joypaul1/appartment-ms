@@ -78,7 +78,7 @@ class MemberTypeController extends Controller
      */
     public function edit(MemberType $memberType)
     {
-        return view('backend.member_type.edit', compact('billType'));
+        return view('backend.member_type.edit', compact('memberType'));
     }
 
     /**
@@ -103,7 +103,7 @@ class MemberTypeController extends Controller
             DB::rollBack();
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.site-config.bill-type.index')->with('success', 'Data Updated Successfully');
+        return redirect()->route('backend.site-config.member-type.index')->with('success', 'Data Updated Successfully');
     }
 
     /**
