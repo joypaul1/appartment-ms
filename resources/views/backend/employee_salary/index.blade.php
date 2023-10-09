@@ -4,7 +4,7 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-list"></i>{{ __('title.Employee-Salary-List') }}
+    <i class="fa fa-list"></i> {{ __('title.Employee-Salary-List') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
@@ -68,7 +68,7 @@
                                                 aria-hidden="true"></i> </button>
 
                                     </a>
-                                    
+
                                 </td>
                             </tr>
                         @endforeach

@@ -9,7 +9,7 @@
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
         'name' => 'Visitor List',
-        'route' => route('backend.tenant.index'),
+        'route' => route('backend.visitor.index'),
     ])
 @endsection
 <div class="row">

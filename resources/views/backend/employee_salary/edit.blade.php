@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-pencil"></i>{{ __('title.Edit-Employee-Salary') }} Edit Employee Salary
+    <i class="fa fa-pencil"></i> {{ __('title.Edit-Employee-Salary') }} Edit Employee Salary
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [

@@ -273,7 +273,7 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'visitor' ? 'active' : ' ' }}">
                 <a data-bs-target="#visitor" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="eye"></i>
                     <span class="align-middle"> @lang('sidebar.visitor')</span>
@@ -292,7 +292,7 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'report' ? 'active' : ' ' }}">
                 <a data-bs-target="#report" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="compass"></i>
                     <span class="align-middle"> @lang('sidebar.report') </span>
@@ -337,7 +337,7 @@ $strpos = Route::currentRouteName();
 
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'site-config' ? 'active' : ' ' }}">
                 <a data-bs-target="#settings" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle"> @lang('sidebar.setting') </span>
