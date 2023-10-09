@@ -43,16 +43,17 @@ class NoticeBoardController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string',
+            'title'    => 'required|string',
             'end_date' => 'required',
-            'status' => 'required',
+            'status'   => 'required',
         ]);
         try {
             $validatedData['branch_id'] = session('branch_id');
-            $validatedData['end_date'] = date('Y-m-d', strtotime($request->end_date));
-        
+            $validatedData['end_date']  = date('Y-m-d', strtotime($request->end_date));
+
             NoticeBoard::create($validatedData);
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
@@ -91,15 +92,16 @@ class NoticeBoardController extends Controller
     public function update(Request $request, NoticeBoard $noticeBoard)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string',
+            'title'    => 'required|string',
             'end_date' => 'required',
-            'status' => 'required',
+            'status'   => 'required',
         ]);
         try {
             $validatedData['branch_id'] = session('branch_id');
-            $validatedData['end_date'] = date('Y-m-d', strtotime($request->end_date));
+            $validatedData['end_date']  = date('Y-m-d', strtotime($request->end_date));
             $noticeBoard->update($validatedData);
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.notice-board.index')->with('success', 'NoticeBoard Updated successfully.');
@@ -117,10 +119,11 @@ class NoticeBoardController extends Controller
             DB::beginTransaction();
             $noticeBoard->delete();
             DB::commit();
-        } catch (\Exception $ex) {
-            DB::rollback();
-            return response()->json(['status' => false, 'mes' => 'Something went wrong!']);
         }
-        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
+        catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json([ 'status' => false, 'mes' => 'Something went wrong!' ]);
+        }
+        return response()->json([ 'status' => true, 'mes' => 'Data Deleted Successfully' ]);
     }
 }
