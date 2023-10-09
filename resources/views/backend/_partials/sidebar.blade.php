@@ -22,15 +22,15 @@ $strpos = Route::currentRouteName();
         </div>
 
         <ul class="sidebar-nav">
-            <li class="sidebar-item {{ request()->segment(2) == 'dashboard' ? 'active' : ' ' }} active">
+            <li class="sidebar-item {{ request()->segment(2) == 'dashboard' ? 'active' : ' ' }}">
                 <a class="sidebar-link" href="{{ url('admin/dashboard') }}">
                     <i class="align-middle" data-feather="box"></i>
                     <span class="align-middle">@lang('sidebar.dashboard') </span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ strpos($strpos, 'backend.floor') === 0 ? 'active' : ' ' }}">
                 <a data-bs-target="#floor" data-bs-toggle="collapse"
-                    class="sidebar-link {{ strpos($strpos, 'backend.floor') === 0 ? 'active' : ' ' }}">
+                    class="sidebar-link ">
                     <i class="align-middle" data-feather="framer"></i>
                     <span class="align-middle">@lang('sidebar.floor')</span>
                 </a>
@@ -44,8 +44,8 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
-                <a data-bs-target="#Unit" data-bs-toggle="collapse" class="sidebar-link {{ request()->segment(2) == 'unit' ? 'active' : ' ' }}">
+            <li class="sidebar-item  {{ request()->segment(2) == 'unit' ? 'active' : ' ' }}">
+                <a data-bs-target="#Unit" data-bs-toggle="collapse" class="sidebar-link">
                     <i class="align-middle" data-feather="crosshair"></i>
                     <span class="align-middle">@lang('sidebar.unit')</span>
                 </a>
@@ -59,8 +59,8 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
-                <a data-bs-target="#owner" data-bs-toggle="collapse" class="sidebar-link ">
+            <li class="sidebar-item {{ request()->segment(2) == 'owner' ? 'active' : ' ' }}">
+                <a data-bs-target="#owner" data-bs-toggle="collapse" class="sidebar-link">
                     <i class="align-middle" data-feather="user-check"></i>
                     <span class="align-middle">@lang('sidebar.owner')</span>
                 </a>
@@ -74,7 +74,7 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'tenant' ? 'active' : ' ' }}">
                 <a data-bs-target="#tenant" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="anchor"></i>
                     <span class="align-middle">@lang('sidebar.tenant')</span>
@@ -89,13 +89,21 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            {{-- @dd( request()->segment(2)); --}}
+            <li class="sidebar-item {{ request()->segment(2) == 'employee' ? 'active' : ' ' }}
+                {{ request()->segment(2) == 'employee-salary' ? 'active' : ' ' }}
+                {{ request()->segment(2) == 'employee-leave' ? 'active' : ' ' }}
+
+                ">
                 <a data-bs-target="#employee" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="briefcase"></i>
                     <span class="align-middle">@lang('sidebar.employee')</span>
                 </a>
-                <ul id="employee" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'employee' ? 'show' : ' ' }}
-                    {{ request()->segment(2) == 'employee-salary' ? 'show' : ' ' }}  " data-bs-parent="#sidebar">
+                <ul id="employee" class="sidebar-dropdown list-unstyled collapse
+                    {{ request()->segment(2) == 'employee' ? 'show' : ' ' }}
+                    {{ request()->segment(2) == 'employee-salary' ? 'show' : ' ' }}
+                    {{ request()->segment(2) == 'employee-leave' ? 'show' : ' ' }}  "
+                    data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.employee.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.employee.index') }}">@lang('sidebar.employee_list')</a>
                     </li>
@@ -111,7 +119,7 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'rent' ? 'active' : ' ' }} ">
                 <a data-bs-target="#Rent" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="circle"></i>
                     <span class="align-middle">@lang('sidebar.rent')</span>
@@ -126,7 +134,7 @@ $strpos = Route::currentRouteName();
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ request()->segment(2) == 'owner-utility' ? 'active' : ' ' }}">
                 <a data-bs-target="#owner-utility" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="gitlab"></i>
                     <span class="align-middle">@lang('sidebar.owner_utility')</span>

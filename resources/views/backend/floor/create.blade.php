@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i>@lang('title.Create-Floor')
+    <i class="fa fa-plus-circle"></i> @lang('title.Create-Floor')
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [

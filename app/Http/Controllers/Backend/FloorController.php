@@ -95,7 +95,7 @@ class FloorController extends Controller
     public function update(Request $request, Floor $floor)
     {
         $validatedData = $request->validate([
-            'name'         => [
+            'name' => [
                 'required',
                 Rule::unique('floors')->ignore($floor->id),
             ],
