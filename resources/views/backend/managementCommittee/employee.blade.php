@@ -20,7 +20,7 @@
             @yield('table_header')
             <div class="card-body">
                 <div class="card-body">
-                    <table id="datatables-reponsive" class="table" style="width:100%">
+                    <table id="datatables-reponsive" class="table text-center" style="width:100%">
                         <thead>
                             <tr>
                                 <th>@lang('table.sl')</th>
