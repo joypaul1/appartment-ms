@@ -1,10 +1,11 @@
 @extends('backend.layout.app')
+@include('backend._partials.delete_alert')
 @push('css')
 @endpush
 @section('content')
 
 @section('page-header')
-<i class="fa fa-list"></i>{{ __('title.Owner-Utilit-List') }}
+<i class="fa fa-list"></i> {{ __('title.Owner-Utility-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
@@ -67,8 +68,7 @@
                                             aria-hidden="true"></i> </button>
 
                                 </a>
-                                <a data-href="{{ route('backend.owner-utility.destroy', $row) }}" href="#"
-                                    class="delete_check">
+                                <a data-href="{{ route('backend.owner-utility.destroy', $row) }}" href="#" class="delete_check">
                                     <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"
                                             aria-hidden="true"></i> </button>
 

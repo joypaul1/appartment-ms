@@ -1,17 +1,18 @@
 @extends('backend.layout.app')
+@include('backend._partials.delete_alert')
 @push('css')
 @endpush
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> {{ __('title.Maintenance-Cost-List') }}
+<i class="fa fa-list"></i> {{ __('title.Maintenance-Cost-List') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-plus-circle',
-        'name' => __('title.Create-Maintenance-Cost') ,
-        'route' => route('backend.maintenance-cost.create'),
-    ])
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-plus-circle',
+'name' => __('title.Create-Maintenance-Cost') ,
+'route' => route('backend.maintenance-cost.create'),
+])
 @endsection
 
 
@@ -35,41 +36,38 @@
                     </thead>
                     <tbody>
                         @foreach ($maintenanceCosts as $key => $row)
-                            <tr>
-                                <td>
-                                    {{ $key + 1 }}
-                                </td>
-                                <td>
-                                    {{ $row->title }}
-                                </td>
-                                <td>
-                                    {{ date('d-m-y', strtotime($row->date)) }}
-                                </td>
-                                <td>
-                                    {{ optional($row->month)->name }}
-                                </td>
-                                <td>
-                                    {{ optional($row->year)->name }}
-                                </td>
-                                <td>
-                                    {{ $row->amount }}
-                                </td>
+                        <tr>
+                            <td>
+                                {{ $key + 1 }}
+                            </td>
+                            <td>
+                                {{ $row->title }}
+                            </td>
+                            <td>
+                                {{ date('d-m-y', strtotime($row->date)) }}
+                            </td>
+                            <td>
+                                {{ optional($row->month)->name }}
+                            </td>
+                            <td>
+                                {{ optional($row->year)->name }}
+                            </td>
+                            <td>
+                                {{ $row->amount }}
+                            </td>
 
 
-                                <td class="table-action">
-                                    <a href="{{ route('backend.maintenance-cost.edit', $row) }}">
-                                        <button class="btn btn-sm btn-info"> <i class="fa fa-pencil"
-                                                aria-hidden="true"></i> </button>
+                            <td class="table-action">
+                                <a href="{{ route('backend.maintenance-cost.edit', $row) }}">
+                                    <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
 
-                                    </a>
-                                    <a data-href="{{ route('backend.maintenance-cost.destroy', $row) }}" href="#"
-                                        class="delete_check">
-                                        <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"
-                                                aria-hidden="true"></i> </button>
+                                </a>
+                                <a data-href="{{ route('backend.maintenance-cost.destroy', $row) }}" href="#" class="delete_check">
+                                    <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
 
-                                    </a>
-                                </td>
-                            </tr>
+                                </a>
+                            </td>
+                        </tr>
                         @endforeach
 
 

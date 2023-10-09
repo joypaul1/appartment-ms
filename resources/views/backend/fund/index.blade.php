@@ -1,17 +1,18 @@
 @extends('backend.layout.app')
+@include('backend._partials.delete_alert')
 @push('css')
 @endpush
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> {{ __('title.Fund-List') }}
+<i class="fa fa-list"></i> {{ __('title.Fund-List') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-plus-circle',
-        'name' => __('title.Create-Fund'),
-        'route' => route('backend.fund.create'),
-    ])
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-plus-circle',
+'name' => __('title.Create-Fund'),
+'route' => route('backend.fund.create'),
+])
 @endsection
 
 
@@ -36,42 +37,39 @@
                     </thead>
                     <tbody>
                         @foreach ($funds as $key => $row)
-                            <tr>
-                                <td>
-                                    {{ $key++ }}
-                                </td>
-                                <td>
-                                    {{ date('d-m-y', strtotime($row->date)) }}
-                                </td>
+                        <tr>
+                            <td>
+                                {{ $key++ }}
+                            </td>
+                            <td>
+                                {{ date('d-m-y', strtotime($row->date)) }}
+                            </td>
 
-                                <td>
-                                    {{ optional($row->owner)->name }}
-                                </td>
-                                <td>
-                                    {{ optional($row->month)->name }}
-                                </td>
-                                <td>
-                                    {{ optional($row->year)->name }}
-                                </td>
-                                <td>
-                                    {{ $row->amount }}
-                                </td>
+                            <td>
+                                {{ optional($row->owner)->name }}
+                            </td>
+                            <td>
+                                {{ optional($row->month)->name }}
+                            </td>
+                            <td>
+                                {{ optional($row->year)->name }}
+                            </td>
+                            <td>
+                                {{ $row->amount }}
+                            </td>
 
 
-                                <td class="table-action">
-                                    <a href="{{ route('backend.fund.edit', $row) }}">
-                                        <button class="btn btn-sm btn-info"> <i class="fa fa-pencil"
-                                                aria-hidden="true"></i> </button>
+                            <td class="table-action">
+                                <a href="{{ route('backend.fund.edit', $row) }}">
+                                    <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
 
-                                    </a>
-                                    <a data-href="{{ route('backend.fund.destroy', $row) }}" href="#"
-                                        class="delete_check">
-                                        <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"
-                                                aria-hidden="true"></i> </button>
+                                </a>
+                                <a data-href="{{ route('backend.fund.destroy', $row) }}" href="#" class="delete_check">
+                                    <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
 
-                                    </a>
-                                </td>
-                            </tr>
+                                </a>
+                            </td>
+                        </tr>
                         @endforeach
 
 

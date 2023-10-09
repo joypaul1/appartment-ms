@@ -46,16 +46,16 @@ class OwnerUtilityController extends Controller
         $months = [];
 
         for ($i = 1; $i <= 12; $i++) {
-            $date = DateTime::createFromFormat('!m', $i);
+            $date     = DateTime::createFromFormat('!m', $i);
             $months[] = [
-                'id' => $i,
+                'id'   => $i,
                 'name' => $date->format('F')
             ];
         }
 
-        $floors = Floor::active()->where('branch_id', session('branch_id'))->get(['id', 'name']);
-        $years = Year::get(['id', 'name']);
-        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        $floors = Floor::active()->where('branch_id', session('branch_id'))->get([ 'id', 'name' ]);
+        $years  = Year::get([ 'id', 'name' ]);
+        $status = [ [ 'id' => 1, 'name' => 'active' ], [ 'id' => 0, 'name' => 'inactive' ] ];
         return view('backend.ownerUtility.create', compact('floors', 'months', 'years', 'status'));
     }
 
@@ -63,7 +63,8 @@ class OwnerUtilityController extends Controller
     {
         if (!OwnerUtility::latest()->first()) {
             return 1;
-        } else {
+        }
+        else {
             return OwnerUtility::latest()->first()->invoice_number + 1;
         }
     }
@@ -77,29 +78,30 @@ class OwnerUtilityController extends Controller
     {
 
         $validatedData = $request->validate([
-            'floor_id' => 'required|numeric',
-            'unit_id' => 'required|numeric',
-            'month_id' => 'required|numeric',
-            'year_id' => 'required|numeric',
-            'owner_name' => 'required|string',
-            'owner_id' => 'required|numeric',
-            'water_bill' => 'required|numeric',
+            'floor_id'      => 'required|numeric',
+            'unit_id'       => 'required|numeric',
+            'month_id'      => 'required|numeric',
+            'year_id'       => 'required|numeric',
+            'owner_name'    => 'required|string',
+            'owner_id'      => 'required|numeric',
+            'water_bill'    => 'required|numeric',
             'electric_bill' => 'required|numeric',
-            'gas_bill' => 'required|numeric',
+            'gas_bill'      => 'required|numeric',
             'security_bill' => 'required|numeric',
-            'utility_bill' => 'required|numeric',
-            'other_bill' => 'required|numeric',
+            'utility_bill'  => 'required|numeric',
+            'other_bill'    => 'required|numeric',
             'total_utility' => 'required|numeric',
-            'issue_date' => 'required',
+            'issue_date'    => 'required',
         ]);
         try {
-            $validatedData['status'] =$request->status;
+            $validatedData['status']         = $request->status;
             $validatedData['invoice_number'] = (new InvoiceNumber)->invoice_num($this->getInvoiceNumber());
-            $validatedData['branch_id'] = session('branch_id');
-            $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
+            $validatedData['branch_id']      = session('branch_id');
+            $validatedData['issue_date']     = date('Y-m-d', strtotime($request->issue_date));
 
             OwnerUtility::create($validatedData);
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
@@ -128,18 +130,20 @@ class OwnerUtilityController extends Controller
         $months = [];
         // dd($ownerUtility);
         for ($i = 1; $i <= 12; $i++) {
-            $date = DateTime::createFromFormat('!m', $i);
+            $date     = DateTime::createFromFormat('!m', $i);
             $months[] = [
-                'id' => $i,
+                'id'   => $i,
                 'name' => $date->format('F')
             ];
         }
-        $floors = Floor::active()->where('branch_id', session('branch_id'))->get(['id', 'name']);
-        $units = Unit::where('floor_id', $ownerUtility->floor_id)->where('branch_id', session('branch_id'))->get();
-        $years = Year::get(['id', 'name']);
-        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
-        return view('backend.ownerUtility.edit',
-        compact('months','ownerUtility','floors', 'years', 'status', 'units'));
+        $floors = Floor::active()->where('branch_id', session('branch_id'))->get([ 'id', 'name' ]);
+        $units  = Unit::where('floor_id', $ownerUtility->floor_id)->where('branch_id', session('branch_id'))->get();
+        $years  = Year::get([ 'id', 'name' ]);
+        $status = [ [ 'id' => 1, 'name' => 'active' ], [ 'id' => 0, 'name' => 'inactive' ] ];
+        return view(
+            'backend.ownerUtility.edit',
+            compact('months', 'ownerUtility', 'floors', 'years', 'status', 'units')
+        );
     }
 
     /**
@@ -152,29 +156,30 @@ class OwnerUtilityController extends Controller
     public function update(Request $request, OwnerUtility $ownerUtility)
     {
         $validatedData = $request->validate([
-            'floor_id' => 'required|numeric',
-            'unit_id' => 'required|numeric',
-            'month_id' => 'required|numeric',
-            'year_id' => 'required|numeric',
-            'owner_name' => 'required|string',
-            'owner_id' => 'required|numeric',
-            'water_bill' => 'required|numeric',
+            'floor_id'      => 'required|numeric',
+            'unit_id'       => 'required|numeric',
+            'month_id'      => 'required|numeric',
+            'year_id'       => 'required|numeric',
+            'owner_name'    => 'required|string',
+            'owner_id'      => 'required|numeric',
+            'water_bill'    => 'required|numeric',
             'electric_bill' => 'required|numeric',
-            'gas_bill' => 'required|numeric',
+            'gas_bill'      => 'required|numeric',
             'security_bill' => 'required|numeric',
-            'utility_bill' => 'required|numeric',
-            'other_bill' => 'required|numeric',
+            'utility_bill'  => 'required|numeric',
+            'other_bill'    => 'required|numeric',
             'total_utility' => 'required|numeric',
-            'issue_date' => 'required',
+            'issue_date'    => 'required',
 
         ]);
         try {
 
-            $validatedData['status'] =$request->status;
-            $validatedData['branch_id'] = session('branch_id');
+            $validatedData['status']     = $request->status;
+            $validatedData['branch_id']  = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
             $ownerUtility->update($validatedData);
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.owner-utility.index')->with('success', 'Rent Collection Updated successfully.');
@@ -193,10 +198,11 @@ class OwnerUtilityController extends Controller
             OwnerUtility::whereId($id)->first()->delete();
 
             DB::commit();
-        } catch (\Exception $ex) {
-            DB::rollback();
-            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }
-        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
+        catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json([ 'status' => false, 'mes' => 'Something went wrong!This was relationship Data.' ]);
+        }
+        return response()->json([ 'status' => true, 'mes' => 'Data Deleted Successfully' ]);
     }
 }
