@@ -4,13 +4,13 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> @lang('title.Floor-List')
+<i class="fa fa-list"></i> {{ __('Building-Config') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => __('title.Create-Floor'),
-'route' => route('backend.floor.create'),
+'name' => __('Create-Building'),
+'route' =>route('backend.site-config.building.create'),
 ])
 @endsection
 
@@ -24,29 +24,52 @@
                         <tr>
                             <th>@lang('table.sl')</th>
                             <th>@lang('table.name')</th>
+                            <th>@lang('table.image') </th>
+                            <th>@lang('table.email') </th>
+                            <th>@lang('table.mobile') </th>
+                            <th>@lang('table.address') </th>
+                            <th>@lang('table.status') </th>
                             <th>@lang('table.action') </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data as $key => $row)
+                        @foreach ($datas as $key=>$row)
                         <tr>
                             <td>
-                                {{ $key + 1 }}
+                                {{ $key+1 }}
                             </td>
                             <td>
                                 {{ $row->name }}
                             </td>
+                            <td>
+                                <img src="{{ asset($row->building_image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
+                            </td>
+                            <td>
+                                {{ $row->email }}
+                            </td>
+                            <td>
+                                {{ $row->mobile }}
+                            </td>
+                            <td>
+                                {{ $row->address }}
+                            </td>
+                            <td>
+                                {{ $row->status == 1? 'Active':'Deactive' }}
 
+
+
+                            </td>
 
                             <td class="table-action">
-                                <a href="{{ route('backend.floor.edit', $row) }}">
+                                <a href="{{ route('backend.site-config.building.edit', $row) }}">
                                     <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
 
                                 </a>
-                                <a data-href="{{ route('backend.floor.destroy', $row) }}" href="#" class="delete_check">
+                                {{-- <a data-href="{{ route('backend.site-config.building.destroy', $row) }}" href="#" class="delete_check">
                                     <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
-                                </a>
+                                </a> --}}
                             </td>
+
                         </tr>
                         @endforeach
 
@@ -60,12 +83,14 @@
 @endsection
 
 @push('js')
+
 <script>
     $(document).ready(function() {
         $("#toggleFilter").click(function() {
             $("#filterContainer").slideToggle();
         });
     });
+
 </script>
 
 <script>
@@ -78,5 +103,6 @@
             responsive: true
         });
     });
+
 </script>
 @endpush
