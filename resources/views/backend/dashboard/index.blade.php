@@ -14,7 +14,7 @@
         @endforelse
     </div>
     @if (auth('admin')->user()->role_type == 'super_admin')
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -94,7 +94,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -120,7 +120,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -146,7 +146,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -172,7 +172,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -198,7 +198,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -224,7 +224,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -250,7 +250,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -276,7 +276,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -302,7 +302,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -328,7 +328,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4 col-xs-6 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="row">

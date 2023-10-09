@@ -38,7 +38,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $branches = Branch::get(['id', 'name']);
+        $branches = Branch::get([ 'id', 'name' ]);
         return view('backend.admin.create', compact('branches'));
     }
 
@@ -53,9 +53,9 @@ class AdminController extends Controller
         $returnData = $request->storeData($request);
         if ($returnData->getData()->status) {
 
-            return back()->with(['success' => $returnData->getData()->msg]);
+            return back()->with([ 'success' => $returnData->getData()->msg ]);
         }
-        return back()->with(['error' => $returnData->getData()->msg]);
+        return back()->with([ 'error' => $returnData->getData()->msg ]);
     }
 
     /**
@@ -93,9 +93,9 @@ class AdminController extends Controller
 
         $returnData = $request->updateData($request, $admin);
         if ($returnData->getData()->status) {
-            return back()->with(['success' => $returnData->getData()->msg]);
+            return back()->with([ 'success' => $returnData->getData()->msg ]);
         }
-        return back()->with(['error' => $returnData->getData()->msg]);
+        return back()->with([ 'error' => $returnData->getData()->msg ]);
     }
 
     /**
@@ -109,11 +109,12 @@ class AdminController extends Controller
         try {
             (new Image)->deleteIfExists($admin->image);
             $admin->delete();
-        } catch (\Exception $ex) {
-            return back()->with(['status' => false, 'error' => $ex->getMessage()]);
+        }
+        catch (\Exception $ex) {
+            return back()->with([ 'status' => false, 'error' => $ex->getMessage() ]);
         }
         (new LogActivity)::addToLog('Admin Deleted');
 
-        return back()->with(['status' => true, 'success' => 'Data Deleted Successfully']);
+        return back()->with([ 'status' => true, 'success' => 'Data Deleted Successfully' ]);
     }
 }

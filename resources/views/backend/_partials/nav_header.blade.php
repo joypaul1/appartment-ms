@@ -71,12 +71,16 @@
                         class="avatar img-fluid rounded" alt="admin-logo" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="{{ route('backend.site-config.admin.edit',auth('admin')->user()) }}">
+                    <a class="dropdown-item" href="{{ route('backend.admin.profile') }}">
                         <i class="align-middle me-1" data-feather="user"></i>
-                        Profile
+                        Profile View
                     </a>
-
-                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                    <a class="dropdown-item" href="{{ route('backend.site-config.admin.edit',auth('admin')->user()) }}">
+                     <i class="fa fa-pencil" aria-hidden="true"></i>
+                        Profile Edit
+                    </a>
+                    <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>  Log out</a>
                     <form id="logout-form" action="{{ route('backend.admin.logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
