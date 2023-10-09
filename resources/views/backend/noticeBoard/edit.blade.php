@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i>{{ __('title.Edit-Notice-Board') }}
+    <i class="fa fa-plus-circle"></i> {{ __('title.Edit-Notice-Board') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
