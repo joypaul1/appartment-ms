@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Traits\AutoTimeStamp;
 use App\Traits\GlobalScope;
-use App\Traits\HasPermissionsTrait;
+
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Cache;
 class Admin extends Authenticatable
 
 {
-    use AutoTimeStamp,GlobalScope, HasPermissionsTrait, SoftDeletes;
+    use AutoTimeStamp,GlobalScope, SoftDeletes;
 
     protected $guard = 'admin';
 
