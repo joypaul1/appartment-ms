@@ -19,7 +19,7 @@
         <div class="card">
             @yield('table_header')
             <div class="card-body">
-                <table id="datatables-reponsive" class="table" style="width:100%">
+                <table id="datatables-reponsive" class="table text-center" style="width:100%">
                     <thead>
                         <tr>
                             <th>@lang('table.sl')</th>
@@ -36,9 +36,17 @@
                             <td>
                                 {{ $row->name }}
                             </td>
-
-
                             <td class="table-action">
+                                <a href="{{ route('backend.site-config.year.edit', $row) }}">
+                                    <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
+
+                                </a>
+                                <a data-href="{{ route('backend.site-config.year.destroy', $row) }}" href="#" class="delete_check">
+                                    <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
+                                </a>
+                            </td>
+
+                            {{-- <td class="table-action">
                                 <a href="{{ route('backend.site-config.year.edit', $row) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -46,7 +54,7 @@
                                         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
                                 </a>
-                                <a data-href="{{ route('backend.site-config.year.destroy', $row) }}" href="#" class="delete_check" >
+                                <a data-href="{{ route('backend.site-config.year.destroy', $row) }}" href="#" class="delete_check">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                         class="feather feather-trash align-middle">
@@ -54,7 +62,7 @@
                                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                     </svg>
                                 </a>
-                            </td>
+                            </td> --}}
                         </tr>
                         @endforeach
 
