@@ -4,8 +4,13 @@
 @section('content')
 @php
 $remainBalance = 0;
-$remainBalance += $maintenanceCost;
-$remainBalance += $employeeSalary;
+$expenseTotal = 0;
+$incomeTotal = 0;
+
+$expenseTotal += $maintenanceCost;
+$expenseTotal += $employeeSalary;
+$incomeTotal += $rentCollection;
+$remainBalance = $incomeTotal- $expenseTotal ;
 
 @endphp
 
@@ -23,21 +28,22 @@ $remainBalance += $employeeSalary;
                         </p>
                     </div>
                 </div>
-                <div class="card-title text-center"><u>Expense Report</u> </div>
+                <div class="card-title text-center"><u>Profit Report</u> </div>
                 <div class="card-body">
                     <div class="card-body">
-                        <table id="datatables-reponsive" class="table table-bordered table-responsive text-center" style="width:100%">
+                        <table id="datatables-reponsive" class="table table-bordered table-responsive  text-center" style="width:100%">
                             <thead>
                                 <tr style="
-                                background: #45c745;
-                                color: white;
-                            ">
+                                    background: #45c745;
+                                    color: white;">
                                     <th>Sl.</th>
-                                    <th>Name</th>
+                                    <th>Expense Description</th>
                                     <th>Total Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
+
+
                                 <tr>
                                     <td>1</td>
                                     <td>Maintenance Cost </td>
@@ -48,11 +54,33 @@ $remainBalance += $employeeSalary;
                                     <td>Salary </td>
                                     <td class="text-end">{{ number_format($employeeSalary, 2) }} </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="2" class="text-end"><strong>Total Expense : </strong></td>
+                                    <td class="text-end"><u><strong>{{ number_format($expenseTotal, 2) }}</strong></u></td>
+                                </tr>
+                                <tr style="
+                                    background: #45c745;
+                                    color: white;">
+                                    <th>Sl.</th>
+                                    <th>Income Description</th>
+                                    <th>Total Amount</th>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>RentCollection </td>
+                                    <td class="text-end">{{ number_format($rentCollection, 2) }} </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-end"><strong>Total Expense : </strong></td>
+                                    <td class="text-end"><u><strong>{{ number_format($rentCollection, 2) }}</strong></u></td>
+                                </tr>
 
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <td colspan="2" class="text-end"><strong>Total Expense : </strong></td>
+                                <tr style="
+                                    background: #45c745;
+                                    color: white;">
+                                    <td colspan="2" class="text-end"><strong>Total Profit : </strong></td>
                                     <td class="text-end"><u><strong>{{ number_format($remainBalance, 2) }}</strong></u></td>
                                 </tr>
                             </tfoot>

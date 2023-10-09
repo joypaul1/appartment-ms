@@ -29,15 +29,41 @@ class ReportController extends Controller
             $endDate         = date('Y-m-d', strtotime($request->end_date));
             $employeeSalary  = EmployeeSalary::where('branch_id', session('branch_id'))
                 ->whereBetween('issue_date', [ $startDate, $endDate ])
-                ->get()->sum('amount')??0;
+                ->get()->sum('amount') ?? 0;
             $maintenanceCost = MaintenanceCost::where('branch_id', session('branch_id'))
                 ->whereBetween('date', [ $startDate, $endDate ])
-                ->orderBy('id', 'desc')->get()->sum('amount')??0;
+                ->orderBy('id', 'desc')->get()->sum('amount') ?? 0;
+            $funds           = Fund::where('branch_id', session('branch_id'))
+                ->whereBetween('date', [ $startDate, $endDate ])
+                ->with('owner:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
+                ->orderBy('id', 'desc')->get();
             $branch          = BuildingInformation::where('id', session('branch_id'))->first();
             return view('backend.report.expenseReportPdf', compact('branch', 'maintenanceCost', 'employeeSalary'));
 
         }
         return view('backend.report.expenseReport');
+    }
+    function incomeReport(Request $request)
+    {
+
+        if ($request->start_date && $request->end_date) {
+
+            $startDate       = date('Y-m-d', strtotime($request->start_date));
+            $endDate         = date('Y-m-d', strtotime($request->end_date));
+            $employeeSalary  = EmployeeSalary::where('branch_id', session('branch_id'))
+                ->whereBetween('issue_date', [ $startDate, $endDate ])
+                ->get()->sum('amount') ?? 0;
+            $maintenanceCost = MaintenanceCost::where('branch_id', session('branch_id'))
+                ->whereBetween('date', [ $startDate, $endDate ])
+                ->orderBy('id', 'desc')->get()->sum('amount') ?? 0;
+            $rentCollection = RentCollection::where('branch_id', session('branch_id'))
+            ->whereBetween('issue_date', [ $startDate, $endDate ])->get()->sum('total_rent');
+
+            $branch = BuildingInformation::where('id', session('branch_id'))->first();
+            return view('backend.report.incomeReportPdf', compact('branch', 'maintenanceCost', 'rentCollection', 'employeeSalary'));
+
+        }
+        return view('backend.report.incomeReport');
     }
     function rentReport(Request $request)
     {
