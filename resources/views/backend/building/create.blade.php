@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i>@lang('title.Create-Bill-Informaiton')
+    <i class="fa fa-plus-circle"></i> Building List
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => __('title.Bill-Informaiton-List'),
+        'name' => ('Create Building'),
         'route' => route('backend.site-config.building.index'),
     ])
 @endsection

@@ -4,13 +4,13 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> {{ __('title.Bill-Informaiton-List') }}
+<i class="fa fa-list"></i> {{ __('Building-Config') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => __('title.Create-Informaiton-Informaiton'),
-'route' =>route('backend.owner.create'),
+'name' => __('Create-Building'),
+'route' =>route('backend.site-config.building.create'),
 ])
 @endsection
 
