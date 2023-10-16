@@ -66,7 +66,6 @@
                         ])
                     </div>
 
-                    {{-- @dd(date('m')) --}}
                     <div class="col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'month_id',

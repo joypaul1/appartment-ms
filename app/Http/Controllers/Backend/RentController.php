@@ -75,8 +75,7 @@ class RentController extends Controller
         $floors = Floor::active()->get(['id', 'name']);
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'Paid'], ['id' => 0, 'name' => 'Due']];
-        return view(
-            'backend.rent.create',
+        return view('backend.rent.create',
             compact('floors', 'months', 'years', 'status')
         );
     }
@@ -159,8 +158,7 @@ class RentController extends Controller
         $years = Year::get(['id', 'name']);
         $status = [['id' => 1, 'name' => 'Paid'], ['id' => 0, 'name' => 'Due']];
 
-        return view(
-            'backend.rent.edit',
+        return view('backend.rent.edit',
             compact('rentCollection', 'floors', 'units', 'months', 'years', 'status')
         );
     }

@@ -53,7 +53,7 @@
                             'name' => 'owner_name',
                             'required' => true,
                             'readonly' => true,
-                            'value' =>  $ownerUtility->owner->name,
+                            'value' =>  optional($ownerUtility->owner)->name,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('owner_id'),

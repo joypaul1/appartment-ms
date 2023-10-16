@@ -75,7 +75,7 @@
                             'name' => 'renter_name',
                             'required' => true,
                             'readonly' => true,
-                            'value' => $rentCollection->tenant->name,
+                            'value' => optional($rentCollection->tenant)->name,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('rent_id'),
