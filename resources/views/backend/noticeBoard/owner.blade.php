@@ -40,12 +40,7 @@
                                 <td>
                                     {{ date('d-m-y', strtotime($row->date)) }}
                                 </td>
-                                {{-- <td>
-                                    {{ $row->status }}
-                                </td> --}}
-                                {{-- <td>
-                            {{ $row->status }}
-                        </td> --}}
+
 
 
 

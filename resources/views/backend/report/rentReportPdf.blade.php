@@ -119,7 +119,7 @@ $remainBalance = 0;
                         </tbody>
                     </table>
                 </div>
-                {{-- @dd(session('site_info')) --}}
+              
                 <p class="text-center">Balance :
                     <strong>
                         <u>

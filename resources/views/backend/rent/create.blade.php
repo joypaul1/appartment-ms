@@ -169,16 +169,7 @@
                             'message' => $errors->first('total_rent'),
                         ])
                     </div>
-                    {{--
-                    <div class="col-md-6">
-                        @include('components.backend.forms.input.input-type', [
-                            'inType' => 'file',
-                            'name' => 'image',
-                        ])
-                        @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('image'),
-                        ])
-                    </div> --}}
+
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'date',
