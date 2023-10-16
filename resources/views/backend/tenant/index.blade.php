@@ -54,7 +54,8 @@
                                 {{ $row->address }}
                             </td>
                             <td>
-                                Floor:{{ $row->floor->name }}/Unit:{{ $row->unit->name }}
+                                Floor:{{ optional($row->floor)->name??'' }}/Unit:{{ optional($row->unit)->name??'' }}
+
                             </td>
 
 
