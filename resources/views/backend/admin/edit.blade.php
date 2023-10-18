@@ -43,7 +43,7 @@
                                 <div class="col-lg-8">
                                     @include('components.backend.forms.input.input-type', [
                                         'name' => 'email',
-                                        'type' => 'email',
+                                        'inType' => 'email',
                                         'required' => true,
                                         'value' => old('email', $admin->email),
                                         'placeholder' => 'email will be here...',
@@ -73,7 +73,7 @@
                                 <div class="col-lg-8">
                                     @include('components.backend.forms.input.input-type', [
                                         'name' => 'password',
-                                        'type' => 'text',
+                                        'inType' => 'text',
                                         'placeholder' => 'Password will be here...',
                                     ])
                                     @include('components.backend.forms.input.errorMessage', [

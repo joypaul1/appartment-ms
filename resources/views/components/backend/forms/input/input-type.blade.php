@@ -47,7 +47,7 @@
     }
     $setValue = json_encode($obj);
     $input = json_decode($setValue, true);
-    // dd($input);
+
 @endphp
 <div class="form-group">
     {{-- label --}}

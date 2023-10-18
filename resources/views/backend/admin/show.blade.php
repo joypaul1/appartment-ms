@@ -37,7 +37,7 @@
                         <div class="col-lg-8">
                             @include('components.backend.forms.input.input-type', [
                             'name' => 'email',
-                            'type' => 'email',
+                            'inType' => 'email',
                             'disabled' => true,
                             'value' => old('email', auth('admin')->user()->email),
                             'placeholder' => 'email will be here...',

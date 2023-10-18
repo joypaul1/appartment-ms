@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Floor;
+use App\Models\Backend\Unit;
 use App\Models\Backend\Visitor;
 use App\Models\Backend\Year;
 use DateTime;
@@ -43,10 +44,10 @@ class VisitorController extends Controller
                 'name' => $date->format('F')
             ];
         }
-        $floors = Floor::active()->get([ 'id', 'name' ]);
+        $units = Unit::active()->get([ 'id', 'name' ]);
         $years  = Year::get([ 'id', 'name' ]);
         $status = [ [ 'id' => 1, 'name' => 'active' ], [ 'id' => 0, 'name' => 'inactive' ] ];
-        return view('backend.visitor.create', compact('floors', 'months', 'years', 'status'));
+        return view('backend.visitor.create', compact('units', 'months', 'years', 'status'));
     }
 
     /**
@@ -57,7 +58,6 @@ class VisitorController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validatedData = $request->validate([
             'name'     => 'required|string|max:255',
             'mobile'   => 'required|string|max:15',
@@ -65,7 +65,6 @@ class VisitorController extends Controller
             'date'     => 'required|date',
             'in_time'  => 'required|date_format:H:i',
             'out_time' => 'required|date_format:H:i',
-            'floor_id' => 'required|integer',
             'unit_id'  => 'required|integer',
         ]);
         try {

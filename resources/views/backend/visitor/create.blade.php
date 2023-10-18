@@ -87,7 +87,7 @@
                             'name' => 'unit_id',
                             'required' => true,
                             'label' => 'Unit',
-                            'optionData' => [],
+                            'optionData' =>$units,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('unit_id'),
