@@ -42,6 +42,8 @@
     }
     if (isset($value)) {
         $obj->value = $value;
+    }else{
+        $obj->value  = old($name);
     }
     $setValue = json_encode($obj);
     $input = json_decode($setValue, true);

@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-pencil"></i>{{ __('title.Edit-Owner') }}
+    <i class="fa fa-pencil"></i> {{ __('title.Edit-Owner') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
@@ -95,7 +95,7 @@
                             'message' => $errors->first('nid'),
                         ])
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'file',
                             'name' => 'image',
@@ -103,6 +103,9 @@
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('image'),
                         ])
+                    </div>
+                    <div class="col-md-2">
+                        <img src="{{ asset($owner->image) }}" alt="" style="width:100px">
                     </div>
                     @php
                         $unit_ids = collect($owner->units)

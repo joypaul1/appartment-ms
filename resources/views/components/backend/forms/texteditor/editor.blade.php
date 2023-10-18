@@ -21,13 +21,14 @@ $upName = ucfirst(str_replace($str, $rplc, $name));
     class="editor-textarea" placeholder="@isset($placeholder){{ $placeholder }} @else Enter description here... @endisset">
 @isset($value)
 {!! $value !!}
+@else
+{!! old($name)!!}
 @endisset
 </textarea>
 {{-- textarea end --}}
 
 @push('js')
-{{-- <script src="https://cdn.tiny.cloud/1/qvctqtfhdqwqkjf8r0rd2dbjuk44fzk70v0sosx67u0z5msk/tinymce/6/tinymce.min.js" referrerpolicy="origin">
-</script> --}}
+
 <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
 <script>
     ClassicEditor
@@ -41,11 +42,5 @@ $upName = ucfirst(str_replace($str, $rplc, $name));
 
 
 </script>
-{{-- // tinymce.init({
-// selector: '.editor-textarea',
-// plugins: 'advlist autolink lists link image charmap preview anchor pagebreak table',
-// toolbar_mode: 'floating',
-// height: '220px',
-// }); --}}
 
 @endpush
