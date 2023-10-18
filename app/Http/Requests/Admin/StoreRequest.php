@@ -27,11 +27,10 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|unique:admins,email',
+            'name'   => 'required|string',
+            'email'  => 'required|unique:admins,email',
             'mobile' => 'required|unique:admins,mobile',
-            // 'branch_id' => 'required',
-            'image' => 'required',
+            'image'  => 'required',
         ];
     }
 
@@ -40,20 +39,21 @@ class StoreRequest extends FormRequest
 
         try {
             $data = $request->validated();
-            if($request->image){
-                $data['image'] =  (new Image)->dirName('admin')->file($request->image)
-                ->resizeImage(100, 100)
-                ->save();
+            if ($request->image) {
+                $data['image'] = (new Image)->dirName('admin')->file($request->image)
+                    ->resizeImage(100, 100)
+                    ->save();
             }
 
-            if($request->password){
+            if ($request->password) {
                 $data['password'] = Hash::make($request->password);
             }
             $data['role_type'] = 'super_admin';
             Admin::create($data);
-        } catch (\Exception $ex) {
-            return response()->json(['status' => false, 'msg' =>$ex->getMessage()]);
         }
-        return response()->json(['status' => true, 'msg' => 'Data Updated Successfully']);
+        catch (\Exception $ex) {
+            return response()->json([ 'status' => false, 'msg' => $ex->getMessage() ]);
+        }
+        return response()->json([ 'status' => true, 'msg' => 'Data Updated Successfully' ]);
     }
 }
