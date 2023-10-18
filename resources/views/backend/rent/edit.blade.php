@@ -118,7 +118,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => $rentCollection->electric_bill,
+                            'value' => $rentCollection->gas_bill,
                             'name' => 'gas_bill',
                             'required' => true,
                         ])
@@ -129,7 +129,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => $rentCollection->electric_bill,
+                            'value' => $rentCollection->security_bill,
                             'name' => 'security_bill',
                             'required' => true,
                         ])
@@ -140,7 +140,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => $rentCollection->electric_bill,
+                            'value' => $rentCollection->utility_bill,
                             'name' => 'utility_bill',
                             'required' => true,
                         ])
@@ -151,7 +151,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => $rentCollection->electric_bill,
+                            'value' => $rentCollection->other_bill,
                             'name' => 'other_bill',
                             'required' => true,
                         ])
@@ -162,7 +162,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'value' => $rentCollection->electric_bill,
+                            'value' => $rentCollection->total_rent,
                             'label' => 'Total Rent',
                             'name' => 'total_rent',
                             'required' => true,
@@ -215,8 +215,8 @@
             url: url,
             dataType: 'JSON',
             data: {
-                'Floorid': e.target.value,
-                'getFreeUnits': true
+                'floor_id': e.target.value,
+                'getUnit': true
             },
 
             success: function(res) {
@@ -224,7 +224,7 @@
                 $.map(res.data, function(val, i) {
                     var newOption = new Option(val.name, val.id, false, false);
                     $('#Unitid').append(newOption).trigger('change');
-
+                    getRentInfo();
                 });
             },
             error: function(jqXHR, exception) {
@@ -249,5 +249,76 @@
         });
 
     });
+    $('#Unitid').on('change', function(e) {
+        $("#renter_name").val(null);
+        $("#rent_id").val(null);
+        $("#rent").val(null);
+        e.preventDefault();
+        getRentInfo();
+
+    });
+
+    function getRentInfo() {
+        $.ajax({
+            type: "GET",
+            url: "{{ route('backend.tenant.index') }}",
+            dataType: 'JSON',
+            data: {
+                'floor_id': $('#Floorid').val(),
+                'unit_id': $('#Unitid').val(),
+                'getRent': true
+            },
+
+            success: function(res) {
+                if (res.data) {
+                    $("#renter_name").val(res.data.name);
+                    $("#rent_id").val(res.data.id);
+                    $("#rent").val(res.data.rent_per_month);
+                    totalRent();
+                }
+
+
+            },
+            error: function(jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                console.log(msg);
+            },
+        });
+    }
+
+    function totalRent() {
+        let total = 0;
+        let rent = $('#rent').val();
+        let water_bill = $('#water_bill').val();
+        let electric_bill = $('#electric_bill').val();
+        let gas_bill = $('#gas_bill').val();
+        let security_bill = $('#security_bill').val();
+        let utility_bill = $('#utility_bill').val();
+        let other_bill = $('#other_bill').val();
+        total = Number(water_bill) + Number(electric_bill) + Number(rent) + Number(gas_bill) + Number(security_bill) +
+            Number(utility_bill) + Number(other_bill);
+        $('#total_rent').val(total);
+    }
+
+    $(document).on('change', '#water_bill, #electric_bill, #gas_bill, #security_bill, #utility_bill, #other_bill',
+        function() {
+            // console.log(333);
+            totalRent();
+        });
 </script>
 @endpush

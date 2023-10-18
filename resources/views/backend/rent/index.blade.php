@@ -63,7 +63,10 @@
                                     {{ $row->total_rent }}
                                 </td>
                                 <td>
-                                    {{ $row->bill_status }}
+                                  @if ($row->bill_status)
+                                      Paid
+                                      @else Due
+                                  @endif
                                 </td>
 
 

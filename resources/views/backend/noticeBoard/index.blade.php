@@ -1,4 +1,6 @@
 @extends('backend.layout.app')
+@include('backend._partials.delete_alert')
+
 @push('css')
 @endpush
 @section('content')

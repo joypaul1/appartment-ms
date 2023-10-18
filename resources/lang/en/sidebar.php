@@ -79,6 +79,7 @@ return [
     'notice-board'  => 'Notice Board',
     'notice-board-list'  => 'Notice Board List',
     'notice-board-create'  => 'Notice Board Create',
+    'Edit-Rent-Collection' => 'Edit Rent Collection',
 
 ];
 

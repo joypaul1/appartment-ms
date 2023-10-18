@@ -84,5 +84,5 @@ return [
     'Management-Management-List' => 'Management-Management List',
     'Create-Management-Management' => 'Create Management-Management',
     'Edit-Management-Management' => 'Edit Management-Management',
-
+    'List-Rent-Collection' => 'Edit Rent Collection',
 ];
