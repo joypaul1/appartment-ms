@@ -200,13 +200,13 @@ class TenantController extends Controller
 
             'mobile'         => [
                 'required',
-                Rule::unique('rent_configurations', 'mobile')->ignore($tenant->id),
-                Rule::unique('admins', 'mobile')->ignore($tenant->id),
+                // Rule::unique('rent_configurations', 'mobile')->ignore($tenant->id),
+                // Rule::unique('admins', 'mobile')->ignore($tenant->id),
             ],
             'email'          => [
                 'required',
-                Rule::unique('rent_configurations', 'email')->ignore($tenant->id),
-                Rule::unique('admins', 'email')->ignore($tenant->id),
+                // Rule::unique('rent_configurations', 'email')->ignore($tenant->id),
+                // Rule::unique('admins', 'email')->ignore($tenant->id),
             ],
             'address'        => 'required|string|max:255',
             'nid'            => 'required|string|max:20',
@@ -258,6 +258,7 @@ class TenantController extends Controller
         }
         catch (\Exception $ex) {
             DB::rollBack();
+            dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
