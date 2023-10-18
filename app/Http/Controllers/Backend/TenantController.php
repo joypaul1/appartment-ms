@@ -96,7 +96,7 @@ class TenantController extends Controller
             ],
             'mobile'         => [
                 'required',
-                'mobile',
+                'string',
                 'max:255',
                 Rule::unique('rent_configurations', 'mobile'),
                 Rule::unique('admins', 'mobile'),
@@ -137,11 +137,11 @@ class TenantController extends Controller
             }
             Admin::where('email', $data['email'])->where('name', $data['name'])->where('mobile', $data['mobile'])
                 ->updateOrCreate($data);
-            DB::rollBack();
-        }
-        catch (\Exception $ex) {
             DB::commit();
 
+        }
+        catch (\Exception $ex) {
+            DB::rollBack();
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
@@ -196,11 +196,13 @@ class TenantController extends Controller
             'name'           => 'required|string|max:255',
             'email'          => [
                 'required',
-                Rule::unique('owners')->ignore($tenant->id),
+                Rule::unique('rent_configurations', 'email')->ignore($tenant->id),
+                Rule::unique('admins', 'email')->ignore($tenant->id),
             ],
             'mobile'         => [
                 'required',
-                Rule::unique('owners')->ignore($tenant->id),
+                Rule::unique('rent_configurations', 'mobile')->ignore($tenant->id),
+                Rule::unique('admins', 'mobile')->ignore($tenant->id),
             ],
             'address'        => 'required|string|max:255',
             'nid'            => 'required|string|max:20',
@@ -244,7 +246,6 @@ class TenantController extends Controller
                 $admin->update($data);
             }
             else {
-                $data['password'] = Hash::make('123456789');
                 Admin::create($data);
             }
 

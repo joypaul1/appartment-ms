@@ -34,6 +34,7 @@
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'mobile',
                         'required' => true,
+                        'number' => true,
                         'value' => $tenant->mobile
 
                         ])
@@ -50,7 +51,6 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'password',
-                        'required' => true,
                         'value' => $tenant->password
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('password')])

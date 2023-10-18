@@ -32,6 +32,7 @@
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'mobile',
                         'required' => true,
+                        'number' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('mobile')])
                     </div>
@@ -47,7 +48,7 @@
                         'name' => 'password',
                         'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('mobile')])
+                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('password')])
                     </div>
 
                     <div class="col-md-6">
