@@ -25,7 +25,7 @@
                             'name' => 'name',
                             'value' => old('name', auth('admin')->user()->name),
                             'placeholder' => 'name will be here...',
-                            'required' => true,
+                            'disabled' => true,
                             ])
                             @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('name'),
@@ -38,7 +38,7 @@
                             @include('components.backend.forms.input.input-type', [
                             'name' => 'email',
                             'type' => 'email',
-                            'required' => true,
+                            'disabled' => true,
                             'value' => old('email', auth('admin')->user()->email),
                             'placeholder' => 'email will be here...',
                             ])
@@ -51,7 +51,7 @@
                         <div class="col-lg-8">
                             @include('components.backend.forms.input.input-type', [
                             'name' => 'mobile',
-                            'required' => true,
+                            'disabled' => true,
                             'value' => old('mobile', auth('admin')->user()->mobile),
                             'placeholder' => 'mobile will be here (01...)',
                             ])

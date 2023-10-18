@@ -58,6 +58,7 @@
                                 <div class="col-lg-8">
                                     @include('components.backend.forms.input.input-type', [
                                         'name' => 'mobile',
+                                        'number' => true,
                                         'required' => true,
                                         'value' => old('mobile', $admin->mobile),
                                         'placeholder' => 'mobile will be here (01...)',

@@ -49,7 +49,7 @@
                                     class="text-danger">*</span> </label> --}}
                             <div class="col-lg-8">
                                 @include('components.backend.forms.input.input-type',[ 'name' => 'mobile', 'required'=>
-                                true,'placeholder' => 'mobile will be here (01...)' ])
+                                true, 'number' => true,'placeholder' => 'mobile will be here (01...)' ])
                                 @include('components.backend.forms.input.errorMessage', ['message'
                                 =>$errors->first('mobile')])
                             </div>

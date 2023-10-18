@@ -7,7 +7,7 @@
     $upName = ucfirst(str_replace($str, $rplc, $name));
     $obj = new stdClass();
     $obj->value = null;
-    $obj->disable = false;
+    $obj->disabled = false;
     $obj->readonly = false;
     $obj->required = false;
     $obj->number = false;
@@ -37,8 +37,8 @@
     if (isset($readonly)) {
         $obj->readonly = true;
     }
-    if (isset($disable)) {
-        $obj->disable = true;
+    if (isset($disabled)) {
+        $obj->disabled = true;
     }
     if (isset($value)) {
         $obj->value = $value;
@@ -75,8 +75,8 @@
         @if($input['readonly'] == true)
         readonly
         @endif
-        @if($input['disable'] == true)
-        disable
+        @if($input['disabled'] == true)
+        disabled
         @endif
 
         >
