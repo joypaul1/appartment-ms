@@ -32,7 +32,7 @@ $remainBalance = $incomeTotal- $expenseTotal ;
                 </div>
                 <div class="card-body">
                     <div class="card-body">
-                        <table id="datatables-reponsive" class="table table-bordered table-responsive  text-center" style="width:100%">
+                        <table id="datatables-reponsive" class="table table-bordered table-sm  text-center" style="width:100%">
                             <thead>
                                 <tr style="
                                     background: #45c745;
