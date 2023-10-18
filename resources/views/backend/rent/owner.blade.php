@@ -19,8 +19,8 @@
     <div class="col-12">
         <div class="card p-3">
             @yield('table_header')
-            <div class="card-body">
-                <table id="datatables-reponsive" class="table table-bordered table-responsive text-center" style="width:100%">
+            <div class="card-body table-responsive">
+                <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
                     <thead>
                         <tr>
                             <th>@lang('table.invoice_no')</th>
@@ -67,7 +67,7 @@
                                 </td>
 
 
-                                
+
                             </tr>
                         @endforeach
 

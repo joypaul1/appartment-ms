@@ -19,7 +19,7 @@
     <div class="col-12">
         <div class="card">
             @yield('table_header')
-            <div class="card-body">
+            <div class="card-body  table-responsive">
                 <table id="datatable-reponsive" class="table  table-responsive text-center" style="width:100%">
                     <thead>
                         <tr>

@@ -23,7 +23,7 @@
             <p class="text-center" id="print"><button><i class="fa fa-print" aria-hidden="true"></i></button></p>
             <div id="printArea">
                 <div class="card-title text-center">Fund Management List </div>
-                <div class="card-body">
+                <div class="card-body  table-responsive">
                     <table id="datatables-reponsive" class="table table-bordered table-responsive text-center" style="width:100%">
                         <thead>
                             <tr>

@@ -20,7 +20,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="body">
+            <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-responsive text-center">
                         <thead>

@@ -37,11 +37,11 @@ class RentController extends Controller
             return view('backend.rent.owner', compact('rentCollections'));
         }
         if (auth('admin')->user()->role_type == 'tenant') {
-            $tenant = Tenant::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
+            $tenant          = Tenant::where('email', auth('admin')->user()->email)->where('mobile', auth('admin')->user()->mobile)->first();
             $rentCollections = RentCollection::where('tenant_id', $tenant->id)->get();
             return view('backend.rent.owner', compact('rentCollections'));
         }
-
+        // dd(123123);
         $rentCollections = RentCollection::with('tenant:id,name', 'floor:id,name', 'unit:id,name', 'month:id,name', 'year:id,name', 'branch:id,name')
             ->orderBy('id', 'desc')->get();
         return view('backend.rent.index', compact('rentCollections'));
@@ -50,7 +50,8 @@ class RentController extends Controller
     {
         if (!RentCollection::latest()->first()) {
             return 1;
-        } else {
+        }
+        else {
             return RentCollection::latest()->first()->invoice_number + 1;
         }
     }
@@ -65,17 +66,18 @@ class RentController extends Controller
         $months = [];
 
         for ($i = 1; $i <= 12; $i++) {
-            $date = DateTime::createFromFormat('!m', $i);
+            $date     = DateTime::createFromFormat('!m', $i);
             $months[] = [
-                'id' => $i,
+                'id'   => $i,
                 'name' => $date->format('F')
             ];
         }
 
-        $floors = Floor::active()->get(['id', 'name']);
-        $years = Year::get(['id', 'name']);
-        $status = [['id' => 1, 'name' => 'Paid'], ['id' => 0, 'name' => 'Due']];
-        return view('backend.rent.create',
+        $floors = Floor::active()->get([ 'id', 'name' ]);
+        $years  = Year::get([ 'id', 'name' ]);
+        $status = [ [ 'id' => 1, 'name' => 'Paid' ], [ 'id' => 0, 'name' => 'Due' ] ];
+        return view(
+            'backend.rent.create',
             compact('floors', 'months', 'years', 'status')
         );
     }
@@ -89,35 +91,36 @@ class RentController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'floor_id' => 'required|numeric',
-            'unit_id' => 'required|numeric',
-            'month_id' => 'required|numeric',
-            'year_id' => 'required|numeric',
-            'renter_name' => 'required|string',
-            'rent' => 'required',
-            'rent_id' => 'required|numeric',
-            'water_bill' => 'required|numeric',
+            'floor_id'      => 'required|numeric',
+            'unit_id'       => 'required|numeric',
+            'month_id'      => 'required|numeric',
+            'year_id'       => 'required|numeric',
+            'renter_name'   => 'required|string',
+            'rent'          => 'required',
+            'rent_id'       => 'required|numeric',
+            'water_bill'    => 'required|numeric',
             'electric_bill' => 'required|numeric',
-            'gas_bill' => 'required|numeric',
+            'gas_bill'      => 'required|numeric',
             'security_bill' => 'required|numeric',
-            'utility_bill' => 'required|numeric',
-            'other_bill' => 'required|numeric',
-            'total_rent' => 'required|numeric',
-            'bill_status' => 'required|numeric',
-            'issue_date' => 'required',
+            'utility_bill'  => 'required|numeric',
+            'other_bill'    => 'required|numeric',
+            'total_rent'    => 'required|numeric',
+            'bill_status'   => 'required|numeric',
+            'issue_date'    => 'required',
         ]);
         try {
             $validatedData['invoice_number'] = (new InvoiceNumber)->invoice_num($this->getInvoiceNumber());
-            $validatedData['tenant_id'] = $request->rent_id;
-            $validatedData['rent_type'] = 'Rented';
-            $validatedData['branch_id'] = session('branch_id');
-            $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
+            $validatedData['tenant_id']      = $request->rent_id;
+            $validatedData['rent_type']      = 'Rented';
+            $validatedData['branch_id']      = session('branch_id');
+            $validatedData['issue_date']     = date('Y-m-d', strtotime($request->issue_date));
             if ($request->hasfile('image')) {
-                $image =  (new Image)->dirName('rent')->file($request->image)->resizeImage(100, 100)->save();
+                $image                  = (new Image)->dirName('rent')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
             }
             RentCollection::create($validatedData);
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
@@ -144,21 +147,22 @@ class RentController extends Controller
     public function edit($id)
     {
         $rentCollection = RentCollection::whereId($id)->with('tenant')->first();
-        $months = [];
+        $months         = [];
 
         for ($i = 1; $i <= 12; $i++) {
-            $date = DateTime::createFromFormat('!m', $i);
+            $date     = DateTime::createFromFormat('!m', $i);
             $months[] = [
-                'id' => $i,
+                'id'   => $i,
                 'name' => $date->format('F')
             ];
         }
-        $units = Unit::where('id', $rentCollection->unit_id)->get(['id', 'name']);
-        $floors = Floor::where('branch_id', session('branch_id'))->active()->get(['id', 'name']);
-        $years = Year::get(['id', 'name']);
-        $status = [['id' => 1, 'name' => 'Paid'], ['id' => 0, 'name' => 'Due']];
+        $units  = Unit::where('id', $rentCollection->unit_id)->get([ 'id', 'name' ]);
+        $floors = Floor::where('branch_id', session('branch_id'))->active()->get([ 'id', 'name' ]);
+        $years  = Year::get([ 'id', 'name' ]);
+        $status = [ [ 'id' => 1, 'name' => 'Paid' ], [ 'id' => 0, 'name' => 'Due' ] ];
 
-        return view('backend.rent.edit',
+        return view(
+            'backend.rent.edit',
             compact('rentCollection', 'floors', 'units', 'months', 'years', 'status')
         );
     }
@@ -173,36 +177,37 @@ class RentController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'floor_id' => 'required|numeric',
-            'unit_id' => 'required|numeric',
-            'month_id' => 'required|numeric',
-            'year_id' => 'required|numeric',
-            'renter_name' => 'required|string',
-            'rent' => 'required',
-            'rent_id' => 'required|numeric',
-            'water_bill' => 'required|numeric',
+            'floor_id'      => 'required|numeric',
+            'unit_id'       => 'required|numeric',
+            'month_id'      => 'required|numeric',
+            'year_id'       => 'required|numeric',
+            'renter_name'   => 'required|string',
+            'rent'          => 'required',
+            'rent_id'       => 'required|numeric',
+            'water_bill'    => 'required|numeric',
             'electric_bill' => 'required|numeric',
-            'gas_bill' => 'required|numeric',
+            'gas_bill'      => 'required|numeric',
             'security_bill' => 'required|numeric',
-            'utility_bill' => 'required|numeric',
-            'other_bill' => 'required|numeric',
-            'total_rent' => 'required|numeric',
-            'bill_status' => 'required|numeric',
+            'utility_bill'  => 'required|numeric',
+            'other_bill'    => 'required|numeric',
+            'total_rent'    => 'required|numeric',
+            'bill_status'   => 'required|numeric',
             // 'issue_date' => 'required',
         ]);
         try {
             $rentCollection = RentCollection::whereId($id)->first();
 
-            $validatedData['tenant_id'] = $request->rent_id;
-            $validatedData['rent_type'] = 'Rented';
-            $validatedData['branch_id'] = session('branch_id');
+            $validatedData['tenant_id']  = $request->rent_id;
+            $validatedData['rent_type']  = 'Rented';
+            $validatedData['branch_id']  = session('branch_id');
             $validatedData['issue_date'] = date('Y-m-d', strtotime($request->issue_date));
             if ($request->hasfile('image')) {
-                $image =  (new Image)->dirName('rent')->file($request->image)->resizeImage(100, 100)->save();
+                $image                  = (new Image)->dirName('rent')->file($request->image)->resizeImage(100, 100)->save();
                 $validatedData['image'] = $image;
             }
             $rentCollection->update($validatedData);
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.rent.index')->with('success', 'Rent Collection Updated successfully.');
@@ -221,10 +226,11 @@ class RentController extends Controller
             RentCollection::whereId($id)->first()->delete();
 
             DB::commit();
-        } catch (\Exception $ex) {
-            DB::rollback();
-            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }
-        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
+        catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json([ 'status' => false, 'mes' => 'Something went wrong!This was relationship Data.' ]);
+        }
+        return response()->json([ 'status' => true, 'mes' => 'Data Deleted Successfully' ]);
     }
 }
