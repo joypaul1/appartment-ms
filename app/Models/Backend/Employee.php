@@ -11,7 +11,7 @@ class Employee extends Model
 {
     protected $table ='employees';
 
-    use GlobalScope, AutoTimeStamp, SoftDeletes;
+    use GlobalScope, AutoTimeStamp;
 
     protected $guarded =['id'];
 

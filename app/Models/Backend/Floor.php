@@ -12,7 +12,7 @@ class Floor extends Model
 {
     protected $table ='floors';
 
-    use GlobalScope, AutoTimeStamp,SoftDeletes;
+    use GlobalScope, AutoTimeStamp;
 
     protected $guarded =['id'];
 

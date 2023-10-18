@@ -12,7 +12,7 @@ class Unit extends Model
 {
     protected $table = 'unit_configurations';
 
-    use GlobalScope, AutoTimeStamp,SoftDeletes;
+    use GlobalScope, AutoTimeStamp;
 
     protected $guarded = ['id'];
     public function branch()

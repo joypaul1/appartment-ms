@@ -11,6 +11,6 @@ class MonthConfiguration extends Model
 {
     protected $table = 'month_setups';
 
-    use GlobalScope, AutoTimeStamp, SoftDeletes;
+    use GlobalScope, AutoTimeStamp;
     protected $guarded = ['id'];
 }

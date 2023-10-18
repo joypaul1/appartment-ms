@@ -12,7 +12,7 @@ class Fund extends Model
 {
     protected $table = 'funds';
 
-    use GlobalScope, AutoTimeStamp,SoftDeletes;
+    use GlobalScope, AutoTimeStamp;
 
     protected $guarded = ['id'];
 

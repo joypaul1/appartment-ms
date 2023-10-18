@@ -11,6 +11,6 @@ class MemberType extends Model
 {
     protected $table ='member_types';
 
-    use GlobalScope, AutoTimeStamp, SoftDeletes;
+    use GlobalScope, AutoTimeStamp;
     protected $guarded =['id'];
 }

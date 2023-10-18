@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Backend\Employee;
 use App\Models\Backend\MemberType;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -72,9 +71,8 @@ class EmployeeController extends Controller
             ],
             'mobile'         => [
                 'required',
-                'mobile',
-                'max:255',
-                Rule::unique('employees', 'mobile'),
+                'string','max:13',
+                Rule::unique('rent_configurations', 'mobile'),
                 Rule::unique('admins', 'mobile'),
             ],
             'pre_address'    => 'required|string|max:255',
@@ -154,8 +152,16 @@ class EmployeeController extends Controller
     {
         $validatedData = $request->validate([
             'name'           => 'required|string|max:255',
-            'email'          => 'required|email|max:255',
-            'mobile'         => 'required|string|max:20',
+            'mobile'         => [
+                'required',
+                Rule::unique('employees', 'mobile')->ignore($employee->id),
+                Rule::unique('admins', 'mobile')->ignore(Admin::where('email', $employee->email)->first()->id),
+            ],
+             'email'          => [
+                'required',
+                Rule::unique('employees', 'email')->ignore($employee->id),
+                Rule::unique('admins', 'email')->ignore(Admin::where('email', $employee->email)->first()->id),
+            ],
             'pre_address'    => 'required|string|max:255',
             'per_address'    => 'required|string|max:255',
             'nid'            => 'required|string|max:20',

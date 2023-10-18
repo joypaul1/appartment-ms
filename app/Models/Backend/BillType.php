@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BillType extends Model
 {
-    use GlobalScope, AutoTimeStamp, SoftDeletes;
+    use GlobalScope, AutoTimeStamp;
 
     protected $table ='bill_types';
 

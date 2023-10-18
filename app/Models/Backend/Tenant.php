@@ -11,7 +11,7 @@ class Tenant extends Model
 {
     protected $table = 'rent_configurations';
 
-    use GlobalScope, AutoTimeStamp,SoftDeletes;
+    use GlobalScope, AutoTimeStamp;
 
     protected $guarded = ['id'];
 

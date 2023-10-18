@@ -96,8 +96,7 @@ class TenantController extends Controller
             ],
             'mobile'         => [
                 'required',
-                'string',
-                'max:255',
+                'string','max:13',
                 Rule::unique('rent_configurations', 'mobile'),
                 Rule::unique('admins', 'mobile'),
             ],
@@ -198,12 +197,12 @@ class TenantController extends Controller
         $validatedData = $request->validate([
             'name'           => 'required|string|max:255',
             'mobile'         => [
-                'required',
+                'required','max:13',
                 Rule::unique('rent_configurations', 'mobile')->ignore($tenant->id),
                 Rule::unique('admins', 'mobile')->ignore(Admin::where('email', $tenant->email)->first()->id),
             ],
              'email'          => [
-                'required',
+                'required','string',
                 Rule::unique('rent_configurations', 'email')->ignore($tenant->id),
                 Rule::unique('admins', 'email')->ignore(Admin::where('email', $tenant->email)->first()->id),
             ],
