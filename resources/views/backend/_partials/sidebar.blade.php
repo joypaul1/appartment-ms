@@ -12,14 +12,7 @@ $strpos = Route::currentRouteName();
 
         </a>
 
-        <div class="sidebar-user">
-            <div class="d-flex justify-content-center align-items-center gap-2">
-                <div class="flex-shrink-0">
-                    <img src="{{ asset(auth('admin')->user()->image) }}"class="avatar img-fluid rounded me-1" alt="{{ auth('admin')->user()->name }}" />
-                </div>
-                <span style="color: greenyellow"> <i class="fa fa-user-circle" aria-hidden="true"></i> {{ auth('admin')->user()->name }}</span>
-            </div>
-        </div>
+        
 
         <ul class="sidebar-nav">
             <li class="sidebar-item {{ request()->segment(2) == 'dashboard' ? 'active' : ' ' }}">

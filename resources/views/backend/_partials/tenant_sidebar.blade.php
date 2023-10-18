@@ -11,24 +11,7 @@ $strpos = Route::currentRouteName();
             </span>
         </a>
 
-        <div class="sidebar-user">
-            <div class="d-flex justify-content-center">
-                <div class="flex-shrink-0">
-                    <img src="{{ auth('admin')->user()->image ? asset(auth('admin')->user()->image): asset('assets/backend/img/avatars/avatar.jpg') }}"
-                        class="avatar img-fluid rounded me-1" alt="admin-logo" />
-                </div>
-                <div class="flex-grow-1 ps-2">
-                    <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                        {{ auth('admin')->user()->name }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-start">
-                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log
-                            out</a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
+     
 
         <ul class="sidebar-nav">
             <li class="sidebar-item {{ request()->segment(2) == 'dashboard' ? 'active' : ' ' }} active">
