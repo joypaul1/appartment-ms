@@ -111,6 +111,9 @@ class TenantController extends Controller
             'month_id'       => 'required',
             'year_id'        => 'required',
             'status'         => 'required',
+            'image'          => 'nullable|image|mimes:jpg,jpeg,png,gif',
+            // Add image validation rules as needed.
+
         ]);
         try {
             DB::beginTransaction();
@@ -194,15 +197,16 @@ class TenantController extends Controller
     {
         $validatedData = $request->validate([
             'name'           => 'required|string|max:255',
-            'email'          => [
-                'required',
-                Rule::unique('rent_configurations', 'email')->ignore($tenant->id),
-                Rule::unique('admins', 'email')->ignore($tenant->id),
-            ],
+
             'mobile'         => [
                 'required',
                 Rule::unique('rent_configurations', 'mobile')->ignore($tenant->id),
                 Rule::unique('admins', 'mobile')->ignore($tenant->id),
+            ],
+            'email'          => [
+                'required',
+                Rule::unique('rent_configurations', 'email')->ignore($tenant->id),
+                Rule::unique('admins', 'email')->ignore($tenant->id),
             ],
             'address'        => 'required|string|max:255',
             'nid'            => 'required|string|max:20',
@@ -213,8 +217,8 @@ class TenantController extends Controller
             'month_id'       => 'required',
             'year_id'        => 'required',
             'status'         => 'required',
-            'password'       => 'required|string|max:255',
-
+            'password'       => 'required|string|max:30',
+            'image'          => 'nullable|image|mimes:jpg,jpeg,png,gif'
         ]);
         try {
             DB::beginTransaction();

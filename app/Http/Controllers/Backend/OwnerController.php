@@ -75,12 +75,13 @@ class OwnerController extends Controller
             ],
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
-            'nid'         => 'required|string|max:25',
+            'nid'         => 'required|string|max:30', // Adjust the max length to match the expected length.
             'password'    => 'required|string|max:20',
-            'image'       => 'nullable',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif', // Add image validation rules as needed.
         ]);
+
         try {
-          
+
             $validatedData['branch_id'] = session('branch_id');
             if ($request->hasfile('image')) {
                 $image                  = (new Image)->dirName('owner')->file($request->image)->resizeImage(100, 100)->save();
@@ -159,8 +160,9 @@ class OwnerController extends Controller
             ],
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
-            'nid'         => 'required|string|max:25',
+            'nid'         => 'required|string|max:30',
             'password'    => 'required|string|max:20',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif', // Add image validation rules as needed.
 
         ]);
 
