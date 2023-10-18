@@ -197,16 +197,15 @@ class TenantController extends Controller
     {
         $validatedData = $request->validate([
             'name'           => 'required|string|max:255',
-
             'mobile'         => [
                 'required',
-                // Rule::unique('rent_configurations', 'mobile')->ignore($tenant->id),
-                // Rule::unique('admins', 'mobile')->ignore($tenant->id),
+                Rule::unique('rent_configurations', 'mobile')->ignore($tenant->id),
+                Rule::unique('admins', 'mobile')->ignore(Admin::where('email', $tenant->email)->first()->id),
             ],
-            'email'          => [
+             'email'          => [
                 'required',
-                // Rule::unique('rent_configurations', 'email')->ignore($tenant->id),
-                // Rule::unique('admins', 'email')->ignore($tenant->id),
+                Rule::unique('rent_configurations', 'email')->ignore($tenant->id),
+                Rule::unique('admins', 'email')->ignore(Admin::where('email', $tenant->email)->first()->id),
             ],
             'address'        => 'required|string|max:255',
             'nid'            => 'required|string|max:20',

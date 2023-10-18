@@ -152,11 +152,15 @@ class OwnerController extends Controller
                 'required',
                 'email',
                 Rule::unique('owners')->ignore($owner->id),
+                Rule::unique('admins', 'email')->ignore(Admin::where('email', $owner->email)->first()->id),
+
             ],
             'mobile'      => [
                 'required',
                 'string',
                 Rule::unique('owners')->ignore($owner->id),
+                Rule::unique('admins', 'mobile')->ignore(Admin::where('email', $owner->email)->first()->id),
+
             ],
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
