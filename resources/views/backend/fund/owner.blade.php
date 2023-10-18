@@ -4,17 +4,17 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> {{ __('title.Fund-List') }}
+<i class="fa fa-list"></i> {{ __('title.Fund-List') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        // 'fa' => 'fa fa-plus-circle',
-        // 'name' => 'Create Fund',
-        // 'route' => route('backend.fund.create'),
-    ])
+@include('backend._partials.page_header', [
+// 'fa' => 'fa fa-plus-circle',
+// 'name' => 'Create Fund',
+// 'route' => route('backend.fund.create'),
+])
 @endsection
 @php
-    $remainBalance = $fundBalance = $maintainCosts = 0;
+$remainBalance = $fundBalance = $maintainCosts = 0;
 @endphp
 
 <div class="row">
@@ -23,22 +23,23 @@
             <p class="text-center" id="print"><button><i class="fa fa-print" aria-hidden="true"></i></button></p>
             <div id="printArea">
                 <div class="card-title text-center">Fund Management List </div>
-                <div class="card-body  table-responsive">
-                    <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>@lang('table.sl')</th>
-                                <th>@lang('table.owner')</th>
-                                <th>@lang('table.date')</th>
-                                <th>@lang('table.month')</th>
-                                <th>@lang('table.year')</th>
-                                <th>@lang('table.amount')</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($funds as $key => $row)
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>@lang('table.sl')</th>
+                                    <th>@lang('table.owner')</th>
+                                    <th>@lang('table.date')</th>
+                                    <th>@lang('table.month')</th>
+                                    <th>@lang('table.year')</th>
+                                    <th>@lang('table.amount')</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($funds as $key => $row)
                                 @php
-                                    $fundBalance += $row->amount;
+                                $fundBalance += $row->amount;
                                 @endphp
                                 <tr>
                                     <td>
@@ -63,47 +64,49 @@
 
 
                                 </tr>
-                            @endforeach
+                                @endforeach
 
 
-                        </tbody>
-                        <tfoot>
-                            <tr class="text-center">
-                                <td colspan="6">
-                                    <strong><u> {{ number_format($fundBalance, 2) }}</u></strong>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                            </tbody>
+                            <tfoot>
+                                <tr class="text-center">
+                                    <td colspan="6">
+                                        <strong><u> {{ number_format($fundBalance, 2) }}</u></strong>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="card-title text-center">Maintenance Cost List</div>
                 <div class="card-body">
-                    <table id="datatables-reponsive" class="table table-striped" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>
-                                    Title
-                                </th>
-                                <th>
-                                    Date
-                                </th>
-                                <th>
-                                    Month
-                                </th>
-                                <th>
-                                    Year
-                                </th>
-                                <th>
-                                    Amount
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($maintenanceCosts as $key => $costRow)
+                    <div class="table-responsive">
+                        <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Date
+                                    </th>
+                                    <th>
+                                        Month
+                                    </th>
+                                    <th>
+                                        Year
+                                    </th>
+                                    <th>
+                                        Amount
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($maintenanceCosts as $key => $costRow)
                                 @php
-                                    $maintainCosts += $costRow->amount;
+                                $maintainCosts += $costRow->amount;
                                 @endphp
                                 <tr>
                                     <td>
@@ -128,20 +131,21 @@
 
 
                                 </tr>
-                            @endforeach
+                                @endforeach
 
 
-                        </tbody>
-                        <tfoot>
-                            <tr class="text-center">
-                                <td colspan="6">
-                                    <strong><u> {{ number_format($maintainCosts, 2) }}</u></strong>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <p class="text-center">Balance : <strong><u>
-                                {{ number_format($fundBalance - $maintainCosts, 2) }}</u></strong> </p>
+                            </tbody>
+                            <tfoot>
+                                <tr class="text-center">
+                                    <td colspan="6">
+                                        <strong><u> {{ number_format($maintainCosts, 2) }}</u></strong>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <p class="text-center">Balance : <strong><u>
+                                    {{ number_format($fundBalance - $maintainCosts, 2) }}</u></strong> </p>
+                    </div>
                 </div>
             </div>
         </div>

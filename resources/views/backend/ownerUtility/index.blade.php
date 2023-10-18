@@ -20,66 +20,66 @@
     <div class="col-12">
         <div class="card p-3">
             @yield('table_header')
-            <div class="card-body  table-responsive">
-                <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>@lang('table.invoice_no')</th>
-                            <th>@lang('table.renter_name')</th>
-                            <th>@lang('table.floor')</th>
-                            <th>@lang('table.unit')</th>
-                            <th>@lang('table.month')</th>
-                            <th>@lang('table.year')</th>
-                            <th>@lang('table.total_utility')</th>
-                            <th>@lang('table.action') </th>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>@lang('table.invoice_no')</th>
+                                <th>@lang('table.renter_name')</th>
+                                <th>@lang('table.floor')</th>
+                                <th>@lang('table.unit')</th>
+                                <th>@lang('table.month')</th>
+                                <th>@lang('table.year')</th>
+                                <th>@lang('table.total_utility')</th>
+                                <th>@lang('table.action') </th>
 
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($ownerUtilitys as $key => $row)
-                        <tr>
-                            <td>
-                                {{ $row->invoice_number }}
-                            </td>
-                            <td>
-                                {{ optional($row->owner)->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->floor)->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->unit)->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->month)->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->year)->name }}
-                            </td>
-                            <td>
-                                {{ $row->total_utility }}
-                            </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($ownerUtilitys as $key => $row)
+                            <tr>
+                                <td>
+                                    {{ $row->invoice_number }}
+                                </td>
+                                <td>
+                                    {{ optional($row->owner)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->floor)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->unit)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->month)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->year)->name }}
+                                </td>
+                                <td>
+                                    {{ $row->total_utility }}
+                                </td>
 
 
-                            <td class="table-action">
-                                <a href="{{ route('backend.owner-utility.edit', $row) }}">
-                                    <button class="btn btn-sm btn-info"> <i class="fa fa-pencil"
-                                            aria-hidden="true"></i> </button>
+                                <td class="table-action">
+                                    <a href="{{ route('backend.owner-utility.edit', $row) }}">
+                                        <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
 
-                                </a>
-                                <a data-href="{{ route('backend.owner-utility.destroy', $row) }}" href="#" class="delete_check">
-                                    <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"
-                                            aria-hidden="true"></i> </button>
+                                    </a>
+                                    <a data-href="{{ route('backend.owner-utility.destroy', $row) }}" href="#" class="delete_check">
+                                        <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
 
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -4,37 +4,38 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-list"></i> {{ __('title.Employee-List') }}
+<i class="fa fa-list"></i> {{ __('title.Employee-List') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-plus-circle',
-        'name' => __('title.Create-Employee'),
-        'route' => route('backend.employee.create'),
-    ])
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-plus-circle',
+'name' => __('title.Create-Employee'),
+'route' => route('backend.employee.create'),
+])
 @endsection
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             @yield('table_header')
-            <div class="card-body  table-responsive">
-                <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>@lang('table.sl')</th>
-                            <th>@lang('table.name')</th>
-                            <th>@lang('table.image') </th>
-                            <th>@lang('table.email') </th>
-                            <th>@lang('table.mobile') </th>
-                            <th>@lang('table.join_date') </th>
-                            <th>@lang('table.salary') </th>
-                            <th>@lang('table.member_type') </th>
-                            <th>@lang('table.action') </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $key => $row)
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>@lang('table.sl')</th>
+                                <th>@lang('table.name')</th>
+                                <th>@lang('table.image') </th>
+                                <th>@lang('table.email') </th>
+                                <th>@lang('table.mobile') </th>
+                                <th>@lang('table.join_date') </th>
+                                <th>@lang('table.salary') </th>
+                                <th>@lang('table.member_type') </th>
+                                <th>@lang('table.action') </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $key => $row)
                             <tr>
                                 <td>
                                     {{ $key + 1 }}
@@ -43,8 +44,7 @@
                                     {{ $row->name }}
                                 </td>
                                 <td>
-                                    <img src="{{ asset($row->image) }}" alt=""
-                                        style="width: 50px;height:50px;border-radius:50%" srcset="">
+                                    <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
                                 </td>
                                 <td>
                                     {{ $row->email }}
@@ -67,24 +67,22 @@
 
                                 <td class="table-action">
                                     <a href="{{ route('backend.employee.edit', $row) }}">
-                                        <button class="btn btn-sm btn-info"> <i class="fa fa-pencil"
-                                                aria-hidden="true"></i> </button>
+                                        <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
 
                                     </a>
-                                    <a data-href="{{ route('backend.employee.destroy', $row) }}" href="#"
-                                        class="delete_check">
-                                        <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"
-                                                aria-hidden="true"></i> </button>
+                                    <a data-href="{{ route('backend.employee.destroy', $row) }}" href="#" class="delete_check">
+                                        <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
 
                                     </a>
 
                                 </td>
                             </tr>
-                        @endforeach
+                            @endforeach
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

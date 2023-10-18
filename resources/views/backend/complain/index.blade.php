@@ -21,47 +21,49 @@
     <div class="col-12">
         <div class="card p-3">
             @yield('table_header')
-            <div class="card-body  table-responsive">
-                <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>@lang('table.sl')</th>
-                            <th>@lang('table.title')</th>
-                            <th>@lang('table.date')</th>
-                            <th>@lang('table.action')</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($complains as $key => $row)
-                        <tr>
-                            <td>
-                                {{ $key + 1 }}
-                            </td>
-                            <td>
-                                {{ $row->title }}
-                            </td>
-                            <td>
-                                {{ date('d-m-y', strtotime($row->date)) }}
-                            </td>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>@lang('table.sl')</th>
+                                <th>@lang('table.title')</th>
+                                <th>@lang('table.date')</th>
+                                <th>@lang('table.action')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($complains as $key => $row)
+                            <tr>
+                                <td>
+                                    {{ $key + 1 }}
+                                </td>
+                                <td>
+                                    {{ $row->title }}
+                                </td>
+                                <td>
+                                    {{ date('d-m-y', strtotime($row->date)) }}
+                                </td>
 
 
 
-                            <td class="table-action">
-                                <a href="{{ route('backend.complain.edit', $row) }}">
-                                    <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
+                                <td class="table-action">
+                                    <a href="{{ route('backend.complain.edit', $row) }}">
+                                        <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
 
-                                </a>
-                                <a data-href="{{ route('backend.complain.destroy', $row) }}" href="#" class="delete_check">
-                                    <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
+                                    </a>
+                                    <a data-href="{{ route('backend.complain.destroy', $row) }}" href="#" class="delete_check">
+                                        <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
 
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

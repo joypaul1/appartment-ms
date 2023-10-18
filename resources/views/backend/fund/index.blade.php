@@ -20,61 +20,63 @@
     <div class="col-12">
         <div class="card p-3">
             @yield('table_header')
-            <div class="card-body  table-responsive">
-                <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>@lang('table.sl')</th>
-                            <th>@lang('table.owner')</th>
-                            <th>@lang('table.date')</th>
-                            <th>@lang('table.month')</th>
-                            <th>@lang('table.year')</th>
-                            <th>@lang('table.amount')</th>
-                            <th>@lang('table.action')</th>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>@lang('table.sl')</th>
+                                <th>@lang('table.owner')</th>
+                                <th>@lang('table.date')</th>
+                                <th>@lang('table.month')</th>
+                                <th>@lang('table.year')</th>
+                                <th>@lang('table.amount')</th>
+                                <th>@lang('table.action')</th>
 
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($funds as $key => $row)
-                        <tr>
-                            <td>
-                                {{ $key++ }}
-                            </td>
-                            <td>
-                                {{ date('d-m-y', strtotime($row->date)) }}
-                            </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($funds as $key => $row)
+                            <tr>
+                                <td>
+                                    {{ $key++ }}
+                                </td>
+                                <td>
+                                    {{ date('d-m-y', strtotime($row->date)) }}
+                                </td>
 
-                            <td>
-                                {{ optional($row->owner)->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->month)->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->year)->name }}
-                            </td>
-                            <td>
-                                {{ $row->amount }}
-                            </td>
-
-
-                            <td class="table-action">
-                                <a href="{{ route('backend.fund.edit', $row) }}">
-                                    <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
-
-                                </a>
-                                <a data-href="{{ route('backend.fund.destroy', $row) }}" href="#" class="delete_check">
-                                    <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
-
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
+                                <td>
+                                    {{ optional($row->owner)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->month)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->year)->name }}
+                                </td>
+                                <td>
+                                    {{ $row->amount }}
+                                </td>
 
 
-                    </tbody>
-                </table>
+                                <td class="table-action">
+                                    <a href="{{ route('backend.fund.edit', $row) }}">
+                                        <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
+
+                                    </a>
+                                    <a data-href="{{ route('backend.fund.destroy', $row) }}" href="#" class="delete_check">
+                                        <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
+
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

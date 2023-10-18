@@ -18,62 +18,64 @@
     <div class="col-12">
         <div class="card">
             @yield('table_header')
-            <div class="card-body table-responsive">
-                <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>@lang('table.sl')</th>
-                            <th>@lang('table.entry_date')</th>
-                            <th>@lang('table.name')</th>
-                            <th>@lang('table.mobile')</th>
-                            <th>@lang('table.address')</th>
-                            <th>@lang('table.floor')</th>
-                            <th>@lang('table.unit')</th>
-                            <th>@lang('table.in_time')</th>
-                            <th>@lang('table.out_time')</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($visitors as $key=>$row)
-                        <tr>
-                            <td>
-                                {{ $key+1 }}
-                            </td>
-                            <td>
-                                {{ date('d-m-y', strtotime($row->date)) }}
-                            </td>
-                            <td>
-                                {{ $row->name }}
-                            </td>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>@lang('table.sl')</th>
+                                <th>@lang('table.entry_date')</th>
+                                <th>@lang('table.name')</th>
+                                <th>@lang('table.mobile')</th>
+                                <th>@lang('table.address')</th>
+                                <th>@lang('table.floor')</th>
+                                <th>@lang('table.unit')</th>
+                                <th>@lang('table.in_time')</th>
+                                <th>@lang('table.out_time')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($visitors as $key=>$row)
+                            <tr>
+                                <td>
+                                    {{ $key+1 }}
+                                </td>
+                                <td>
+                                    {{ date('d-m-y', strtotime($row->date)) }}
+                                </td>
+                                <td>
+                                    {{ $row->name }}
+                                </td>
 
-                            <td>
-                                {{ $row->mobile }}
-                            </td>
-                            <td>
-                                {{ $row->address }}
-                            </td>
-                            <td>
-                                {{ optional($row->floor)->name }}
+                                <td>
+                                    {{ $row->mobile }}
+                                </td>
+                                <td>
+                                    {{ $row->address }}
+                                </td>
+                                <td>
+                                    {{ optional($row->floor)->name }}
 
-                            </td>
-                            <td>
-                                {{ optional($row->unit)->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->unit)->name }}
 
-                            </td>
-                            <td>
-                                {{ $row->in_time }}
-                            </td>
-                            <td>
-                                {{ $row->out_time }}
-                            </td>
-
-
-                        </tr>
-                        @endforeach
+                                </td>
+                                <td>
+                                    {{ $row->in_time }}
+                                </td>
+                                <td>
+                                    {{ $row->out_time }}
+                                </td>
 
 
-                    </tbody>
-                </table>
+                            </tr>
+                            @endforeach
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -6,14 +6,14 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> {{ __('title.Rent-Collection-List') }}
+<i class="fa fa-list"></i> {{ __('title.Rent-Collection-List') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-plus-circle',
-        'name' =>__('title.Create-Rent-Collection'),
-        'route' => route('backend.rent.create'),
-    ])
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-plus-circle',
+'name' =>__('title.Create-Rent-Collection'),
+'route' => route('backend.rent.create'),
+])
 @endsection
 
 
@@ -21,24 +21,25 @@
     <div class="col-12">
         <div class="card p-3">
             @yield('table_header')
-            <div class="card-body  table-responsive">
-                <table id="datatables-reponsive" class="table table-bordered text-center" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>@lang('table.invoice_no')</th>
-                            <th>@lang('table.renter_name')</th>
-                            <th>@lang('table.floor')</th>
-                            <th>@lang('table.unit')</th>
-                            <th>@lang('table.month')</th>
-                            <th>@lang('table.year')</th>
-                            <th>@lang('table.total_rent')</th>
-                            <th>@lang('table.bill_status')</th>
-                            <th>@lang('table.action')</th>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatables-reponsive" class="table table-bordered text-center" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>@lang('table.invoice_no')</th>
+                                <th>@lang('table.renter_name')</th>
+                                <th>@lang('table.floor')</th>
+                                <th>@lang('table.unit')</th>
+                                <th>@lang('table.month')</th>
+                                <th>@lang('table.year')</th>
+                                <th>@lang('table.total_rent')</th>
+                                <th>@lang('table.bill_status')</th>
+                                <th>@lang('table.action')</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($rentCollections as $key => $row)
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($rentCollections as $key => $row)
                             <tr>
                                 <td>
                                     {{ $row->invoice_number }}
@@ -68,24 +69,22 @@
 
                                 <td class="table-action">
                                     <a href="{{ route('backend.rent.edit', $row) }}">
-                                        <button class="btn btn-sm btn-info"> <i class="fa fa-pencil"
-                                                aria-hidden="true"></i> </button>
+                                        <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
 
                                     </a>
-                                    <a data-href="{{ route('backend.rent.destroy', $row) }}"
-                                        class="delete_check">
-                                        <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"
-                                                aria-hidden="true"></i> </button>
+                                    <a data-href="{{ route('backend.rent.destroy', $row) }}" class="delete_check">
+                                        <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
 
                                     </a>
 
                                 </td>
                             </tr>
-                        @endforeach
+                            @endforeach
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i>  {{  ('title.Management-Committe-List') }}
+<i class="fa fa-list"></i> {{ ('title.Management-Committe-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
@@ -19,7 +19,7 @@
         <div class="card">
             @yield('table_header')
             <div class="card-body">
-                <div class=" table-responsive">
+                <div class="table-responsive">
                     <table id="datatables-reponsive" class="table text-center" style="width:100%">
                         <thead>
                             <tr>

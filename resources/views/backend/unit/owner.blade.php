@@ -18,37 +18,39 @@
     <div class="col-12">
         <div class="card">
             @yield('table_header')
-            <div class="card-body table-responsive">
-                <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
-                    <thead>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
+                        <thead>
 
-                        <tr>
-                            <th>@lang('table.sl')</th>
-                            <th>@lang('table.name')</th>
-                            <th>@lang('table.floor_name') </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $key=>$row)
-                        <tr>
-                            <td>
-                                {{ $key+1 }}
-                            </td>
-                            <td>
-                                {{ $row->name }}
-                            </td>
-                            <td>
-                                {{ optional($row->floor)->name }}
-                            </td>
-
-
-
-                        </tr>
-                        @endforeach
+                            <tr>
+                                <th>@lang('table.sl')</th>
+                                <th>@lang('table.name')</th>
+                                <th>@lang('table.floor_name') </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $key=>$row)
+                            <tr>
+                                <td>
+                                    {{ $key+1 }}
+                                </td>
+                                <td>
+                                    {{ $row->name }}
+                                </td>
+                                <td>
+                                    {{ optional($row->floor)->name }}
+                                </td>
 
 
-                    </tbody>
-                </table>
+
+                            </tr>
+                            @endforeach
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

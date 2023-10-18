@@ -19,59 +19,61 @@
         <div class="card">
             @yield('table_header')
             <div class="card-body">
-                <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>@lang('table.sl')</th>
-                            <th>@lang('table.name')</th>
-                            <th>@lang('table.image') </th>
-                            <th>@lang('table.mobile') </th>
-                            <th>@lang('table.address') </th>
-                            <th>@lang('table.appartment') </th>
-                            <th>@lang('table.advance') </th>
-                            <th>@lang('table.rent') </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $key=>$row)
-                        <tr>
-                            <td>
-                                {{ $key+1 }}
-                            </td>
-                            <td>
-                                {{ $row->name }}
-                            </td>
-                            <td>
-                                <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
-                            </td>
-                            <td>
-                                {{ $row->email }}
-                            </td>
-                            <td>
-                                {{ $row->mobile }}
-                            </td>
-                            {{-- <td>
-                                {{ $row->address }}
-                            </td> --}}
-                            <td>
-                                Floor:{{ optional($row->floor)->name??'Data Deleted' }}/Unit:{{ optional($row->unit)->name??'Data Deleted' }}
+                <div class="table-responsive">
+                    <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>@lang('table.sl')</th>
+                                <th>@lang('table.name')</th>
+                                <th>@lang('table.image') </th>
+                                <th>@lang('table.mobile') </th>
+                                <th>@lang('table.address') </th>
+                                <th>@lang('table.appartment') </th>
+                                <th>@lang('table.advance') </th>
+                                <th>@lang('table.rent') </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $key=>$row)
+                            <tr>
+                                <td>
+                                    {{ $key+1 }}
+                                </td>
+                                <td>
+                                    {{ $row->name }}
+                                </td>
+                                <td>
+                                    <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
+                                </td>
+                                <td>
+                                    {{ $row->email }}
+                                </td>
+                                <td>
+                                    {{ $row->mobile }}
+                                </td>
+                                {{-- <td>
+                                    {{ $row->address }}
+                                </td> --}}
+                                <td>
+                                    Floor:{{ optional($row->floor)->name??'Data Deleted' }}/Unit:{{ optional($row->unit)->name??'Data Deleted' }}
 
-                            </td>
-                            <td>
-                                {{ $row->advance_rent }}
-                            </td>
-                            <td>
-                                {{ $row->rent_per_month }}
-                            </td>
-
-
-
-                        </tr>
-                        @endforeach
+                                </td>
+                                <td>
+                                    {{ $row->advance_rent }}
+                                </td>
+                                <td>
+                                    {{ $row->rent_per_month }}
+                                </td>
 
 
-                    </tbody>
-                </table>
+
+                            </tr>
+                            @endforeach
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

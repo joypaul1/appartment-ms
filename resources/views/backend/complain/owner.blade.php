@@ -4,14 +4,14 @@
 @section('content')
 
 @section('page-header')
-    <i class="fa fa-list"></i> {{ __('title.Complain-List') }}
+<i class="fa fa-list"></i> {{ __('title.Complain-List') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        // 'fa' => 'fa fa-plus-circle',
-        // 'name' => 'Create Complain',
-        // 'route' => route('backend.complain.create'),
-    ])
+@include('backend._partials.page_header', [
+// 'fa' => 'fa fa-plus-circle',
+// 'name' => 'Create Complain',
+// 'route' => route('backend.complain.create'),
+])
 @endsection
 
 
@@ -19,17 +19,18 @@
     <div class="col-12">
         <div class="card p-3">
             @yield('table_header')
-            <div class="card-body  table-responsive">
-                <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
-                    <thead>
-                        <tr>
-                            th>@lang('table.sl')</th>
-                            <th>@lang('table.title')</th>
-                            <th>@lang('table.date')</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($complains as $key => $row)
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
+                        <thead>
+                            <tr>
+                                th>@lang('table.sl')</th>
+                                <th>@lang('table.title')</th>
+                                <th>@lang('table.date')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($complains as $key => $row)
                             <tr>
                                 <td>
                                     {{ $key + 1 }}
@@ -45,11 +46,12 @@
 
 
                             </tr>
-                        @endforeach
+                            @endforeach
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

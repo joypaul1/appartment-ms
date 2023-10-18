@@ -4,14 +4,14 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-list"></i> {{ __('title.Management-Committe-List') }}
+<i class="fa fa-list"></i> {{ __('title.Management-Committe-List') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-plus-circle',
-        'name' => __('title.Create-Management-Committe'),
-        'route' => route('backend.management-committee.create'),
-    ])
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-plus-circle',
+'name' => __('title.Create-Management-Committe'),
+'route' => route('backend.management-committee.create'),
+])
 @endsection
 
 <div class="row">
@@ -35,48 +35,44 @@
                         </thead>
                         <tbody>
                             @foreach ($data as $key => $row)
-                                <tr>
-                                    <td>
-                                        {{ $key + 1 }}
-                                    </td>
-                                    <td>
-                                        {{ $row->name }}
-                                    </td>
-                                    <td>
-                                        <img src="{{ asset($row->image) }}" alt=""
-                                            style="width: 50px;height:50px;border-radius:50%" srcset="">
-                                    </td>
-                                    <td>
-                                        {{ $row->email }}
-                                    </td>
-                                    <td>
-                                        {{ $row->mobile }}
-                                    </td>
-                                    <td>
-                                        {{ date('d-m-y', strtotime($row->joining_date)) }}
-                                    </td>
+                            <tr>
+                                <td>
+                                    {{ $key + 1 }}
+                                </td>
+                                <td>
+                                    {{ $row->name }}
+                                </td>
+                                <td>
+                                    <img src="{{ asset($row->image) }}" alt="" style="width: 50px;height:50px;border-radius:50%" srcset="">
+                                </td>
+                                <td>
+                                    {{ $row->email }}
+                                </td>
+                                <td>
+                                    {{ $row->mobile }}
+                                </td>
+                                <td>
+                                    {{ date('d-m-y', strtotime($row->joining_date)) }}
+                                </td>
 
-                                    </td>
-                                    <td>
-                                        {{ optional($row->memberType)->name }}
-                                    </td>
+                                </td>
+                                <td>
+                                    {{ optional($row->memberType)->name }}
+                                </td>
 
 
-                                    <td>
-                                        <a href="{{ route('backend.management-committee.edit', $row) }}">
-                                            <button class="btn btn-sm btn-info"> <i class="fa fa-pencil"
-                                                    aria-hidden="true"></i> </button>
+                                <td>
+                                    <a href="{{ route('backend.management-committee.edit', $row) }}">
+                                        <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>
 
-                                        </a>
-                                        <a data-href="{{ route('backend.management-committee.destroy', $row) }}"
-                                            href="#" class="delete_check">
-                                            <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"
-                                                    aria-hidden="true"></i> </button>
+                                    </a>
+                                    <a data-href="{{ route('backend.management-committee.destroy', $row) }}" href="#" class="delete_check">
+                                        <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
 
-                                        </a>
-                                    </td>
+                                    </a>
+                                </td>
 
-                                </tr>
+                            </tr>
                             @endforeach
 
 
