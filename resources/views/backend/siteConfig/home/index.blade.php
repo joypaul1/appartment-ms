@@ -38,7 +38,7 @@
 
                         <div class="form-group">
                             @include('components.backend.forms.input.input-type', [
-                                'name' => 'email',
+                                'name' => 'email',  'inType' => 'email',
                                 'value' => old('email', $siteInfo->email),
                                 'placeholder' => 'Email will be here...',
                                 'required' => 'yes',

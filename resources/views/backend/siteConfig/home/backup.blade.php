@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="form-group">
-                        @include('components.backend.forms.input.input-type',[ 'name' => 'email',
+                        @include('components.backend.forms.input.input-type',[ 'name' => 'email',  'inType' => 'email',
                         'value'=>old('name',$siteInfo->email), 'placeholder' => 'Email will be here...', 'required'=> 'yes'
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('email')])

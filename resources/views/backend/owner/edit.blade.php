@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'email',
+                        'name' => 'email',  'inType' => 'email',
                         'required' => true,
                         'value' => $owner->email,
                         ])

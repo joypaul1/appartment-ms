@@ -38,7 +38,7 @@
                             {{-- <label class="col-lg-4 col-form-label" for="email">Email <span
                                     class="text-danger">*</span> </label> --}}
                             <div class="col-lg-8">
-                                @include('components.backend.forms.input.input-type',[ 'name' => 'email', 'type'
+                                @include('components.backend.forms.input.input-type',[ 'name' => 'email', 'inType'
                                 =>'email', 'required'=> true, 'placeholder' => 'email will be here...' ])
                                 @include('components.backend.forms.input.errorMessage', ['message'
                                 =>$errors->first('email')])
