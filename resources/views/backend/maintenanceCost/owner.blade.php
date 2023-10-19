@@ -8,9 +8,7 @@
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
-// 'fa' => 'fa fa-plus-circle',
-// 'name' => 'Create Owner Utility',
-// 'route' => route('backend.maintenance-cost.create'),
+
 ])
 @endsection
 
@@ -21,7 +19,7 @@
             @yield('table_header')
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="datatables-reponsive" class="table table-striped text-center" style="width:100%">
+                    <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
                         <thead>
                             <tr>
                                 <th>@lang('table.sl')</th>

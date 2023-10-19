@@ -8,9 +8,7 @@
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
-// 'fa' => 'fa fa-plus-circle',
-// 'name' => 'Create Employee',
-// 'route' =>route('backend.employee.create'),
+
 ])
 @endsection
 

@@ -13,7 +13,7 @@ $strpos = Route::currentRouteName();
 
         </a>
 
-        
+
 
         <ul class="sidebar-nav">
             <li class="sidebar-item {{ request()->segment(2) == 'dashboard' ? 'active' : ' ' }} ">
@@ -26,8 +26,8 @@ $strpos = Route::currentRouteName();
 
             <li class="sidebar-item {{ strpos($strpos, 'backend.unit.index') === 0 ? 'active' : ' ' }}">
                 <a class="sidebar-link" href="{{ route('backend.unit.index') }}">
-                    <i class="align-middle" data-feather="crosshair"></i>crosshair
-                    <span class="align-middle">@lang('sidebar.unit_list') </span>
+                    <i class="align-middle" data-feather="crosshair"></i>
+                    <span class="align-middle"> @lang('sidebar.unit_list') </span>
                 </a>
             </li>
 
@@ -75,7 +75,7 @@ $strpos = Route::currentRouteName();
             <li class="sidebar-item">
                 <a data-bs-target="#owner-utility" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="gitlab"></i>
-                    <span class="align-middle">@lang('sidebar.owner_utility')</span>
+                    <span class="align-middle"> @lang('sidebar.owner_utility')</span>
 
                 </a>
                 <ul id="owner-utility" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'owner-utility' ? 'show' : ' ' }} "
@@ -110,13 +110,13 @@ $strpos = Route::currentRouteName();
             <li class="sidebar-item">
                 <a data-bs-target="#fund" data-bs-toggle="collapse" class="sidebar-link ">
                     <i class="align-middle" data-feather="book"></i>
-                    <span class="align-middle"> Fund Management</span>
+                    <span class="align-middle">@lang('sidebar.fund_management')</span>
                 </a>
                 <ul id="fund" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'fund' ? 'show' : ' ' }} "
                     data-bs-parent="#sidebar">
                     <li class="sidebar-item {{ strpos($strpos, 'backend.fund.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.fund.index') }}">
-                            Fund List
+                            @lang('sidebar.fund_management_list')
                         </a>
                     </li>
 
@@ -140,22 +140,6 @@ $strpos = Route::currentRouteName();
             </li>
 
 
-            {{-- <li class="sidebar-item">
-                <a data-bs-target="#Report" data-bs-toggle="collapse" class="sidebar-link ">
-                    <i class="align-middle" data-feather="compass"></i>
-                    <span class="align-middle"> Report </span>
-                    <span class="align-middle"> @lang('sidebar.report')</span>
-                </a>
-                <ul id="Report" class="sidebar-dropdown list-unstyled collapse {{ request()->segment(2) == 'report' ? 'show' : ' ' }} "
-                    data-bs-parent="#sidebar">
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.notice-board.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.notice-board.index') }}">
-                            @lang('sidebar.rental_report')
-                        </a>
-                    </li>
-
-                </ul>
-            </li> --}}
 
 
 
