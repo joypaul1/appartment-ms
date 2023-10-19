@@ -43,35 +43,30 @@ class BuildingController extends Controller
         $validatedData = $request->validate([
             'name'                  => 'required|string|max:255',
             'mobile'                => 'required|string|max:15',
-            // Adjust max length if necessary.
             'email'                 => 'required|email|max:255',
             'security_guard_mobile' => 'nullable|string|max:15',
-            // Adjust max length if necessary.
             'secretary_mobile'      => 'nullable|string|max:15',
-            // Adjust max length if necessary.
             'moderator_mobile'      => 'nullable|string|max:15',
-            // Adjust max length if necessary.
             'address'               => 'required|string|max:255',
             'status'                => 'required|boolean',
             'builder_name'          => 'nullable|string|max:255',
-            // Adjust max length if necessary.
+
             'builder_address'       => 'nullable|string|max:255',
-            // Adjust max length if necessary.
             'building_rules'        => 'nullable|string',
-            // No specific max length for text.
+
         ]);
         try {
-
-            $validatedData['branch_id'] = session('branch_id');
             if ($request->hasfile('building_image')) {
                 $image                           = (new Image)->dirName('building_image')->file($request->building_image)
-                    ->resizeImage(100, 100)->save();
+                    ->resizeImage(200, 150)->save();
                 $validatedData['building_image'] = $image;
             }
-            BuildingInformation::create($validatedData);
+            $building= BuildingInformation::create($validatedData);
+            if(BuildingInformation::count() == 1){
+                session()->put('branch_id', $building->id);
+            }
         }
         catch (\Exception $ex) {
-            return redirect()->back()->with('error', $ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
@@ -115,22 +110,17 @@ class BuildingController extends Controller
         $validatedData = $request->validate([
             'name'                  => 'required|string|max:255',
             'mobile'                => 'required|string|max:15',
-            // Adjust max length if necessary.
+
             'email'                 => 'required|max:255',
             'security_guard_mobile' => 'nullable|string|max:15',
-            // Adjust max length if necessary.
             'secretary_mobile'      => 'nullable|string|max:15',
-            // Adjust max length if necessary.
             'moderator_mobile'      => 'nullable|string|max:15',
-            // Adjust max length if necessary.
             'address'               => 'required|string|max:255',
             'status'                => 'required|boolean',
             'builder_name'          => 'nullable|string|max:255',
-            // Adjust max length if necessary.
             'builder_address'       => 'nullable|string|max:255',
-            // Adjust max length if necessary.
             'building_rules'        => 'nullable|string',
-            // No specific max length for text.
+
         ]);
         // dd( $validatedData );
         // Validation passed, update the data in the database
@@ -142,7 +132,7 @@ class BuildingController extends Controller
         $validatedData['branch_id'] = session('branch_id');
         if ($request->hasfile('building_image')) {
             $image                           = (new Image)->dirName('building_image')->file($request->building_image)
-                ->resizeImage(100, 100)->save();
+                ->resizeImage(200, 150)->save();
             $validatedData['building_image'] = $image;
         }
         $buildingInformation->update($validatedData);

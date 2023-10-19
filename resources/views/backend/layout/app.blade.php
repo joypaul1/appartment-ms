@@ -8,7 +8,7 @@
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
     <div class="wrapper">
-        {{-- @dd(auth('admin')->user()->role_type) --}}
+
         @if (auth('admin')->user()->role_type == 'owner')
         @include('backend._partials.owner_sidebar')
         @elseif (auth('admin')->user()->role_type == 'tenant')
@@ -20,9 +20,9 @@
         @endif
 
         <div class="main">
-
+            @if(App\Models\Backend\BuildingInformation::first())
             @include('backend._partials.nav_header')
-
+            @endif
             <main class="content">
                 <div class="container-fluid p-0">
                     @yield('content')

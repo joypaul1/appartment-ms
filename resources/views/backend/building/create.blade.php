@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> Building List
+    <i class="fa fa-plus-circle"></i> Building Create
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => ('Create Building'),
+        'name' => ('List Building'),
         'route' => route('backend.site-config.building.index'),
     ])
 @endsection
@@ -54,6 +54,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'name' => 'security_guard_mobile',
                             'label' => 'Security Mobile No.',
+                            'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('security_guard_mobile'),
@@ -63,6 +64,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'name' => 'secretary_mobile',
                             'label' => 'Secretary Mobile No.',
+                            'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('secretary_mobile'),
@@ -72,6 +74,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'name' => 'moderator_mobile',
                             'label' => 'moderator Mobile No.',
+                            'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('moderator_mobile'),

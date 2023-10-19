@@ -28,8 +28,8 @@ use App\Http\Controllers\Backend\VisitorController;
 use App\Http\Controllers\Backend\YearController;
 use Illuminate\Support\Facades\Route;
 
-
-Route::group(['middleware' => ['admin', 'another_middleware'], 'prefix' => 'admin', 'as' => 'backend.'], function () {
+// , 'checkExitBuilding'
+Route::group(['middleware' => ['admin', 'checkExitBuilding'], 'prefix' => 'admin', 'as' => 'backend.'], function () {
     // dashboard
     Route::get('profile', [DashboardController::class, 'profile'])->name('admin.profile');
     Route::post('update-profile', [DashboardController::class, 'profileUpdate'])->name('admin.update-profile');
@@ -69,7 +69,7 @@ Route::group(['middleware' => ['admin', 'another_middleware'], 'prefix' => 'admi
     });
     Route::group(['prefix' => 'site-config', 'as' => 'site-config.'], function () {
         Route::resource('admin', AdminController::class);
-        Route::resource('building', BuildingController::class);
+        Route::resource('building', BuildingController::class)->withoutMiddleware(['checkExitBuilding']);
         Route::resource('email', EmailConfigurationController::class);
         Route::resource('system', SiteInfoController::class);
         Route::resource('bill-type', BillTypeController::class);

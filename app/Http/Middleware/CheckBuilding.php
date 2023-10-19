@@ -20,7 +20,7 @@ class CheckBuilding
         if(BuildingInformation::first()){
             return $next($request);
         }else{
-            return redirect()->route('backend.site-config.building')->with('error','Please Create a new Building Information');
+            return redirect()->route('backend.site-config.building.create')->with('error','Please Create a new Building Information');
         }
 
 
