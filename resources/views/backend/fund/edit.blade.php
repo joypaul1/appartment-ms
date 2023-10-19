@@ -78,7 +78,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
                             'value' => 0.0,
-                             'name' =>__('langdata.amount'),
+                             'name' =>'amount', 'label' =>__('langdata.amount')
                             'required' => true,
                             'value' => $fund->amount,
                         ])
