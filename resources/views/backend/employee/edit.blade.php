@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'nid',
+                         'name' => 'nid','number' =>true,
                         'value' => $employee->nid,
                         'required' => true,
                         ])
