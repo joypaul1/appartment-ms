@@ -32,13 +32,13 @@
                     </div>
 
                     <div class="form-group">
-                        @include('components.backend.forms.input.input-type',[ 'name' => 'email',  'inType' => 'email',
+                        @include('components.backend.forms.input.input-type',[  'name' =>'email', 'label' =>__('langdata.email')  'inType' => 'email',
                         'value'=>old('name',$siteInfo->email), 'placeholder' => 'Email will be here...', 'required'=> 'yes'
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('email')])
                     </div>
                     <div class="form-group">
-                        @include('components.backend.forms.input.input-type',[ 'name' => 'mobile', 'number' =>true,
+                        @include('components.backend.forms.input.input-type',[  'name' =>'mobile', 'label' =>__('langdata.mobile') 'number' =>true,
                         'value'=>old('name',$siteInfo->mobile), 'placeholder' => 'Mobile will be here...', 'required'=>
                         'yes' ])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('mobile')])

@@ -89,6 +89,8 @@ return [
     'image'                        => 'Image',
     'email'                        => 'Email',
     'mobile'                       => 'Mobile',
+    'Security Mobile No'           => 'Security Mobile No',
+    'moderator Mobile No'           => 'moderator Mobile No',
     'address'                      => 'Address',
     'unit_list'                    => 'Unit List',
     'appartment'                   => 'Appartment',
@@ -102,6 +104,7 @@ return [
     'date'                         => 'Date',
     'amount'                       => 'Amount',
     'deposit_account'              => 'Deposit Account',
+    'deposit_account_name'         => 'Deposit Account Name',
     'title'                        => 'Title',
     'entry_date'                   => 'Entry Date',
     'floor'                        => 'Floor',
@@ -192,6 +195,7 @@ return [
     'notice-board-create'          => 'Notice Board Create',
     'purpose'                      => 'Purpos',
     'details'                      => 'Details',
+    'mobile'                       => 'Details',
 
 
 

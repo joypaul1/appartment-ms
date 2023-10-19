@@ -36,7 +36,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'label' => 'Mobile No',
-                             'name' => 'mobile','number' =>true,
+                              'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
                             'required' => true,
                             'value' => $buildingInformation->mobile,
                         ])
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'email',  'inType' => 'email',
+                             'name' =>'email', 'label' =>__('langdata.email')  'inType' => 'email',
                             'value' => $buildingInformation->email,
                             'required' => true,
                         ])
@@ -57,7 +57,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'name' => 'security_guard_mobile',
-                            'label' => 'Security Mobile No.',
+                             'label' =>'email', 'label' =>__('langdata.Security Mobile No')
                             'value' => $buildingInformation->security_guard_mobile,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'address',
+                                'name' =>'address', 'label' =>__('langdata.address'),
                             'required' => true,
                             'value' => $buildingInformation->address,
                         ])

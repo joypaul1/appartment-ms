@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' => 'mobile','number' =>true,
+                          'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
                         'required' => true,
                         'number' => true,
                         ])
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'email',  'inType' => 'email',
+                         'name' =>'email', 'label' =>__('langdata.email')  'inType' => 'email',
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('email')])
@@ -54,7 +54,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'label' => 'Permanent Address',
-                        'name' => 'address',
+                            'name' =>'address', 'label' =>__('langdata.address'),
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('address')])

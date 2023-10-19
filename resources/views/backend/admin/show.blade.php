@@ -36,7 +36,7 @@
 
                         <div class="col-lg-8">
                             @include('components.backend.forms.input.input-type', [
-                            'name' => 'email',
+                             'name' =>'email', 'label' =>__('langdata.email')
                             'inType' => 'email',
                             'disabled' => true,
                             'value' => old('email', auth('admin')->user()->email),
@@ -50,7 +50,7 @@
                     <div class="mb-3 row">
                         <div class="col-lg-8">
                             @include('components.backend.forms.input.input-type', [
-                             'name' => 'mobile','number' =>true,
+                              'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
                             'disabled' => true,
                             'value' => old('mobile', auth('admin')->user()->mobile),
                             'placeholder' => 'mobile will be here (01...)',

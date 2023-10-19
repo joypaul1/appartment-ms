@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                             'name' => 'mobile','number' =>true,
+                              'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -44,7 +44,7 @@
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'address',
+                                'name' =>'address', 'label' =>__('langdata.address'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
