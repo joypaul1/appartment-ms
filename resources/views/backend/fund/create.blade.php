@@ -47,7 +47,7 @@
                         @include('components.backend.forms.select2.option', [
                         'name' => 'month_id',
                         'required' => true,
-                         'label' =>__('langdata.month'),
+                        'label' =>__('langdata.month'),
                         'optionData' => $months,
                         'selectedKey' => date('m'),
                         ])
@@ -59,7 +59,7 @@
                         @include('components.backend.forms.select2.option', [
                         'name' => 'year_id',
                         'required' => true,
-                         'label' =>__('langdata.year'),
+                        'label' =>__('langdata.year'),
                         'optionData' => $years,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -72,7 +72,7 @@
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'number',
                         'value' => 0.0,
-                        'name' => 'amount',
+                         'name' =>__('langdata.amount'),
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
