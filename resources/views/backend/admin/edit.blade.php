@@ -57,7 +57,7 @@
                                 {{-- <label class="col-lg-4 col-form-label" for="mobile">Mobile  <span class="text-danger">*</span> </label> --}}
                                 <div class="col-lg-8">
                                     @include('components.backend.forms.input.input-type', [
-                                        'name' => 'mobile',
+                                         'name' => 'mobile','number' =>true,
                                         'number' => true,
                                         'required' => true,
                                         'value' => old('mobile', $admin->mobile),

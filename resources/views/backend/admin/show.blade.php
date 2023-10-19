@@ -50,7 +50,7 @@
                     <div class="mb-3 row">
                         <div class="col-lg-8">
                             @include('components.backend.forms.input.input-type', [
-                            'name' => 'mobile',
+                             'name' => 'mobile','number' =>true,
                             'disabled' => true,
                             'value' => old('mobile', auth('admin')->user()->mobile),
                             'placeholder' => 'mobile will be here (01...)',

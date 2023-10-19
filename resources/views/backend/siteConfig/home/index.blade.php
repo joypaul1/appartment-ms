@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             @include('components.backend.forms.input.input-type', [
-                                'name' => 'mobile',
+                                 'name' => 'mobile','number' =>true,
                                 'value' => old('mobile', $siteInfo->mobile),
                                 'placeholder' => 'Mobile will be here...',
                                 'required' => 'yes',
