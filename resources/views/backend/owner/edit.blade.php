@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-pencil"></i> {{ __('title.Edit-Owner') }}
+<i class="fa fa-pencil"></i> {{ __('title.Edit-Owner') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-list',
-        'name' => __('title.Owner-List'),
-        'route' => route('backend.owner.index'),
-    ])
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-list',
+'name' => __('title.Owner-List'),
+'route' => route('backend.owner.index'),
+])
 @endsection
 <div class="row">
     <div class="col-12">
@@ -18,110 +18,109 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.owner.update', $owner) }}" method="POST" class="row g-3"
-                    enctype="multipart/form-data">
+                <form action="{{ route('backend.owner.update', $owner) }}" method="POST" class="row g-3" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'name',
-                            'required' => true,
-                            'value' => $owner->name,
+                        'name' => 'name',
+                        'required' => true,
+                        'value' => $owner->name,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('name'),
+                        'message' => $errors->first('name'),
                         ])
                     </div>
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                             'name' => 'mobile','number' =>true,
-                            'required' => true,
-                            'value' => $owner->mobile,
+                        'name' => 'mobile','number' =>true,
+                        'required' => true,
+                        'value' => $owner->mobile,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('mobile'),
+                        'message' => $errors->first('mobile'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'email',
-                            'required' => true,
-                            'value' => $owner->email,
+                        'name' => 'email',
+                        'required' => true,
+                        'value' => $owner->email,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('email'),
+                        'message' => $errors->first('email'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'password',
-                            'value' => $owner->password,
-                            'required' => true,
+                        'name' => 'password',
+                        'value' => $owner->password,
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('password'),
+                        'message' => $errors->first('password'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'pre_address',
-                            'label' => 'Present Address',
-                            'value' => $owner->pre_address,
-                            'required' => true,
+                        'name' => 'pre_address',
+                        'label' => 'Present Address',
+                        'value' => $owner->pre_address,
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('pre_address'),
+                        'message' => $errors->first('pre_address'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'label' => 'Permanent Address',
-                            'name' => 'per_address',
-                            'value' => $owner->per_address,
-                            'required' => true,
+                        'label' => 'Permanent Address',
+                        'name' => 'per_address',
+                        'value' => $owner->per_address,
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('per_address'),
+                        'message' => $errors->first('per_address'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                             'name' => 'nid','number' =>true,
-                            'value' => $owner->nid,
-                            'required' => true,
+                        'name' => 'nid','number' =>true,
+                        'value' => $owner->nid,
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('nid'),
+                        'message' => $errors->first('nid'),
                         ])
                     </div>
                     <div class="col-md-4">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'file',
-                            'name' => 'image',
+                        'inType' => 'file',
+                        'name' => 'image',
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('image'),
+                        'message' => $errors->first('image'),
                         ])
                     </div>
                     <div class="col-md-2">
                         <img src="{{ asset($owner->image) }}" alt="" style="width:100px">
                     </div>
                     @php
-                        $unit_ids = collect($owner->units)
-                            ->pluck('id')
-                            ->toArray();
+                    $unit_ids = collect($owner->units)
+                    ->pluck('id')
+                    ->toArray();
                     @endphp
                     <div class="col-md-12">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'unit_id[]',
-                            'selectedKey' => $unit_ids,
-                            'label' => 'Unit',
-                            'optionData' => $units,
-                            'multiple' => true,
+                        'name' => 'unit_id[]',
+                        'selectedKey' => $unit_ids,
+                        'label' => 'Unit',
+                        'optionData' => $units,
+                        'multiple' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('unit_id'),
+                        'message' => $errors->first('unit_id'),
                         ])
                     </div>
 
