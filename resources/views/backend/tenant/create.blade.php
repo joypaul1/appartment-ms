@@ -75,12 +75,12 @@
                     </div>
                     <div class="col-md-6"></div>
                     <hr>
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'floor_id',
                         'required' => true,'label'=>'Floor','optionData'=> $floors])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('floor_id')])
                     </div>
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'unit_id',
                         'required' => true,'label'=>'Unit','optionData'=> []])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('unit_id')])
@@ -103,17 +103,17 @@
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('rent_per_month')])
                     </div>
                     {{-- @dd(date('m')) --}}
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'month_id',
                         'required' => true,'label'=>'Month','optionData'=> $months , 'selectedKey' => date('m')])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('month_id')])
                     </div>
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'year_id',
                         'required' => true,'label'=>'Year','optionData'=> $years])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('year_id')])
                     </div>
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'status','selectedKey'=>1,
                         'required' => true,'label'=>'status','optionData'=> $status])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('status')])

@@ -58,7 +58,7 @@
                             'message' => $errors->first('password'),
                         ])
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'member_type_id',
                             'required' => true,
@@ -133,7 +133,7 @@
 
 
 
-                    <div class="col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'status',
                             'selectedKey' => 1,

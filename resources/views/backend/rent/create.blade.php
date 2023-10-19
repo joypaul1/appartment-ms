@@ -22,7 +22,7 @@
                     enctype="multipart/form-data">
                     @method('POST')
                     @csrf
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'floor_id',
                             'required' => true,
@@ -33,7 +33,7 @@
                             'message' => $errors->first('floor_id'),
                         ])
                     </div>
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'unit_id',
                             'required' => true,
@@ -45,7 +45,7 @@
                         ])
                     </div>
 
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'month_id',
                             'required' => true,
@@ -57,7 +57,7 @@
                             'message' => $errors->first('month_id'),
                         ])
                     </div>
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'year_id',
                             'required' => true,
@@ -180,7 +180,7 @@
                             'message' => $errors->first('issue_date'),
                         ])
                     </div>
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'bill_status',
                             'selectedKey' => 1,

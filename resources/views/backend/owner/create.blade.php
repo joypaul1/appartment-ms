@@ -80,7 +80,8 @@
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('image')])
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+
                         @include('components.backend.forms.select2.option',[ 'name' => 'unit_id[]',
                         'label'=>'Unit','optionData'=> $units, 'multiple' => true])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('unit_id')])

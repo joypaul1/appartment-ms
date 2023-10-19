@@ -22,7 +22,7 @@
                     enctype="multipart/form-data">
                     @method('POST')
                     @csrf
-                    <div class="col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'employee_id',
                             'label' => 'Select Employee',
@@ -33,7 +33,7 @@
                             'message' => $errors->first('employee_id'),
                         ])
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'month_id',
                             'label' => 'Month',
@@ -44,7 +44,7 @@
                             'message' => $errors->first('month_id'),
                         ])
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'year_id',
                             'label' => 'year',

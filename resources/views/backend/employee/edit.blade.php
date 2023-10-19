@@ -55,7 +55,7 @@
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('password')])
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'member_type_id',
                         'required' => true,'label'=>'Member Type','optionData'=> $member_types, 'selectedKey' => $employee->member_type_id])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('member_type_id')])
@@ -125,7 +125,7 @@
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('salary')])
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option',[ 'name' => 'status','selectedKey'=>$employee->status,
                         'required' => true,'label'=>'status','optionData'=> $status])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('status')])

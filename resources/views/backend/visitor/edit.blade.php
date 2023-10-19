@@ -83,7 +83,7 @@
                         ])
                     </div>
 
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'floor_id',
                             'required' => true,
@@ -94,7 +94,7 @@
                             'message' => $errors->first('floor_id'),
                         ])
                     </div>
-                    <div class="col-md-6">
+                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'unit_id',
                             'required' => true,
