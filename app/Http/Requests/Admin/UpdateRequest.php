@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Admin;
 
 use App\Helpers\Image;
-use App\Rules\MatchOldPassword;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -30,11 +29,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            // 'branch_id' => 'required',
-            // 'password' => ['nullable', new MatchOldPassword($this->admin)],
             'email' => ['required', Rule::unique('admins')->ignore($this->admin->id)],
             'mobile' => ['required', Rule::unique('admins')->ignore($this->admin->id)],
-            // 'mobile' => 'nullable',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
         ];
     }
@@ -53,7 +49,10 @@ class UpdateRequest extends FormRequest
             if(($request->filled('password'))){
                 $data['password'] = Hash::make($request->password);
             }
-            // dd($data);
+
+            if($admin->role_type != 'super_admin'){
+
+            }
             $admin->update($data);
         } catch (\Exception $ex) {
             return response()->json(['status' => false, 'msg' =>$ex->getMessage()]);

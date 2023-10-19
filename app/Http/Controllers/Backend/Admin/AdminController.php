@@ -21,8 +21,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Admin::where('role_type', 'super_admin')->paginate(10);
-        return view('backend.admin.index', compact('admins'));
+        if(auth('admin')->user()->role_type == 'super_admin'){
+            $admins = Admin::where('role_type', 'super_admin')->paginate(10);
+            return view('backend.admin.index', compact('admins'));
+        }
+        return redirect()->to('admin/dashboard');
     }
 
     public function logIndex()
@@ -38,8 +41,12 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $branches = Branch::get(['id', 'name']);
-        return view('backend.admin.create', compact('branches'));
+
+        if(auth('admin')->user()->role_type == 'super_admin'){
+            $branches = Branch::get(['id', 'name']);
+            return view('backend.admin.create', compact('branches'));
+        }
+        return redirect()->to('admin/dashboard');
     }
 
     /**
