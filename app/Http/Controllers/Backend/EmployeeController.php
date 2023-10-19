@@ -71,7 +71,8 @@ class EmployeeController extends Controller
             ],
             'mobile'         => [
                 'required',
-                'string','max:13',
+                'string',
+                'max:13',
                 Rule::unique('rent_configurations', 'mobile'),
                 Rule::unique('admins', 'mobile'),
             ],
@@ -92,7 +93,7 @@ class EmployeeController extends Controller
                 $validatedData['resign_date'] = date('Y-m-d', strtotime($request->resign_date));
             }
             if ($request->hasfile('image')) {
-                $image                  = (new Image)->dirName('employee')->file($request->image)->resizeImage(100, 100)->save();
+                $image                  = (new Image)->dirName('employee')->file($request->image)->resizeImage(150, 100)->save();
                 $validatedData['image'] = $image;
             }
             $employee          = Employee::create($validatedData);
@@ -157,7 +158,7 @@ class EmployeeController extends Controller
                 Rule::unique('employees', 'mobile')->ignore($employee->id),
                 Rule::unique('admins', 'mobile')->ignore(Admin::where('email', $employee->email)->first()->id),
             ],
-             'email'          => [
+            'email'          => [
                 'required',
                 Rule::unique('employees', 'email')->ignore($employee->id),
                 Rule::unique('admins', 'email')->ignore(Admin::where('email', $employee->email)->first()->id),
@@ -183,7 +184,7 @@ class EmployeeController extends Controller
                 $validatedData['resign_date'] = date('Y-m-d', strtotime($request->resign_date));
             }
             if ($request->hasfile('image')) {
-                $image                  = (new Image)->dirName('employee')->file($request->image)->resizeImage(100, 100)->save();
+                $image                  = (new Image)->dirName('employee')->file($request->image)->resizeImage(150, 100)->save();
                 $validatedData['image'] = $image;
             }
 
