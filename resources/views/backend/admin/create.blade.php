@@ -25,8 +25,7 @@
 
                         <input type="hidden" name="role_type" value="supper_admin">
                         <div class="mb-3 row">
-                            {{-- <label class="col-lg-4 col-form-label" for="text">Name <span
-                                    class="text-danger">*</span></label> --}}
+
                             <div class="col-lg-8">
                                 @include('components.backend.forms.input.input-type',[ 'name' => 'name', 'placeholder'
                                 => 'name will be here...', 'required'=> true ])
@@ -35,8 +34,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            {{-- <label class="col-lg-4 col-form-label" for="email">Email <span
-                                    class="text-danger">*</span> </label> --}}
+
                             <div class="col-lg-8">
                                 @include('components.backend.forms.input.input-type',[ 'name' => 'email', 'inType'
                                 =>'email', 'required'=> true, 'placeholder' => 'email will be here...' ])
@@ -45,8 +43,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            {{-- <label class="col-lg-4 col-form-label" for="mobile">Mobile <span
-                                    class="text-danger">*</span> </label> --}}
+
                             <div class="col-lg-8">
                                 @include('components.backend.forms.input.input-type',[  'name' => 'mobile','number' =>true, 'required'=>
                                 true, 'number' => true,'placeholder' => 'mobile will be here (01...)' ])
@@ -62,17 +59,7 @@
                                 =>$errors->first('password')])
                             </div>
                         </div>
-                        {{-- <div class="col-md-8">
-                            @include('components.backend.forms.select2.option', [
-                                'name' => 'branch_id',
-                                'required' => true,
-                                'label' => 'Branch',
-                                'optionData' => $branches,
-                            ])
-                            @include('components.backend.forms.input.errorMessage', [
-                                'message' => $errors->first('branch_id'),
-                            ])
-                        </div> --}}
+
 
                         <div class="mb-3 ">
                             <label class="col-lg-4 col-form-label" for="image">Image</label>
@@ -100,8 +87,6 @@
 @endsection
 
 @push('js')
-{{-- <script src="{{ asset('assets/backend') }}/vendor/dropify/js/dropify.min.js"></script>
-<script src="{{ asset('assets/backend') }}/js/pages/forms/dropify.js"></script> --}}
 
 
 @endpush

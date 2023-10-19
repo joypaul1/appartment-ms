@@ -69,13 +69,13 @@ class OwnerController extends Controller
             'mobile'      => [
                 'required',
                 'string',
-                'max:255',
+                'max:13',
                 Rule::unique('owners', 'mobile'),
                 Rule::unique('admins', 'mobile'),
             ],
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
-            'nid'         => 'required|string|max:30', // Adjust the max length to match the expected length.
+            'nid'         => 'required|string|max:15', // Adjust the max length to match the expected length.
             'password'    => 'required|string|max:20',
             'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif', // Add image validation rules as needed.
         ]);
@@ -157,14 +157,14 @@ class OwnerController extends Controller
             ],
             'mobile'      => [
                 'required',
-                'string',
+                'string', 'max:13',
                 Rule::unique('owners')->ignore($owner->id),
                 Rule::unique('admins', 'mobile')->ignore(Admin::where('email', $owner->email)->first()->id),
 
             ],
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
-            'nid'         => 'required|string|max:30',
+            'nid'         => 'required|string|max:15',
             'password'    => 'required|string|max:20',
             'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif', // Add image validation rules as needed.
 

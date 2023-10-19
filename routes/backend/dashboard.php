@@ -29,7 +29,7 @@ use App\Http\Controllers\Backend\YearController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'as' => 'backend.'], function () {
+Route::group(['middleware' => ['admin', 'another_middleware'], 'prefix' => 'admin', 'as' => 'backend.'], function () {
     // dashboard
     Route::get('profile', [DashboardController::class, 'profile'])->name('admin.profile');
     Route::post('update-profile', [DashboardController::class, 'profileUpdate'])->name('admin.update-profile');
