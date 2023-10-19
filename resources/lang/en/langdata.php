@@ -152,7 +152,7 @@ return [
     'management_committee_list'    => 'Maintenance Committee List',
     'management_committee_create'  => 'Create Maintenance Committee',
     'management_committee_edit'    => 'Edit Maintenance Committee',
-    'fund_management'                 => 'Fund Management',
+    'fund_management'              => 'Fund Management',
     'fund_management_list'         => 'Fund  List',
     'fund_management_create'       => 'Create Fund ',
     'fund_management_edit'         => 'Edit Fund ',
@@ -190,6 +190,8 @@ return [
     'notice-board'                 => 'Notice Board',
     'notice-board-list'            => 'Notice Board List',
     'notice-board-create'          => 'Notice Board Create',
+    'purpose'                      => 'Purpos',
+    'details'                      => 'Details',
 
 
 

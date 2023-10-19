@@ -87,7 +87,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'label' => 'Amount',
+                            'label' =>__('langdata.amount')
                             'name' => 'total_amount',
                             'required' => true,
                             'value' => $billDeposit->total_amount,
@@ -98,7 +98,7 @@
                     </div>
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
-                            'name' => 'details',
+                             'name' =>'details', 'label' =>__('langdata.details')
                             'required' => true,
                             'value' => $billDeposit->details,
                         ])

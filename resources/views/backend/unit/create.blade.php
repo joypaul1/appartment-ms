@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> 
+<i class="fa fa-plus-circle"></i>
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
@@ -23,7 +23,7 @@
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'name',
+                         'name' =>'name', 'label' =>__('langdata.name')
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])

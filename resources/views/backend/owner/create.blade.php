@@ -23,7 +23,7 @@
                     @csrf
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'name',
+                         'name' =>'name', 'label' =>__('langdata.name')
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])

@@ -82,7 +82,7 @@
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
                         'label' => 'Fund Purpose',
-                        'name' => 'purpose',
+                         'name' =>'purpose', 'label' =>__('langdata.purpose')
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
