@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Admin;
 
 use App\Helpers\Image;
+use App\Models\Backend\Employee;
+use App\Models\Backend\Owner;
+use App\Models\Backend\Tenant;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -39,20 +42,30 @@ class UpdateRequest extends FormRequest
     {
         try {
             $data = $request->validated();
-            unset($data['password']);
+
             if(!empty($request->image)){
                 $data['image'] =  (new Image)->dirName('admin')->file($request->image)
                 ->resizeImage(100, 100)
                 ->deleteIfExists($admin->image)
                 ->save();
             }
+            if($admin->role_type != 'super_admin'){
+                if($admin->role_type == 'owner'){
+                    Owner::where('email', $admin->email)->first()->update($data);
+                }
+                if($admin->role_type == 'employee'){
+                    Employee::where('email', $admin->email)->first()->update($data);
+                }
+                if($admin->role_type == 'tenant'){
+                    Tenant::where('email', $admin->email)->first()->update($data);
+                }
+            }
+            unset($data['password']);
             if(($request->filled('password'))){
                 $data['password'] = Hash::make($request->password);
             }
 
-            if($admin->role_type != 'super_admin'){
 
-            }
             $admin->update($data);
         } catch (\Exception $ex) {
             return response()->json(['status' => false, 'msg' =>$ex->getMessage()]);
