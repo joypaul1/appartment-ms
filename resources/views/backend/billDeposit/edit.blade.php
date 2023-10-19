@@ -51,7 +51,7 @@
                         @include('components.backend.forms.select2.option', [
                             'name' => 'month_id',
                             'required' => true,
-                            'label' => 'Month',
+                             'label' =>__('langdata.month'),
                             'optionData' => $months,
                             'selectedKey' => $billDeposit->month_id,
                         ])
@@ -63,7 +63,7 @@
                         @include('components.backend.forms.select2.option', [
                             'name' => 'year_id',
                             'required' => true,
-                            'label' => 'Year',
+                             'label' =>__('langdata.year'),
                             'optionData' => $years,
                             'selectedKey' => $billDeposit->year_id,
                         ])

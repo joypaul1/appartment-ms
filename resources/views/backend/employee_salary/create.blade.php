@@ -36,7 +36,7 @@
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'month_id',
-                            'label' => 'Month',
+                             'label' =>__('langdata.month'),
                             'required' => true,
                             'optionData' => $months,
                         ])

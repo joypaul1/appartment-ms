@@ -14,7 +14,7 @@
 
 {{-- <link rel="canonical" href="https://demo.adminkit.io/dashboard-ecommerce" /> --}}
 
-<langdata.{{ session('site_info')['name'] }} | @yield('langdata.)</langdata.
+<title > {{ session('site_info')['name'] }} | @yield('title') </title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 

@@ -81,7 +81,7 @@
                     <div class="col-md-4">
                         @include('components.backend.forms.select2.option', [
                         'name' => 'month',
-                        'label' => 'Month',
+                         'label' =>__('langdata.month'),
                         'optionData' => $months,
                         'required' => true,
                         ])
@@ -92,7 +92,7 @@
                     <div class="col-md-4">
                         @include('components.backend.forms.select2.option', [
                         'name' => 'year',
-                        'label' => 'Year',
+                         'label' =>__('langdata.year'),
                         'optionData' => $years,
                         'required' => true,
                         ])
