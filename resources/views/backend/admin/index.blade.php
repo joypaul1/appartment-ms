@@ -49,11 +49,11 @@
                                 <td class="text-center"><img src="{{ asset($item->image) }}" alt="{{ $item->image }}" srcset="" width="100px"
                                         height="100px"></td>
                                 <td class="text-center">
-                                    <a href="{{ route('backend.site-config.admin.edit', $item) }}" class="btn btn-sm btn-icon btn-warning  m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                    <a href="{{ route('backend.site-config.admin.edit', $item) }}" class="btn btn-sm btn-icon btn-warning  m-r-5" data-toggle="tooltip" data-original-langdata."Edit"><i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
                                     @if($item->role_type != 'super_admin')
                                     <button type="button" onclick="delete_check({{$item->id}})" class="btn btn-sm btn-icon btn-danger  button-remove"
-                                        data-toggle="tooltip" data-original-title="Remove" aria-describedby="tooltip64483">
+                                        data-toggle="tooltip" data-original-langdata."Remove" aria-describedby="tooltip64483">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </button>
                                     <form action="{{ route('backend.site-config.admin.destroy', $item)}}" id="deleteCheck_{{ $item->id }}"
@@ -89,7 +89,7 @@
 <script>
     function delete_check(id) {
             Swal.fire({
-                title: 'Are you sure?',
+                langdata. 'Are you sure?',
                 html: "<b>You will delete it permanently!</b>",
                 type: 'warning',
                 showCancelButton: true,

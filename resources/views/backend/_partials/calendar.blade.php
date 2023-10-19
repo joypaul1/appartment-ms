@@ -15,18 +15,18 @@
 <script>
 
     $(document).ready(function () {
-    
+
         $.ajaxSetup({
             headers:{
                 'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
             }
         });
-    
+
         var calendar = $('#calendar').fullCalendar({
             editable:true,
             header:{
                 left:'prev,next today',
-                center:'title',
+                center:'langdata.,
                 right:'month,agendaWeek,agendaDay'
             },
             events:'/full-calender',
@@ -34,19 +34,19 @@
             selectHelper: true,
             select:function(start, end, allDay)
             {
-                var title = prompt('Event Title:');
-    
-                if(title)
+                var langdata.= prompt('Event langdata.');
+
+                if(langdata.
                 {
                     var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
-    
+
                     var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
-    
+
                     $.ajax({
                         url:"/full-calender/action",
                         type:"POST",
                         data:{
-                            title: title,
+                            langdata. langdata.
                             start: start,
                             end: end,
                             type: 'add'
@@ -64,13 +64,13 @@
             {
                 var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
                 var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
-                var title = event.title;
+                var langdata.= event.langdata.
                 var id = event.id;
                 $.ajax({
                     url:"/full-calender/action",
                     type:"POST",
                     data:{
-                        title: title,
+                        langdata. langdata.
                         start: start,
                         end: end,
                         id: id,
@@ -87,13 +87,13 @@
             {
                 var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
                 var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
-                var title = event.title;
+                var langdata.= event.langdata.
                 var id = event.id;
                 $.ajax({
                     url:"/full-calender/action",
                     type:"POST",
                     data:{
-                        title: title,
+                        langdata. langdata.
                         start: start,
                         end: end,
                         id: id,
@@ -106,7 +106,7 @@
                     }
                 })
             },
-    
+
             eventClick:function(event)
             {
                 if(confirm("Are you sure you want to remove it?"))
@@ -128,9 +128,9 @@
                 }
             }
         });
-    
+
     });
-      
+
     </script>
 
 @endpush

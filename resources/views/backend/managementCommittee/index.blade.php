@@ -4,12 +4,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> {{ __('title.Management-Committe-List') }}
+<i class="fa fa-list"></i> {{ __('langdata.Management-Committe-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => __('title.Create-Management-Committe'),
+'name' => __('langdata.Create-Management-Committe'),
 'route' => route('backend.management-committee.create'),
 ])
 @endsection

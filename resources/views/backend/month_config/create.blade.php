@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> {{ __('title.Create-Month') }}
+    <i class="fa fa-plus-circle"></i> {{ __('langdata.Create-Month') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => __('title.Month-List'),
+        'name' => __('langdata.Month-List'),
         'route' => route('backend.site-config.month.index'),
     ])
 @endsection

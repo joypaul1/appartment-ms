@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> {{ __('title.Create-Employee') }}
+<i class="fa fa-plus-circle"></i> {{ __('langdata.Create-Employee') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' =>   __('title.Employee-List') ,
+'name' =>   __('langdata.Employee-List') ,
 'route' =>route('backend.employee.index'),
 ])
 @endsection

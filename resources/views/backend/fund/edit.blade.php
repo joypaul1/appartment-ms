@@ -3,13 +3,13 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-pencil"></i> @lang('title.Edit-Fund')
+    <i class="fa fa-pencil"></i> @lang('langdata.Edit-Fund')
 @stop
 
 @section('table_header')
 @include('backend._partials.page_header', [
     'fa' => 'fa fa-list',
-    'name' => __('title.Fund-List'),
+    'name' => __('langdata.Fund-List'),
     'route' => route('backend.fund.index'),
 ])
 @endsection

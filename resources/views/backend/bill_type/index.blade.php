@@ -4,13 +4,13 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> @lang('title.Bill-Type-List')
+<i class="fa fa-list"></i> @lang('langdata.Bill-Type-List')
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
 'name' => 'Create Bill Type',
-'name' => __('title.Create-Bill-Type') ,
+'name' => __('langdata.Create-Bill-Type') ,
 'route' =>route('backend.site-config.bill-type.create'),
 ])
 @endsection

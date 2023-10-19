@@ -6,12 +6,12 @@
 @section('content')
 
 @section('page-header')
-<i class="fa fa-list"></i> {{ __('title.Complain-List') }}
+<i class="fa fa-list"></i> {{ __('langdata.Complain-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => __('title.Create-Complain'),
+'name' => __('langdata.Create-Complain'),
 'route' => route('backend.complain.create'),
 ])
 @endsection
@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th>@lang('table.sl')</th>
-                                <th>@lang('table.title')</th>
+                                <th>@lang('table.langdata.)</th>
                                 <th>@lang('table.date')</th>
                                 <th>@lang('table.action')</th>
                             </tr>
@@ -39,7 +39,7 @@
                                     {{ $key + 1 }}
                                 </td>
                                 <td>
-                                    {{ $row->title }}
+                                    {{ $row->langdata.}}
                                 </td>
                                 <td>
                                     {{ date('d-m-y', strtotime($row->date)) }}

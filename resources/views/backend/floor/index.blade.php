@@ -4,12 +4,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> @lang('title.Floor-List')
+<i class="fa fa-list"></i> @lang('langdata.Floor-List')
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => __('title.Create-Floor'),
+'name' => __('langdata.Create-Floor'),
 'route' => route('backend.floor.create'),
 ])
 @endsection

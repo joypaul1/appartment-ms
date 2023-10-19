@@ -5,12 +5,12 @@
 @section('content')
 
 @section('page-header')
-<i class="fa fa-list"></i> {{ __('title.Maintenance-Cost-List') }}
+<i class="fa fa-list"></i> {{ __('langdata.Maintenance-Cost-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => __('title.Create-Maintenance-Cost') ,
+'name' => __('langdata.Create-Maintenance-Cost') ,
 'route' => route('backend.maintenance-cost.create'),
 ])
 @endsection
@@ -26,7 +26,7 @@
                         <thead>
                             <tr>
                                 <th>@lang('table.sl')</th>
-                                <th>@lang('table.title')</th>
+                                <th>@lang('table.langdata.)</th>
                                 <th>@lang('table.date')</th>
                                 <th>@lang('table.month')</th>
                                 <th>@lang('table.year')</th>
@@ -42,7 +42,7 @@
                                     {{ $key + 1 }}
                                 </td>
                                 <td>
-                                    {{ $row->title }}
+                                    {{ $row->langdata.}}
                                 </td>
                                 <td>
                                     {{ date('d-m-y', strtotime($row->date)) }}

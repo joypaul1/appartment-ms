@@ -21,14 +21,14 @@
                             </p>
                         </div>
                     </div>
-                    <div class="card-title text-center"><u>Complain Report</u> </div>
+                    <div class="card-langdata.text-center"><u>Complain Report</u> </div>
                     <div class="card-body">
                         <div class="card-body">
                             <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Title</th>
+                                        <th>langdata./th>
                                         <th>
                                             Date
                                         </th>
@@ -41,7 +41,7 @@
                                                 {{ $key + 1 }}
                                             </td>
                                             <td>
-                                                {{ $row->title }}
+                                                {{ $row->langdata.}}
                                             </td>
                                             <td>
                                                 {{ date('d-m-y', strtotime($row->date)) }}

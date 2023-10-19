@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> {{ __('title.Create-Complain') }}
+    <i class="fa fa-plus-circle"></i> {{ __('langdata.Create-Complain') }}
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' =>  __('title.Complain-List'),
+        'name' =>  __('langdata.Complain-List'),
         'route' => route('backend.complain.index'),
     ])
 @endsection
@@ -25,11 +25,11 @@
 
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'title',
+                            'name' => 'langdata.,
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('title'),
+                            'message' => $errors->first('langdata.),
                         ])
                     </div>
                     <div class="col-md-6">

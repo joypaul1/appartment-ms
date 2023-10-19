@@ -71,7 +71,7 @@
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Profile Image</h4>
+                <h4 class="card-langdata.>Profile Image</h4>
             </div>
             <div class="card-body">
                 <a href="#" onClick="javascript:showMyModalImage('{{ asset( auth('admin')->user()->image) }}')">

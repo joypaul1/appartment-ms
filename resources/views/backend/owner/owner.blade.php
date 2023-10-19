@@ -4,7 +4,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> {{ __('title.Owner-List') }}
+<i class="fa fa-list"></i> {{ __('langdata.Owner-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [

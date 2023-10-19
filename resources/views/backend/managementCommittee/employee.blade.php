@@ -4,7 +4,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> {{ ('title.Management-Committe-List') }}
+<i class="fa fa-list"></i> {{ ('langdata.Management-Committe-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [

@@ -125,7 +125,7 @@
             <div class="wrapper">
                 <ul class="indicator">
                     <li class="active" data-target="#business">Business</li>
-                    <li data-target="#tax">Tax <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" title="Registered Tax Number for yur business"></i></li>
+                    <li data-target="#tax">Tax <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" langdata."Registered Tax Number for yur business"></i></li>
                     <li data-target="#product">Product</li>
                     <li data-target="#contact">Contact</li>
                     <li data-target="#sale">Sale</li>
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
-                                <label class="col-form-label">Default Profit Percentage: <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" title="Default profit margin of a product. <br><small>Used to calculate selling price based on purchase price entered.<br/> You can modify this value for individual products while adding</small>" data-html="true"></i></label>
+                                <label class="col-form-label">Default Profit Percentage: <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" langdata."Default profit margin of a product. <br><small>Used to calculate selling price based on purchase price entered.<br/> You can modify this value for individual products while adding</small>" data-html="true"></i></label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
@@ -218,7 +218,7 @@
                                         <option value="12">12 Hour</option>
                                     </select>
                                 </div>
-                                <label class="col-form-label">Transaction Edit Days: <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" title="Number of days from Transaction Date till which a transaction can be edited." data-html="true"></i></label>
+                                <label class="col-form-label">Transaction Edit Days: <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" langdata."Number of days from Transaction Date till which a transaction can be edited." data-html="true"></i></label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
@@ -228,7 +228,7 @@
                                     <input type="number" class="form-control" placeholder="Enter Transaction Edit Days">
                                 </div>
 
-                                <label class="col-form-label">Financial year start month: <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" title="<small>Start Month of the financial year of business</small>" data-html="true"></i></label>
+                                <label class="col-form-label">Financial year start month: <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" langdata."<small>Start Month of the financial year of business</small>" data-html="true"></i></label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
@@ -241,7 +241,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6">
-                                <label class="col-form-label">Stock Accounting Method: <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" title="Accounting Methods"></i></label>
+                                <label class="col-form-label">Stock Accounting Method: <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" langdata."Accounting Methods"></i></label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
@@ -267,7 +267,7 @@
                                 </div>
 
 
-                                <label class="col-form-label">Currency precision: <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" title="Number of digits after decimal point for currency value. Example:0.00 for value 2, 0.000 for value 3, 0.0000 for value 4" data-html="true"></i></label>
+                                <label class="col-form-label">Currency precision: <i class="fa fa-info-circle text-info" data-toggle="tooltip" data-placement="top" langdata."Number of digits after decimal point for currency value. Example:0.00 for value 2, 0.000 for value 3, 0.0000 for value 4" data-html="true"></i></label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">

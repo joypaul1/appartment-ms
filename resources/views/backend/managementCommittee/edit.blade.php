@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-pencil"></i> {{ __('title.Edit-Management-Committe') }}
+<i class="fa fa-pencil"></i> {{ __('langdata.Edit-Management-Committe') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' => __('title.Management-Committe-List'),
+'name' => __('langdata.Management-Committe-List'),
 'route' => route('backend.management-committee.index'),
 ])
 @endsection

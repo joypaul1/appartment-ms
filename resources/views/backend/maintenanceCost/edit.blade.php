@@ -8,7 +8,7 @@
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => __('title.Maintenance-Cost-List'),
+        'name' => __('langdata.Maintenance-Cost-List'),
         'route' => route('backend.maintenance-cost.index'),
     ])
 @endsection
@@ -25,12 +25,12 @@
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'title',
-                            'value' => $maintenanceCost->title,
+                            'name' => 'langdata.,
+                            'value' => $maintenanceCost->langdata.
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('title'),
+                            'message' => $errors->first('langdata.),
                         ])
                     </div>
                     <div class="col-md-6">

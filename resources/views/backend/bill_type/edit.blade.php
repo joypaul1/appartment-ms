@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-pencil"></i> @lang('title.Edit-Bill-Type')
+<i class="fa fa-pencil"></i> @lang('langdata.Edit-Bill-Type')
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' => __('title.Bill-Type-List'),
+'name' => __('langdata.Bill-Type-List'),
 'route' =>route('backend.site-config.bill-type.index'),
 ])
 @endsection

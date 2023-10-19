@@ -20,7 +20,7 @@ $remainBalance = 0;
                         </p>
                     </div>
                 </div>
-                <div class="card-title text-center"><u>Rent Collection Report</u> </div>
+                <div class="card-langdata.text-center"><u>Rent Collection Report</u> </div>
                 <div class="card-body">
                     <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                         <thead>
@@ -119,7 +119,7 @@ $remainBalance = 0;
                         </tbody>
                     </table>
                 </div>
-              
+
                 <p class="text-center">Balance :
                     <strong>
                         <u>

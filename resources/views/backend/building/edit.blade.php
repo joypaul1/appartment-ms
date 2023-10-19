@@ -8,7 +8,7 @@
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => __('title.Bill-Informaiton-List'),
+        'name' => __('langdata.Bill-Informaiton-List'),
         'route' => route('backend.site-config.building.index'),
     ])
 @endsection

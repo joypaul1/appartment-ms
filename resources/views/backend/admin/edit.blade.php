@@ -119,7 +119,7 @@
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Uploaded Document</h4>
+                    <h4 class="card-langdata.>Uploaded Document</h4>
                 </div>
                 <div class="card-body">
                     <a href="#" onClick="javascript:showMyModalImage('{{ asset($admin->image) }}')">
@@ -134,7 +134,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="title" id="defaultModalLabel">Admin Image View</h4>
+                    <h4 class="langdata. id="defaultModalLabel">Admin Image View</h4>
                 </div>
                 <div class="modal-body">
                     <img src="#" alt="" id="outputImage" width='100%' height="50%">

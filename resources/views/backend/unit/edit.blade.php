@@ -3,13 +3,13 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-pencil"></i>  {{ __('title.unit_dit') }}
+<i class="fa fa-pencil"></i>  {{ __('langdata.unit_dit') }}
 @stop
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' =>  {{ __('title.unit_list') }},
+'name' =>  {{ __('langdata.unit_list') }},
 'route' =>route('backend.unit.index'),
 ])
 @endsection

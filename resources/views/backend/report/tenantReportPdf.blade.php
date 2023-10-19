@@ -21,7 +21,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="card-title text-center"><u>Tenant Report</u> </div>
+                    <div class="card-langdata.text-center"><u>Tenant Report</u> </div>
                     <div class="card-body">
                         <table style="font-size:13px;" id="datatables-reponsive" class="table" style="width:100%">
                             <thead>

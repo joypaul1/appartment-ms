@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> @lang('title.Create-Floor')
+    <i class="fa fa-plus-circle"></i> @lang('langdata.Create-Floor')
 @stop
 @section('table_header')
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
-        'name' => __('title.Floor-List'),
+        'name' => __('langdata.Floor-List'),
         'route' => route('backend.floor.index'),
     ])
 @endsection

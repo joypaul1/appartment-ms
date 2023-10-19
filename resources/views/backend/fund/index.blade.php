@@ -5,12 +5,12 @@
 @section('content')
 
 @section('page-header')
-<i class="fa fa-list"></i> {{ __('title.Fund-List') }}
+<i class="fa fa-list"></i> {{ __('langdata.Fund-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => __('title.Create-Fund'),
+'name' => __('langdata.Create-Fund'),
 'route' => route('backend.fund.create'),
 ])
 @endsection

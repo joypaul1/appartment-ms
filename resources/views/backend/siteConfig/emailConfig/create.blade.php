@@ -81,7 +81,7 @@
     {{-- <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Uploaded Document</h4>
+                <h4 class="card-langdata.>Uploaded Document</h4>
             </div>
             <div class="card-body">
                 <img class="card-img-top img-fluid" src="{{ asset($emailConfig->document??' ') }}" id="outputImage" alt="Current document">

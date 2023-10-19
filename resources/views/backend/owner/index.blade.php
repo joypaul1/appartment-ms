@@ -4,12 +4,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> {{ __('title.Owner-List') }}
+<i class="fa fa-list"></i> {{ __('langdata.Owner-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => __('title.Owner-List'),
+'name' => __('langdata.Owner-List'),
 
 'route' =>route('backend.owner.create'),
 ])

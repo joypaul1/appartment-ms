@@ -6,12 +6,12 @@
 @section('content')
 
 @section('page-header')
-<i class="fa fa-list"></i> {{ __('title.Notice-Board-List') }}
+<i class="fa fa-list"></i> {{ __('langdata.Notice-Board-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => __('title.Create-Notice-Board'),
+'name' => __('langdata.Create-Notice-Board'),
 'route' => route('backend.notice-board.create'),
 ])
 @endsection
@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th>@lang('table.sl')</th>
-                                <th>@lang('table.title')</th>
+                                <th>@lang('table.langdata.)</th>
                                 <th>@lang('table.date')</th>
                                 <th>@lang('table.action')</th>
                             </tr>
@@ -39,7 +39,7 @@
                                     {{ $key + 1 }}
                                 </td>
                                 <td>
-                                    {{ Str::limit($row->title, 50, '...') }}
+                                    {{ Str::limit($row->langdata. 50, '...') }}
                                 </td>
                                 <td>
                                     {{ date('d-m-y', strtotime($row->end_date)) }}
