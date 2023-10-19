@@ -375,7 +375,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="card overflowhidden">
                         <div class="card-body">
-                            <h3 class="card-title text-center">Monthly Bill Collection Report</h3>
+                            <h3 class="card-title text-center"> @lang('dashboard.Monthly Bill Collection Report')</h3>
                             <canvas id="monthlyBooking" style="width:100%;max-width:600px"></canvas>
                         </div>
                     </div>
@@ -383,7 +383,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="card overflowhidden">
                         <div class="card-body">
-                            <h3 class="card-title text-center">Monthly Rent Report</h3>
+                            <h3 class="card-title text-center" > @lang('dashboard.Monthly Rent Report') </h3>
                             <canvas id="rentMonthlyReport" style="width:100%;max-width:600px"></canvas>
                         </div>
                     </div>

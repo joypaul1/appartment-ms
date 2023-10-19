@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> Create Unit
+<i class="fa fa-plus-circle"></i> 
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [

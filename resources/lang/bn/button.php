@@ -1,5 +1,5 @@
 <?php
 return [
-    'Submit Data' => 'ডেটা জমা দিন',
-    'Update-Data' => 'ডেটা আপডেট করুন',
+    'submit_data' => 'ডেটা জমা দিন',
+    'update_data' => 'ডেটা আপডেট করুন',
 ];
