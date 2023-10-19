@@ -22,9 +22,9 @@
                         <thead>
 
                             <tr>
-                                <th>@lang('table.sl')</th>
-                                <th>@lang('table.name')</th>
-                                <th>@lang('table.floor_name') </th>
+                                <th>@lang('langdata.sl')</th>
+                                <th>@lang('langdata.name')</th>
+                                <th>@lang('langdata.floor_name') </th>
                             </tr>
                         </thead>
                         <tbody>

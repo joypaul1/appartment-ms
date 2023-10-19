@@ -26,14 +26,14 @@
                     <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
                         <thead>
                             <tr>
-                                <th>@lang('table.sl')</th>
-                                <th>@lang('table.type')</th>
-                                <th>@lang('table.date')</th>
-                                <th>@lang('table.month')</th>
-                                <th>@lang('table.year')</th>
-                                <th>@lang('table.amount')</th>
-                                <th>@lang('table.deposit_account')</th>
-                                <th>@lang('table.action')</th>
+                                <th>@lang('langdata.sl')</th>
+                                <th>@lang('langdata.type')</th>
+                                <th>@lang('langdata.date')</th>
+                                <th>@lang('langdata.month')</th>
+                                <th>@lang('langdata.year')</th>
+                                <th>@lang('langdata.amount')</th>
+                                <th>@lang('langdata.deposit_account')</th>
+                                <th>@lang('langdata.action')</th>
 
                             </tr>
                         </thead>

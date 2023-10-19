@@ -26,10 +26,10 @@
                     <table id="datatable-reponsive-sm" class="table table-bordered table-sm text-center" style="width:100%">
                         <thead>
                             <tr>
-                                <th>@lang('table.sl')</th>
-                                <th>@lang('table.langdata.)</th>
-                                <th>@lang('table.date')</th>
-                                <th>@lang('table.action')</th>
+                                <th>@lang('langdata.sl')</th>
+                                <th>@lang('langdata.langdata.)</th>
+                                <th>@lang('langdata.date')</th>
+                                <th>@lang('langdata.action')</th>
                             </tr>
                         </thead>
                         <tbody>

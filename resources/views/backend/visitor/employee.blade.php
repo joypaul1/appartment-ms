@@ -23,15 +23,15 @@
                     <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
                         <thead>
                             <tr>
-                                <th>@lang('table.sl')</th>
-                                <th>@lang('table.entry_date')</th>
-                                <th>@lang('table.name')</th>
-                                <th>@lang('table.mobile')</th>
-                                <th>@lang('table.address')</th>
-                                <th>@lang('table.floor')</th>
-                                <th>@lang('table.unit')</th>
-                                <th>@lang('table.in_time')</th>
-                                <th>@lang('table.out_time')</th>
+                                <th>@lang('langdata.sl')</th>
+                                <th>@lang('langdata.entry_date')</th>
+                                <th>@lang('langdata.name')</th>
+                                <th>@lang('langdata.mobile')</th>
+                                <th>@lang('langdata.address')</th>
+                                <th>@lang('langdata.floor')</th>
+                                <th>@lang('langdata.unit')</th>
+                                <th>@lang('langdata.in_time')</th>
+                                <th>@lang('langdata.out_time')</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -23,14 +23,14 @@
                     <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
                         <thead>
                             <tr>
-                                <th>@lang('table.sl')</th>
-                                <th>@lang('table.name')</th>
-                                <th>@lang('table.image') </th>
-                                <th>@lang('table.email') </th>
-                                <th>@lang('table.mobile') </th>
-                                <th>@lang('table.join_date') </th>
-                                <th>@lang('table.member_type') </th>
-                                <th>@lang('table.action') </th>
+                                <th>@lang('langdata.sl')</th>
+                                <th>@lang('langdata.name')</th>
+                                <th>@lang('langdata.image') </th>
+                                <th>@lang('langdata.email') </th>
+                                <th>@lang('langdata.mobile') </th>
+                                <th>@lang('langdata.join_date') </th>
+                                <th>@lang('langdata.member_type') </th>
+                                <th>@lang('langdata.action') </th>
                             </tr>
                         </thead>
                         <tbody>

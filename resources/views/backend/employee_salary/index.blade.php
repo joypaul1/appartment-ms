@@ -23,13 +23,13 @@
                     <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
                         <thead>
                             <tr>
-                                <th>@lang('table.sl')</th>
-                                <th>@lang('table.name')</th>
-                                <th>@lang('table.month')</th>
-                                <th>@lang('table.year')</th>
-                                <th>@lang('table.issue_date')</th>
-                                <th>@lang('table.salary')</th>
-                                <th>@lang('table.action')</th>
+                                <th>@lang('langdata.sl')</th>
+                                <th>@lang('langdata.name')</th>
+                                <th>@lang('langdata.month')</th>
+                                <th>@lang('langdata.year')</th>
+                                <th>@lang('langdata.issue_date')</th>
+                                <th>@lang('langdata.salary')</th>
+                                <th>@lang('langdata.action')</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -24,15 +24,15 @@
                     <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
                         <thead>
                             <tr>
-                                <th>@lang('table.invoice_no')</th>
-                                <th>@lang('table.renter_name')</th>
-                                <th>@lang('table.floor')</th>
-                                <th>@lang('table.unit')</th>
-                                <th>@lang('table.month')</th>
-                                <th>@lang('table.year')</th>
-                                <th>@lang('table.total_rent')</th>
-                                <th>@lang('table.bill_status')</th>
-                                <th>@lang('table.bill_created_date')</th>
+                                <th>@lang('langdata.invoice_no')</th>
+                                <th>@lang('langdata.renter_name')</th>
+                                <th>@lang('langdata.floor')</th>
+                                <th>@lang('langdata.unit')</th>
+                                <th>@lang('langdata.month')</th>
+                                <th>@lang('langdata.year')</th>
+                                <th>@lang('langdata.total_rent')</th>
+                                <th>@lang('langdata.bill_status')</th>
+                                <th>@lang('langdata.bill_created_date')</th>
 
                             </tr>
                         </thead>

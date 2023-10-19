@@ -23,9 +23,9 @@
                     <table id="datatables-reponsive" class="table table-bordered table-sm text-center">
                         <thead>
                             <tr>
-                                <th>@lang('table.sl')</th>
-                                <th>@lang('table.name')</th>
-                                <th>@lang('table.action') </th>
+                                <th>@lang('langdata.sl')</th>
+                                <th>@lang('langdata.name')</th>
+                                <th>@lang('langdata.action') </th>
                             </tr>
                         </thead>
                         <tbody>
