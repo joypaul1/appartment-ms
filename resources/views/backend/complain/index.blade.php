@@ -45,8 +45,6 @@
                                     {{ date('d-m-y', strtotime($row->date)) }}
                                 </td>
 
-
-
                                 <td class="table-action">
                                     <a href="{{ route('backend.complain.edit', $row) }}">
                                         <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>

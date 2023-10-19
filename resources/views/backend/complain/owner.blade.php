@@ -24,7 +24,7 @@
                     <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
                         <thead>
                             <tr>
-                                th>@lang('table.sl')</th>
+                                <th>@lang('table.sl')</th>
                                 <th>@lang('table.title')</th>
                                 <th>@lang('table.date')</th>
                             </tr>

@@ -21,7 +21,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Admin::paginate(10);
+        $admins = Admin::where('role_type', 'super_admin')->paginate(10);
         return view('backend.admin.index', compact('admins'));
     }
 
