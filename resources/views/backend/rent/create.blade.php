@@ -95,7 +95,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
                             'value' => 0.0,
-                            'name' => 'water_bill',
+                             'name' =>'water_bill', 'label' =>__('langdata.water_bill'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -106,7 +106,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
                             'value' => 0.0,
-                            'name' => 'electric_bill',
+                             'name' =>'electric_bill', 'label' =>__('langdata.electric_bill'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -117,7 +117,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
                             'value' => 0.0,
-                            'name' => 'gas_bill',
+                             'name' =>'gas_bill', 'label' =>__('langdata.gas_bill'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -128,7 +128,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
                             'value' => 0.0,
-                            'name' => 'security_bill',
+                             'name' =>'security_bill', 'label' =>__('langdata.security_bill'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -139,7 +139,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
                             'value' => 0.0,
-                            'name' => 'utility_bill',
+                             'name' =>'utility_bill', 'label' =>__('langdata.utility_bill'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -150,7 +150,7 @@
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
                             'value' => 0.0,
-                            'name' => 'other_bill',
+                             'name' =>'other_bill', 'label' =>__('langdata.other_bill'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

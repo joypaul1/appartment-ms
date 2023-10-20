@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> {{ __('langdata.Create-Notice-Board') }}
+<i class="fa fa-plus-circle"></i> {{ __('langdata.Create-Notice-Board') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-list',
-        'name' => __('langdata.Notice-Board-List'),
-        'route' => route('backend.notice-board.index'),
-    ])
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-list',
+'name' => __('langdata.Notice-Board-List'),
+'route' => route('backend.notice-board.index'),
+])
 @endsection
 <div class="row">
     <div class="col-12">
@@ -18,39 +18,38 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.notice-board.store') }}" method="POST" class="row g-3"
-                    enctype="multipart/form-data">
+                <form action="{{ route('backend.notice-board.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
                     @method('POST')
                     @csrf
 
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                            'name' =>'maintenance', 'label' =>__('langdata.maintenance'),
-                            'required' => true,
+                        'name' =>'maintenance', 'label' =>__('langdata.maintenance'),
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('title'),
+                        'message' => $errors->first('title'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'date',
-                            'name' => 'end_date',
-                            'required' => true,
+                        'inType' => 'date',
+                        'name' =>'end_date', 'label' =>__('langdata.end_date'),
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('end_date'),
+                        'message' => $errors->first('end_date'),
                         ])
                     </div>
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                           'name' =>'status', 'label' =>__('langdata.status'),
-                            'required' => true,
-                            'optionData' => [['id' => 1, 'name' => 'Publish'],['id' => 0, 'name' => 'Unpublish']],
+                        'name' =>'status', 'label' =>__('langdata.status'),
+                        'required' => true,
+                        'optionData' => [['id' => 1, 'name' => 'Publish'],['id' => 0, 'name' => 'Unpublish']],
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('status'),
+                        'message' => $errors->first('status'),
                         ])
                     </div>
 

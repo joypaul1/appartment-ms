@@ -208,7 +208,13 @@ return [
     'Permanent Address'            => 'Permanent Address',
     'Present Address'              => 'Present Address',
     'Fund Purpose'                 => 'Fund Purpose',
-
-
+    'end_date'                     => 'End Date',
+    'start_date'                   => 'Start Date',
+    'other_bill'                   => 'Other Bill',
+    'water_bill'                   => 'Water Bill',
+    'electric_bill'                => 'Electric Bill',
+    'gas_bill'                     => 'Gas Bill',
+    'security_bill'                => 'Security Bill',
+    'utility_bill'                 => 'Utility Bill',
 
 ];

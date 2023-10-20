@@ -18,7 +18,7 @@
 
                     <div class="col-md-4">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'start_date',
+                             'name' =>'start_date', 'label' =>__('langdata.start_date'),
                             'label' => 'Start Date',
                             'inType' => 'date',
                             'required' => true,
@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-4">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'end_date',
+                             'name' =>'end_date', 'label' =>__('langdata.end_date'),
                             'inType' => 'date',
                             'required' => true,
                         ])

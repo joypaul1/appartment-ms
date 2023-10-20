@@ -24,7 +24,7 @@
                     @csrf
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'name', 'label' =>__('langdata.name')
+                        'name' =>'name', 'label' =>__('langdata.name')
                         'required' => true,
                         'value' => $managementCommittee->name,
                         ])
@@ -35,7 +35,7 @@
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                          'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
+                        'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
                         'required' => true,
                         'value' => $managementCommittee->mobile,
                         ])
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'email', 'label' =>__('langdata.email')  'inType' => 'email',
+                        'name' =>'email', 'label' =>__('langdata.email') 'inType' => 'email',
                         'required' => true,
                         'value' => $managementCommittee->email,
                         ])
@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'password', 'label' =>__('langdata.password'),
+                        'name' =>'password', 'label' =>__('langdata.password'),
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                         'message' => $errors->first('password'),
@@ -65,7 +65,7 @@
                         @include('components.backend.forms.select2.option', [
                         'name' => 'member_type_id',
                         'required' => true,
-                       'label' =>__('langdata.member_type'),
+                        'label' =>__('langdata.member_type'),
                         'optionData' => $member_types,
                         'selectedKey' => $managementCommittee->member_type_id,
                         ])
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                          'name' =>'nid', 'label' =>__('langdata.nid'),'number' =>true,
+                        'name' =>'nid', 'label' =>__('langdata.nid'),'number' =>true,
                         'value' => $managementCommittee->nid,
                         'required' => true,
                         ])
@@ -108,7 +108,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'file',
-                       'name' =>'image', 'label' =>__('langdata.image'),
+                        'name' =>'image', 'label' =>__('langdata.image'),
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                         'message' => $errors->first('image'),
@@ -122,7 +122,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
-                       'name' =>'joining_date', 'label' =>__('langdata.joining_date'),
+                        'name' =>'joining_date', 'label' =>__('langdata.joining_date'),
                         'value' => $managementCommittee->joining_date,
                         'required' => true,
                         ])
@@ -133,7 +133,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
-                       'name' =>'resign_date', 'label' =>__('langdata.resign_date'),
+                        'name' =>'resign_date', 'label' =>__('langdata.resign_date'),
                         'value' => $managementCommittee->resign_date,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -144,10 +144,10 @@
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                       'name' =>'status', 'label' =>__('langdata.status'),
+                        'name' =>'status', 'label' =>__('langdata.status'),
                         'selectedKey' => $managementCommittee->status,
                         'required' => true,
-                       
+
                         'optionData' => $status,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
