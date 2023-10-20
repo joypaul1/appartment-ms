@@ -44,7 +44,7 @@ class VisitorController extends Controller
                 'name' => $date->format('F')
             ];
         }
-        $units = Unit::active()->get([ 'id', 'name' ]);
+        $units = Unit::get([ 'id', 'name' ]);
         $years  = Year::get([ 'id', 'name' ]);
         $status = [ [ 'id' => 1, 'name' => 'active' ], [ 'id' => 0, 'name' => 'inactive' ] ];
         return view('backend.visitor.create', compact('units', 'months', 'years', 'status'));

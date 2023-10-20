@@ -8,9 +8,7 @@
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
-// 'fa' => 'fa fa-plus-circle',
-// 'name' => 'Create Complain',
-// 'route' => route('backend.complain.create'),
+
 ])
 @endsection
 
@@ -41,9 +39,6 @@
                                 <td>
                                     {{ date('d-m-y', strtotime($row->date)) }}
                                 </td>
-
-
-
 
                             </tr>
                             @endforeach

@@ -28,7 +28,6 @@
                                 <th>@lang('langdata.name')</th>
                                 <th>@lang('langdata.mobile')</th>
                                 <th>@lang('langdata.address')</th>
-                                <th>@lang('langdata.floor')</th>
                                 <th>@lang('langdata.unit')</th>
                                 <th>@lang('langdata.in_time')</th>
                                 <th>@lang('langdata.out_time')</th>
@@ -55,10 +54,7 @@
                                 <td>
                                     {{ $row->address }}
                                 </td>
-                                <td>
-                                    {{ optional($row->floor)->name }}
 
-                                </td>
                                 <td>
                                     {{ optional($row->unit)->name }}
 
