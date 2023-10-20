@@ -35,7 +35,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'date',
-                             'name' =>'date', 'label' =>__('langdata.date')
+                             'name' =>'date', 'label' =>__('langdata.date'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

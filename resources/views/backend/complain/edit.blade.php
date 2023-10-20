@@ -35,7 +35,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
-                        'name' =>'date', 'label' =>__('langdata.date')
+                        'name' =>'date', 'label' =>__('langdata.date'),
                         'required' => true,
                         'value' => $complain->date
 
@@ -47,7 +47,7 @@
 
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
-                    
+
                         'name' =>'description', 'label' =>__('langdata.description'),
                         'required' => true,
                         'value' => $complain->description

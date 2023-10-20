@@ -25,8 +25,8 @@
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                        'name' =>'maintenance', 'label' =>__('langdata.maintenance'),
-                        'value' => $maintenanceCost->langdata.
+                        'name' =>'title', 'label' =>__('langdata.title'),
+                        'value' => $maintenanceCost->title,
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -36,7 +36,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
-                        'name' =>'date', 'label' =>__('langdata.date')
+                        'name' =>'date', 'label' =>__('langdata.date'),
                         'required' => true,
                         'value' => $maintenanceCost->date,
 

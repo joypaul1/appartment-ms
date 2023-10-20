@@ -67,8 +67,8 @@
                                     </a>
                                     <a data-href="{{ route('backend.fund.destroy', $row) }}" href="#" class="delete_check">
                                         <button class="btn btn-sm btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i> </button>
-
                                     </a>
+
                                 </td>
                             </tr>
                             @endforeach
