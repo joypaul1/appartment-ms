@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'password',
+                         'name' =>'password', 'label' =>__('langdata.password'),
                         'required' => true,
                         'value' => $employee->password
                         ])
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' => 'nid','number' =>true,
+                          'name' =>'nid', 'label' =>__('langdata.nid'),'number' =>true,
                         'value' => $employee->nid,
                         'required' => true,
                         ])

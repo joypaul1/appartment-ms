@@ -72,7 +72,7 @@
                                 {{-- <label class="col-lg-4 col-form-label" for="password">Password  <span class="text-danger">*</span> </label> --}}
                                 <div class="col-lg-8">
                                     @include('components.backend.forms.input.input-type', [
-                                        'name' => 'password',
+                                         'name' =>'password', 'label' =>__('langdata.password'),
                                         'inType' => 'text',
                                         'placeholder' => 'Password will be here...',
                                     ])

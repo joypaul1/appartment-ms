@@ -181,13 +181,12 @@
                             'message' => $errors->first('image'),
                         ])
                     </div>
-                    {{-- @dd($rentCollection); --}}
                      <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'bill_status',
                             'selectedKey' => $rentCollection->bill_status,
                             'required' => true,
-                            'label' => 'status',
+                            'label' =>__('langdata.status'),
                             'optionData' => $status,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

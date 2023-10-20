@@ -185,7 +185,7 @@
                             'name' => 'bill_status',
                             'selectedKey' => 1,
                             'required' => true,
-                            'label' => 'status',
+                            'label' =>__('langdata.status'),
                             'optionData' => $status,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

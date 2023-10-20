@@ -175,7 +175,6 @@
                            'name' =>'status', 'label' =>__('langdata.status'),
                             'selectedKey' => 1,
                             'required' => true,
-                            'label' => 'status',
                             'optionData' => $status,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="form-group">
-                            @include('components.backend.forms.input.input-type',[ 'name' => 'password', 'placeholder' => 'email user name...', 'value' => $emailConfig->password??old('password') ])
+                            @include('components.backend.forms.input.input-type',[  'name' =>'password', 'label' =>__('langdata.password'), 'placeholder' => 'email user name...', 'value' => $emailConfig->password??old('password') ])
                             @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('password')])
                         </div>
 

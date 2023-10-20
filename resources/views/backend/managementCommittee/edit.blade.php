@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'password',
+                         'name' =>'password', 'label' =>__('langdata.password'),
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                         'message' => $errors->first('password'),
@@ -65,7 +65,7 @@
                         @include('components.backend.forms.select2.option', [
                         'name' => 'member_type_id',
                         'required' => true,
-                        'label' => 'Member Type',
+                       'label' =>__('langdata.member_type'),
                         'optionData' => $member_types,
                         'selectedKey' => $managementCommittee->member_type_id,
                         ])
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' => 'nid','number' =>true,
+                          'name' =>'nid', 'label' =>__('langdata.nid'),'number' =>true,
                         'value' => $managementCommittee->nid,
                         'required' => true,
                         ])
@@ -147,7 +147,7 @@
                        'name' =>'status', 'label' =>__('langdata.status'),
                         'selectedKey' => $managementCommittee->status,
                         'required' => true,
-                        'label' => 'status',
+                       
                         'optionData' => $status,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

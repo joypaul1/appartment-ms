@@ -112,6 +112,7 @@ return [
     'unit'                         => 'Unit',
     'in_time'                      => 'In Time',
     'out_time'                     => 'Out Time',
+    'nid'                          => 'Nid',
     'status'                       => 'status',
     'advance'                      => 'Advance',
     'rent'                         => 'Rent',
@@ -196,6 +197,7 @@ return [
     'notice-board-create'          => 'Notice Board Create',
     'purpose'                      => 'Purpos',
     'details'                      => 'Details',
+    'password'                     => 'Password',
     'builder_name'                 => 'Builder Name',
     'builder_mobile'               => 'Builder Mobile',
     'builder_address'              => 'Builder Address',
@@ -205,7 +207,7 @@ return [
     'joining_date'                 => 'Joining Date',
     'Permanent Address'            => 'Permanent Address',
     'Present Address'              => 'Present Address',
-    'Fund Purpose'              => 'Fund Purpose',
+    'Fund Purpose'                 => 'Fund Purpose',
 
 
 

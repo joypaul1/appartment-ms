@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'password',
+                         'name' =>'password', 'label' =>__('langdata.password'),
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('password')])
@@ -73,7 +73,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'nid','number' =>true,
+                         'name' =>'nid', 'label' =>__('langdata.nid'),'number' =>true,
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('nid')])

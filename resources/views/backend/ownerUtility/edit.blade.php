@@ -204,7 +204,6 @@
                            'name' =>'status', 'label' =>__('langdata.status'),
                             'selectedKey' => 1,
                             'required' => true,
-                            'label' => 'status',
                             'optionData' => $status,
                             'selectedKey' => $ownerUtility->status,
                         ])

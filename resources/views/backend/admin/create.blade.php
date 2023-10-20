@@ -53,7 +53,7 @@
                         </div>
                         <div class="mb-3 row">
                             <div class="col-lg-8">
-                                @include('components.backend.forms.input.input-type',[ 'name' => 'password', 'type'
+                                @include('components.backend.forms.input.input-type',[  'name' =>'password', 'label' =>__('langdata.password'), 'type'
                                 =>'text','required'=> true, 'placeholder' => 'Password will be here...' ])
                                 @include('components.backend.forms.input.errorMessage', ['message'
                                 =>$errors->first('password')])
