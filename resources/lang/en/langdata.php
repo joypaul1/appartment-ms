@@ -90,7 +90,8 @@ return [
     'email'                        => 'Email',
     'mobile'                       => 'Mobile',
     'Security Mobile No'           => 'Security Mobile No',
-    'moderator Mobile No'           => 'moderator Mobile No',
+    'Secretary Mobile No'          => 'Secretary Mobile No',
+    'moderator Mobile No'          => 'moderator Mobile No',
     'address'                      => 'Address',
     'unit_list'                    => 'Unit List',
     'appartment'                   => 'Appartment',
@@ -195,7 +196,10 @@ return [
     'notice-board-create'          => 'Notice Board Create',
     'purpose'                      => 'Purpos',
     'details'                      => 'Details',
-    'mobile'                       => 'Details',
+    'builder_name'                 => 'Builder Name',
+    'builder_mobile'               => 'Builder Mobile',
+    'builder_address'              => 'Builder Address',
+    'building_rules'               => 'Builder Rules',
 
 
 

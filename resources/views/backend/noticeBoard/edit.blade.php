@@ -48,7 +48,7 @@
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'status',
+                           'name' =>'status', 'label' =>__('langdata.status'),
                             'required' => true,
                             'selectedKey' => $noticeBoard->status,
                             'optionData' => [['id' => 1, 'name' => 'Publish'],['id' => 0, 'name' => 'Unpublish']],

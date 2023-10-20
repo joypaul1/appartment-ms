@@ -65,7 +65,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'time',
-                            'name' => 'in_time',
+                           'name' =>'in_time', 'label' =>__('langdata.in_time'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -75,7 +75,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'time',
-                            'name' => 'out_time',
+                           'name' =>'out_time', 'label' =>__('langdata.out_time'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

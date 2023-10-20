@@ -58,7 +58,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'date',
-                            'name' => 'issue_date',
+                           'name' =>'issue_date', 'label' =>__('langdata.issue_date'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -172,7 +172,7 @@
                     </div>
                      <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'status',
+                           'name' =>'status', 'label' =>__('langdata.status'),
                             'selectedKey' => 1,
                             'required' => true,
                             'label' => 'status',

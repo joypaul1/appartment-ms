@@ -115,7 +115,7 @@
 
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
-                        @include('components.backend.forms.select2.option',[ 'name' => 'status','selectedKey'=>1,
+                        @include('components.backend.forms.select2.option',['name' =>'status', 'label' =>__('langdata.status'),'selectedKey'=>1,
                         'required' => true,'label'=>'status','optionData'=> $status])
                         @include('components.backend.forms.input.errorMessage', ['message' => $errors->first('status')])
                     </div>

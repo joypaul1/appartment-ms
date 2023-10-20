@@ -108,7 +108,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'file',
-                        'name' => 'image',
+                       'name' =>'image', 'label' =>__('langdata.image'),
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                         'message' => $errors->first('image'),
@@ -144,7 +144,7 @@
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                        'name' => 'status',
+                       'name' =>'status', 'label' =>__('langdata.status'),
                         'selectedKey' => $managementCommittee->status,
                         'required' => true,
                         'label' => 'status',

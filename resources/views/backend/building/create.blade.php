@@ -32,7 +32,6 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'label' => 'Mobile No',
                         'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
                         'required' => true,
                         ])
@@ -52,7 +51,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'security_guard_mobile',
-                        'label' =>'email', 'label' =>__('langdata.Security Mobile No')
+                        'label' =>__('langdata.Security Mobile No'),
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -62,7 +61,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'secretary_mobile',
-                        'label' => 'Secretary Mobile No.',
+                        'label' =>__('langdata.Secretary Mobile No'),
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -72,7 +71,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'moderator_mobile',
-                        'label' => 'moderator Mobile No.',
+                        'label' =>__('langdata.moderator Mobile No'),
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -91,6 +90,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'file',
+                        'label' =>__('langdata.image'),
                         'name' => 'building_image',
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                        'name' => 'status',
+                       'name' =>'status', 'label' =>__('langdata.status'),
                         'optionData' => $status,
                         'selectedKey' => 1,
                         ])
@@ -111,7 +111,7 @@
                     <h2><u>Builder/Company Information :</u> </h2>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'builder_name',
+                       'name' =>'builder_name', 'label' =>__('langdata.builder_name'),
                         // 'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -120,7 +120,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'builder_mobile',
+                       'name' =>'builder_mobile', 'label' =>__('langdata.builder_mobile'),
                         // 'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -140,7 +140,7 @@
 
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
-                        'name' => 'building_rules',
+                       'name' =>'building_rules', 'label' =>__('langdata.building_rules'),
                         // 'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

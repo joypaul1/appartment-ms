@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'renter_name',
+                           'name' =>'renter_name', 'label' =>__('langdata.renter_name'),
                             'required' => true,
                             'readonly' => true,
                             'value' => optional($rentCollection->tenant)->name,
@@ -84,7 +84,7 @@
                     <input type="hidden" name="rent_id" id="rent_id" value="{{ $rentCollection->tenant_id }}">
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'rent',
+                           'name' =>'rent', 'label' =>__('langdata.rent'),
                             'required' => true,
                             'readonly' => true,
                             'value' => $rentCollection->rent,
@@ -175,7 +175,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'file',
-                            'name' => 'image',
+                           'name' =>'image', 'label' =>__('langdata.image'),
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                             'message' => $errors->first('image'),

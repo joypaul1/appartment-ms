@@ -97,7 +97,7 @@
                     <div class="col-md-4">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'file',
-                        'name' => 'image',
+                       'name' =>'image', 'label' =>__('langdata.image'),
                         ])
                         @include('components.backend.forms.input.errorMessage', [
                         'message' => $errors->first('image'),

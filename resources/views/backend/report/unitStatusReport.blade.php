@@ -18,7 +18,7 @@
 
                     <div class="col-md-12">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'status',
+                           'name' =>'status', 'label' =>__('langdata.status'),
                             'label' => 'Unit Status',
                             'optionData' => [['id' => 1, 'name' => 'Available'], ['id' => 2, 'name' => 'Booked']],
                             'required' => true,

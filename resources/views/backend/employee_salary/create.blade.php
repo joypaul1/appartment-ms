@@ -58,7 +58,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'date',
-                            'name' => 'issue_date',
+                           'name' =>'issue_date', 'label' =>__('langdata.issue_date'),
                             'value' => date('Y-m-d'),
                             'required' => true,
                         ])

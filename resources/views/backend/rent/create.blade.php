@@ -71,7 +71,7 @@
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'renter_name',
+                           'name' =>'renter_name', 'label' =>__('langdata.renter_name'),
                             'required' => true,
                             'readonly' => true,
                         ])
@@ -82,7 +82,7 @@
                     <input type="hidden" name="rent_id" id="rent_id" value="">
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'rent',
+                           'name' =>'rent', 'label' =>__('langdata.rent'),
                             'value' => 0.0,
                             'required' => true,
                             'readonly' => true,
@@ -173,7 +173,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'date',
-                            'name' => 'issue_date',
+                           'name' =>'issue_date', 'label' =>__('langdata.issue_date'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
