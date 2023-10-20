@@ -26,7 +26,7 @@
                     <div class="form-validation">
                         <div class="form-group">
                             @include('components.backend.forms.input.input-type', [
-                                 'name' =>'name', 'label' =>__('langdata.name')
+                                 'name' =>'name', 'label' =>__('langdata.name'),
                                 'value' => old('name', $siteInfo->name),
                                 'placeholder' => ' Name will be here...',
                                 'required' => 'yes',

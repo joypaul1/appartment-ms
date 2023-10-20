@@ -226,6 +226,7 @@ return [
     'Tenant Report Form'            => 'Tenant Report Form',
     'Unit Status Report Form'       => 'Unit Status Report Form',
     'Visitors Report Form'          => 'Visitors Report Form',
-    'Email Config'          => 'Email Config',
+    'Email Config'                  => 'Email Config',
+    'sl'                            => 'Sl',
 
 ];

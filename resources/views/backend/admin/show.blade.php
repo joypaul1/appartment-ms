@@ -22,7 +22,7 @@
                     <div class="mb-3 row">
                         <div class="col-lg-8">
                             @include('components.backend.forms.input.input-type', [
-                             'name' =>'name', 'label' =>__('langdata.name')
+                             'name' =>'name', 'label' =>__('langdata.name'),
                             'value' => old('name', auth('admin')->user()->name),
                             'placeholder' => 'name will be here...',
                             'disabled' => true,

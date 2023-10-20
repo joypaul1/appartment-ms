@@ -7,7 +7,7 @@
         @forelse ($noticeBoards as $noticeBoard)
         <div class="card">
             <div class="card-header text-danger">
-                <marquee>{{ $noticeBoard->langdata.}}</marquee>
+                <marquee>{{ $noticeBoard->title}}</marquee>
             </div>
         </div>
         @empty

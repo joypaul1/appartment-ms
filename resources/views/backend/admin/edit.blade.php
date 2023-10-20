@@ -28,7 +28,7 @@
                                 {{-- <label class="col-lg-4 col-form-label" for="name">Name   <span class="text-danger">*</span> </label> --}}
                                 <div class="col-lg-8">
                                     @include('components.backend.forms.input.input-type', [
-                                         'name' =>'name', 'label' =>__('langdata.name')
+                                         'name' =>'name', 'label' =>__('langdata.name'),
                                         'value' => old('name', $admin->name),
                                         'placeholder' => 'name will be here...',
                                         'required' => true,

@@ -47,7 +47,8 @@ class DashboardController extends Controller
         $buildingInformation      = BuildingInformation::where('id', session('branch_id'))->first();
         $depositMonthlyReport     = $this->depositMonthlyReport();
         $rentMonthlyReport        = $this->rentMonthlyReport();
-        return view('backend.dashboard.index',
+        return view(
+            'backend.dashboard.index',
             compact(
                 'depositMonthlyReport',
                 'rentMonthlyReport',
@@ -70,7 +71,8 @@ class DashboardController extends Controller
         );
     }
 
-    function profile()  {
+    function profile()
+    {
         return view('backend.admin.show');
     }
 
