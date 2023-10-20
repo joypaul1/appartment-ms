@@ -63,7 +63,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'pre_address',
-                        'label' => 'Present Address',
+                        'label' =>__('langdata.Present Address'),
                         'value' => $employee->pre_address,
                         'required' => true,
                         ])
@@ -72,7 +72,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'per_address',
-                        'label' => 'Permanent Address',
+                        'label' =>__('langdata.Permanent Address'),
                         'value' => $employee->per_address,
                         'required' => true,
                         ])
@@ -89,7 +89,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'file',
-                        'name' => 'image'
+                        'name' =>'image', 'label' =>__('langdata.image'),
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('image')])
                     </div>
@@ -101,7 +101,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
-                        'name' => 'joining_date',
+                       'name' =>'joining_date', 'label' =>__('langdata.joining_date'),
                         'value' => $employee->joining_date,
                         'required' => true,
                         ])
@@ -110,7 +110,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
-                        'name' => 'resign_date',
+                       'name' =>'resign_date', 'label' =>__('langdata.resign_date'),
                         'value' => $employee->resign_date,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('joining_date')])
@@ -118,7 +118,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'number',
-                        'name' => 'salary',
+                       'name' =>'salary', 'label' =>__('langdata.salary'),
                         'required' => true,
                         'value' => $employee->salary
                         ])

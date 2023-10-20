@@ -53,7 +53,7 @@
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'label' => 'Permanent Address',
+                        'label' =>__('langdata.Permanent Address'),
                             'name' =>'address', 'label' =>__('langdata.address'),
                         'required' => true,
                         ])
@@ -69,7 +69,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'file',
-                        'name' => 'image'
+                        'name' =>'image', 'label' =>__('langdata.image'),
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('image')])
                     </div>

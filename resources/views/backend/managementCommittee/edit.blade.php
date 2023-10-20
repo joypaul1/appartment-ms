@@ -76,7 +76,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'pre_address',
-                        'label' => 'Present Address',
+                        'label' =>__('langdata.Present Address'),
                         'value' => $managementCommittee->pre_address,
                         'required' => true,
                         ])
@@ -87,7 +87,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'per_address',
-                        'label' => 'Permanent Address',
+                        'label' =>__('langdata.Permanent Address'),
                         'value' => $managementCommittee->per_address,
                         'required' => true,
                         ])
@@ -122,7 +122,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
-                        'name' => 'joining_date',
+                       'name' =>'joining_date', 'label' =>__('langdata.joining_date'),
                         'value' => $managementCommittee->joining_date,
                         'required' => true,
                         ])
@@ -133,7 +133,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
-                        'name' => 'resign_date',
+                       'name' =>'resign_date', 'label' =>__('langdata.resign_date'),
                         'value' => $managementCommittee->resign_date,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

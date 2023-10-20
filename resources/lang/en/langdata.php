@@ -201,6 +201,10 @@ return [
     'builder_address'              => 'Builder Address',
     'building_rules'               => 'Builder Rules',
     'description'                  => 'Description',
+    'resign_date'                  => 'Resign Date',
+    'joining_date'                 => 'Joining Date',
+    'Permanent Address'            => 'Permanent Address',
+    'Present Address'              => 'Present Address',
 
 
 

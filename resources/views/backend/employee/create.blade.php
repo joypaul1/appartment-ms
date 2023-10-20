@@ -8,7 +8,7 @@
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' =>   __('langdata.Employee-List') ,
+'name' => __('langdata.Employee-List') ,
 'route' =>route('backend.employee.index'),
 ])
 @endsection
@@ -23,21 +23,21 @@
                     @csrf
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'name', 'label' =>__('langdata.name')
+                        'name' =>'name', 'label' =>__('langdata.name')
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                          'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
+                        'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('mobile')])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'email', 'label' =>__('langdata.email')  'inType' => 'email',
+                        'name' =>'email', 'label' =>__('langdata.email') 'inType' => 'email',
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('email')])
@@ -57,7 +57,7 @@
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'label' => 'Present Address',
+                        'label' =>__('langdata.Present Address'),
                         'name' => 'pre_address',
                         'required' => true,
                         ])
@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'label' => 'Permanent Address',
+                        'label' =>__('langdata.Permanent Address'),
                         'name' => 'per_address',
                         'required' => true,
                         ])
@@ -73,7 +73,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' => 'nid','number' =>true,
+                        'name' => 'nid','number' =>true,
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('nid')])
@@ -81,7 +81,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'file',
-                        'name' => 'image'
+                        'name' =>'image', 'label' =>__('langdata.image'),
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('image')])
                     </div>
@@ -90,7 +90,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
-                        'name' => 'joining_date',
+                        'name' =>'joining_date', 'label' =>__('langdata.joining_date'),
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('joining_date')])
@@ -98,15 +98,15 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'date',
-                        'name' => 'resign_date',
+                        'name' =>'resign_date', 'label' =>__('langdata.resign_date'),
                         // 'required' => true,
                         ])
-                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('joining_date')])
+                        @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('resign_date')])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'number',
-                        'name' => 'salary',
+                        'name' =>'salary', 'label' =>__('langdata.salary'),
                         'required' => true,
                         'value' =>0.00
                         ])

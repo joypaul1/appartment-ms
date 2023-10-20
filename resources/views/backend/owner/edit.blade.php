@@ -65,7 +65,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' => 'pre_address',
-                        'label' => 'Present Address',
+                        'label' =>__('langdata.Present Address'),
                         'value' => $owner->pre_address,
                         'required' => true,
                         ])
@@ -75,7 +75,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'label' => 'Permanent Address',
+                        'label' =>__('langdata.Permanent Address'),
                         'name' => 'per_address',
                         'value' => $owner->per_address,
                         'required' => true,
