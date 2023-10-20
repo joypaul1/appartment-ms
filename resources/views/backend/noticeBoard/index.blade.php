@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th>@lang('langdata.sl')</th>
-                                <th>@lang('langdata.langdata.)</th>
+                                <th>@lang('langdata.title')</th>
                                 <th>@lang('langdata.date')</th>
                                 <th>@lang('langdata.action')</th>
                             </tr>
@@ -39,7 +39,7 @@
                                     {{ $key + 1 }}
                                 </td>
                                 <td>
-                                    {{ Str::limit($row->langdata. 50, '...') }}
+                                    {{ Str::limit($row->title 50, '...') }}
                                 </td>
                                 <td>
                                     {{ date('d-m-y', strtotime($row->end_date)) }}

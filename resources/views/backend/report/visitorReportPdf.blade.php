@@ -41,7 +41,7 @@
                                                 {{ $key + 1 }}
                                             </td>
                                             <td>
-                                                {{ $row->langdata.}}
+                                                {{ $row->title}}
                                             </td>
                                             <td>
                                                 {{ date('d-m-y', strtotime($row->date)) }}
