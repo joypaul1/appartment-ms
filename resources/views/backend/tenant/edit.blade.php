@@ -32,7 +32,7 @@
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
+                        'name' =>'mobile', 'label' =>__('langdata.mobile'),'number' =>true,
                         'required' => true,
                         'number' => true,
                         'value' => $tenant->mobile
@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' =>'email', 'label' =>__('langdata.email')
+                        'name' =>'email', 'label' =>__('langdata.email'),
                         'inType' => 'email',
                         'required' => true,
                         'value' => $tenant->email

@@ -34,7 +34,7 @@
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
+                         'name' =>'mobile', 'label' =>__('langdata.mobile'),'number' =>true,
                         'required' => true,
                         'value' => $owner->mobile,
                         ])
@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'email', 'label' =>__('langdata.email') 'inType' => 'email',
+                         'name' =>'email', 'label' =>__('langdata.email'), 'inType' => 'email',
                         'required' => true,
                         'value' => $owner->email,
                         ])

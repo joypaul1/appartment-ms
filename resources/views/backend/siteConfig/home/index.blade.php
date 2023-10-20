@@ -38,7 +38,7 @@
 
                         <div class="form-group">
                             @include('components.backend.forms.input.input-type', [
-                                 'name' =>'email', 'label' =>__('langdata.email')  'inType' => 'email',
+                                 'name' =>'email', 'label' =>__('langdata.email'),  'inType' => 'email',
                                 'value' => old('email', $siteInfo->email),
                                 'placeholder' => 'Email will be here...',
                                 'required' => 'yes',
@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             @include('components.backend.forms.input.input-type', [
-                                  'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
+                                  'name' =>'mobile', 'label' =>__('langdata.mobile'),'number' =>true,
                                 'value' => old('mobile', $siteInfo->mobile),
                                 'placeholder' => 'Mobile will be here...',
                                 'required' => 'yes',

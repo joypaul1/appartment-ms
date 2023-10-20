@@ -36,7 +36,7 @@
                         <div class="mb-3 row">
 
                             <div class="col-lg-8">
-                                @include('components.backend.forms.input.input-type',[  'name' =>'email', 'label' =>__('langdata.email') 'inType'
+                                @include('components.backend.forms.input.input-type',[  'name' =>'email', 'label' =>__('langdata.email'), 'inType'
                                 =>'email', 'required'=> true, 'placeholder' => 'email will be here...' ])
                                 @include('components.backend.forms.input.errorMessage', ['message'
                                 =>$errors->first('email')])
@@ -45,7 +45,7 @@
                         <div class="mb-3 row">
 
                             <div class="col-lg-8">
-                                @include('components.backend.forms.input.input-type',[   'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true, 'required'=>
+                                @include('components.backend.forms.input.input-type',[   'name' =>'mobile', 'label' =>__('langdata.mobile'),'number' =>true, 'required'=>
                                 true, 'number' => true,'placeholder' => 'mobile will be here (01...)' ])
                                 @include('components.backend.forms.input.errorMessage', ['message'
                                 =>$errors->first('mobile')])

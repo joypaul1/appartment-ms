@@ -42,7 +42,7 @@
                                 {{-- <label class="col-lg-4 col-form-label" for="email">Email   <span class="text-danger">*</span> </label> --}}
                                 <div class="col-lg-8">
                                     @include('components.backend.forms.input.input-type', [
-                                         'name' =>'email', 'label' =>__('langdata.email')
+                                         'name' =>'email', 'label' =>__('langdata.email'),
                                         'inType' => 'email',
                                         'required' => true,
                                         'value' => old('email', $admin->email),
@@ -57,7 +57,7 @@
                                 {{-- <label class="col-lg-4 col-form-label" for="mobile">Mobile  <span class="text-danger">*</span> </label> --}}
                                 <div class="col-lg-8">
                                     @include('components.backend.forms.input.input-type', [
-                                          'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
+                                          'name' =>'mobile', 'label' =>__('langdata.mobile'),'number' =>true,
                                         'number' => true,
                                         'required' => true,
                                         'value' => old('mobile', $admin->mobile),

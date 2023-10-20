@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> @lang("langdata.Create-Tenant")
+<i class="fa fa-plus-circle"></i> {{ __('langdata.Create-Tenant') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
+                        'name' =>'mobile', 'label' =>__('langdata.mobile'),'number' =>true,
                         'required' => true,
                         'number' => true,
                         ])
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' =>'email', 'label' =>__('langdata.email') 'inType' => 'email',
+                        'name' =>'email', 'label' =>__('langdata.email'), 'inType' => 'email',
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('email')])

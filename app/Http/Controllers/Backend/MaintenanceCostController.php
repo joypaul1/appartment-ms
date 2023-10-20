@@ -41,14 +41,14 @@ class MaintenanceCostController extends Controller
     {
         $months = [];
         for ($i = 1; $i <= 12; $i++) {
-            $date = DateTime::createFromFormat('!m', $i);
+            $date     = DateTime::createFromFormat('!m', $i);
             $months[] = [
-                'id' => $i,
+                'id'   => $i,
                 'name' => $date->format('F')
             ];
         }
-        $years = Year::get(['id', 'name']);
-        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        $years  = Year::get([ 'id', 'name' ]);
+        $status = [ [ 'id' => 1, 'name' => 'active' ], [ 'id' => 0, 'name' => 'inactive' ] ];
         return view('backend.maintenanceCost.create', compact('months', 'years', 'status'));
     }
 
@@ -56,7 +56,8 @@ class MaintenanceCostController extends Controller
     {
         if (!OwnerUtility::latest()->first()) {
             return 1;
-        } else {
+        }
+        else {
             return OwnerUtility::latest()->first()->invoice_number + 1;
         }
     }
@@ -70,18 +71,19 @@ class MaintenanceCostController extends Controller
     {
 
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'date' => 'required',
+            'title'    => 'required|string|max:255',
+            'date'     => 'required',
             'month_id' => 'required|integer',
-            'year_id' => 'required|integer',
-            'amount' => 'required|numeric',
-            'details' => 'nullable|string',
+            'year_id'  => 'required|integer',
+            'amount'   => 'required|numeric',
+            'details'  => 'nullable|string',
         ]);
         try {
             $validatedData['branch_id'] = session('branch_id');
-            $validatedData['date'] = date('Y-m-d', strtotime($request->date));
+            $validatedData['date']      = date('Y-m-d', strtotime($request->date));
             MaintenanceCost::create($validatedData);
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.maintenance-cost.index')->with('success', 'Data Created successfully.');
@@ -108,14 +110,14 @@ class MaintenanceCostController extends Controller
     {
         $months = [];
         for ($i = 1; $i <= 12; $i++) {
-            $date = DateTime::createFromFormat('!m', $i);
+            $date     = DateTime::createFromFormat('!m', $i);
             $months[] = [
-                'id' => $i,
+                'id'   => $i,
                 'name' => $date->format('F')
             ];
         }
-        $years = Year::get(['id', 'name']);
-        $status = [['id' => 1, 'name' => 'active'], ['id' => 0, 'name' => 'inactive']];
+        $years  = Year::get([ 'id', 'name' ]);
+        $status = [ [ 'id' => 1, 'name' => 'active' ], [ 'id' => 0, 'name' => 'inactive' ] ];
         return view('backend.maintenanceCost.edit', compact('maintenanceCost', 'months', 'years', 'status'));
     }
 
@@ -129,18 +131,19 @@ class MaintenanceCostController extends Controller
     public function update(Request $request, MaintenanceCost $maintenanceCost)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'date' => 'required',
+            'title'    => 'required|string|max:255',
+            'date'     => 'required',
             'month_id' => 'required|integer',
-            'year_id' => 'required|integer',
-            'amount' => 'required|numeric',
-            'details' => 'nullable|string',
+            'year_id'  => 'required|integer',
+            'amount'   => 'required|numeric',
+            'details'  => 'nullable|string',
         ]);
         try {
             $validatedData['branch_id'] = session('branch_id');
-            $validatedData['date'] = date('Y-m-d', strtotime($request->date));
+            $validatedData['date']      = date('Y-m-d', strtotime($request->date));
             $maintenanceCost->update($validatedData);
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.maintenance-cost.index')->with('success', 'Rent Collection Created successfully.');
@@ -156,9 +159,10 @@ class MaintenanceCostController extends Controller
     {
         try {
             $maintenanceCost->delete();
-        } catch (\Exception $ex) {
-            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }
-        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
+        catch (\Exception $ex) {
+            return response()->json([ 'status' => false, 'mes' => 'Something went wrong!This was relationship Data.' ]);
+        }
+        return response()->json([ 'status' => true, 'mes' => 'Data Deleted Successfully' ]);
     }
 }

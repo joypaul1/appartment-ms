@@ -8,7 +8,7 @@
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' => 'Unit List',
+'name' =>  __('langdata.unit_list'),
 'route' =>route('backend.unit.index'),
 ])
 @endsection

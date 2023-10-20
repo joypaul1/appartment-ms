@@ -10,7 +10,7 @@ return [
     'Edit-Fund'                     => 'Edit Fund',
 
     'Unit-List'                     => 'Unit List',
-    'Create-Unit'                   => 'Create Floor',
+    'Create-Unit'                   => 'Create Unit',
     'Edit-Unit'                     => 'Edit Unit',
 
     'Admin-List'                    => 'Admin List',

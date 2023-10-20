@@ -33,7 +33,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                         'name' =>'mobile',
-                        'label' =>__('langdata.mobile'),
+                        'label' =>__('langdata.mobile'),,
                         'number' =>true,
                         'required' => true,
                         ])

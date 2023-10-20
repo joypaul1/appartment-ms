@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> {{ __('langdata.Create-Owner')  }}  Owner
+<i class="fa fa-plus-circle"></i> {{ __('langdata.Create-Owner') }} Owner
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' =>  __('langdata.Owner-List'),
+'name' => __('langdata.Owner-List'),
 'route' =>route('backend.owner.index'),
 ])
 @endsection
@@ -23,28 +23,28 @@
                     @csrf
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'name', 'label' =>__('langdata.name'),
+                        'name' =>'name', 'label' =>__('langdata.name'),
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                          'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
+                        'name' =>'mobile', 'label' =>__('langdata.mobile'),'number' =>true,
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('mobile')])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'email', 'label' =>__('langdata.email')  'inType' => 'email',
+                        'name' =>'email', 'label' =>__('langdata.email'), 'inType' => 'email',
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('email')])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'password', 'label' =>__('langdata.password'),
+                        'name' =>'password', 'label' =>__('langdata.password'),
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('password')])
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                          'name' =>'nid', 'label' =>__('langdata.nid'),'number' =>true,
+                        'name' =>'nid', 'label' =>__('langdata.nid'),'number' =>true,
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('nid')])
