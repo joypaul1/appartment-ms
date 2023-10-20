@@ -39,7 +39,7 @@
                                     {{ $key + 1 }}
                                 </td>
                                 <td>
-                                    {{ Str::limit($row->title 50, '...') }}
+                                    {{ Str::limit($row->title, 50, '...') }}
                                 </td>
                                 <td>
                                     {{ date('d-m-y', strtotime($row->end_date)) }}

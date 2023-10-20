@@ -25,7 +25,7 @@
 
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                            'name' =>'maintenance', 'label' =>__('langdata.maintenance'),
+                            'name' =>'title', 'label' =>__('langdata.title'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

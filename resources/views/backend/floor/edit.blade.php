@@ -24,7 +24,7 @@
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'name', 'label' =>__('langdata.name'),,
+                         'name' =>'name', 'label' =>__('langdata.name'),
                         'required' => true,
                         'value' => $floor->name,
                         ])
