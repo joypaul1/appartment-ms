@@ -76,7 +76,7 @@
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                             'name' =>'deposit_account_name', 'label' =>__('langdata.deposit_account_name')
+                             'name' =>'deposit_account_name', 'label' =>__('langdata.deposit_account_name'),
                             'required' => true,
                             'value' => $billDeposit->deposit_account_name,
                         ])
@@ -87,7 +87,7 @@
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
                             'inType' => 'number',
-                            'label' =>__('langdata.amount')
+                            'label' =>__('langdata.amount'),
                             'name' => 'total_amount',
                             'required' => true,
                             'value' => $billDeposit->total_amount,

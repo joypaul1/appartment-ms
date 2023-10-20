@@ -6,7 +6,7 @@
 <script>
     function delete_check(id) {
         Swal.fire({
-            langdata. 'Are you sure?',
+            title: 'Are you sure?',
             html: "<b>You will delete it permanently!</b>",
             type: 'warning',
             showCancelButton: true,
@@ -23,7 +23,7 @@
 
     $(document).on('click', 'button.delete_check', function() {
         Swal.fire({
-            langdata. 'Are you sure?'
+            title: 'Are you sure?'
             , html: "<b>You will delete it permanently!</b>"
             , type: 'warning'
             , showCancelButton: true
@@ -60,7 +60,7 @@
     });
     $(document).on('click', 'a.delete_check', function() {
         Swal.fire({
-            langdata. 'Are you sure?'
+              title:'Are you sure?'
             , html: "<b>You will delete it permanently!</b>"
             , type: 'warning'
             , showCancelButton: true
