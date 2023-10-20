@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ asset('assets/backend') }}/vendor/dropify/css/dropify.min.css">
 @endpush
 @section('page-header')
-<i class="fa fa-plus-circle"></i> Admin Profile
+<i class="fa fa-plus-circle"></i>  @lang('langdata.Admin-Profile')  
 @stop
 
 @section('content')

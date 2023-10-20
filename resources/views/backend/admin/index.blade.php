@@ -6,13 +6,13 @@
 @endpush
 
 @section('page-header')
-<i class="fa fa-list"></i> Admin List
+<i class="fa fa-list"></i> @lang('langdata.Admin-List')
 @stop
 @section('content')
 
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => 'Create Admin',
+'name' => __('Create-Admin'),
 'route' => route('backend.site-config.admin.create')
 ])
 
@@ -25,15 +25,13 @@
                     <table class="table table-bordered table-sm text-center">
                         <thead>
                             <tr>
-                                <th class="text-center">Sl.</th>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">Mobile</th>
-                                <th class="text-center">Role Type</th>
-                                <th class="text-center">Image</th>
-                                {{-- <th class="text-center">Active/Not</th> --}}
-                                {{-- <th class="text-center">Last Seen</th> --}}
-                                <th class="text-center">Action</th>
+                                <th class="text-center" >@lang('langdata.sl')</th>
+                                <th class="text-center" >@lang('langdata.name')</th>
+                                <th class="text-center" >@lang('langdata.email')</th>
+                                <th class="text-center" >@lang('langdata.mobile')</th>
+                                <th class="text-center" >@lang('langdata.role_type')</th>
+                                <th class="text-center" >@lang('langdata.image')</th>
+                                <th class="text-center" >@lang('langdata.action') </th>
                             </tr>
                         </thead>
 

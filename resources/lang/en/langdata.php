@@ -16,6 +16,8 @@ return [
     'Admin-List'                    => 'Admin List',
     'Create-Admin'                  => 'Create Admin',
     'Edit-Admin'                    => 'Edit Admin',
+    'Admin-Profile'                 => 'Admin Profile',
+    'role_type'                     => 'Role Type',
 
     'Bill-Type-List'                => 'Bill Type List',
     'Create-Bill-Type'              => 'Create Bill Type',
@@ -72,7 +74,7 @@ return [
     'Edit-Year'                     => 'Edit Tenant',
 
     'Visitor-List'                  => 'Visitor List',
-    'Visitor-Year'                  => 'Create Visitor',
+    'Create-Visitor'                => 'Create Visitor',
     'Edit-Visitor'                  => 'Edit Visitor',
 
     'Email-List'                    => 'Email List',

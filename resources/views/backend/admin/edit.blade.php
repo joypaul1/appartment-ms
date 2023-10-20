@@ -1,9 +1,9 @@
 @extends('backend.layout.app')
 @push('css')
-    <link rel="stylesheet" href="{{ asset('assets/backend') }}/vendor/dropify/css/dropify.min.css">
+
 @endpush
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> Admin Edit
+    <i class="fa fa-plus-circle"></i> @lang('langdata.Edit-Admin')
 @stop
 
 @section('content')
@@ -150,9 +150,7 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset('assets/backend') }}/vendor/dropify/js/dropify.min.js"></script>
-    <script src="{{ asset('assets/backend') }}/js/pages/forms/dropify.js"></script>
-    <script>
+   <script>
         function showMyModalImage(imgsrc) {
             $("#outputImage").attr("src", imgsrc);
             $('#defaultModal').modal('show');
