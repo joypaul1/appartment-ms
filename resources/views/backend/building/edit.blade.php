@@ -136,7 +136,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                        'name' => 'builder_address',
+                       'name' =>'builder_address', 'label' =>__('langdata.builder_address'),
                         'value' => $buildingInformation->builder_address,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

@@ -24,11 +24,11 @@
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                            'name' => 'langdata.,
+                            'name' =>'maintenance', 'label' =>__('langdata.maintenance'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('langdata.),
+                            'message' => $errors->first('title'),
                         ])
 
                     </div>
