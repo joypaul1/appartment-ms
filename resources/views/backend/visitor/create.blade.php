@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> Create Visitor
+<i class="fa fa-plus-circle"></i> {{ __('langdata.visitor_create') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-list',
-        'name' => 'Visitor List',
-        'route' => route('backend.visitor.index'),
-    ])
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-list',
+'name' => __('langdata.visitor_list'),
+'route' => route('backend.visitor.index'),
+])
 @endsection
 <div class="row">
     <div class="col-12">
@@ -18,79 +18,83 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.visitor.store') }}" method="POST" class="row g-3"
-                    enctype="multipart/form-data">
+                <form action="{{ route('backend.visitor.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
                     @method('POST')
                     @csrf
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                             'name' =>'name', 'label' =>__('langdata.name')
-                            'required' => true,
+                        'name' =>'name', 'label' =>__('langdata.name'),
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('name'),
+                        'message' => $errors->first('name'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                              'name' =>'mobile', 'label' =>__('langdata.mobile')'number' =>true,
-                            'required' => true,
+                        'name' =>'mobile',
+                        'label' =>__('langdata.mobile'),
+                        'number' =>true,
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('mobile'),
+                        'message' => $errors->first('mobile'),
                         ])
                     </div>
 
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                                'name' =>'address', 'label' =>__('langdata.address'),
-                            'required' => true,
+                        'name' =>'address',
+                        'label' =>__('langdata.address'),
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('address'),
+                        'message' => $errors->first('address'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'date',
-                            'label' => 'Entry Date',
-                             'name' =>'date', 'label' =>__('langdata.date')
-                            'required' => true,
+                        'inType' => 'date',
+                        'name' =>'date',
+                        'label' =>__('langdata.date')
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('date'),
+                        'message' => $errors->first('date'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'time',
-                           'name' =>'in_time', 'label' =>__('langdata.in_time'),
-                            'required' => true,
+                        'inType' => 'time',
+                        'name' =>'in_time',
+                        'label' =>__('langdata.in_time'),
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('in_time'),
+                        'message' => $errors->first('in_time'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'time',
-                           'name' =>'out_time', 'label' =>__('langdata.out_time'),
-                            'required' => true,
+                        'inType' => 'time',
+                        'name' =>'out_time',
+                        'label' =>__('langdata.out_time'),
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('out_time'),
+                        'message' => $errors->first('out_time'),
                         ])
                     </div>
-                     <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'unit_id',
-                            'required' => true,
-                            'label' => 'Unit',
-                            'optionData' =>$units,
+                        'name' => 'unit_id',
+                        'required' => true,
+                        'label' =>__('langdata.unit'),
+                        'optionData' =>$units,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('unit_id'),
+                        'message' => $errors->first('unit_id'),
                         ])
                     </div>
 

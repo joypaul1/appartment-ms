@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i>
+<i class="fa fa-plus-circle"></i> @lang("langdata.Create-Unit")
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [

@@ -4,7 +4,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Unit List
+<i class="fa fa-list"></i> {{ __('langdata.unit_list') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [

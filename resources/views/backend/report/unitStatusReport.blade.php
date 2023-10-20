@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i> Unit Status Report Form
+    <i class="fa fa-plus-circle"></i>@lang("langdata.Unit Status Report Form")
 @stop
 @section('table_header')
     @include('backend._partials.page_header')

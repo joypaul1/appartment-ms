@@ -4,12 +4,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Year List
+<i class="fa fa-list"></i> {{  __('langdata.Year-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => 'Create Year',
+'name' => __('langdata.Create-Year'),
 'route' =>route('backend.site-config.year.create'),
 ])
 @endsection

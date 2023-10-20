@@ -164,7 +164,7 @@
                             'inType' => 'number',
                             'value' => $rentCollection->total_rent,
                             'label' => 'Total Rent',
-                            'name' => 'total_rent',
+                             'name' =>'total_rent', 'label' =>__('langdata.total_rent'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

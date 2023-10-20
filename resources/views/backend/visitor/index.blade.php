@@ -4,12 +4,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Visitor List
+<i class="fa fa-list"></i> {{ __('langdata.visitor_list') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => 'Create Visitor',
+'name' =>  __('langdata.visitor_create'),
 'route' =>route('backend.visitor.create'),
 ])
 @endsection

@@ -182,7 +182,7 @@
                             'inType' => 'number',
                             'value' => $ownerUtility->total_utility,
                             'label' => 'Total utility',
-                            'name' => 'total_utility',
+                             'name' =>'total_utility', 'label' =>__('langdata.total_utility'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

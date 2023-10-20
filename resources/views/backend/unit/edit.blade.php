@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-pencil"></i>  {{ __('langdata.unit_dit') }}
+<i class="fa fa-pencil"></i>  @lang("langdata.Edit-Unit")
 @stop
 @stop
 @section('table_header')

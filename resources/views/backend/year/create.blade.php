@@ -3,12 +3,12 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> Create Year
+<i class="fa fa-plus-circle"></i> {{ __('langdata.Create-Year') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-list',
-'name' => 'Year List',
+'name' => __('langdata.Year-List'),
 'route' =>route('backend.site-config.year.index'),
 ])
 @endsection
@@ -23,7 +23,7 @@
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                         'name' =>'name', 'label' =>__('langdata.name')
+                        'name' =>'name', 'label' =>__('langdata.name')
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', ['message'=>$errors->first('name')])

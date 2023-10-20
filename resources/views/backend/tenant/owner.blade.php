@@ -4,13 +4,11 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-list"></i> Tenant List
+<i class="fa fa-list"></i> @lang("langdata.Tenant-List")
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
-// 'fa' => 'fa fa-plus-circle',
-// 'name' => 'Create Tenant',
-// 'route' =>route('backend.tenant.create'),
+
 ])
 @endsection
 

@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-plus-circle"></i> Expense Report Form
+<i class="fa fa-plus-circle"></i> @lang("langdata.Expense Report Form")
 @stop
 @section('table_header')
 @include('backend._partials.page_header')
@@ -18,23 +18,23 @@
 
                     <div class="col-md-4">
                         @include('components.backend.forms.input.input-type', [
-                             'name' =>'start_date', 'label' =>__('langdata.start_date'),
-                            'label' => 'Start Date',
-                            'inType' => 'date',
-                            'required' => true,
+                        'name' =>'start_date', 'label' =>__('langdata.start_date'),
+
+                        'inType' => 'date',
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('start_date'),
+                        'message' => $errors->first('start_date'),
                         ])
                     </div>
                     <div class="col-md-4">
                         @include('components.backend.forms.input.input-type', [
-                             'name' =>'end_date', 'label' =>__('langdata.end_date'),
-                            'inType' => 'date',
-                            'required' => true,
+                        'name' =>'end_date', 'label' =>__('langdata.end_date'),
+                        'inType' => 'date',
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('end_date'),
+                        'message' => $errors->first('end_date'),
                         ])
                     </div>
                     <div class="col-12 text-center">
