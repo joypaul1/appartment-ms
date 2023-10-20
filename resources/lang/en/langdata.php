@@ -205,6 +205,7 @@ return [
     'joining_date'                 => 'Joining Date',
     'Permanent Address'            => 'Permanent Address',
     'Present Address'              => 'Present Address',
+    'Fund Purpose'              => 'Fund Purpose',
 
 
 

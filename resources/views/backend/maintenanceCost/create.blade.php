@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-plus-circle"></i>  {{ __('langdata.Create-Maintenance-Cost')  }}
+<i class="fa fa-plus-circle"></i> {{ __('langdata.Create-Maintenance-Cost') }}
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-list',
-        'name' =>  __('langdata.Maintenance-Cost-List'),
-        'route' => route('backend.maintenance-cost.index'),
-    ])
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-list',
+'name' => __('langdata.Maintenance-Cost-List'),
+'route' => route('backend.maintenance-cost.index'),
+])
 @endsection
 <div class="row">
     <div class="col-12">
@@ -18,78 +18,75 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.maintenance-cost.store') }}" method="POST" class="row g-3"
-                    enctype="multipart/form-data">
+                <form action="{{ route('backend.maintenance-cost.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
                     @method('POST')
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                            'name' =>'maintenance', 'label' =>__('langdata.maintenance'),
-                            'required' => true,
+                        'name' =>'maintenance', 'label' =>__('langdata.maintenance'),
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('title'),
+                        'message' => $errors->first('title'),
                         ])
 
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'date',
-                             'name' =>'date', 'label' =>__('langdata.date')
-                            'required' => true,
+                        'inType' => 'date',
+                        'name' =>'date', 'label' =>__('langdata.date')
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('date'),
+                        'message' => $errors->first('date'),
                         ])
                     </div>
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'month_id',
-                            'required' => true,
-                             'label' =>__('langdata.month'),
-                            'optionData' => $months,
-                            'selectedKey' => date('m'),
+                        'name' => 'month_id',
+                        'required' => true,
+                        'label' =>__('langdata.month'),
+                        'optionData' => $months,
+                        'selectedKey' => date('m'),
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('month_id'),
+                        'message' => $errors->first('month_id'),
                         ])
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'year_id',
-                            'required' => true,
-                             'label' =>__('langdata.year'),
-                            'optionData' => $years,
+                        'name' => 'year_id',
+                        'required' => true,
+                        'label' =>__('langdata.year'),
+                        'optionData' => $years,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('year_id'),
+                        'message' => $errors->first('year_id'),
                         ])
                     </div>
 
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'number',
-                            'value' => 0.0,
-                             'name' =>'amount', 'label' =>__('langdata.amount')
-                            'required' => true,
+                        'inType' => 'number',
+                        'value' => 0.0,
+                        'name' =>'amount', 'label' =>__('langdata.amount'),
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('amount'),
+                        'message' => $errors->first('amount'),
                         ])
                     </div>
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
-                             'name' =>'details', 'label' =>__('langdata.details')
-                            'required' => true,
+                        'name' =>'details', 'label' =>__('langdata.details'),
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('details'),
+                        'message' => $errors->first('details'),
                         ])
                     </div>
-
-
 
 
                     <div class="col-12 text-center">

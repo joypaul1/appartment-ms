@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-pencil"></i> Edit Maintenance Cost
+<i class="fa fa-pencil"></i> Edit Maintenance Cost
 @stop
 @section('table_header')
-    @include('backend._partials.page_header', [
-        'fa' => 'fa fa-list',
-        'name' => __('langdata.Maintenance-Cost-List'),
-        'route' => route('backend.maintenance-cost.index'),
-    ])
+@include('backend._partials.page_header', [
+'fa' => 'fa fa-list',
+'name' => __('langdata.Maintenance-Cost-List'),
+'route' => route('backend.maintenance-cost.index'),
+])
 @endsection
 
 <div class="row">
@@ -25,76 +25,76 @@
                     @csrf
                     <div class="col-md-12">
                         @include('components.backend.forms.input.input-type', [
-                            'name' =>'maintenance', 'label' =>__('langdata.maintenance'),
-                            'value' => $maintenanceCost->langdata.
-                            'required' => true,
+                        'name' =>'maintenance', 'label' =>__('langdata.maintenance'),
+                        'value' => $maintenanceCost->langdata.
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('title'),
+                        'message' => $errors->first('title'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'date',
-                             'name' =>'date', 'label' =>__('langdata.date')
-                            'required' => true,
-                            'value' => $maintenanceCost->date,
+                        'inType' => 'date',
+                        'name' =>'date', 'label' =>__('langdata.date')
+                        'required' => true,
+                        'value' => $maintenanceCost->date,
 
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('date'),
+                        'message' => $errors->first('date'),
                         ])
                     </div>
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'month_id',
-                            'required' => true,
-                             'label' =>__('langdata.month'),
-                            'optionData' => $months,
-                            'selectedKey' =>  $maintenanceCost->month_id,
+                        'name' => 'month_id',
+                        'required' => true,
+                        'label' =>__('langdata.month'),
+                        'optionData' => $months,
+                        'selectedKey' => $maintenanceCost->month_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('month_id'),
+                        'message' => $errors->first('month_id'),
                         ])
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'year_id',
-                            'required' => true,
-                             'label' =>__('langdata.year'),
-                            'optionData' => $years,
-                            'selectedKey' =>  $maintenanceCost->year_id,
+                        'name' => 'year_id',
+                        'required' => true,
+                        'label' =>__('langdata.year'),
+                        'optionData' => $years,
+                        'selectedKey' => $maintenanceCost->year_id,
 
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('year_id'),
+                        'message' => $errors->first('year_id'),
                         ])
                     </div>
 
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'number',
-                            'value' => 0.0,
-                             'name' =>'amount', 'label' =>__('langdata.amount')
-                            'required' => true,
-                            'value' => $maintenanceCost->amount,
+                        'inType' => 'number',
+                        'value' => 0.0,
+                        'name' =>'amount', 'label' =>__('langdata.amount'),
+                        'required' => true,
+                        'value' => $maintenanceCost->amount,
 
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('amount'),
+                        'message' => $errors->first('amount'),
                         ])
                     </div>
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
-                             'name' =>'details', 'label' =>__('langdata.details')
-                            'required' => true,
-                            'value' => $maintenanceCost->details,
+                        'name' =>'details', 'label' =>__('langdata.details'),
+                        'required' => true,
+                        'value' => $maintenanceCost->details,
 
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('details'),
+                        'message' => $errors->first('details'),
                         ])
                     </div>
 

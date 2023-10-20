@@ -3,14 +3,14 @@
 @endpush
 @section('content')
 @section('page-header')
-    <i class="fa fa-pencil"></i> @lang('langdata.Edit-Fund')
+<i class="fa fa-pencil"></i> @lang('langdata.Edit-Fund')
 @stop
 
 @section('table_header')
 @include('backend._partials.page_header', [
-    'fa' => 'fa fa-list',
-    'name' => __('langdata.Fund-List'),
-    'route' => route('backend.fund.index'),
+'fa' => 'fa fa-list',
+'name' => __('langdata.Fund-List'),
+'route' => route('backend.fund.index'),
 ])
 @endsection
 
@@ -20,81 +20,81 @@
 
             @yield('table_header')
             <div class="card-body">
-                <form action="{{ route('backend.fund.update', $fund) }}" method="POST" class="row g-3"
-                    enctype="multipart/form-data">
+                <form action="{{ route('backend.fund.update', $fund) }}" method="POST" class="row g-3" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'owner_id',
-                            'required' => true,
-                             'label' =>__('langdata.owner'),
-                            'optionData' => $owners,
-                            'selectedKey' => $fund->owner_id,
+                        'name' => 'owner_id',
+                        'required' => true,
+                        'label' =>__('langdata.owner'),
+                        'optionData' => $owners,
+                        'selectedKey' => $fund->owner_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('owner_id'),
+                        'message' => $errors->first('owner_id'),
                         ])
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'date',
-                             'name' =>'date', 'label' =>__('langdata.date')
-                            'value' => $fund->date,
-                            'required' => true,
+                        'inType' => 'date',
+                        'name' =>'date', 'label' =>__('langdata.date')
+                        'value' => $fund->date,
+                        'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('date'),
+                        'message' => $errors->first('date'),
                         ])
                     </div>
 
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'month_id',
-                            'required' => true,
-                             'label' =>__('langdata.month'),
-                            'optionData' => $months,
-                            'selectedKey' => $fund->month_id,
+                        'name' => 'month_id',
+                        'required' => true,
+                        'label' =>__('langdata.month'),
+                        'optionData' => $months,
+                        'selectedKey' => $fund->month_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('month_id'),
+                        'message' => $errors->first('month_id'),
                         ])
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                            'name' => 'year_id',
-                            'required' => true,
-                             'label' =>__('langdata.year'),
-                            'optionData' => $years,
-                            'selectedKey' => $fund->year_id,
+                        'name' => 'year_id',
+                        'required' => true,
+                        'label' =>__('langdata.year'),
+                        'optionData' => $years,
+                        'selectedKey' => $fund->year_id,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('year_id'),
+                        'message' => $errors->first('year_id'),
                         ])
                     </div>
 
 
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                            'inType' => 'number',
-                            'value' => 0.0,
-                             'name' =>'amount', 'label' =>__('langdata.amount')
-                            'required' => true,
-                            'value' => $fund->amount,
+                        'inType' => 'number',
+                        'value' => 0.0,
+                        'name' =>'amount', 'label' =>__('langdata.amount'),
+                        'required' => true,
+                        'value' => $fund->amount,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('amount'),
+                        'message' => $errors->first('amount'),
                         ])
                     </div>
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
-                            'label' => 'Fund Purpose',
-                             'name' =>'purpose', 'label' =>__('langdata.purpose')
-                            'required' => true,
-                            'value' => $fund->purpose,
+
+                        'label' =>__('langdata.Fund Purpose'),
+                        'name' =>'purpose',
+                        'required' => true,
+                        'value' => $fund->purpose,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
-                            'message' => $errors->first('purpose'),
+                        'message' => $errors->first('purpose'),
                         ])
                     </div>
 

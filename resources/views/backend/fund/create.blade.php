@@ -72,7 +72,7 @@
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'number',
                         'value' => 0.0,
-                         'name' =>'amount', 'label' =>__('langdata.amount')
+                        'name' =>'amount', 'label' =>__('langdata.amount'),
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -81,8 +81,8 @@
                     </div>
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
-                        'label' => 'Fund Purpose',
-                         'name' =>'purpose', 'label' =>__('langdata.purpose')
+                        'label' =>__('langdata.Fund Purpose'),
+                        'name' =>'purpose',
                         'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

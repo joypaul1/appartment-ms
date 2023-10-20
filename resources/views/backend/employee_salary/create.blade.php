@@ -25,7 +25,7 @@
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'employee_id',
-                            'label' => 'Select Employee',
+                             'label' =>__('langdata.employee'),
                             'required' => true,
                             'optionData' => $employees,
                         ])
@@ -47,7 +47,7 @@
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
                             'name' => 'year_id',
-                            'label' => 'year',
+                             'label' =>__('langdata.year'),
                             'required' => true,
                             'optionData' => $years,
                         ])
