@@ -78,7 +78,7 @@
 
                         <div class="d-block mt-2 ">
                             <div class="text-right">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">{{ __('button.submit_data') }}</button>
                             </div>
                         </div>
                     </form>
@@ -86,23 +86,10 @@
             </div>
         </div>
     </div>
-    {{-- <div class="col-lg-4">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-langdata.>Uploaded Document</h4>
-            </div>
-            <div class=" card-body">
-                    <img class="card-img-top img-fluid" src="{{ asset($emailConfig->document??' ') }}" id="outputImage" alt="Current document">
-            </div>
-        </div>
-    </div> --}}
+
 </div>
 
 
 @endsection
 
-@push('js')
-<!-- dropify -->
-<script src="{{ asset('assets/backend') }}/vendor/dropify/js/dropify.min.js"></script>
-<script src="{{ asset('assets/backend') }}/js/pages/forms/dropify.js"></script>
-@endpush
+

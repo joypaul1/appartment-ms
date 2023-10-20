@@ -44,9 +44,6 @@
                                 <td>
                                     {{ date('d-m-y', strtotime($row->end_date)) }}
                                 </td>
-                                {{-- <td>
-                                    {{ $row->status == 1 ? 'Publish' : 'Unpublish' }}
-                                </td> --}}
                                 <td class="table-action">
                                     <a href="{{ route('backend.notice-board.edit', $row) }}">
                                         <button class="btn btn-sm btn-info"> <i class="fa fa-pencil" aria-hidden="true"></i> </button>

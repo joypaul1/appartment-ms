@@ -59,6 +59,10 @@ return [
     'Create-Owner'                  => 'Create Owner',
     'Edit-Owner'                    => 'Edit Owner',
 
+    'Month-List'                    => 'Month List',
+    'Create-Month'                  => 'Create Month',
+    'Edit-Month'                    => 'Edit Month',
+
     'Tenant-List'                   => 'Tenant List',
     'Create-Tenant'                 => 'Create Tenant',
     'Edit-Tenant'                   => 'Edit Tenant',
@@ -87,6 +91,7 @@ return [
     'action'                        => 'Action',
     'floor_name'                    => 'Floor Name',
     'image'                         => 'Image',
+    'logo'                          => 'Logo',
     'email'                         => 'Email',
     'mobile'                        => 'Mobile',
     'Security Mobile No'            => 'Security Mobile No',
@@ -228,5 +233,7 @@ return [
     'Visitors Report Form'          => 'Visitors Report Form',
     'Email Config'                  => 'Email Config',
     'sl'                            => 'Sl',
+    'currency_symbol'               => 'Currency Symbol',
+    'currency_symbol_placement'     => 'Currency Symbol Placement',
 
 ];
