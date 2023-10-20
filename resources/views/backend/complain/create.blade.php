@@ -45,8 +45,7 @@
 
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
-                            'label' => 'Fund Purpose',
-                            'name' => 'description',
+                           'name' =>'description', 'label' =>__('langdata.description'),
                             'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [

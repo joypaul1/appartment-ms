@@ -200,6 +200,7 @@ return [
     'builder_mobile'               => 'Builder Mobile',
     'builder_address'              => 'Builder Address',
     'building_rules'               => 'Builder Rules',
+    'description'                  => 'Description',
 
 
 
