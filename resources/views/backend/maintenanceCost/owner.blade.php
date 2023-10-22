@@ -4,7 +4,7 @@
 @section('content')
 
 @section('page-header')
-<i class="fa fa-list"></i> Maintenance Cost List
+<i class="fa fa-list"></i>  {{ __('langdata.Maintenance-Cost-List') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [

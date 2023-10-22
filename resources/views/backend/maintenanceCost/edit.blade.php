@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-pencil"></i>{{ __('langdata.Edit-Maintenance-Cost') }}
+<i class="fa fa-pencil"></i> {{ __('langdata.Edit-Maintenance-Cost') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
