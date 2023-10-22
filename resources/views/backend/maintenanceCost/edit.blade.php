@@ -3,7 +3,7 @@
 @endpush
 @section('content')
 @section('page-header')
-<i class="fa fa-pencil"></i> Edit Maintenance Cost
+<i class="fa fa-pencil"></i>{{ __('langdata.Edit-Maintenance-Cost') }}
 @stop
 @section('table_header')
 @include('backend._partials.page_header', [
@@ -77,7 +77,7 @@
                         @include('components.backend.forms.input.input-type', [
                         'inType' => 'number',
                         'value' => 0.0,
-                        'name' =>'amount', 'label' =>__('langdata.amount'),,
+                        'name' =>'amount', 'label' =>__('langdata.amount'),
                         'required' => true,
                         'value' => $maintenanceCost->amount,
 

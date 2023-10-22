@@ -39,6 +39,7 @@ class MaintenanceCostController extends Controller
      */
     public function create(Request $request)
     {
+
         $months = [];
         for ($i = 1; $i <= 12; $i++) {
             $date     = DateTime::createFromFormat('!m', $i);
