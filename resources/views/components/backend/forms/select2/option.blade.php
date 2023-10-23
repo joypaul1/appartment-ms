@@ -2,6 +2,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
     integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous"
     referrerpolicy="no-referrer" />
+<style>
+    .select2-selection {
+        overflow: hidden;
+    }
+
+    .select2-selection__rendered {
+        white-space: normal;
+        word-break: break-all;
+    }
+</style>
 @endpush
 
 @php
@@ -27,8 +37,8 @@ $label = ucfirst(str_replace($str, $rplc, $label));
     readonly @endisset>
     <option value="{{ null }}">- select {{ $label ?? $upName }} -</option>
     @forelse ($optionData as $data)
-    <option value="{{ $data['id'] }}" @if(isset($multiple) && isset($selectedKey)) {{ in_array($data['id'], $selectedKey) ? 'selected' : '' }} @else @isset($selectedKey) {{
-        $selectedKey==$data['id'] ? 'selected' : ' ' }} @endisset @endif>
+    <option value="{{ $data['id'] }}" @if(isset($multiple) && isset($selectedKey)) {{ in_array($data['id'], $selectedKey) ? 'selected' : '' }} @else
+        @isset($selectedKey) {{ $selectedKey==$data['id'] ? 'selected' : ' ' }} @endisset @endif>
         {{ $data['name'] }}
     </option>
     @empty
@@ -50,6 +60,11 @@ $label = ucfirst(str_replace($str, $rplc, $label));
     $(".select2").each(function() {
         $(this).select2();
     });;
+</script>
+<script>
+    $('select').select2({
+        width: '100%'
+    });
 </script>
 @endif
 
