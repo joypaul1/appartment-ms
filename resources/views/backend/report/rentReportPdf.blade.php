@@ -20,9 +20,10 @@ $remainBalance = 0;
                         </p>
                     </div>
                 </div>
-                <div class="card-langdata.text-center"><u>Rent Collection Report</u> </div>
-                <div class="card-body">
-                    <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                <div class="card-title text-center"><u>Rent Collection Report</u> </div>
+                <div class="card-body table-responsive">
+
+                    <table id="datatables-reponsive" class="table table-bordered text-center" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Invoice No.</th>

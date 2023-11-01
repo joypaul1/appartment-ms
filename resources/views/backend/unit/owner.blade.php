@@ -17,7 +17,7 @@
         <div class="card">
             @yield('table_header')
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="table-responsive text-break">
                     <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
                         <thead>
 

@@ -24,7 +24,7 @@ $remainBalance = $fundBalance = $maintainCosts = 0;
             <div id="printArea">
                 <div class="card-langdata.text-center">Fund Management List </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive text-break">
                         <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
                             <thead>
                                 <tr>
@@ -81,7 +81,7 @@ $remainBalance = $fundBalance = $maintainCosts = 0;
 
                 <div class="card-langdata.text-center">Maintenance Cost List</div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive text-break">
                         <table id="datatables-reponsive" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>

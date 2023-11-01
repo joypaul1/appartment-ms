@@ -21,7 +21,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="table-responsive text-break">
                     <table class="table table-bordered table-sm text-center">
                         <thead>
                             <tr>
