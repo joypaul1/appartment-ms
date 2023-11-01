@@ -29,7 +29,7 @@
                                 <th class="text-center" >@lang('langdata.name')</th>
                                 <th class="text-center" >@lang('langdata.email')</th>
                                 <th class="text-center" >@lang('langdata.mobile')</th>
-                                <th class="text-center" >@lang('langdata.role_type')</th>
+                                {{-- <th class="text-center" >@lang('langdata.role_type')</th> --}}
                                 <th class="text-center" >@lang('langdata.image')</th>
                                 <th class="text-center" >@lang('langdata.action') </th>
                             </tr>
@@ -43,7 +43,7 @@
                                 <td class="text-center">{{ $item->name??'-' }}</td>
                                 <td class="text-center">{{ $item->email??'-' }}</td>
                                 <td class="text-center">{{ $item->mobile??'-' }}</td>
-                                <td class="text-center"><span class="badge  bg-info">{{ $item->role_type }}</span></td>
+                                {{-- <td class="text-center"><span class="badge  bg-info">{{ $item->role_type }}</span></td> --}}
                                 <td class="text-center"><img src="{{ asset($item->image) }}" alt="{{ $item->image }}" srcset="" width="100px"
                                         height="100px"></td>
                                 <td class="text-center">
