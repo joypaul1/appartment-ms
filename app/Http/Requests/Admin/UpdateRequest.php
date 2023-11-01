@@ -33,7 +33,7 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => ['required', Rule::unique('admins')->ignore($this->admin->id)],
-            'mobile' => ['required', Rule::unique('admins')->ignore($this->admin->id)],
+            'mobile' => ['required','max:13', Rule::unique('admins')->ignore($this->admin->id)],
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
         ];
     }

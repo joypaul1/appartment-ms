@@ -29,7 +29,7 @@ class StoreRequest extends FormRequest
         return [
             'name'   => 'required|string',
             'email'  => 'required|unique:admins,email',
-            'mobile' => 'required|unique:admins,mobile',
+            'mobile' => 'required|max:13|unique:admins,mobile',
             'image'  => 'required',
         ];
     }
