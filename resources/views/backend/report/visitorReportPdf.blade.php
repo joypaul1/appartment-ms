@@ -22,7 +22,7 @@ $remainBalance = 0;
                 </div>
                 <div class="card-title text-center"><u>Visitor Report</u> </div>
                 <div class="card-body">
-                    <div class="table-responsive text-break">
+                    <div class="table-responsive ">
                         <table id="datatables-reponsive" class="table table-bordered text-center" style="width:100%">
                             <thead>
                                 <tr>
