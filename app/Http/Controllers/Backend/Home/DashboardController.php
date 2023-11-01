@@ -47,6 +47,11 @@ class DashboardController extends Controller
         $buildingInformation      = BuildingInformation::where('id', session('branch_id'))->first();
         $depositMonthlyReport     = $this->depositMonthlyReport();
         $rentMonthlyReport        = $this->rentMonthlyReport();
+
+
+        // Get the results
+        // $monthlyReport = $query->get();
+        // dd($monthlyReport, $monthlyReport->pluck('month_name')->toArray());
         return view(
             'backend.dashboard.index',
             compact(
@@ -91,64 +96,53 @@ class DashboardController extends Controller
         Artisan::call('cache:clear');
         Artisan::call('route:clear');
         Artisan::call('view:clear');
-        // dd(App::getLocale());
         return back();
     }
 
     private function depositMonthlyReport($order = 'asc')
     {
         $currentYear = Carbon::now()->year;
-        $currentYear = Carbon::now()->year;
 
-        $monthlyReport = DB::table('bills')
-            ->where('branch_id', session('branch_id'))
-            ->rightJoin(
-                DB::raw("
-                (SELECT 1 as month UNION SELECT 2 UNION SELECT 3 UNION SELECT 4
-                 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8
-                 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) as months
-            "),
-                function ($join) use ($currentYear)
-                {
-                    $join->on(DB::raw('months.month'), '=', DB::raw('MONTH(bills.date)'))
-                        ->whereYear('bills.date', $currentYear);
-                }
-            )
+        $monthlyReport = DB::table('month_setups')
+            ->leftJoin('bills', function ($join) use ($currentYear)
+            {
+                $join->on('month_setups.id', '=', DB::raw('(bills.month_id)'))
+                    ->where('branch_id', session('branch_id'))
+                    ->whereYear('bills.date', $currentYear);
+            })
             ->select(
-                DB::raw('MONTHNAME(CONCAT("2023-", months.month, "-01")) as month_name'),
+                DB::raw('MONTHNAME(CONCAT("' . date("Y") . '-", month_setups.id, "-01")) as month_name'),
                 DB::raw('COALESCE(SUM(total_amount), 0) as total_amount')
             )
-            ->groupBy('months.month', 'month_name')
-            ->orderBy('months.month', $order)
+            ->groupBy('month_setups.name', 'month_name')
+            ->orderBy('month_setups.id', 'asc')
             ->get();
+
         return [ 'monthlyReport' => $monthlyReport->pluck('total_amount')->toArray() ];
     }
 
     private function rentMonthlyReport($order = 'asc')
     {
-        // dd(date('Y'));
         $currentYear   = Carbon::now()->year;
         $monthlyReport = DB::table('rent_collections')
-            ->where('branch_id', session('branch_id'))
             ->rightJoin(
                 DB::raw("
-            (SELECT 1 as month UNION SELECT 2 UNION SELECT 3 UNION SELECT 4
-             UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8
-             UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) as months
-        "),
+                    (SELECT 1 as month UNION SELECT 2 UNION SELECT 3 UNION SELECT 4
+                     UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8
+                     UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) as months
+                "),
                 function ($join) use ($currentYear)
                 {
                     $join->on(DB::raw('months.month'), '=', DB::raw('MONTH(rent_collections.issue_date)'))
                         ->whereYear('rent_collections.issue_date', $currentYear);
-                    // ->where('year_id' , DB::raw('(SELECT name FROM year_configurations WHERE name = '.date('Y').')'), $currentYear);
                 }
             )
             ->select(
-                DB::raw('MONTHNAME(CONCAT("2023-", months.month, "-01")) as month_name'),
+                DB::raw('MONTHNAME(CONCAT("' . date("Y") . '-", months.month, "-01")) as month_name'),
                 DB::raw('COALESCE(SUM(total_rent), 0) as total_rent')
             )
             ->groupBy('months.month', 'month_name')
-            ->orderBy('months.month', $order)
+            ->orderBy('months.month', 'asc')
             ->get();
 
 
