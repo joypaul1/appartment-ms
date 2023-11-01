@@ -99,7 +99,8 @@
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         @include('components.backend.forms.select2.option', [
-                       'name' =>'status', 'label' =>__('langdata.status'),
+                        'name' =>'status', 'label' =>__('langdata.status'),
+                        'required' => true,
                         'optionData' => $status,
                         'selectedKey' => 1,
                         ])
@@ -111,7 +112,7 @@
                     <h2><u>Builder/Company Information :</u> </h2>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                       'name' =>'builder_name', 'label' =>__('langdata.builder_name'),
+                        'name' =>'builder_name', 'label' =>__('langdata.builder_name'),
                         // 'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -120,7 +121,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                       'name' =>'builder_mobile', 'label' =>__('langdata.builder_mobile'),
+                        'name' =>'builder_mobile', 'label' =>__('langdata.builder_mobile'),
                         // 'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -129,7 +130,7 @@
                     </div>
                     <div class="col-md-6">
                         @include('components.backend.forms.input.input-type', [
-                       'name' =>'builder_address', 'label' =>__('langdata.builder_address'),
+                        'name' =>'builder_address', 'label' =>__('langdata.builder_address'),
                         // 'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
@@ -140,7 +141,7 @@
 
                     <div class="col-md-12">
                         @include('components.backend.forms.texteditor.editor', [
-                       'name' =>'building_rules', 'label' =>__('langdata.building_rules'),
+                        'name' =>'building_rules', 'label' =>__('langdata.building_rules'),
                         // 'required' => true,
                         ])
                         @include('components.backend.forms.input.errorMessage', [
