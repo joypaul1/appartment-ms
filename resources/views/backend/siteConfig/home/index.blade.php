@@ -69,7 +69,11 @@
                         'message' => $errors->first('logo'),
                         ])
                     </div>
-
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="{{ asset($siteInfo->logo) }}" alt="" width="50%">
+                        </div>
+                    </div>
 
 
 

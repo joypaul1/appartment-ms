@@ -51,7 +51,7 @@ class UpdateRequest extends FormRequest
             $data = $request->all();
             if($request->logo){
                 $data['logo'] =  (new Image)->dirName('site_info')->file($request->logo)
-                // ->resizeImage(130, 50)
+                // ->resizeImage(150, 150)
                 ->save();
             }
             $siteInfo = SiteInfo::updateOrCreate(['id'=> 1], $data);
