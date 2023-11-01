@@ -137,12 +137,12 @@ class OwnerController extends Controller
      */
     public function edit(Owner $owner)
     {
-        $unitsWithNoOwner = Unit::where('branch_id', session('branch_id'))->whereDoesntHave('owners')->get()??[];
+        $unitsWithNoOwner  = Unit::where('branch_id', session('branch_id'))->whereDoesntHave('owners')->get() ?? [];
         $currentOwnerUnits = Unit::where('branch_id', session('branch_id'))->whereHas('owners', function ($query) use ($owner)
         {
             $query->where('owner_id', $owner->id);
         })->get();
-        $units          = $unitsWithNoOwner->concat($currentOwnerUnits);
+        $units             = $unitsWithNoOwner->concat($currentOwnerUnits);
         return view('backend.owner.edit', compact('owner', 'units'));
     }
 

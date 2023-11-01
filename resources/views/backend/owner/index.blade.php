@@ -9,7 +9,7 @@
 @section('table_header')
 @include('backend._partials.page_header', [
 'fa' => 'fa fa-plus-circle',
-'name' => __('langdata.Owner-List'),
+'name' => __('langdata.Create-Owner'),
 
 'route' =>route('backend.owner.create'),
 ])
