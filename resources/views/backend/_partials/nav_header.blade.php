@@ -9,7 +9,7 @@
         $activeBranch = App\Models\Backend\BuildingInformation::where('id', session('branch_id'))
         ->select('id', 'name')
         ->first();
-        $allBranchs = App\Models\Backend\BuildingInformation::select('id', 'name')->get();
+        $allBranchs = App\Models\Backend\BuildingInformation::where('status', 1)->select('id', 'name')->get();
 
         @endphp
         <li class="nav-item dropdown">
