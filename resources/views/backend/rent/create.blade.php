@@ -9,7 +9,7 @@
     @include('backend._partials.page_header', [
         'fa' => 'fa fa-list',
         'name' => __('langdata.List-Rent-Collection'),
-        'route' => route('backend.tenant.index'),
+        'route' => route('backend.rent.index'),
     ])
 @endsection
 <div class="row">
