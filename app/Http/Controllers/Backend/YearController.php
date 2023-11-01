@@ -53,7 +53,6 @@ class YearController extends Controller
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
-
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.site-config.year.index')->with('success', 'Data Created Successfully');
@@ -91,7 +90,7 @@ class YearController extends Controller
     public function update(Request $request, Year $year)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:year_configurations,name,'. $year->id,
         ]);
         try {
             DB::beginTransaction();

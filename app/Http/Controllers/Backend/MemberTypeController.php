@@ -56,7 +56,7 @@ class MemberTypeController extends Controller
 
             return redirect()->back()->with('error', 'Something went wrong!');
         }
-        return redirect()->route('backend.site-config.bill-type.index')->with('success', 'Data Created Successfully');
+        return redirect()->route('backend.site-config.member-type.index')->with('success', 'Data Created Successfully');
     }
 
     /**
