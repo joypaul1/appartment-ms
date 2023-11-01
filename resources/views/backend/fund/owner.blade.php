@@ -22,7 +22,7 @@ $remainBalance = $fundBalance = $maintainCosts = 0;
         <div class="card p-3">
             <p class="text-center" id="print"><button><i class="fa fa-print" aria-hidden="true"></i></button></p>
             <div id="printArea">
-                <div class="card-langdata.text-center">Fund Management List </div>
+                <div class="card-title text-center">Fund Management List </div>
                 <div class="card-body">
                     <div class="table-responsive text-break">
                         <table id="datatables-reponsive" class="table table-bordered table-sm text-center" style="width:100%">
@@ -79,7 +79,7 @@ $remainBalance = $fundBalance = $maintainCosts = 0;
                     </div>
                 </div>
 
-                <div class="card-langdata.text-center">Maintenance Cost List</div>
+                <div class="card-title text-center">Maintenance Cost List</div>
                 <div class="card-body">
                     <div class="table-responsive text-break">
                         <table id="datatables-reponsive" class="table table-striped" style="width:100%">
@@ -113,7 +113,7 @@ $remainBalance = $fundBalance = $maintainCosts = 0;
                                         {{ $key + 1 }}
                                     </td>
                                     <td>
-                                        {{ $costRow->langdata.}}
+                                        {{ $costRow->title}}
                                     </td>
                                     <td>
                                         {{ date('d-m-y', strtotime($costRow->date)) }}

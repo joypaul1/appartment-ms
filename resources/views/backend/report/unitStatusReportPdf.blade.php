@@ -21,7 +21,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="card-langdata.text-center"><u>Unit Report</u> </div>
+                    <div class="card-title text-center"><u>Unit Report</u> </div>
                     <div class="card-body">
                         <div class="table-responsive text-break">
                             <table id="datatables-reponsive" class="table table-bordered text-center" style="width:100%">

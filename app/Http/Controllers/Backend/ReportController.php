@@ -56,8 +56,8 @@ class ReportController extends Controller
             $maintenanceCost = MaintenanceCost::where('branch_id', session('branch_id'))
                 ->whereBetween('date', [ $startDate, $endDate ])
                 ->orderBy('id', 'desc')->get()->sum('amount') ?? 0;
-            $rentCollection = RentCollection::where('branch_id', session('branch_id'))
-            ->whereBetween('issue_date', [ $startDate, $endDate ])->get()->sum('total_rent');
+            $rentCollection  = RentCollection::where('branch_id', session('branch_id'))
+                ->whereBetween('issue_date', [ $startDate, $endDate ])->get()->sum('total_rent');
 
             $branch = BuildingInformation::where('id', session('branch_id'))->first();
             return view('backend.report.incomeReportPdf', compact('branch', 'maintenanceCost', 'rentCollection', 'employeeSalary'));
@@ -144,7 +144,7 @@ class ReportController extends Controller
                 ->whereBetween('date', [ $startDate, $endDate ])
                 ->get();
             $branch    = BuildingInformation::where('id', session('branch_id'))->first();
-            return view('backend.report.visitorReportPdf', compact('complains', 'branch'));
+            return view('backend.report.complainReportPdf', compact('complains', 'branch'));
         }
         return view('backend.report.complainReport');
     }

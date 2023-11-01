@@ -119,7 +119,7 @@
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-langdata.>Uploaded Document</h4>
+                    <h4 class="card-title >Uploaded Document</h4>
                 </div>
                 <div class="card-body">
                     <a href="#" onClick="javascript:showMyModalImage('{{ asset($admin->image) }}')">

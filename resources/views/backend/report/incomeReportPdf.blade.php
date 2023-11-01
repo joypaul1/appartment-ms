@@ -26,7 +26,7 @@ $remainBalance = $incomeTotal- $expenseTotal ;
                         <p class="card-text">Mobile : {{ $branch->mobile }}
                             <br> Email: {{ $branch->email }}
                         </p>
-                        <div class="card-langdata.text-center"><u>Profit Report</u> </div>
+                        <div class="card-title text-center"><u>Profit Report</u> </div>
 
                     </div>
                 </div>
