@@ -11,8 +11,8 @@ $remainBalance = 0;
         <div class="card p-3">
             <p class="text-center" id="print"><button class="btn btn-info"><i class="fa fa-print" aria-hidden="true"></i></button></p>
             <div id="printArea">
-                <div class="card mx-auto" style="width: 25%;">
-                    <img class="card-img-top" src="{{ asset(session('site_info')['logo']) }}" alt="logo">
+                <div class="card d-block text-center" style="">
+                    <img class="" src="{{ asset(session('site_info')['logo']) }}" alt="logo" width="150px">
                     <div class="card-body">
                         <strong class="card-header"><u>{{ $branch->name }}</u></strong>
                         <p class="card-text">Mobile : {{ $branch->mobile }}
