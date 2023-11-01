@@ -109,7 +109,7 @@ class BuildingController extends Controller
     {
         $validatedData = $request->validate([
             'name'                  => 'required|string|max:255',
-            'mobile'                => 'required|string|max:15',
+            'mobile'                => 'required|string|max:13',
 
             'email'                 => 'required|max:255',
             'security_guard_mobile' => 'nullable|string|max:15',

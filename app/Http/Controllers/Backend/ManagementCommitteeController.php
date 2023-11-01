@@ -48,7 +48,7 @@ class ManagementCommitteeController extends Controller
         $validatedData = $request->validate([
             'name'              => 'required|string|max:255',
             'email'             => 'required|email|max:255',
-            'mobile'            => 'required|string|max:20',
+            'mobile'            => 'required|string|max:13',
             'pre_address'       => 'required|string|max:255',
             'per_address'       => 'required|string|max:255',
             'nid'               => 'required|string|max:20',
@@ -115,7 +115,7 @@ class ManagementCommitteeController extends Controller
         $validatedData = $request->validate([
             'name'              => 'required|string|max:255',
             'email'             => 'required|email|max:255',
-            'mobile'            => 'required|string|max:20',
+            'mobile'            => 'required|string|max:13',
             'pre_address'       => 'required|string|max:255',
             'per_address'       => 'required|string|max:255',
             'nid'               => 'required|string|max:20',

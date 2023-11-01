@@ -60,7 +60,7 @@ class VisitorController extends Controller
     {
         $validatedData = $request->validate([
             'name'     => 'required|string|max:255',
-            'mobile'   => 'required|string|max:15',
+            'mobile'   => 'required|string|max:13',
             'address'  => 'required|string|max:255',
             'date'     => 'required|date',
             'in_time'  => 'required|date_format:H:i',
@@ -117,7 +117,7 @@ class VisitorController extends Controller
     {
         $validatedData = $request->validate([
             'name'     => 'required|string|max:255',
-            'mobile'   => 'required|string|max:15',
+            'mobile'   => 'required|string|max:13',
             'address'  => 'required|string|max:255',
             'date'     => 'required|date',
             'in_time'  => 'required|date_format:H:i',
