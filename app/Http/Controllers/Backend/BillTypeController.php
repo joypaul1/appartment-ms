@@ -46,13 +46,15 @@ class BillTypeController extends Controller
         ]);
         try {
             DB::beginTransaction();
-            $data = $validatedData;
-            $data['id'] =BillType::first()?BillType:: orderBy('id', 'DESC')->first()->id +1: 1 ;
+            $data               = $validatedData;
+            $data['id']         = BillType::first() ? BillType::orderBy('id', 'DESC')->first()->id + 1 : 1;
             $data['created_at'] = now();
             $data['updated_at'] = now();
+            $data['branch_id']  = session('branch_id');
             BillType::insert($data);
             DB::commit();
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             DB::rollBack();
             dd($ex->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
@@ -96,11 +98,12 @@ class BillTypeController extends Controller
         ]);
         try {
             DB::beginTransaction();
-            $data = $validatedData;
+            $data              = $validatedData;
             $data['branch_id'] = session('branch_id');
             $billType->update($data);
             DB::commit();
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Something went wrong!');
         }
@@ -120,10 +123,11 @@ class BillTypeController extends Controller
             DB::beginTransaction();
             $billType->delete();
             DB::commit();
-        } catch (\Exception $ex) {
-            DB::rollback();
-            return response()->json(['status' => false, 'mes' => 'Something went wrong!This was relationship Data.']);
         }
-        return  response()->json(['status' => true, 'mes' => 'Data Deleted Successfully']);
+        catch (\Exception $ex) {
+            DB::rollback();
+            return response()->json([ 'status' => false, 'mes' => 'Something went wrong!This was relationship Data.' ]);
+        }
+        return response()->json([ 'status' => true, 'mes' => 'Data Deleted Successfully' ]);
     }
 }
