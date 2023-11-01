@@ -367,11 +367,11 @@ $strpos = Route::currentRouteName();
                             @lang('langdata.member_type_config')
                         </a>
                     </li>
-                    <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.month.index') === 0 ? 'active' : ' ' }}">
+                    {{-- <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.month.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.site-config.month.index') }}">
                             @lang('langdata.month_config')
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.year.index') === 0 ? 'active' : ' ' }}">
                         <a class="sidebar-link" href="{{ route('backend.site-config.year.index') }}">
                             @lang('langdata.year_config')

@@ -54,7 +54,7 @@ class NoticeBoardController extends Controller
             NoticeBoard::create($validatedData);
         }
         catch (\Exception $ex) {
-            dd($ex->getMessage());
+
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.notice-board.index')->with('success', 'NoticeBoard Created successfully.');

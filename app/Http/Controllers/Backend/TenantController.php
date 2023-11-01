@@ -256,7 +256,7 @@ class TenantController extends Controller
         }
         catch (\Exception $ex) {
             DB::rollBack();
-            dd($ex->getMessage());
+
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 

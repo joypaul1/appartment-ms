@@ -111,7 +111,7 @@ class EmployeeController extends Controller
                 ->updateOrCreate($data);
         }
         catch (\Exception $ex) {
-            dd($ex->getMessage());
+
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 

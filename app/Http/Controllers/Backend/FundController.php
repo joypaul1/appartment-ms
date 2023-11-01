@@ -82,7 +82,7 @@ class FundController extends Controller
             $validatedData['date'] = date('Y-m-d', strtotime($request->date));
             Fund::create($validatedData);
         } catch (\Exception $ex) {
-            dd($ex->getMessage());
+
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.fund.index')->with('success', 'Fund Created successfully.');

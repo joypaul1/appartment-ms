@@ -78,7 +78,7 @@ class VisitorController extends Controller
             Visitor::create($validatedData);
         }
         catch (\Exception $ex) {
-            dd($ex->getMessage());
+
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.visitor.index')->with('success', 'Visitor Created successfully.');

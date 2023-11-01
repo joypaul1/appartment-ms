@@ -56,7 +56,7 @@ class BillTypeController extends Controller
         }
         catch (\Exception $ex) {
             DB::rollBack();
-            dd($ex->getMessage());
+
             return redirect()->back()->with('error', 'Something went wrong!');
         }
         return redirect()->route('backend.site-config.bill-type.index')->with('success', 'Data Created Successfully');

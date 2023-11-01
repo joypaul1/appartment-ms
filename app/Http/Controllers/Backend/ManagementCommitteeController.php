@@ -71,7 +71,7 @@ class ManagementCommitteeController extends Controller
             }
             ManagementCommittee::create($validatedData);
         } catch (\Exception $ex) {
-            dd($ex->getMessage());
+
             return redirect()->back()->with('error', 'Something went wrong!');
         }
 
