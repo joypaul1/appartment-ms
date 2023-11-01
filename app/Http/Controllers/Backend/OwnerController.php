@@ -75,9 +75,11 @@ class OwnerController extends Controller
             ],
             'pre_address' => 'required|string|max:255',
             'per_address' => 'required|string|max:255',
-            'nid'         => 'required|string|max:15', // Adjust the max length to match the expected length.
+            'nid'         => 'required|string|max:15',
+            // Adjust the max length to match the expected length.
             'password'    => 'required|string|max:20',
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif', // Add image validation rules as needed.
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif',
+            // Add image validation rules as needed.
         ]);
 
         try {
@@ -121,7 +123,10 @@ class OwnerController extends Controller
      */
     public function show($id)
     {
-        //
+        $owner = Owner::with('units')->findOrFail($id);
+        if (count($owner->units) > 0) {
+            return $owner->units->pluck('id')->toArray();
+        }
     }
 
     /**
@@ -132,8 +137,12 @@ class OwnerController extends Controller
      */
     public function edit(Owner $owner)
     {
-        $units = Unit::get([ 'id', 'name' ]);
-
+        $unitsWithNoOwner = Unit::where('branch_id', session('branch_id'))->whereDoesntHave('owners')->get()??[];
+        $currentOwnerUnits = Unit::where('branch_id', session('branch_id'))->whereHas('owners', function ($query) use ($owner)
+        {
+            $query->where('owner_id', $owner->id);
+        })->get();
+        $units          = $unitsWithNoOwner->concat($currentOwnerUnits);
         return view('backend.owner.edit', compact('owner', 'units'));
     }
 
@@ -157,7 +166,8 @@ class OwnerController extends Controller
             ],
             'mobile'      => [
                 'required',
-                'string', 'max:13',
+                'string',
+                'max:13',
                 Rule::unique('owners')->ignore($owner->id),
                 Rule::unique('admins', 'mobile')->ignore(Admin::where('email', $owner->email)->first()->id),
 
@@ -166,7 +176,8 @@ class OwnerController extends Controller
             'per_address' => 'required|string|max:255',
             'nid'         => 'required|string|max:15',
             'password'    => 'required|string|max:20',
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif', // Add image validation rules as needed.
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,gif',
+            // Add image validation rules as needed.
 
         ]);
 
@@ -221,7 +232,10 @@ class OwnerController extends Controller
     public function destroy($id)
     {
         try {
-            $owner = Owner::findOrFail($id);
+            $owner = Owner::with('units')->findOrFail($id);
+            if (count($owner->units) > 0) {
+                $owner->units()->detach($owner->units->pluck('id')->toArray());
+            }
             Admin::where('email', $owner->email)->where('name', $owner->name)->where('mobile', $owner->mobile)->delete();
             $owner->delete();
         }
