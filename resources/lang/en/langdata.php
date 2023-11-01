@@ -237,5 +237,6 @@ return [
     'sl'                            => 'Sl',
     'currency_symbol'               => 'Currency Symbol',
     'currency_symbol_placement'     => 'Currency Symbol Placement',
+    'More-Info'                     => 'More Info',
 
 ];

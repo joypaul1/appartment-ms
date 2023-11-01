@@ -384,12 +384,6 @@ $strpos = Route::currentRouteName();
 
                         </a>
                     </li>
-                    {{-- <li class="sidebar-item {{ strpos($strpos, 'backend.site-config.email.index') === 0 ? 'active' : ' ' }}">
-                        <a class="sidebar-link" href="{{ route('backend.site-config.email.index') }}">
-                            @lang('langdata.email_config')
-
-                        </a>
-                    </li> --}}
                 </ul>
             </li>
 

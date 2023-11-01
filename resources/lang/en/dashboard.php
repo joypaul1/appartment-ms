@@ -16,5 +16,7 @@ return [
     'total_house'                    => 'Total House',
     'building_rules'                 => 'Building Rules',
     'Monthly Bill Collection Report' => 'Monthly Bill Collection Report',
-    'Monthly Rent Report'            => 'Monthly Rent Report'
+    'Monthly Rent Report'            => 'Monthly Rent Report',
+    'More-Info'                      => 'More Info',
+
 ];

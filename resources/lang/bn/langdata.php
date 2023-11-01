@@ -237,4 +237,6 @@ return [
     'currency_symbol_placement'     => 'মুদ্রার প্রতীক বসানো',
     'Admin-Profile'                 => 'অ্যাডমিন প্রোফাইল',
     'role_type'                     => 'ভূমিকার ধরন',
+    'More-Info'                     => 'অধিক তথ্য',
+
 ];

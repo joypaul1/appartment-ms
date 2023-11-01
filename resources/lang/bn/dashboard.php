@@ -16,6 +16,8 @@ return [
     'total_house'                    => 'মোট বাড়ি',
     'building_rules'                 => 'নির্মাণের নিয়ম',
     'Monthly Bill Collection Report' => 'মাসিক বিল সংগ্রহ প্রতিবেদন',
-    'Monthly Rent Report'            => 'মাসিক ভাড়া রিপোর্ট'
+    'Monthly Rent Report'            => 'মাসিক ভাড়া রিপোর্ট',
+    'More-Info'                     => 'অধিক তথ্য',
+
 
 ];

@@ -20,7 +20,7 @@
                 <div class="row">
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.total_floor')</h5>
-                        <h1 class="mt-1 mb-3">{{ $floorCount }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ $floorCount }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -35,7 +35,7 @@
 
                 <div class="mb-0 text-center bg-light p-2">
                     <a href="{{ route('backend.floor.index') }}" class="p-2">
-                        More Info
+                          @lang('langdata.More-Info')
                         <i class="fa fa-arrow-right"></i>
                     </a>
                 </div>
@@ -49,7 +49,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.total_unit')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ $unitCount }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ $unitCount }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -59,7 +59,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.unit.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -75,7 +75,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.total_owner')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ $ownerCount }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ $ownerCount }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -85,7 +85,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.owner.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -101,7 +101,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.total_tenant')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ $tenantCount }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ $tenantCount }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -111,7 +111,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.tenant.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -127,7 +127,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.total_employee')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ $employeeCount }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ $employeeCount }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -137,7 +137,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.employee.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -153,7 +153,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.total_committee')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ $managementCommitteeCount }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ $managementCommitteeCount }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -163,7 +163,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.management-committee.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -179,7 +179,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.total_rent')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ $totalRentCollection }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ $totalRentCollection }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -189,7 +189,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.rent.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -205,7 +205,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.total_maintenance')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ number_format($totalMaintenanceCost ?? 0, 2) }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ number_format($totalMaintenanceCost ?? 0, 2) }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -215,7 +215,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.maintenance-cost.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -231,7 +231,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.total_fund')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ number_format($totalFund ?? 0, 2) }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ number_format($totalFund ?? 0, 2) }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -241,7 +241,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.fund.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -257,7 +257,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.owner_utility')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ number_format($totalOwnerUtility ?? 0, 2) }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ number_format($totalOwnerUtility ?? 0, 2) }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -267,7 +267,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.owner-utility.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -283,7 +283,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.employee_salary')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ number_format($totalEmployeeSalary ?? 0, 2) }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ number_format($totalEmployeeSalary ?? 0, 2) }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -293,7 +293,8 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.employee.index') }}" class="p-2">
-                            More Info
+                            {{-- {{ _('langdata.More-Info') }} --}}
+                            @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -309,7 +310,7 @@
                     <div class="col mt-0">
                         <h5 class="card-title >@lang('dashboard.total_complain')
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ $totalComplain ?? 0 }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ $totalComplain ?? 0 }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -319,7 +320,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.complain.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -336,7 +337,7 @@
                         <h5 class="card-title >@lang('dashboard.total_house')
 
                         </h5>
-                        <h1 class="mt-1 mb-3">{{ $totalHouse ?? 0 }}</h1>
+                        <h1 class=" mt-1 mb-3">{{ $totalHouse ?? 0 }}</h1>
                     </div>
 
                     <div class="col-auto">
@@ -346,7 +347,7 @@
                 <div class="mb-0">
                     <div class="mb-0 text-center bg-light p-2">
                         <a href="{{ route('backend.site-config.building.index') }}" class="p-2">
-                            More Info
+                              @lang('langdata.More-Info')
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
@@ -383,7 +384,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="card overflowhidden">
                         <div class="card-body">
-                            <h3 class="card-title text-center" > @lang('dashboard.Monthly Rent Report') </h3>
+                            <h3 class="card-title text-center"> @lang('dashboard.Monthly Rent Report') </h3>
                             <canvas id="rentMonthlyReport" style="width:100%;max-width:600px"></canvas>
                         </div>
                     </div>
