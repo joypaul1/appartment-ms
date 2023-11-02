@@ -114,8 +114,10 @@ class DashboardController extends Controller
                 DB::raw('MONTHNAME(CONCAT("' . date("Y") . '-", month_setups.id, "-01")) as month_name'),
                 DB::raw('COALESCE(SUM(total_amount), 0) as total_amount')
             )
-            ->groupBy('month_setups.name', 'month_name')
-            ->orderBy('month_setups.id', 'asc')
+            // ->groupBy('month_setups.name', 'month_name')
+            // ->orderBy('month_setups.id', 'asc')
+            ->groupBy('month_setups.id', 'month_setups.name', 'month_name')
+            // ->orderBy('month_name', 'asc')
             ->get();
 
         return [ 'monthlyReport' => $monthlyReport->pluck('total_amount')->toArray() ];
