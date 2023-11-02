@@ -238,5 +238,6 @@ return [
     'currency_symbol'               => 'Currency Symbol',
     'currency_symbol_placement'     => 'Currency Symbol Placement',
     'More-Info'                     => 'More Info',
+    'Bill-Informaiton-List'        => 'Bill Informaiton List',
 
 ];

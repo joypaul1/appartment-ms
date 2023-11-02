@@ -43,12 +43,13 @@
                                     {{ $key++ }}
                                 </td>
                                 <td>
+                                    {{ optional($row->owner)->name }}
+                                </td>
+                                <td>
                                     {{ date('d-m-y', strtotime($row->date)) }}
                                 </td>
 
-                                <td>
-                                    {{ optional($row->owner)->name }}
-                                </td>
+
                                 <td>
                                     {{ optional($row->month)->name }}
                                 </td>

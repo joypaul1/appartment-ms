@@ -115,6 +115,15 @@
                         'message' => $errors->first('status'),
                         ])
                     </div>
+                    {{-- @dd($buildingInformation); --}}
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="card text-center">
+
+                            <div class="card-body">
+                                <img src="{{ url($buildingInformation->building_image) }}" alt="" width="200px" height="100px">
+                            </div>
+                        </div>
+                    </div>
                     <hr>
                     <h2><u>Builder/Company Information :</u> </h2>
                     <div class="col-md-6">
