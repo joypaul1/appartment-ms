@@ -178,8 +178,8 @@ class ReportController extends Controller
                 ->with('month:id,name', 'year:id,name', 'branch:id,name')
                 ->orderBy('id', 'desc')->get();
             $branch           = BuildingInformation::where('id', session('branch_id'))->first();
-
-            return view('backend.fund.owner', compact('funds', 'maintenanceCosts'));
+            $branch = BuildingInformation::where('id', session('branch_id'))->first();
+            return view('backend.fund.owner', compact('funds', 'maintenanceCosts', 'branch'));
         }
 
         return view('backend.report.fundReport');
